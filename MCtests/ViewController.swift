@@ -9,7 +9,7 @@
 import UIKit
 import MultipeerConnectivity
 
-class ViewController: UIViewController, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate {
+class ViewController: UIViewController, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate, UITextViewDelegate {
 
     //MARK: – Properties
     
@@ -101,10 +101,54 @@ class ViewController: UIViewController, MCNearbyServiceAdvertiserDelegate, MCNea
         NSLog("%@", "lostPeer: \(peerID)")
     }
     
+    //MARK: - UITextViewDelegate
+    func textViewDidChange(textView: UITextView) {
+        if textView.text.characters.count > 255
+        {
+            let charAC = UIAlertController(title: "Error: too many characters", message: "You can broadcast at most 255 characters", preferredStyle: .Alert)
+            charAC.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            presentViewController(charAC, animated: true, completion: {() -> Void in
+                textView.text = textView.text.substringToIndex(textView.text.startIndex.advancedBy(255))
+            })
+        }
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        broadcastField.resignFirstResponder()
+    }
+    
+    //MARK: - UIKeyboardMethods
+    
+    func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue()
+        {
+            self.view.frame.origin.y -= keyboardSize.height / 3
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue()
+        {
+            self.view.frame.origin.y += keyboardSize.height / 3
+        }
+    }
+    
+    
     //MARK: - Default Loading
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        broadcastField.delegate = self
+        broadcastField.layer.borderColor = UIColor.blackColor().CGColor
+        broadcastField.layer.borderWidth = 1.0
+        broadcastField.layer.cornerRadius = 5.0
+        
+        receiveLabel.layer.borderColor = UIColor.blackColor().CGColor
+        receiveLabel.layer.borderWidth = 1.0
+        receiveLabel.layer.cornerRadius = 5.0
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -112,7 +156,6 @@ class ViewController: UIViewController, MCNearbyServiceAdvertiserDelegate, MCNea
         // Dispose of any resources that can be recreated.
     }
     
-
 
     required init?(coder aDecoder: NSCoder) {
         serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: myServiceType)
