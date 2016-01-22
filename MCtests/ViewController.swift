@@ -2,8 +2,8 @@
 //  ViewController.swift
 //  MCtests
 //
-//  Created by Pascal Sturmfels on 1/15/16.
-//  Copyright © 2016 Pascal Sturmfels. All rights reserved.
+//  Created by Pascal Sturmfels and Yufan Sun on 1/15/16.
+//  Copyright © 2016 Pascal Sturmfels and Yufan Sun. All rights reserved.
 //
 
 import UIKit
