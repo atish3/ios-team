@@ -17,7 +17,7 @@ class ViewController: UIViewController, MCNearbyServiceAdvertiserDelegate, MCNea
     @IBOutlet weak var broadcastField: UITextView!
     
     
-    let myPeerId = MCPeerID(displayName: UIDevice.currentDevice().name)
+    var myPeerId = MCPeerID(displayName: UIDevice.currentDevice().name)
     let myServiceType = "MDP-broadcast"
     var isReceiving : Bool = false
     var isBroadcasting : Bool = false
@@ -40,6 +40,7 @@ class ViewController: UIViewController, MCNearbyServiceAdvertiserDelegate, MCNea
         else {
             let myDictionary: [String:String]? = ["message":broadcastField.text]
             print("Broadcasting: '\(broadcastField.text)'")
+            myPeerId = MCPeerID(displayName: "Device" + String(arc4random_uniform(999999)))
             serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: myDictionary, serviceType: myServiceType)
             serviceAdvertiser.delegate = self
             serviceAdvertiser.startAdvertisingPeer()
@@ -86,13 +87,13 @@ class ViewController: UIViewController, MCNearbyServiceAdvertiserDelegate, MCNea
             NSLog("%@", "foundPeer: \(peerID)")
             if let discovery_info = info
             {
-                receiveLabel.text = discovery_info["message"] ?? "No message sent."
-                print(receiveLabel.text)
+                receiveLabel.text = peerID.displayName + ": " + (discovery_info["message"] ?? "No message sent.")
+                print(receiveLabel.text!)
             }
             else
             {
-                receiveLabel.text = "No dictionary sent."
-                print("No dictionary sent.")
+                receiveLabel.text = "\(peerID.displayName): No dictionary sent."
+                print("\(peerID.displayName): No dictionary sent.")
             }
         }
     }
@@ -103,12 +104,13 @@ class ViewController: UIViewController, MCNearbyServiceAdvertiserDelegate, MCNea
     
     //MARK: - UITextViewDelegate
     func textViewDidChange(textView: UITextView) {
-        if textView.text.characters.count > 255
+        let maxChars = 240
+        if textView.text.characters.count > maxChars
         {
-            let charAC = UIAlertController(title: "Error: too many characters", message: "You can broadcast at most 255 characters", preferredStyle: .Alert)
+            let charAC = UIAlertController(title: "Error: too many characters", message: "You can broadcast at most \(maxChars) characters", preferredStyle: .Alert)
             charAC.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
             presentViewController(charAC, animated: true, completion: {() -> Void in
-                textView.text = textView.text.substringToIndex(textView.text.startIndex.advancedBy(255))
+                textView.text = textView.text.substringToIndex(textView.text.startIndex.advancedBy(maxChars))
             })
         }
     }
