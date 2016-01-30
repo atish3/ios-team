@@ -10,6 +10,8 @@ import UIKit
 
 class MCChatNavigationController: UIViewController, UITextFieldDelegate {
     
+    @IBOutlet weak var text1: UITextField!
+    @IBOutlet weak var text2: UITextField!
     @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet weak var MCtextField: UITextField!
     @IBAction func sendTapped(sender: AnyObject) {
@@ -18,6 +20,7 @@ class MCChatNavigationController: UIViewController, UITextFieldDelegate {
             tableView.addMessage(text, date: NSDate(), type: MCChatMessageType.sentMessage)
         }
     }
+
     
     var tableView: MCChatTableViewController!
     
@@ -40,6 +43,15 @@ class MCChatNavigationController: UIViewController, UITextFieldDelegate {
     }
     
     override func canBecomeFirstResponder() -> Bool {
+        return true
+    }
+    func textFieldShouldReturn(textField: UITextField)->Bool{
+        if textField==MCtextField{
+            if let text = MCtextField.text where text.characters.count > 0
+            {
+                tableView.addMessage(text, date: NSDate(), type: MCChatMessageType.sentMessage)
+            }
+        }
         return true
     }
     
