@@ -10,19 +10,9 @@ import UIKit
 
 class MCChatNavigationController: UIViewController, UITextFieldDelegate {
     
-    @IBOutlet weak var text1: UITextField!
-    @IBOutlet weak var text2: UITextField!
-    @IBOutlet weak var toolbar: UIToolbar!
-    @IBOutlet weak var MCtextField: UITextField!
-    @IBAction func sendTapped(sender: AnyObject) {
-        if let text = MCtextField.text where text.characters.count > 0
-        {
-            tableView.addMessage(text, date: NSDate(), type: MCChatMessageType.sentMessage)
-            MCtextField.text = ""
-            MCtextField.resignFirstResponder()
-        }
-    }
-
+    var accessoryToolbar: UIToolbar = UIToolbar()
+    var sendButton: UIBarButtonItem = UIBarButtonItem()
+    var MCtextField: UITextField = UITextField()
     
     var tableView: MCChatTableViewController!
     
@@ -30,6 +20,34 @@ class MCChatNavigationController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
+        
+        sendButton = UIBarButtonItem(title: "Send", style: UIBarButtonItemStyle.Plain, target: self, action: "returnTextField")
+        MCtextField = UITextField(frame: CGRect(x: 0, y: 0, width: self.view.frame.width / 2, height: 30))
+        MCtextField.borderStyle = UITextBorderStyle.RoundedRect
+        MCtextField.delegate = self
+        
+        accessoryToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.width * 3 / 4, height: 44))
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil)
+        let fixedSpace = UIBarButtonItem(barButtonSystemItem: .FixedSpace, target: self, action: nil)
+        fixedSpace.width = 20
+        
+        accessoryToolbar.items = [flexibleSpace, UIBarButtonItem(customView: MCtextField), fixedSpace, sendButton, flexibleSpace]
+        MCtextField.becomeFirstResponder()
+    }
+    
+    func returnTextField()
+    {
+        if let text = MCtextField.text where text.characters.count > 0 {
+            tableView.addMessage(text, date: NSDate(), type: MCChatMessageType.sentMessage)
+            MCtextField.text = ""
+            MCtextField.resignFirstResponder()
+        }
+    }
+    
+    override var inputAccessoryView: UIToolbar? {
+        get {
+            return self.accessoryToolbar
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -47,17 +65,12 @@ class MCChatNavigationController: UIViewController, UITextFieldDelegate {
     override func canBecomeFirstResponder() -> Bool {
         return true
     }
+    
     func textFieldShouldReturn(textField: UITextField)->Bool{
         if textField==MCtextField{
-            if let text = MCtextField.text where text.characters.count > 0
-            {
-                tableView.addMessage(text, date: NSDate(), type: MCChatMessageType.sentMessage)
-                MCtextField.text = ""
-                MCtextField.resignFirstResponder()
-            }
+            returnTextField()
         }
         return true
     }
-    
     
 }
