@@ -18,6 +18,8 @@ class MCChatNavigationController: UIViewController, UITextFieldDelegate {
         if let text = MCtextField.text where text.characters.count > 0
         {
             tableView.addMessage(text, date: NSDate(), type: MCChatMessageType.sentMessage)
+            MCtextField.text = ""
+            MCtextField.resignFirstResponder()
         }
     }
 
@@ -50,6 +52,8 @@ class MCChatNavigationController: UIViewController, UITextFieldDelegate {
             if let text = MCtextField.text where text.characters.count > 0
             {
                 tableView.addMessage(text, date: NSDate(), type: MCChatMessageType.sentMessage)
+                MCtextField.text = ""
+                MCtextField.resignFirstResponder()
             }
         }
         return true
