@@ -77,7 +77,9 @@ class MCChatTableViewController : UITableViewController
         }
         let cellData = MCChatMessageData(message: message, hideDate: ifHideDate)
         cellDataArray.append(cellData)
-        tableView.reloadData() //MARK: DO THIS BETTER
+        let indexPath = NSIndexPath(forRow: cellDataArray.count - 1, inSection: 0)
+        tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Right)
+        tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
     }
     
         // Add test data here

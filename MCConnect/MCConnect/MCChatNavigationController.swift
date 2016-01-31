@@ -27,6 +27,7 @@ class MCChatNavigationController: UIViewController, UITextFieldDelegate {
         MCtextField = UITextField(frame: CGRect(x: 0, y: 0, width: self.view.frame.width / 2, height: 30))
         MCtextField.borderStyle = UITextBorderStyle.RoundedRect
         MCtextField.delegate = self
+        MCtextField.layer.cornerRadius = 7.0
         
         accessoryToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.width * 3 / 4, height: 44))
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil)
@@ -40,9 +41,25 @@ class MCChatNavigationController: UIViewController, UITextFieldDelegate {
     func returnTextField()
     {
         if let text = MCtextField.text where text.characters.count > 0 {
-            tableView.addMessage(text, date: NSDate(), type: MCChatMessageType.sentMessage)
-            MCtextField.text = ""
-            MCtextField.resignFirstResponder()
+            UIView.animateWithDuration(0.3, delay: 0, options: [], animations: { () -> Void in
+                self.sendButton.enabled = false
+                self.MCtextField.backgroundColor = UIColor.greenColor()
+                self.MCtextField.textColor = UIColor.whiteColor()
+                //self.sendButton.tintColor = UIColor.clearColor()
+                }, completion: { (_) -> Void in
+                UIView.animateWithDuration(0.3, delay: 0, options: [], animations: { () -> Void in
+                    self.MCtextField.center.x += self.view.bounds.width
+                    }, completion: { (_) -> Void in
+                    //self.sendButton.tintColor = nil
+                    self.sendButton.enabled = true
+                    self.tableView.addMessage(text, date: NSDate(), type: MCChatMessageType.sentMessage)
+                    self.MCtextField.text = ""
+                    self.MCtextField.textColor = UIColor.blackColor()
+                    self.MCtextField.backgroundColor = UIColor.whiteColor()
+                    self.MCtextField.center.x -= self.view.bounds.width
+                })
+            })
+            //MCtextField.resignFirstResponder()
         }
     }
     
