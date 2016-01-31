@@ -88,5 +88,6 @@ class MCChatTableViewController : UITableViewController
         addMessage("this is a string", date: NSDate(timeIntervalSinceNow: -12*60*60+30), type: MCChatMessageType.receivedMessage)
         addMessage("this is a very very very very very very very very very very very very very very very very very very very very very very very very very very very very long string", date: NSDate(timeIntervalSinceNow: -30), type: MCChatMessageType.sentMessage)
         addMessage("Another message", date: NSDate(), type: MCChatMessageType.receivedMessage)
+        
     }
 }

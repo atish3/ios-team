@@ -21,6 +21,8 @@ class MCChatNavigationController: UIViewController, UITextFieldDelegate {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
         
+        self.title = "MC Chat App"
+        
         sendButton = UIBarButtonItem(title: "Send", style: UIBarButtonItemStyle.Plain, target: self, action: "returnTextField")
         MCtextField = UITextField(frame: CGRect(x: 0, y: 0, width: self.view.frame.width / 2, height: 30))
         MCtextField.borderStyle = UITextBorderStyle.RoundedRect
