@@ -12,10 +12,13 @@ class MCChatTableViewController : UITableViewController
 {
     var cellDataArray = [MCChatMessageData]()
     var ifCellRegistered = false
+    var connectivityController = MCConnectivityController()
+    
     
     override func viewDidLoad() {
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         loadTestData()
+        connectivityController.tableViewController = self
     }
     
     //Number of rows in tableView
@@ -77,10 +80,12 @@ class MCChatTableViewController : UITableViewController
         }
         let cellData = MCChatMessageData(message: message, hideDate: ifHideDate)
         cellDataArray.append(cellData)
+        connectivityController.message = text
         let indexPath = NSIndexPath(forRow: cellDataArray.count - 1, inSection: 0)
         tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Right)
         tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
     }
+    
     
         // Add test data here
     func loadTestData()

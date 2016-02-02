@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1A1015721C56FA2200387847 /* MCChatCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1015711C56FA2200387847 /* MCChatCellData.swift */; };
 		1A1015781C570CA900387847 /* MCChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A1015771C570CA900387847 /* MCChatTableViewCell.xib */; };
+		1A613E891C60350E00138F10 /* MCConnectivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A613E881C60350E00138F10 /* MCConnectivityController.swift */; };
 		1A77CF711C594F5200BD7663 /* MCChatNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A77CF701C594F5200BD7663 /* MCChatNavigationController.swift */; };
 		1AF5F1E01C56CEF1004C474F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF5F1DF1C56CEF1004C474F /* AppDelegate.swift */; };
 		1AF5F1E51C56CEF1004C474F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AF5F1E31C56CEF1004C474F /* Main.storyboard */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		1A1015711C56FA2200387847 /* MCChatCellData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCChatCellData.swift; sourceTree = "<group>"; };
 		1A1015771C570CA900387847 /* MCChatTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCChatTableViewCell.xib; sourceTree = "<group>"; };
+		1A613E881C60350E00138F10 /* MCConnectivityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCConnectivityController.swift; sourceTree = "<group>"; };
 		1A77CF701C594F5200BD7663 /* MCChatNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCChatNavigationController.swift; sourceTree = "<group>"; };
 		1AF5F1DC1C56CEF1004C474F /* MCConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MCConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AF5F1DF1C56CEF1004C474F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				1A1015711C56FA2200387847 /* MCChatCellData.swift */,
 				1AF5F1F51C56D6A0004C474F /* MCChatTableViewController.swift */,
 				1A77CF701C594F5200BD7663 /* MCChatNavigationController.swift */,
+				1A613E881C60350E00138F10 /* MCConnectivityController.swift */,
 				1AF5F1E31C56CEF1004C474F /* Main.storyboard */,
 				1AF5F1E61C56CEF1004C474F /* Images.xcassets */,
 				1AF5F1E81C56CEF1004C474F /* LaunchScreen.storyboard */,
@@ -154,6 +157,7 @@
 			files = (
 				1A77CF711C594F5200BD7663 /* MCChatNavigationController.swift in Sources */,
 				1AF5F1F61C56D6A0004C474F /* MCChatTableViewController.swift in Sources */,
+				1A613E891C60350E00138F10 /* MCConnectivityController.swift in Sources */,
 				1AF5F1F41C56D5FB004C474F /* MCChatTableViewCell.swift in Sources */,
 				1A1015721C56FA2200387847 /* MCChatCellData.swift in Sources */,
 				1AF5F1F81C56D6FE004C474F /* MCChatMessage.swift in Sources */,
