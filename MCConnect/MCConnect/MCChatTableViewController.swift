@@ -17,7 +17,7 @@ class MCChatTableViewController : UITableViewController
     
     override func viewDidLoad() {
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        loadTestData()
+        //loadTestData()
         connectivityController.tableViewController = self
     }
     
@@ -80,10 +80,14 @@ class MCChatTableViewController : UITableViewController
         }
         let cellData = MCChatMessageData(message: message, hideDate: ifHideDate)
         cellDataArray.append(cellData)
-        connectivityController.message = text
+        print("Add message called: ")
         let indexPath = NSIndexPath(forRow: cellDataArray.count - 1, inSection: 0)
         tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Right)
         tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+        
+        if type == MCChatMessageType.sentMessage {
+            connectivityController.message = text
+        }
     }
     
     

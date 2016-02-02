@@ -17,16 +17,26 @@ class MCConnectivityController: NSObject, MCNearbyServiceAdvertiserDelegate, MCN
     
     var serviceBrowser: MCNearbyServiceBrowser!
     var serviceAdvertiser: MCNearbyServiceAdvertiser!
+    let personalKey: String = String(arc4random_uniform(999999))
+    
     var message: String? {
         didSet {
             if let messageString = message {
-                let myDictionary: [String:String]? = ["message":messageString]
+                let myDictionary: [String:String]? = ["message":messageString, "senderKey":String(personalKey)]
                 myPeerId = MCPeerID(displayName: "Device" + String(arc4random_uniform(999999)))
                 serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: myDictionary, serviceType: myServiceType)
                 serviceAdvertiser.delegate = self
                 serviceAdvertiser.startAdvertisingPeer()
+                print("\(myPeerId.displayName) started advertising '\(messageString)'")
             }
         }
+    }
+    
+    override init() {
+        super.init()
+        serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: myServiceType)
+        serviceBrowser.delegate = self
+        serviceBrowser.startBrowsingForPeers()
     }
     
     //MARK: – MCNearbyServiceAdvertiserDelegate
@@ -46,8 +56,10 @@ class MCConnectivityController: NSObject, MCNearbyServiceAdvertiserDelegate, MCN
     func browser(browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         if let tvController = tableViewController {
             if let dictionary = info {
-                if let messageToSend = dictionary["message"] {
-                    tvController.addMessage(messageToSend, date: NSDate(), type: MCChatMessageType.receivedMessage)
+                if let key = dictionary["senderKey"] where key != personalKey {
+                    if let messageToSend = dictionary["message"] {
+                        tvController.addMessage(messageToSend, date: NSDate(), type: MCChatMessageType.receivedMessage)
+                    }
                 }
             }
         }
