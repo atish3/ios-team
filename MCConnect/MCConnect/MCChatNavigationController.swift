@@ -69,6 +69,12 @@ class MCChatNavigationController: UIViewController, UITextViewDelegate {
                     self.MCtextView.layer.cornerRadius = 7.0
                     self.MCtextView.layer.borderWidth = 0.3
                     self.MCtextView.center.x -= self.view.bounds.width
+                    
+                    UIView.animateWithDuration(0.3, animations: { () -> Void in
+                        let offset = self.accessoryToolbar.frame.size.height - self.MCtextView.contentSize.height - 10
+                        self.accessoryToolbar.frame.size.height = 44
+                        self.accessoryToolbar.frame.origin.y += offset
+                    })
                 })
             })
             //MCtextView.resignFirstResponder()
@@ -80,6 +86,17 @@ class MCChatNavigationController: UIViewController, UITextViewDelegate {
         if numLines <= 5
         {
             textView.frame.size.height = textView.contentSize.height
+            let offset = accessoryToolbar.frame.size.height - textView.contentSize.height - 10
+            if(numLines == 1)
+            {
+                accessoryToolbar.frame.size.height = 44
+                accessoryToolbar.frame.origin.y += offset
+            }
+            else
+            {
+                accessoryToolbar.frame.size.height = textView.contentSize.height + 10
+                accessoryToolbar.frame.origin.y += offset
+            }
         }
     }
     
