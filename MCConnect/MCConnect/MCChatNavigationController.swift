@@ -15,6 +15,7 @@ class MCChatNavigationController: UIViewController, UITextViewDelegate {
     var MCtextView: UITextView = UITextView()
     
     var tableView: MCChatTableViewController!
+    var prevNumLines: Int = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +25,7 @@ class MCChatNavigationController: UIViewController, UITextViewDelegate {
         self.title = "MC Chat App"
         
         sendButton = UIBarButtonItem(title: "Send", style: UIBarButtonItemStyle.Plain, target: self, action: "returnTextField")
-        MCtextView = UITextView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width / 2, height: 30))
+        MCtextView = UITextView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width / 2, height: 33))
         MCtextView.layer.borderWidth = 0.3
         MCtextView.layer.borderColor = UIColor.grayColor().CGColor
         MCtextView.delegate = self
@@ -49,6 +50,8 @@ class MCChatNavigationController: UIViewController, UITextViewDelegate {
     {
         if let text = MCtextView.text where text.characters.count > 0 {
             UIView.animateWithDuration(0.3, delay: 0, options: [], animations: { () -> Void in
+                self.MCtextView.autocorrectionType = .No
+                
                 self.sendButton.enabled = false
                 self.MCtextView.backgroundColor = UIColor(red: 0.04, green: 0.93, blue: 0.094, alpha: 1.0)
                 self.MCtextView.textColor = UIColor.whiteColor()
@@ -74,6 +77,7 @@ class MCChatNavigationController: UIViewController, UITextViewDelegate {
                         let offset = self.accessoryToolbar.frame.size.height - self.MCtextView.contentSize.height - 10
                         self.accessoryToolbar.frame.size.height = 44
                         self.accessoryToolbar.frame.origin.y += offset
+                        self.MCtextView.autocorrectionType = .Yes
                     })
                 })
             })
@@ -82,22 +86,27 @@ class MCChatNavigationController: UIViewController, UITextViewDelegate {
     }
     
     func textViewDidChange(textView: UITextView) {
-        let numLines = textView.contentSize.height / textView.font!.lineHeight
-        if numLines <= 5
+        let numLines:Int = Int(textView.contentSize.height / textView.font!.lineHeight) - 1
+        if numLines <= 4
         {
             textView.frame.size.height = textView.contentSize.height
-            let offset = accessoryToolbar.frame.size.height - textView.contentSize.height - 10
-            if(numLines == 1)
+            if(numLines != prevNumLines)
             {
-                accessoryToolbar.frame.size.height = 44
-                accessoryToolbar.frame.origin.y += offset
-            }
-            else
-            {
-                accessoryToolbar.frame.size.height = textView.contentSize.height + 10
-                accessoryToolbar.frame.origin.y += offset
+                if (numLines == 1)
+                {
+                    let offset = accessoryToolbar.frame.size.height - 44
+                    accessoryToolbar.frame.size.height = 44
+                    accessoryToolbar.frame.origin.y += offset
+                }
+                else
+                {
+                    let offset = accessoryToolbar.frame.size.height - textView.contentSize.height - 10
+                    accessoryToolbar.frame.size.height = textView.contentSize.height + 10
+                    accessoryToolbar.frame.origin.y += offset
+                }
             }
         }
+        prevNumLines = numLines
     }
     
     override var inputAccessoryView: UIToolbar? {
@@ -115,7 +124,11 @@ class MCChatNavigationController: UIViewController, UITextViewDelegate {
     
     func dismissKeyboard()
     {
+        MCtextView.autocorrectionType = UITextAutocorrectionType.No
+        MCtextView.text = ""
+        MCtextView.frame.size.height = 33
         MCtextView.resignFirstResponder()
+        MCtextView.autocorrectionType = UITextAutocorrectionType.Yes
     }
     
     override func canBecomeFirstResponder() -> Bool {

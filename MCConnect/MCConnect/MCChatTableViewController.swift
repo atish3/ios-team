@@ -82,7 +82,15 @@ class MCChatTableViewController : UITableViewController
         cellDataArray.append(cellData)
         print("Add message called: ")
         let indexPath = NSIndexPath(forRow: cellDataArray.count - 1, inSection: 0)
-        tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Right)
+        if (type == MCChatMessageType.sentMessage)
+        {
+            tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Right)
+        }
+        else
+        {
+            tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Left)
+        }
+        
         tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
         
         if type == MCChatMessageType.sentMessage {
