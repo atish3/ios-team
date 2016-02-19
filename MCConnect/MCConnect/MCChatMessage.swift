@@ -15,7 +15,7 @@ enum MCChatMessageType
     case receivedMessage
 }
 
-//The message contained within MCChatMessageData
+//The a data class that contains the essential data within MCChatMessageData
 class MCChatMessage {
     let date: NSDate
     let text: String

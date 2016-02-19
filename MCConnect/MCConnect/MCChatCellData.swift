@@ -8,6 +8,9 @@
 
 import UIKit
 
+
+//Contains all of the necessary information to render a message within a table view cell. 
+//Does not contain data needed to position that message within the table view cell (see MCChatTableViewCell)
 class MCChatMessageData {
     let message: MCChatMessage
     
@@ -34,6 +37,8 @@ class MCChatMessageData {
         self.messageFont = UIFont(name: "Helvetica", size: 14.0)!
         
         //Create a message label with the inputted text.
+        //This message label is a "dummy label" and is never actually seen on screen.
+        //Instead, it is used to calculate how big the text will be once it appears on screen.
         let messageLabel = UILabel(frame: CGRectMake(0, 0, 260, CGFloat.max))
         messageLabel.numberOfLines = 0
         messageLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
@@ -42,6 +47,7 @@ class MCChatMessageData {
         messageLabel.sizeToFit()
         //Use this "dummy" message label to tell what size our actual label should be
         self.messageLabelSize = messageLabel.frame.size
+        //Notice that the messageLabel is never presented.
         
         //Add some extra padding for the message bubble cell
         self.cellHeight = self.messageLabelSize.height + dateLabelHeight + spacing
