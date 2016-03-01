@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CryptoSwift
 
 
 //A subclass of UITableViewController. This class handles all of the outward display of messages, 
@@ -140,6 +141,9 @@ class MCChatTableViewController : UITableViewController
         if type == MCChatMessageType.sentMessage {
             connectivityController.message = text
         }
+        
+        print(text.sha1())
+
     }
     
     
