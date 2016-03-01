@@ -28,6 +28,7 @@ class MCChatTableViewController : UITableViewController
         
         //This line allows the connectivityController to reference the tableView.
         connectivityController.tableViewController = self
+        
     }
     
     //This function is part of UITableViewController's built-in classes.

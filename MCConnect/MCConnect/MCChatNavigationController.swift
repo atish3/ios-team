@@ -70,6 +70,10 @@ class MCChatNavigationController: UIViewController, UITextViewDelegate {
         MCtextView.becomeFirstResponder()
     }
     
+    override func canBecomeFirstResponder() -> Bool {
+        return true
+    }
+    
     //This function is called when the sendButton is tapped. 
     //It animates the sending of the message, and then sends the text of the message
     //to the tableView.

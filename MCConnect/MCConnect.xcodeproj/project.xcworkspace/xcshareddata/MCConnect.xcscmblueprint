@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "2D5B8B0F8E6EA4F88149496D3BF4970E7324004A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "C3D8ED1CB28D809ADCE2C0DE74935E8A502ACD53" : 0,
+    "2D5B8B0F8E6EA4F88149496D3BF4970E7324004A" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "906FACEE-C80C-49F5-A619-E5DFD26D39C9",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "C3D8ED1CB28D809ADCE2C0DE74935E8A502ACD53" : "ios-team\/MCConnect\/CryptoSwift\/",
+    "2D5B8B0F8E6EA4F88149496D3BF4970E7324004A" : "ios-team\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "MCConnect",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "MCConnect\/MCConnect.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/psturmfels\/ios-team",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2D5B8B0F8E6EA4F88149496D3BF4970E7324004A"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/krzyzanowskim\/CryptoSwift.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C3D8ED1CB28D809ADCE2C0DE74935E8A502ACD53"
+    }
+  ]
+}
