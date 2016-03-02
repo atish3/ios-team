@@ -16,6 +16,7 @@ class MCChatTableViewController : UITableViewController
 {
     //An array MCChatMessageData objects. This array is where all messages are stored.
     var cellDataArray = [MCChatMessageData]()
+    var messageHashes = [String]()
     var ifCellRegistered = false
     
     //A variable of type MCConnectivityController. 
@@ -119,6 +120,7 @@ class MCChatTableViewController : UITableViewController
         
         //Append it to our cellDataArray.
         cellDataArray.append(cellData)
+        messageHashes.append(text.sha1())
         
         //Find the end of the tableView, and insert the message there.
         let indexPath = NSIndexPath(forRow: cellDataArray.count - 1, inSection: 0)
@@ -141,9 +143,6 @@ class MCChatTableViewController : UITableViewController
         if type == MCChatMessageType.sentMessage {
             connectivityController.message = text
         }
-        
-        print(text.sha1())
-
     }
     
     
