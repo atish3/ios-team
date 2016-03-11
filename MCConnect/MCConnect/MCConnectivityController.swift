@@ -39,7 +39,6 @@ class MCConnectivityController: NSObject, MCNearbyServiceAdvertiserDelegate, MCN
     //Normally, we'd use peerID, but we use that for other purposes... (see below)
     let personalKey: String = String(arc4random_uniform(999999))
     
-    
     //A property that is the current message to be broadcast on the network. 
     //Whenever this property is set, the message is send to the network.
     var message: String? {
@@ -94,7 +93,6 @@ class MCConnectivityController: NSObject, MCNearbyServiceAdvertiserDelegate, MCN
     func browser(browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: NSError) {
         print("didNotStartBrowsingForPeers: \(error)")
     }
-
     
     //Called if the browser object discovers a new nearby phone. When this happens
     //this function is used to receive that new phone's currently broadcasted message.
@@ -118,6 +116,22 @@ class MCConnectivityController: NSObject, MCNearbyServiceAdvertiserDelegate, MCN
                         //Add the message to the tableViewController using the addMessage function.
                         tvController.addMessage(messageToSend, date: NSDate(), type: MCChatMessageType.receivedMessage)
                     }
+                }
+                
+                var foundAllHashes = true
+                for messageHash in tvController.messageHashes {
+                    if dictionary[messageHash] == nil {
+                        foundAllHashes = false
+                        break
+                    }
+                }
+                
+                if foundAllHashes {
+                    print("All hashes match")
+                }
+                else
+                {
+                    print("Not all hashes match")
                 }
             }
         }

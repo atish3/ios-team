@@ -46,7 +46,7 @@ class MCChatNavigationController: UIViewController, UITextViewDelegate {
         MCtextView.layer.borderWidth = 0.3
         MCtextView.layer.borderColor = UIColor.grayColor().CGColor
         
-        //Set the deleage of the textView to be self. This models the delegate-object swift
+        //Set the delegate of the textView to be self. This models the delegate-object swift
         //pattern, where we have views that are objects, and viewControllers that behave
         //as "delegates" which control what happens with those views.
         MCtextView.delegate = self
