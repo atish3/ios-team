@@ -12,7 +12,6 @@
 		1A613E891C60350E00138F10 /* MCConnectivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A613E881C60350E00138F10 /* MCConnectivityController.swift */; };
 		1A77CF711C594F5200BD7663 /* MCChatNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A77CF701C594F5200BD7663 /* MCChatNavigationController.swift */; };
 		1A7D049B1C865682001C7184 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A7D04901C865658001C7184 /* CryptoSwift.framework */; };
-		1A7D049C1C86568A001C7184 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A7D04901C865658001C7184 /* CryptoSwift.framework */; };
 		1A7D049D1C86568A001C7184 /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1A7D04901C865658001C7184 /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1AF5F1E01C56CEF1004C474F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF5F1DF1C56CEF1004C474F /* AppDelegate.swift */; };
 		1AF5F1E51C56CEF1004C474F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AF5F1E31C56CEF1004C474F /* Main.storyboard */; };
@@ -112,7 +111,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A7D049B1C865682001C7184 /* CryptoSwift.framework in Frameworks */,
-				1A7D049C1C86568A001C7184 /* CryptoSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
