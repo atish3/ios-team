@@ -458,6 +458,7 @@
 				1ABE12E71C9744D0005923BA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

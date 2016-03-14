@@ -5,16 +5,15 @@
 //  Created by Pascal Sturmfels on 3/14/16.
 //  Copyright © 2016 1AM. All rights reserved.
 //
-
+import CryptoSwift
 import UIKit
 
 class RoarTableViewController: UITableViewController {
     //An array MCChatMessageData objects. This array is where all messages are stored.
-    var cellDataArray = [RoarMessage]()
-    var messageHashes = [String]()
+    var cellDataArray = [RoarMessage]() //PERSISTENT STORAGE
+    var messageHashes = [String]()      //PERSISTENT STORAGE!!!
     var ifCellRegistered = false
-    
-    
+
     override func viewDidLoad() {
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
         self.tableView.separatorColor = UIColor.blackColor()
@@ -22,13 +21,13 @@ class RoarTableViewController: UITableViewController {
         self.tableView.cellLayoutMarginsFollowReadableWidth = false
         loadTestData()
     }
-    
+
     //This function is part of UITableViewController's built-in classes.
     //It asks for the number of rows in tableView = number of messages = size of cellDataArray.
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cellDataArray.count
     }
-    
+
     //This function is part of UITableViewController's built-in classes.
     //In it, we tell the tableView which message to render at each index of the table.
     
@@ -101,6 +100,7 @@ class RoarTableViewController: UITableViewController {
         
         //Append it to our cellDataArray.
         cellDataArray.append(cellData)
+        messageHashes.append(text.sha1())
         
         //Find the end of the tableView, and insert the message there.
         let indexPath = NSIndexPath(forRow: cellDataArray.count - 1, inSection: 0)
