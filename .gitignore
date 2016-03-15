@@ -1,1 +1,5 @@
-.xcodeproj*
+*xcuserstate
+*pbxproj
+*xcbkptlist
+*xcscheme 
+*xcworkspacedata
