@@ -10,12 +10,9 @@ import UIKit
 
 class RoarNavigationController: UIViewController {
     var tableView: RoarTableViewController!
-
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func canBecomeFirstResponder() -> Bool {
@@ -29,6 +26,12 @@ class RoarNavigationController: UIViewController {
         if segue.identifier == "Embed"
         {
             tableView = segue.destinationViewController as! RoarTableViewController
+        }
+        else if segue.identifier == "composeSegue"
+        {
+            let destNav = segue.destinationViewController as! UINavigationController
+            let composeVC = destNav.childViewControllers[0] as! RoarComposeViewController
+            composeVC.roarTableVC = tableView
         }
     }
 }

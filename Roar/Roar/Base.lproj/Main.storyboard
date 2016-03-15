@@ -21,7 +21,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aCC-Js-0Bj">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                 <connections>
-                                    <segue destination="UuS-Ug-yb5" kind="embed" id="YpO-Dj-nEh"/>
+                                    <segue destination="UuS-Ug-yb5" kind="embed" identifier="Embed" id="YpO-Dj-nEh"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -33,11 +33,17 @@
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="aCC-Js-0Bj" secondAttribute="bottom" id="id3-3n-JCk"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="bHu-ch-o8h"/>
+                    <navigationItem key="navigationItem" id="bHu-ch-o8h">
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="25j-hz-LvG">
+                            <connections>
+                                <segue destination="0Fk-Zl-y9r" kind="presentation" identifier="composeSegue" id="JFC-An-3oP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1562" y="-320"/>
+            <point key="canvasLocation" x="1722" y="-320"/>
         </scene>
         <!--Roar Table View Controller-->
         <scene sceneID="BTv-it-fzJ">
@@ -66,7 +72,43 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1BD-g3-nsa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2326" y="-320.5"/>
+            <point key="canvasLocation" x="2578" y="-320.5"/>
+        </scene>
+        <!--Roar Compose View Controller-->
+        <scene sceneID="CDs-4p-tsE">
+            <objects>
+                <viewController id="GbC-sh-ika" customClass="RoarComposeViewController" customModule="Roar" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="GIP-Dq-IFc"/>
+                        <viewControllerLayoutGuide type="bottom" id="9TS-z3-FYY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="q7M-iY-63g">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Post something to the world!" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="CQ8-QT-fge">
+                                <rect key="frame" x="20" y="0.0" width="560" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="CQ8-QT-fge" firstAttribute="leading" secondItem="q7M-iY-63g" secondAttribute="leadingMargin" placeholder="YES" id="PnD-uH-XCo"/>
+                            <constraint firstItem="CQ8-QT-fge" firstAttribute="top" secondItem="GIP-Dq-IFc" secondAttribute="bottom" constant="-64" placeholder="YES" id="X5m-9I-asQ"/>
+                            <constraint firstItem="9TS-z3-FYY" firstAttribute="top" secondItem="CQ8-QT-fge" secondAttribute="bottom" placeholder="YES" id="gvq-Ln-UvH"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="CQ8-QT-fge" secondAttribute="trailing" placeholder="YES" id="mAn-FN-iHa"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="gg7-oi-VL6"/>
+                    <connections>
+                        <outlet property="composeTextView" destination="CQ8-QT-fge" id="l4u-Gz-itD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ssb-0e-GDA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2267" y="485"/>
         </scene>
         <!--Second-->
         <scene sceneID="wg7-f3-ORb">
@@ -84,13 +126,13 @@
                                 <rect key="frame" x="195" y="279" width="210" height="42"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="36"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loaded by SecondViewController" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NDk-cv-Gan">
                                 <rect key="frame" x="193" y="329" width="215" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -145,6 +187,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mF6-BZ-oDi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="750" y="-320"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="T6b-vv-tqw">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0Fk-Zl-y9r" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="X3X-Mf-nQL">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="GbC-sh-ika" kind="relationship" relationship="rootViewController" id="5tR-gU-sYs"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yF9-U6-TzT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1469" y="495"/>
         </scene>
     </scenes>
     <resources>

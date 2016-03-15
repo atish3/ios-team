@@ -21,6 +21,7 @@
 		1ABE13081C976A4B005923BA /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABE12FD1C976A1F005923BA /* CryptoSwift.framework */; };
 		1ABE13091C976A5A005923BA /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABE12FD1C976A1F005923BA /* CryptoSwift.framework */; };
 		1ABE130A1C976A5A005923BA /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABE12FD1C976A1F005923BA /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1AF2D0671C97856300670C89 /* RoarComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF2D0661C97856300670C89 /* RoarComposeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +105,7 @@
 		1ABE12EF1C975321005923BA /* RoarTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RoarTableViewCell.xib; sourceTree = "<group>"; };
 		1ABE12F11C9756A2005923BA /* RoarConnectivityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoarConnectivityController.swift; sourceTree = "<group>"; };
 		1ABE12F41C976A1F005923BA /* CryptoSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CryptoSwift.xcodeproj; path = CryptoSwift/CryptoSwift.xcodeproj; sourceTree = "<group>"; };
+		1AF2D0661C97856300670C89 /* RoarComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoarComposeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,9 +147,10 @@
 				1ABE12F11C9756A2005923BA /* RoarConnectivityController.swift */,
 				1ABE12ED1C97521C005923BA /* RoarTableViewCell.swift */,
 				1ABE12EB1C9751E6005923BA /* RoarMessage.swift */,
+				1AF2D0661C97856300670C89 /* RoarComposeViewController.swift */,
+				1ABE12DA1C9744D0005923BA /* Main.storyboard */,
 				1ABE12EF1C975321005923BA /* RoarTableViewCell.xib */,
 				1ABE12D81C9744D0005923BA /* SecondViewController.swift */,
-				1ABE12DA1C9744D0005923BA /* Main.storyboard */,
 				1ABE12DD1C9744D0005923BA /* Assets.xcassets */,
 				1ABE12DF1C9744D0005923BA /* LaunchScreen.storyboard */,
 				1ABE12E21C9744D0005923BA /* Info.plist */,
@@ -290,6 +293,7 @@
 				1ABE12EC1C9751E6005923BA /* RoarMessage.swift in Sources */,
 				1ABE12EE1C97521C005923BA /* RoarTableViewCell.swift in Sources */,
 				1ABE12D91C9744D0005923BA /* SecondViewController.swift in Sources */,
+				1AF2D0671C97856300670C89 /* RoarComposeViewController.swift in Sources */,
 				1ABE12D51C9744D0005923BA /* AppDelegate.swift in Sources */,
 				1ABE12F21C9756A2005923BA /* RoarConnectivityController.swift in Sources */,
 				1ABE12D71C9744D0005923BA /* RoarNavigationController.swift in Sources */,

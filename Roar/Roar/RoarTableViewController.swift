@@ -19,9 +19,10 @@ class RoarTableViewController: UITableViewController {
         self.tableView.separatorColor = UIColor.blackColor()
         self.tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         self.tableView.cellLayoutMarginsFollowReadableWidth = false
+        
         loadTestData()
     }
-
+    
     //This function is part of UITableViewController's built-in classes.
     //It asks for the number of rows in tableView = number of messages = size of cellDataArray.
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -105,7 +106,7 @@ class RoarTableViewController: UITableViewController {
         //Find the end of the tableView, and insert the message there.
         let indexPath = NSIndexPath(forRow: cellDataArray.count - 1, inSection: 0)
         
-        tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
+        tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
         
         //Scroll to see the new message added to the tableView.
         tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
