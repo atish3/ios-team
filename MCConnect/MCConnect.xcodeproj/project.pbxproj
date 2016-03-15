@@ -1,0 +1,464 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1A1015721C56FA2200387847 /* MCChatCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1015711C56FA2200387847 /* MCChatCellData.swift */; };
+		1A1015781C570CA900387847 /* MCChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A1015771C570CA900387847 /* MCChatTableViewCell.xib */; };
+		1A613E891C60350E00138F10 /* MCConnectivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A613E881C60350E00138F10 /* MCConnectivityController.swift */; };
+		1A77CF711C594F5200BD7663 /* MCChatNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A77CF701C594F5200BD7663 /* MCChatNavigationController.swift */; };
+		1A7D049B1C865682001C7184 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A7D04901C865658001C7184 /* CryptoSwift.framework */; };
+		1A7D049D1C86568A001C7184 /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1A7D04901C865658001C7184 /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1AF5F1E01C56CEF1004C474F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF5F1DF1C56CEF1004C474F /* AppDelegate.swift */; };
+		1AF5F1E51C56CEF1004C474F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AF5F1E31C56CEF1004C474F /* Main.storyboard */; };
+		1AF5F1E71C56CEF1004C474F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AF5F1E61C56CEF1004C474F /* Images.xcassets */; };
+		1AF5F1EA1C56CEF1004C474F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AF5F1E81C56CEF1004C474F /* LaunchScreen.storyboard */; };
+		1AF5F1F41C56D5FB004C474F /* MCChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF5F1F31C56D5FB004C474F /* MCChatTableViewCell.swift */; };
+		1AF5F1F61C56D6A0004C474F /* MCChatTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF5F1F51C56D6A0004C474F /* MCChatTableViewController.swift */; };
+		1AF5F1F81C56D6FE004C474F /* MCChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF5F1F71C56D6FE004C474F /* MCChatMessage.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1A7D048F1C865658001C7184 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A7D04871C865658001C7184 /* CryptoSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 754BE45519693E190098E6F3;
+			remoteInfo = "CryptoSwift iOS";
+		};
+		1A7D04911C865658001C7184 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A7D04871C865658001C7184 /* CryptoSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5596BDBB1BC8F220007E38D5;
+			remoteInfo = "CryptoSwift watchOS";
+		};
+		1A7D04931C865658001C7184 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A7D04871C865658001C7184 /* CryptoSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 75DF77721BC8EB59006E9520;
+			remoteInfo = "CryptoSwift OSX";
+		};
+		1A7D04951C865658001C7184 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A7D04871C865658001C7184 /* CryptoSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 75D614BF1BD844F2001358B2;
+			remoteInfo = "CryptoSwift tvOS";
+		};
+		1A7D04971C865658001C7184 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A7D04871C865658001C7184 /* CryptoSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 754BE46019693E190098E6F3;
+			remoteInfo = CryptoSwiftTests;
+		};
+		1A7D04991C86567F001C7184 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A7D04871C865658001C7184 /* CryptoSwift.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 754BE45419693E190098E6F3;
+			remoteInfo = "CryptoSwift iOS";
+		};
+		1A7D049E1C86568A001C7184 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A7D04871C865658001C7184 /* CryptoSwift.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 754BE45419693E190098E6F3;
+			remoteInfo = "CryptoSwift iOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1A7D04A01C86568A001C7184 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1A7D049D1C86568A001C7184 /* CryptoSwift.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		1A1015711C56FA2200387847 /* MCChatCellData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCChatCellData.swift; sourceTree = "<group>"; };
+		1A1015771C570CA900387847 /* MCChatTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCChatTableViewCell.xib; sourceTree = "<group>"; };
+		1A613E881C60350E00138F10 /* MCConnectivityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCConnectivityController.swift; sourceTree = "<group>"; };
+		1A77CF701C594F5200BD7663 /* MCChatNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCChatNavigationController.swift; sourceTree = "<group>"; };
+		1A7D04871C865658001C7184 /* CryptoSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CryptoSwift.xcodeproj; path = CryptoSwift/CryptoSwift.xcodeproj; sourceTree = "<group>"; };
+		1AF5F1DC1C56CEF1004C474F /* MCConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MCConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AF5F1DF1C56CEF1004C474F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		1AF5F1E41C56CEF1004C474F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1AF5F1E61C56CEF1004C474F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		1AF5F1E91C56CEF1004C474F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		1AF5F1EB1C56CEF1004C474F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1AF5F1F31C56D5FB004C474F /* MCChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCChatTableViewCell.swift; sourceTree = "<group>"; };
+		1AF5F1F51C56D6A0004C474F /* MCChatTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCChatTableViewController.swift; sourceTree = "<group>"; };
+		1AF5F1F71C56D6FE004C474F /* MCChatMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCChatMessage.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1AF5F1D91C56CEF1004C474F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1A7D049B1C865682001C7184 /* CryptoSwift.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1A7D04881C865658001C7184 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1A7D04901C865658001C7184 /* CryptoSwift.framework */,
+				1A7D04921C865658001C7184 /* CryptoSwift.framework */,
+				1A7D04941C865658001C7184 /* CryptoSwift.framework */,
+				1A7D04961C865658001C7184 /* CryptoSwift.framework */,
+				1A7D04981C865658001C7184 /* CryptoSwiftTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1AF5F1D31C56CEF1004C474F = {
+			isa = PBXGroup;
+			children = (
+				1AF5F1DE1C56CEF1004C474F /* MCConnect */,
+				1AF5F1DD1C56CEF1004C474F /* Products */,
+				1A7D04871C865658001C7184 /* CryptoSwift.xcodeproj */,
+			);
+			sourceTree = "<group>";
+		};
+		1AF5F1DD1C56CEF1004C474F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1AF5F1DC1C56CEF1004C474F /* MCConnect.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1AF5F1DE1C56CEF1004C474F /* MCConnect */ = {
+			isa = PBXGroup;
+			children = (
+				1AF5F1DF1C56CEF1004C474F /* AppDelegate.swift */,
+				1AF5F1F31C56D5FB004C474F /* MCChatTableViewCell.swift */,
+				1AF5F1F71C56D6FE004C474F /* MCChatMessage.swift */,
+				1A1015711C56FA2200387847 /* MCChatCellData.swift */,
+				1AF5F1F51C56D6A0004C474F /* MCChatTableViewController.swift */,
+				1A77CF701C594F5200BD7663 /* MCChatNavigationController.swift */,
+				1A613E881C60350E00138F10 /* MCConnectivityController.swift */,
+				1AF5F1E31C56CEF1004C474F /* Main.storyboard */,
+				1AF5F1E61C56CEF1004C474F /* Images.xcassets */,
+				1AF5F1E81C56CEF1004C474F /* LaunchScreen.storyboard */,
+				1A1015771C570CA900387847 /* MCChatTableViewCell.xib */,
+				1AF5F1EB1C56CEF1004C474F /* Info.plist */,
+			);
+			path = MCConnect;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1AF5F1DB1C56CEF1004C474F /* MCConnect */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1AF5F1EE1C56CEF1004C474F /* Build configuration list for PBXNativeTarget "MCConnect" */;
+			buildPhases = (
+				1AF5F1D81C56CEF1004C474F /* Sources */,
+				1AF5F1D91C56CEF1004C474F /* Frameworks */,
+				1AF5F1DA1C56CEF1004C474F /* Resources */,
+				1A7D04A01C86568A001C7184 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1A7D049A1C86567F001C7184 /* PBXTargetDependency */,
+				1A7D049F1C86568A001C7184 /* PBXTargetDependency */,
+			);
+			name = MCConnect;
+			productName = MCConnect;
+			productReference = 1AF5F1DC1C56CEF1004C474F /* MCConnect.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1AF5F1D41C56CEF1004C474F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Pascal Sturmfels";
+				TargetAttributes = {
+					1AF5F1DB1C56CEF1004C474F = {
+						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = A82QZKWKS8;
+					};
+				};
+			};
+			buildConfigurationList = 1AF5F1D71C56CEF1004C474F /* Build configuration list for PBXProject "MCConnect" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1AF5F1D31C56CEF1004C474F;
+			productRefGroup = 1AF5F1DD1C56CEF1004C474F /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 1A7D04881C865658001C7184 /* Products */;
+					ProjectRef = 1A7D04871C865658001C7184 /* CryptoSwift.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				1AF5F1DB1C56CEF1004C474F /* MCConnect */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		1A7D04901C865658001C7184 /* CryptoSwift.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CryptoSwift.framework;
+			remoteRef = 1A7D048F1C865658001C7184 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1A7D04921C865658001C7184 /* CryptoSwift.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CryptoSwift.framework;
+			remoteRef = 1A7D04911C865658001C7184 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1A7D04941C865658001C7184 /* CryptoSwift.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CryptoSwift.framework;
+			remoteRef = 1A7D04931C865658001C7184 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1A7D04961C865658001C7184 /* CryptoSwift.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CryptoSwift.framework;
+			remoteRef = 1A7D04951C865658001C7184 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1A7D04981C865658001C7184 /* CryptoSwiftTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = CryptoSwiftTests.xctest;
+			remoteRef = 1A7D04971C865658001C7184 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1AF5F1DA1C56CEF1004C474F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1AF5F1EA1C56CEF1004C474F /* LaunchScreen.storyboard in Resources */,
+				1AF5F1E71C56CEF1004C474F /* Images.xcassets in Resources */,
+				1AF5F1E51C56CEF1004C474F /* Main.storyboard in Resources */,
+				1A1015781C570CA900387847 /* MCChatTableViewCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1AF5F1D81C56CEF1004C474F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1A77CF711C594F5200BD7663 /* MCChatNavigationController.swift in Sources */,
+				1AF5F1F61C56D6A0004C474F /* MCChatTableViewController.swift in Sources */,
+				1A613E891C60350E00138F10 /* MCConnectivityController.swift in Sources */,
+				1AF5F1F41C56D5FB004C474F /* MCChatTableViewCell.swift in Sources */,
+				1A1015721C56FA2200387847 /* MCChatCellData.swift in Sources */,
+				1AF5F1F81C56D6FE004C474F /* MCChatMessage.swift in Sources */,
+				1AF5F1E01C56CEF1004C474F /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1A7D049A1C86567F001C7184 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "CryptoSwift iOS";
+			targetProxy = 1A7D04991C86567F001C7184 /* PBXContainerItemProxy */;
+		};
+		1A7D049F1C86568A001C7184 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "CryptoSwift iOS";
+			targetProxy = 1A7D049E1C86568A001C7184 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		1AF5F1E31C56CEF1004C474F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1AF5F1E41C56CEF1004C474F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		1AF5F1E81C56CEF1004C474F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1AF5F1E91C56CEF1004C474F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1AF5F1EC1C56CEF1004C474F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1AF5F1ED1C56CEF1004C474F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1AF5F1EF1C56CEF1004C474F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				INFOPLIST_FILE = MCConnect/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = AM.MCConnect;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		1AF5F1F01C56CEF1004C474F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				INFOPLIST_FILE = MCConnect/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = AM.MCConnect;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1AF5F1D71C56CEF1004C474F /* Build configuration list for PBXProject "MCConnect" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1AF5F1EC1C56CEF1004C474F /* Debug */,
+				1AF5F1ED1C56CEF1004C474F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1AF5F1EE1C56CEF1004C474F /* Build configuration list for PBXNativeTarget "MCConnect" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1AF5F1EF1C56CEF1004C474F /* Debug */,
+				1AF5F1F01C56CEF1004C474F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1AF5F1D41C56CEF1004C474F /* Project object */;
+}
