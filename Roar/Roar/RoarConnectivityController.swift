@@ -9,7 +9,7 @@
 import UIKit
 import MultipeerConnectivity
 
-class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate {
+class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate, MCSessionDelegate {
     //An MCPeerID is a unique identifier used to identify one's phone on the multipeer network.
     var myPeerId = MCPeerID(displayName: UIDevice.currentDevice().name)
     
@@ -28,53 +28,84 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
     //presence on the network.
     var serviceAdvertiser: MCNearbyServiceAdvertiser!
     
-    //A randomized string that identifies one's phone within this app.
-    //Normally, we'd use peerID, but we use that for other purposes... (see below)
-    let personalKey: String = String(arc4random_uniform(999999))
+    lazy var sessionObject: MCSession = {
+        let session = MCSession(peer: self.myPeerId)
+        session.delegate = self
+        return session
+    }()
+        
+    override init() {
+        serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: myServiceType)
+        serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: nil, serviceType: myServiceType)
+        
+        super.init()
+        
+        serviceBrowser.delegate = self
+        serviceBrowser.startBrowsingForPeers()
+        
+        serviceAdvertiser.delegate = self
+        serviceAdvertiser.startAdvertisingPeer()
+    }
     
-        //A property that is the current message to be broadcast on the network. 
-    //Whenever this property is set, the message is send to the network.
-    var message: String? {
-        didSet {
-            if let messageString = message {
-                //Create a dictionary containing the message. The only way to advertise information
-                //across the network is through [String:String] dictionaries.
-                let myDictionary: [String:String]? = ["message":messageString, "senderKey":String(personalKey)]
-                
-                //Generate a random peerID. The reason we do this is to be able to rapidly 
-                //broadcast new messages without actually establishing connections.
-                //(although I want to change this. We should try to avoid this in the future)
-                myPeerId = MCPeerID(displayName: "Device" + String(arc4random_uniform(999999)))
-                
-                //Create a new advertiser object to broadcast the current message.
-                serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: myDictionary, serviceType: myServiceType)
-                
-                //Set the delegate to by myself.
-                serviceAdvertiser.delegate = self
-                
-                //Start advertising the service and the message.
-                serviceAdvertiser.startAdvertisingPeer()
-            }
-        }
+    deinit {
+        self.serviceAdvertiser.stopAdvertisingPeer()
+        self.serviceBrowser.stopBrowsingForPeers()
     }
 
     func browser(browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: NSError) {
-
+        NSLog("%@", "didNotStartBrowsingForPeers: \(error)")
     }
     
     func browser(browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
-        
+        NSLog("%@", "foundPeer: \(peerID)")
+        NSLog("%@", "invitePeer: \(peerID)")
+        if let peerHashes = info
+        {
+            if let tableVC = tableViewController {
+                for hash in tableVC.messageHashes {
+                    if peerHashes[hash] == nil {
+                        browser.invitePeer(peerID, toSession: sessionObject, withContext: nil, timeout: 5)
+                        break
+                    }
+                }
+            }
+        }
     }
     
     func browser(browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
-
+        NSLog("%@", "lostPeer: \(peerID)")
     }
     
     func advertiser(advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: NSError) {
-
+        NSLog("%@", "didNotStartAdvertisingPeer: \(error)")
     }
     
     func advertiser(advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: NSData?, invitationHandler: (Bool, MCSession) -> Void) {
+        NSLog("%@", "didReceiveInvitationFromPeer \(peerID)")
+        invitationHandler(true, self.sessionObject)
     }
     
+    func session(session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, atURL localURL: NSURL, withError error: NSError?) {
+        NSLog("%@", "didFinishReceivingResourceWithName \(resourceName)")
+    }
+    
+    func session(session: MCSession, didReceiveCertificate certificate: [AnyObject]?, fromPeer peerID: MCPeerID, certificateHandler: (Bool) -> Void) {
+        NSLog("%@", "didReceiveCertificate from peer \(peerID)")
+    }
+    
+    func session(session: MCSession, didReceiveData data: NSData, fromPeer peerID: MCPeerID) {
+        NSLog("%@", "didReceiveData: \(data.length) bytes from peer \(peerID)")
+    }
+    
+    func session(session: MCSession, didReceiveStream stream: NSInputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
+        NSLog("%@", "didReceiveStream withName \(streamName)")
+    }
+    
+    func session(session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, withProgress progress: NSProgress) {
+        NSLog("%@", "didStartReceivingResourceWithName \(resourceName)")
+    }
+    
+    func session(session: MCSession, peer peerID: MCPeerID, didChangeState state: MCSessionState) {
+        NSLog("%@", "peer \(peerID) didChangeState: \(state.rawValue)")
+    }
 }
