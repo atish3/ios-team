@@ -42,22 +42,21 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
             dictionary[hash] = ""
         }
         
-        serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: dictionary, serviceType: myServiceType)
+        serviceAdvertiser = MCNearbyServiceAdvertiser(peer: MCPeerID(displayName: "Device" + String(arc4random_uniform(999999))), discoveryInfo: dictionary, serviceType: myServiceType)
         serviceAdvertiser.delegate = self
         serviceAdvertiser.startAdvertisingPeer()
+        print(dictionary)
     }
     
     override init() {
-        serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: myServiceType)
         serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: nil, serviceType: myServiceType)
+        serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: myServiceType)
         
         super.init()
         
+        serviceAdvertiser.delegate = self
         serviceBrowser.delegate = self
         serviceBrowser.startBrowsingForPeers()
-        
-        serviceAdvertiser.delegate = self
-        serviceAdvertiser.startAdvertisingPeer()
     }
     
     deinit {
@@ -71,6 +70,7 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
     
     func browser(browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         NSLog("%@", "foundPeer: \(peerID)")
+        var didInvitePeer = false
         
         if let peerHashes = info
         {
@@ -79,13 +79,31 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
                     if peerHashes[hash] == nil {
                         NSLog("%@", "invitePeer: \(peerID)")
                         browser.invitePeer(peerID, toSession: sessionObject, withContext: nil, timeout: 5)
+                        didInvitePeer = true
                         break
                     }
                 }
+                if !didInvitePeer {
+                    for (hash, _) in peerHashes {
+                        if tableVC.messageHashes.indexOf(hash) == nil {
+                            NSLog("%@", "invitePeer: \(peerID)")
+                            browser.invitePeer(peerID, toSession: sessionObject, withContext: nil, timeout: 5)
+                            didInvitePeer = true
+                            break
+                        }
+                    }
+                }
+            }
+            else {
+                print("TableView does not exist")
             }
         }
-        
-        NSLog("%@", "didNotInvitePeer: \(peerID)")
+        else {
+            print("discovery info does not exist")
+        }
+        if !didInvitePeer {
+            NSLog("%@", "didNotInvitePeer: \(peerID)")
+        }
     }
     
     func browser(browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
@@ -107,6 +125,7 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
     
     func session(session: MCSession, didReceiveCertificate certificate: [AnyObject]?, fromPeer peerID: MCPeerID, certificateHandler: (Bool) -> Void) {
         NSLog("%@", "didReceiveCertificate from peer \(peerID)")
+        certificateHandler(true)
     }
     
     func session(session: MCSession, didReceiveData data: NSData, fromPeer peerID: MCPeerID) {

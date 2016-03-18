@@ -15,7 +15,8 @@ class RoarNavigationController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         connectivityController = RoarConnectivityController()
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "create")
+        connectivityController.tableViewController = tableView
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "create")
         
     }
     
