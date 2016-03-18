@@ -33,7 +33,20 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
         session.delegate = self
         return session
     }()
+    
+    func createNewAdvertiser(withHashes messageHashes: [String])
+    {
+        serviceAdvertiser.stopAdvertisingPeer()
+        var dictionary = [String: String]()
+        for hash in messageHashes {
+            dictionary[hash] = ""
+        }
         
+        serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: dictionary, serviceType: myServiceType)
+        serviceAdvertiser.delegate = self
+        serviceAdvertiser.startAdvertisingPeer()
+    }
+    
     override init() {
         serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: myServiceType)
         serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: nil, serviceType: myServiceType)
@@ -58,18 +71,21 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
     
     func browser(browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         NSLog("%@", "foundPeer: \(peerID)")
-        NSLog("%@", "invitePeer: \(peerID)")
+        
         if let peerHashes = info
         {
             if let tableVC = tableViewController {
                 for hash in tableVC.messageHashes {
                     if peerHashes[hash] == nil {
+                        NSLog("%@", "invitePeer: \(peerID)")
                         browser.invitePeer(peerID, toSession: sessionObject, withContext: nil, timeout: 5)
                         break
                     }
                 }
             }
         }
+        
+        NSLog("%@", "didNotInvitePeer: \(peerID)")
     }
     
     func browser(browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
@@ -107,5 +123,8 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
     
     func session(session: MCSession, peer peerID: MCPeerID, didChangeState state: MCSessionState) {
         NSLog("%@", "peer \(peerID) didChangeState: \(state.rawValue)")
+        if state == MCSessionState.Connected {
+            print("Connected!")
+        }
     }
 }
