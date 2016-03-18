@@ -10,9 +10,17 @@ import UIKit
 
 class RoarNavigationController: UIViewController {
     var tableView: RoarTableViewController!
+    var connectivityController: RoarConnectivityController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        connectivityController = RoarConnectivityController()
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "create")
+        
+    }
+    
+    func create() {
+        connectivityController.createNewAdvertiser(withHashes: tableView.messageHashes)
     }
     
     override func canBecomeFirstResponder() -> Bool {
