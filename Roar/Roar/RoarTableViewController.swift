@@ -84,6 +84,12 @@ class RoarTableViewController: UITableViewController {
     
         //Create a MCChatMessage object from the input parameters.
         let message = RoarMessageCore(text: text, date: date, user:user)
+        addMessage(message)
+    }
+    
+    func addMessage(message: RoarMessageCore) {
+        let date = message.date
+        let text = message.text
         let ifHideDate: Bool
         if cellDataArray.count == 0 || date.timeIntervalSinceDate(cellDataArray[cellDataArray.count - 1].message.date) > 60
         {
@@ -106,12 +112,14 @@ class RoarTableViewController: UITableViewController {
         //Find the end of the tableView, and insert the message there.
         let indexPath = NSIndexPath(forRow: cellDataArray.count - 1, inSection: 0)
         
-        tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+        tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
+        
+        tableView.reloadData()
         
         //Scroll to see the new message added to the tableView.
         tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+        
     }
-    
     
         // Add test data here
     func loadTestData()
@@ -120,7 +128,7 @@ class RoarTableViewController: UITableViewController {
         addMessage("Hello World!", date: NSDate(), user: "Pascal")
         addMessage("this is a string", date: NSDate(timeIntervalSinceNow: -12*60*60+30), user: "Pascal")
         addMessage("this is a very very very very very very very very very very very very very very very very very very very very very very very very very very very very long string", date: NSDate(timeIntervalSinceNow: -30), user: "Pascal")
-       addMessage("Another message", date: NSDate(), user: "Pascal")
+        addMessage("Another message", date: NSDate(), user: "Pascal")
         
     }
 }

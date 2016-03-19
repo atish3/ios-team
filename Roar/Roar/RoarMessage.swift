@@ -9,16 +9,29 @@
 import UIKit
 
 //The core data necessary for a message
-class RoarMessageCore {
-    let date: NSDate
-    let text: String
-    let user: String
+class RoarMessageCore: NSObject, NSCoding {
+    var date: NSDate
+    var text: String
+    var user: String
     
-    init(text: String, date: NSDate, user: String)
-    {
+    init(text: String, date: NSDate, user: String) {
         self.text = text
         self.date = date
-        self.user = user + ":"
+        self.user = user
+    }
+    
+    required convenience init?(coder aDecoder: NSCoder) {
+        let unarchivedDate = aDecoder.decodeObjectForKey("date") as! NSDate
+        let unarchivedText = aDecoder.decodeObjectForKey("text") as! String
+        let unarchivedUser = aDecoder.decodeObjectForKey("user") as! String
+        
+        self.init(text: unarchivedText, date: unarchivedDate, user: unarchivedUser)
+    }
+    
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(self.date, forKey: "date")
+        aCoder.encodeObject(self.text, forKey: "text")
+        aCoder.encodeObject(self.user, forKey: "user")
     }
 }
 
@@ -41,8 +54,7 @@ class RoarMessage {
     private let spacing:CGFloat = 10
     let cellHeight: CGFloat
 
-    init(message: RoarMessageCore, hideDate: Bool)
-    {
+    init(message: RoarMessageCore, hideDate: Bool) {
         self.message = message
         
         self.hideDate = hideDate

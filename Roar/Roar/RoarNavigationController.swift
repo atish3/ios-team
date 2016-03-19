@@ -16,12 +16,34 @@ class RoarNavigationController: UIViewController {
         super.viewDidLoad()
         connectivityController = RoarConnectivityController()
         connectivityController.tableViewController = tableView
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "create")
-        
+        connectivityController.navigationController = self
+
+        let browseButton = UIBarButtonItem(title: "browse", style: UIBarButtonItemStyle.Plain , target: self, action: "toggleBrowser")
+        let advertiseButton = UIBarButtonItem(title: "advertise", style: UIBarButtonItemStyle.Plain, target: self, action: "toggleAdvertiser")
+        self.navigationItem.leftBarButtonItems = [browseButton, advertiseButton]
     }
     
-    func create() {
-        connectivityController.createNewAdvertiser(withHashes: tableView.messageHashes)
+    func toggleBrowser() {
+        if connectivityController.isBrowsing {
+            connectivityController.stopBrowsingForPeers()
+            self.navigationItem.leftBarButtonItems![0].title = "browse"
+        }
+        else {
+            connectivityController.startBrowsingForPeers()
+            self.navigationItem.leftBarButtonItems![0].title = "stop browsing"
+        }
+    }
+    
+    func toggleAdvertiser() {
+        if connectivityController.isAdvertising {
+            connectivityController.stopAdvertisingPeer()
+            self.navigationItem.leftBarButtonItems![1].title = "advertise"
+        }
+        else {
+            connectivityController.createNewAdvertiser(withHashes: tableView.messageHashes)
+            connectivityController.startAdvertisingPeer()
+            self.navigationItem.leftBarButtonItems![1].title = "stop advertising"
+        }
     }
     
     override func canBecomeFirstResponder() -> Bool {
