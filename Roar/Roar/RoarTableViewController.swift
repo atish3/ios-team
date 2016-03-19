@@ -112,9 +112,10 @@ class RoarTableViewController: UITableViewController {
         //Find the end of the tableView, and insert the message there.
         let indexPath = NSIndexPath(forRow: cellDataArray.count - 1, inSection: 0)
         
-        tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
-        
-        tableView.reloadData()
+        self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+           self.tableView.reloadData()
+        }
         
         //Scroll to see the new message added to the tableView.
         tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
