@@ -12,6 +12,8 @@ class RoarComposeViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var composeTextView: UITextView!
     weak var roarTableVC: RoarTableViewController!
     let textViewMargins = 20
+    let placeholderText = "Post something to the world!"
+    var placeholderLabel: UILabel!
     
     override func viewDidLoad() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
@@ -26,11 +28,22 @@ class RoarComposeViewController: UIViewController, UITextViewDelegate {
         composeTextView.translatesAutoresizingMaskIntoConstraints = true
         composeTextView.frame = CGRect(x: CGFloat(textViewMargins), y: 0, width: self.view.bounds.width - CGFloat(textViewMargins), height: self.view.bounds.height)
         composeTextView.delegate = self
+        composeTextView.text = ""
+        
+        placeholderLabel = UILabel()
+        placeholderLabel.text = placeholderText
+        placeholderLabel.font = composeTextView.font
+        placeholderLabel.sizeToFit()
+        composeTextView.addSubview(placeholderLabel)
+        placeholderLabel.frame.origin = CGPointMake(5, composeTextView.font!.pointSize / 2)
+        placeholderLabel.textColor = UIColor.lightGrayColor()
+        
         composeTextView.becomeFirstResponder()
     }
     
     
     func textViewDidChange(textView: UITextView) {
+        placeholderLabel.hidden = !textView.text.isEmpty
         if textView.text.characters.count > 0 {
             self.navigationItem.rightBarButtonItem!.enabled = true
         }
