@@ -12,7 +12,7 @@
             <rect key="frame" x="0.0" y="0.0" width="324" height="77"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" placeholderIntrinsicWidth="324" placeholderIntrinsicHeight="76" tableViewCell="axp-op-4Dp" id="y5x-mB-5b9">
-                <rect key="frame" x="0.0" y="0.0" width="324" height="76"/>
+                <rect key="frame" x="0.0" y="0.0" width="324" height="76.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="181" placeholderIntrinsicHeight="21" text="Date" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Q0-Pr-Pvr">

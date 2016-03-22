@@ -124,8 +124,8 @@
 		1ABE12C81C9744D0005923BA = {
 			isa = PBXGroup;
 			children = (
-				1ABE12D31C9744D0005923BA /* Roar */,
 				1ABE12D21C9744D0005923BA /* Products */,
+				1ABE12D31C9744D0005923BA /* Roar */,
 				1ABE12F41C976A1F005923BA /* CryptoSwift.xcodeproj */,
 			);
 			sourceTree = "<group>";

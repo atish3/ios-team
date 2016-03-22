@@ -22,6 +22,7 @@ class RoarTableViewController: UITableViewController {
         
         loadTestData()
     }
+
     
     //This function is part of UITableViewController's built-in classes.
     //It asks for the number of rows in tableView = number of messages = size of cellDataArray.
@@ -113,9 +114,7 @@ class RoarTableViewController: UITableViewController {
         let indexPath = NSIndexPath(forRow: cellDataArray.count - 1, inSection: 0)
         
         self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
-           self.tableView.reloadData()
-        }
+       
         
         //Scroll to see the new message added to the tableView.
         tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)

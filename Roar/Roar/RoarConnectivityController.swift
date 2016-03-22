@@ -216,6 +216,9 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
                     else {
                         print("addMessage called on \(tableVC.cellDataArray[tableVC.cellDataArray.count - 1].message.text)")
                         tableVC.addMessage(receivedMessage)
+                        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                            tableVC.tableView.reloadData()
+                        }
                     }
                 }
                 else {
