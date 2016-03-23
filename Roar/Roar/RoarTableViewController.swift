@@ -131,4 +131,28 @@ class RoarTableViewController: UITableViewController {
         addMessage("Another message", date: NSDate(), user: "Pascal")
         
     }
+    
+    // MARK: NSCoding
+    // TODO: fix this (method of saving message core)
+    func saveMessage(messageCore: RoarMessageCore) {
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(messageCore, toFile: RoarMessageCore.ArchiveURLMessage.path!)
+        if (!isSuccessfulSave) {
+            print("Failed to save messagecore")
+        }
+    }
+    
+    func loadMessage() -> RoarMessageCore? {
+        return NSKeyedUnarchiver.unarchiveObjectWithFile(RoarMessageCore.ArchiveURLMessage.path!) as? RoarMessageCore
+    }
+    
+    func saveHash() {
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(messageHashes, toFile: RoarMessageCore.ArchiveURLHash.path!)
+        if (!isSuccessfulSave) {
+            print("Failed to save hashes")
+        }
+    }
+    
+    func loadHash() -> [String]? {
+        return NSKeyedUnarchiver.unarchiveObjectWithFile(RoarMessageCore.ArchiveURLHash.path!) as? [String]
+    }
 }
