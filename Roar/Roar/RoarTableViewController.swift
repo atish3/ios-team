@@ -12,6 +12,8 @@ class RoarTableViewController: UITableViewController {
     //An array MCChatMessageData objects. This array is where all messages are stored.
     var cellDataArray = [RoarMessage]()
     var messageHashes = [String]()      //PERSISTENT STORAGE!!!
+    // TODO: maybe change the hashes string array into a set
+    
     var coreDataArray = [RoarMessageCore]() //PERSISTENT STORAGE
     
     var ifCellRegistered = false
@@ -21,8 +23,6 @@ class RoarTableViewController: UITableViewController {
         self.tableView.separatorColor = UIColor.blackColor()
         self.tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         self.tableView.cellLayoutMarginsFollowReadableWidth = false
-        
-        loadTestData()
         
         // Persistent Storage
         if let savedMessage = loadMessage() {
@@ -34,6 +34,9 @@ class RoarTableViewController: UITableViewController {
         if let savedHash = loadHash() {
             messageHashes += savedHash
         }
+        
+        //loadTestData()
+        
     }
 
     
@@ -98,11 +101,12 @@ class RoarTableViewController: UITableViewController {
     
         //Create a MCChatMessage object from the input parameters.
         let message = RoarMessageCore(text: text, date: date, user:user)
-        addMessage(message)
         
         // Persistent Storage
         coreDataArray.append(message)
         saveMessage()
+        
+        addMessage(message)
     }
     
     func addMessage(message: RoarMessageCore) {
@@ -123,11 +127,12 @@ class RoarTableViewController: UITableViewController {
         //Create an MCChatMessageData object from the given MCChatMessage object.
         let cellData = RoarMessage(message: message, hideDate: ifHideDate)
         
-        //Append it to our cellDataArray.
+        //Append it to our cellDataArray. + Persistent Storage
         cellDataArray.append(cellData)
         messageHashes.append(text.sha1())
+        //coreDataArray.append(message)
         
-        // Persistent Storage
+        //saveMessage()
         saveHash()
         
         //Find the end of the tableView, and insert the message there.
@@ -145,10 +150,10 @@ class RoarTableViewController: UITableViewController {
     func loadTestData()
     {
         addMessage("Hi!", date: NSDate(timeIntervalSinceNow: -24*60*60*23), user: "Pascal")
-        addMessage("Hello World!", date: NSDate(), user: "Pascal")
-        addMessage("this is a string", date: NSDate(timeIntervalSinceNow: -12*60*60+30), user: "Pascal")
-        addMessage("this is a very very very very very very very very very very very very very very very very very very very very very very very very very very very very long string", date: NSDate(timeIntervalSinceNow: -30), user: "Pascal")
-        addMessage("Another message", date: NSDate(), user: "Pascal")
+        //addMessage("Hello World!", date: NSDate(), user: "Pascal")
+        //addMessage("this is a string", date: NSDate(timeIntervalSinceNow: -12*60*60+30), user: "Pascal")
+        //addMessage("this is a very very very very very very very very very very very very very very very very very very very very very very very very very very very very long string", date: NSDate(timeIntervalSinceNow: -30), user: "Pascal")
+        //addMessage("Another message", date: NSDate(), user: "Pascal")
         
     }
     
