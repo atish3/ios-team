@@ -121,7 +121,7 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
         do {
             try self.sessionObject.sendData("@@@messagebegin".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, toPeers: self.sessionObject.connectedPeers, withMode: MCSessionSendDataMode.Reliable)
             if let tableVC = self.tableViewController {
-                for var index = 0; index < tableVC.messageHashes.count; ++index {
+                for index in 0 ..< tableVC.messageHashes.count {
                     if peerHashes.indexOf(tableVC.messageHashes[index]) == nil {
                         let encodedMessage = NSKeyedArchiver.archivedDataWithRootObject(tableVC.cellDataArray[index].message)
                         try self.sessionObject.sendData(encodedMessage, toPeers: self.sessionObject.connectedPeers, withMode: MCSessionSendDataMode.Reliable)
