@@ -18,8 +18,8 @@ class RoarNavigationController: UIViewController {
         connectivityController.tableViewController = tableView
         connectivityController.navigationController = self
 
-        let browseButton = UIBarButtonItem(title: "browse", style: UIBarButtonItemStyle.Plain , target: self, action: "toggleBrowser")
-        let advertiseButton = UIBarButtonItem(title: "advertise", style: UIBarButtonItemStyle.Plain, target: self, action: "toggleAdvertiser")
+        let browseButton = UIBarButtonItem(title: "browse", style: UIBarButtonItemStyle.Plain , target: self, action: #selector(RoarNavigationController.toggleBrowser))
+        let advertiseButton = UIBarButtonItem(title: "advertise", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(RoarNavigationController.toggleAdvertiser))
         self.navigationItem.leftBarButtonItems = [browseButton, advertiseButton]
     }
     
@@ -63,6 +63,7 @@ class RoarNavigationController: UIViewController {
             let destNav = segue.destinationViewController as! UINavigationController
             let composeVC = destNav.childViewControllers[0] as! RoarComposeViewController
             composeVC.roarTableVC = tableView
+            composeVC.roarCC = connectivityController
         }
     }
 }

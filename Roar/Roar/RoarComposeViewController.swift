@@ -11,16 +11,17 @@ import UIKit
 class RoarComposeViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var composeTextView: UITextView!
     weak var roarTableVC: RoarTableViewController!
+    weak var roarCC: RoarConnectivityController!
     let textViewMargins = 20
     let placeholderText = "Post something to the world!"
     var placeholderLabel: UILabel!
     
     override func viewDidLoad() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(RoarComposeViewController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(RoarComposeViewController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
     
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "cancelTapped")
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Post", style: .Done, target: self, action: "postTapped")
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: #selector(RoarComposeViewController.cancelTapped))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Post", style: .Done, target: self, action: #selector(RoarComposeViewController.postTapped))
         self.navigationItem.rightBarButtonItem!.enabled = false
         
         self.title = "Post to Feed"
@@ -80,6 +81,9 @@ class RoarComposeViewController: UIViewController, UITextViewDelegate {
     func postTapped() {
         self.dismissViewControllerAnimated(true) { () -> Void in
             self.roarTableVC.addMessage(self.composeTextView.text, date: NSDate(), user: "Pascal")
+            if self.roarCC.sessionObject.connectedPeers.count > 0 {
+                self.roarCC.sendIndividualMessage(RoarMessageCore(text: self.composeTextView.text, date: NSDate(), user: "Pascal"))
+            }
         }
     }
 }

@@ -99,7 +99,7 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
         do {
             if let tableVC = tableViewController {
                 var messageDictionary = [String:RoarMessageCore]()
-                for (var i = 0; i < tableVC.messageHashes.count; ++i) {
+                for i in 0 ..< tableVC.messageHashes.count {
                     messageDictionary[tableVC.messageHashes[i]] = tableVC.cellDataArray[i].message
                 }
                 let messageDictionaryData = NSKeyedArchiver.archivedDataWithRootObject(messageDictionary)
@@ -201,6 +201,7 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
         var didReceiveRequest = false
         if let str = NSString(data: data, encoding: NSUTF8StringEncoding) as? String {
             if str == "@@@messagereq" {
+                print("Received request for messages")
                 broadcastHashMessageDictionary()
                 didReceiveRequest = true
             }
@@ -208,16 +209,24 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
         if !didReceiveRequest {
             if let tableVC = tableViewController {
                 if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? RoarMessageCore {
+                    print("Did receive single message")
                     if !tableVC.messageHashes.contains(message.text) {
                         tableVC.addMessage(message)
-                        ++newMessagesReceived
+                        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                            tableVC.tableView.reloadData()
+                        }
+                        newMessagesReceived += 1
                     }
                 }
                 if let dictionary = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? [String: RoarMessageCore] {
+                    print("Did receive dictionary of messages")
                     for (hash, message) in dictionary {
                         if !tableVC.messageHashes.contains(hash) {
                             tableVC.addMessage(message)
-                            ++newMessagesReceived
+                            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                            tableVC.tableView.reloadData()
+                            }
+                            newMessagesReceived += 1
                         }
                     }
                     if self.newMessagesReceived > 20 {

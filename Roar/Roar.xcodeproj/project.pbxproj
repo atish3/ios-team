@@ -19,7 +19,6 @@
 		1ABE12F01C975321005923BA /* RoarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1ABE12EF1C975321005923BA /* RoarTableViewCell.xib */; };
 		1ABE12F21C9756A2005923BA /* RoarConnectivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE12F11C9756A2005923BA /* RoarConnectivityController.swift */; };
 		1ABE13081C976A4B005923BA /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABE12FD1C976A1F005923BA /* CryptoSwift.framework */; };
-		1ABE13091C976A5A005923BA /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABE12FD1C976A1F005923BA /* CryptoSwift.framework */; };
 		1ABE130A1C976A5A005923BA /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABE12FD1C976A1F005923BA /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1AF2D0671C97856300670C89 /* RoarComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF2D0661C97856300670C89 /* RoarComposeViewController.swift */; };
 /* End PBXBuildFile section */
@@ -114,7 +113,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1ABE13081C976A4B005923BA /* CryptoSwift.framework in Frameworks */,
-				1ABE13091C976A5A005923BA /* CryptoSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,7 +198,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = 1AM;
 				TargetAttributes = {
 					1ABE12D01C9744D0005923BA = {
@@ -372,7 +370,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -410,7 +408,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
