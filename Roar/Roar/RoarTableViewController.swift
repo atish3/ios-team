@@ -10,8 +10,10 @@ import UIKit
 
 class RoarTableViewController: UITableViewController {
     //An array MCChatMessageData objects. This array is where all messages are stored.
-    var cellDataArray = [RoarMessage]() //PERSISTENT STORAGE
+    var cellDataArray = [RoarMessage]()
     var messageHashes = [String]()      //PERSISTENT STORAGE!!!
+    var coreDataArray = [RoarMessageCore]() //PERSISTENT STORAGE
+    
     var ifCellRegistered = false
 
     override func viewDidLoad() {
@@ -21,6 +23,17 @@ class RoarTableViewController: UITableViewController {
         self.tableView.cellLayoutMarginsFollowReadableWidth = false
         
         loadTestData()
+        
+        // Persistent Storage
+        if let savedMessage = loadMessage() {
+            coreDataArray += savedMessage
+            for message in coreDataArray {
+                addMessage(message)
+            }
+        }
+        if let savedHash = loadHash() {
+            messageHashes += savedHash
+        }
     }
 
     
@@ -86,6 +99,10 @@ class RoarTableViewController: UITableViewController {
         //Create a MCChatMessage object from the input parameters.
         let message = RoarMessageCore(text: text, date: date, user:user)
         addMessage(message)
+        
+        // Persistent Storage
+        coreDataArray.append(message)
+        saveMessage()
     }
     
     func addMessage(message: RoarMessageCore) {
@@ -110,6 +127,9 @@ class RoarTableViewController: UITableViewController {
         cellDataArray.append(cellData)
         messageHashes.append(text.sha1())
         
+        // Persistent Storage
+        saveHash()
+        
         //Find the end of the tableView, and insert the message there.
         let indexPath = NSIndexPath(forRow: cellDataArray.count - 1, inSection: 0)
         
@@ -133,16 +153,16 @@ class RoarTableViewController: UITableViewController {
     }
     
     // MARK: NSCoding
-    // TODO: fix this (method of saving message core)
-    func saveMessage(messageCore: RoarMessageCore) {
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(messageCore, toFile: RoarMessageCore.ArchiveURLMessage.path!)
+    // Persistent Storage
+    func saveMessage() {
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(coreDataArray, toFile: RoarMessageCore.ArchiveURLMessage.path!)
         if (!isSuccessfulSave) {
             print("Failed to save messagecore")
         }
     }
     
-    func loadMessage() -> RoarMessageCore? {
-        return NSKeyedUnarchiver.unarchiveObjectWithFile(RoarMessageCore.ArchiveURLMessage.path!) as? RoarMessageCore
+    func loadMessage() -> [RoarMessageCore]? {
+        return NSKeyedUnarchiver.unarchiveObjectWithFile(RoarMessageCore.ArchiveURLMessage.path!) as? [RoarMessageCore]
     }
     
     func saveHash() {
