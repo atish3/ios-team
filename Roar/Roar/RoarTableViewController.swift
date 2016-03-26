@@ -31,9 +31,6 @@ class RoarTableViewController: UITableViewController {
                 addMessage(message)
             }
         }
-        if let savedHash = loadHash() {
-            messageHashes += savedHash
-        }
         
         //loadTestData()
         
@@ -132,9 +129,6 @@ class RoarTableViewController: UITableViewController {
         messageHashes.append(text.sha1())
         //coreDataArray.append(message)
         
-        //saveMessage()
-        saveHash()
-        
         //Find the end of the tableView, and insert the message there.
         let indexPath = NSIndexPath(forRow: cellDataArray.count - 1, inSection: 0)
         
@@ -160,24 +154,13 @@ class RoarTableViewController: UITableViewController {
     // MARK: NSCoding
     // Persistent Storage
     func saveMessage() {
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(coreDataArray, toFile: RoarMessageCore.ArchiveURLMessage.path!)
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(coreDataArray, toFile: RoarMessageCore.ArchiveURL.path!)
         if (!isSuccessfulSave) {
             print("Failed to save messagecore")
         }
     }
     
     func loadMessage() -> [RoarMessageCore]? {
-        return NSKeyedUnarchiver.unarchiveObjectWithFile(RoarMessageCore.ArchiveURLMessage.path!) as? [RoarMessageCore]
-    }
-    
-    func saveHash() {
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(messageHashes, toFile: RoarMessageCore.ArchiveURLHash.path!)
-        if (!isSuccessfulSave) {
-            print("Failed to save hashes")
-        }
-    }
-    
-    func loadHash() -> [String]? {
-        return NSKeyedUnarchiver.unarchiveObjectWithFile(RoarMessageCore.ArchiveURLHash.path!) as? [String]
+        return NSKeyedUnarchiver.unarchiveObjectWithFile(RoarMessageCore.ArchiveURL.path!) as? [RoarMessageCore]
     }
 }

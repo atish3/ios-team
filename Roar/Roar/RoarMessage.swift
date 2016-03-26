@@ -40,8 +40,7 @@ class RoarMessageCore: NSObject, NSCoding {
     
     // MARK: Archiving Paths
     static let DocumentsDirectory = NSFileManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
-    static let ArchiveURLMessage = DocumentsDirectory.URLByAppendingPathComponent("messageCore")
-    static let ArchiveURLHash = DocumentsDirectory.URLByAppendingPathComponent("hash")
+    static let ArchiveURL = DocumentsDirectory.URLByAppendingPathComponent("messageCore")
 }
 
 //Contains all of the necessary information to render a message within a table view cell. 
