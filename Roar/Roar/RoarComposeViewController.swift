@@ -80,7 +80,7 @@ class RoarComposeViewController: UIViewController, UITextViewDelegate {
     
     func postTapped() {
         self.dismissViewControllerAnimated(true) { () -> Void in
-            self.roarTableVC.addMessage(self.composeTextView.text, date: NSDate(), user: "Pascal")
+            self.roarTableVC.addMessage(self.composeTextView.text, date: NSDate(), user: "Pascal", didCompose: true)
             if self.roarCC.sessionObject.connectedPeers.count > 0 {
                 self.roarCC.sendIndividualMessage(RoarMessageCore(text: self.composeTextView.text, date: NSDate(), user: "Pascal"))
             }
