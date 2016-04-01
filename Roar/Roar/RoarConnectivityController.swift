@@ -239,6 +239,7 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
                     }
                     if self.newMessagesReceived > 20 {
                         self.sessionObject.disconnect()
+                    
                     }
                 }
             }

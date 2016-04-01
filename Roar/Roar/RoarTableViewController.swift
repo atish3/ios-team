@@ -19,7 +19,7 @@ class RoarTableViewController: UITableViewController {
         self.tableView.separatorColor = UIColor.blackColor()
         self.tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         self.tableView.cellLayoutMarginsFollowReadableWidth = false
-        
+
         loadTestData()
     }
 
