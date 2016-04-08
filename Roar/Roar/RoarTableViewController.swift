@@ -107,11 +107,11 @@ class RoarTableViewController: UITableViewController {
         let cellData = RoarMessage(message: message, hideDate: ifHideDate)
         
         //Append it to our cellDataArray.
-        cellDataArray.append(cellData)
-        messageHashes.append(text.sha1())
+        cellDataArray.insert(cellData, atIndex: 0)
+        messageHashes.insert(text.sha1(), atIndex: 0)
         
         if didCompose {
-            let indexPath = NSIndexPath(forRow: cellDataArray.count - 1, inSection: 0)
+            let indexPath = NSIndexPath(forRow: 0, inSection: 0)
             self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
             tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
         }

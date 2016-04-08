@@ -99,7 +99,7 @@
 		1ABE12E01C9744D0005923BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1ABE12E21C9744D0005923BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1ABE12E91C9750A6005923BA /* RoarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoarTableViewController.swift; sourceTree = "<group>"; };
-		1ABE12EB1C9751E6005923BA /* RoarMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoarMessage.swift; sourceTree = "<group>"; };
+		1ABE12EB1C9751E6005923BA /* RoarMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoarMessage.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1ABE12ED1C97521C005923BA /* RoarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoarTableViewCell.swift; sourceTree = "<group>"; };
 		1ABE12EF1C975321005923BA /* RoarTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RoarTableViewCell.xib; sourceTree = "<group>"; };
 		1ABE12F11C9756A2005923BA /* RoarConnectivityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoarConnectivityController.swift; sourceTree = "<group>"; };

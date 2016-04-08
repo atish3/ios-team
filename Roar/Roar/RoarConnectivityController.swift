@@ -222,7 +222,7 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
                     }
                     dispatch_async(dispatch_get_main_queue()) { () -> Void in
                         tableVC.tableView.reloadData()
-                        let indexPath = NSIndexPath(forRow: tableVC.cellDataArray.count - 1, inSection: 0)
+                        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
                         tableVC.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
                     }
                 }
@@ -234,7 +234,7 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
                     }
                     dispatch_async(dispatch_get_main_queue()) { () -> Void in
                         tableVC.tableView.reloadData()
-                        let indexPath = NSIndexPath(forRow: tableVC.cellDataArray.count - 1, inSection: 0)
+                        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
                         tableVC.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
                     }
                     if self.newMessagesReceived > 20 {
