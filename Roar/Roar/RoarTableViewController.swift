@@ -19,7 +19,7 @@ class RoarTableViewController: UITableViewController {
         self.tableView.separatorColor = UIColor.blackColor()
         self.tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         self.tableView.cellLayoutMarginsFollowReadableWidth = false
-        
+
         loadTestData()
     }
 
@@ -81,14 +81,14 @@ class RoarTableViewController: UITableViewController {
     
     //WHENEVER YOU NEED TO ADD A MESSAGE TO THE TABLE, USE THIS FUNCTION.
     //An all-purpose function that adds a message to the table and updates the tableView.
-    func addMessage(text: String, date: NSDate, user: String) {
+    func addMessage(text: String, date: NSDate, user: String, didCompose: Bool) {
     
         //Create a MCChatMessage object from the input parameters.
         let message = RoarMessageCore(text: text, date: date, user:user)
-        addMessage(message)
+        addMessage(message, didCompose: didCompose)
     }
     
-    func addMessage(message: RoarMessageCore) {
+    func addMessage(message: RoarMessageCore, didCompose: Bool) {
         let date = message.date
         let text = message.text
         let ifHideDate: Bool
@@ -107,28 +107,24 @@ class RoarTableViewController: UITableViewController {
         let cellData = RoarMessage(message: message, hideDate: ifHideDate)
         
         //Append it to our cellDataArray.
-        cellDataArray.append(cellData)
-        messageHashes.append(text.sha1())
+        cellDataArray.insert(cellData, atIndex: 0)
+        messageHashes.insert(text.sha1(), atIndex: 0)
         
-        //Find the end of the tableView, and insert the message there.
-        let indexPath = NSIndexPath(forRow: cellDataArray.count - 1, inSection: 0)
-        
-        //self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
-        self.tableView.reloadData()
-        
-        //Scroll to see the new message added to the tableView.
-        tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
-        
+        if didCompose {
+            let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+            self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
+            tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+        }
     }
     
         // Add test data here
     func loadTestData()
     {
-        addMessage("Hi!", date: NSDate(timeIntervalSinceNow: -24*60*60*23), user: "Pascal")
-        addMessage("Hello World!", date: NSDate(), user: "Pascal")
-        addMessage("this is a string", date: NSDate(timeIntervalSinceNow: -12*60*60+30), user: "Pascal")
-        addMessage("this is a very very very very very very very very very very very very very very very very very very very very very very very very very very very very long string", date: NSDate(timeIntervalSinceNow: -30), user: "Pascal")
-        addMessage("Another message", date: NSDate(), user: "Pascal")
+        addMessage("Hi!", date: NSDate(timeIntervalSinceNow: -24*60*60*23), user: "Pascal", didCompose: true)
+        addMessage("Hello World!", date: NSDate(), user: "Pascal", didCompose: true)
+        addMessage("this is a string", date: NSDate(timeIntervalSinceNow: -12*60*60+30), user: "Pascal", didCompose: true)
+        addMessage("this is a very very very very very very very very very very very very very very very very very very very very very very very very very very very very long string", date: NSDate(timeIntervalSinceNow: -30), user: "Pascal", didCompose: true)
+        addMessage("Another message", date: NSDate(), user: "Pascal", didCompose: true)
         
     }
 }
