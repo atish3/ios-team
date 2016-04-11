@@ -21,6 +21,7 @@
 		1ABE13081C976A4B005923BA /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABE12FD1C976A1F005923BA /* CryptoSwift.framework */; };
 		1ABE130A1C976A5A005923BA /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABE12FD1C976A1F005923BA /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1AF2D0671C97856300670C89 /* RoarComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF2D0661C97856300670C89 /* RoarComposeViewController.swift */; };
+		7DD0BBB41CBC349000CF2268 /* Roar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7DD0BBB21CBC349000CF2268 /* Roar.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +106,7 @@
 		1ABE12F11C9756A2005923BA /* RoarConnectivityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoarConnectivityController.swift; sourceTree = "<group>"; };
 		1ABE12F41C976A1F005923BA /* CryptoSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CryptoSwift.xcodeproj; path = CryptoSwift/CryptoSwift.xcodeproj; sourceTree = "<group>"; };
 		1AF2D0661C97856300670C89 /* RoarComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoarComposeViewController.swift; sourceTree = "<group>"; };
+		7DD0BBB31CBC349000CF2268 /* Roar.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Roar.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +143,7 @@
 			children = (
 				1ABE12D41C9744D0005923BA /* AppDelegate.swift */,
 				1ABE12D61C9744D0005923BA /* RoarNavigationController.swift */,
+				7DD0BBB21CBC349000CF2268 /* Roar.xcdatamodeld */,
 				1ABE12E91C9750A6005923BA /* RoarTableViewController.swift */,
 				1ABE12F11C9756A2005923BA /* RoarConnectivityController.swift */,
 				1ABE12ED1C97521C005923BA /* RoarTableViewCell.swift */,
@@ -296,6 +299,7 @@
 				1ABE12F21C9756A2005923BA /* RoarConnectivityController.swift in Sources */,
 				1ABE12D71C9744D0005923BA /* RoarNavigationController.swift in Sources */,
 				1ABE12EA1C9750A6005923BA /* RoarTableViewController.swift in Sources */,
+				7DD0BBB41CBC349000CF2268 /* Roar.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,6 +467,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7DD0BBB21CBC349000CF2268 /* Roar.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7DD0BBB31CBC349000CF2268 /* Roar.xcdatamodel */,
+			);
+			currentVersion = 7DD0BBB31CBC349000CF2268 /* Roar.xcdatamodel */;
+			path = Roar.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1ABE12C91C9744D0005923BA /* Project object */;
 }

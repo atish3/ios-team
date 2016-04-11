@@ -7,11 +7,16 @@
 //
 import CryptoSwift
 import UIKit
+import CoreData
 
 class RoarTableViewController: UITableViewController {
     //An array MCChatMessageData objects. This array is where all messages are stored.
+    
+    // For core data
+    var coreDataArray = [NSManagedObject]()
+    
     var cellDataArray = [RoarMessage]() //PERSISTENT STORAGE
-    var messageHashes = [String]()      //PERSISTENT STORAGE!!!
+    var messageHashes = [String]()
     var ifCellRegistered = false
 
     override func viewDidLoad() {
@@ -21,6 +26,27 @@ class RoarTableViewController: UITableViewController {
         self.tableView.cellLayoutMarginsFollowReadableWidth = false
 
         loadTestData()
+        
+        // For core data
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        let fetchRequest = NSFetchRequest(entityName: "RoarMesageCore")
+        
+        do {
+            let results = try managedContext.executeFetchRequest(fetchRequest)
+            coreDataArray = results as! [NSManagedObject]
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
+        
+        for coreMessage in coreDataArray {
+            let text = coreMessage.valueForKey("text") as! String
+            let date = coreMessage.valueForKey("date") as! NSDate
+            let user = coreMessage.valueForKey("user") as! String
+            let didCompose = false
+            let message = RoarMessageCore(text: text, date: date, user: user)
+            addMessage(message, didCompose: didCompose)
+        }
     }
 
     
@@ -83,6 +109,22 @@ class RoarTableViewController: UITableViewController {
     //An all-purpose function that adds a message to the table and updates the tableView.
     func addMessage(text: String, date: NSDate, user: String, didCompose: Bool) {
     
+        // For core data
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        let entity = NSEntityDescription.entityForName("RoarMessageCore", inManagedObjectContext: managedContext)
+        let coreMessage = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+        
+        coreMessage.setValue(text, forKey: "text")
+        coreMessage.setValue(date, forKey: "date")
+        coreMessage.setValue(user, forKey: "user")
+        
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not save \(error), \(error.userInfo)")
+        }
+        
         //Create a MCChatMessage object from the input parameters.
         let message = RoarMessageCore(text: text, date: date, user:user)
         addMessage(message, didCompose: didCompose)
