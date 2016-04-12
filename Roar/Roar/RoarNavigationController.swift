@@ -18,9 +18,21 @@ class RoarNavigationController: UIViewController {
         connectivityController.tableViewController = tableView
         connectivityController.navigationController = self
 
-        let browseButton = UIBarButtonItem(title: "browse", style: UIBarButtonItemStyle.Plain , target: self, action: #selector(RoarNavigationController.toggleBrowser))
-        let advertiseButton = UIBarButtonItem(title: "advertise", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(RoarNavigationController.toggleAdvertiser))
-        self.navigationItem.leftBarButtonItems = [browseButton, advertiseButton]
+        //let browseButton = UIBarButtonItem(title: "browse", style: UIBarButtonItemStyle.Plain , target: self, action: #selector(RoarNavigationController.toggleBrowser))
+        //let advertiseButton = UIBarButtonItem(title: "advertise", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(RoarNavigationController.toggleAdvertiser))
+        //self.navigationItem.leftBarButtonItems = [browseButton, advertiseButton]
+        
+        
+        var timer = NSTimer.scheduledTimerWithTimeInterval(45.0, target: self, selector: #selector(RoarNavigationController.startBrowsingAndAdvertising), userInfo: nil, repeats: true)
+        
+
+    }
+    
+    func startBrowsingAndAdvertising()
+    {
+        connectivityController.startBrowsingForPeers()
+        connectivityController.createNewAdvertiser(withHashes: tableView.messageHashes)
+        connectivityController.startAdvertisingPeer()
     }
     
     func toggleBrowser() {
