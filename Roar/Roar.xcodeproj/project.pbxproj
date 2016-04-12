@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		1ABE12D51C9744D0005923BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE12D41C9744D0005923BA /* AppDelegate.swift */; };
 		1ABE12D71C9744D0005923BA /* RoarNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE12D61C9744D0005923BA /* RoarNavigationController.swift */; };
-		1ABE12D91C9744D0005923BA /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE12D81C9744D0005923BA /* SecondViewController.swift */; };
+		1ABE12D91C9744D0005923BA /* RoarProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE12D81C9744D0005923BA /* RoarProfileViewController.swift */; };
 		1ABE12DC1C9744D0005923BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ABE12DA1C9744D0005923BA /* Main.storyboard */; };
 		1ABE12DE1C9744D0005923BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1ABE12DD1C9744D0005923BA /* Assets.xcassets */; };
 		1ABE12E11C9744D0005923BA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ABE12DF1C9744D0005923BA /* LaunchScreen.storyboard */; };
@@ -93,7 +93,7 @@
 		1ABE12D11C9744D0005923BA /* Roar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Roar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ABE12D41C9744D0005923BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1ABE12D61C9744D0005923BA /* RoarNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoarNavigationController.swift; sourceTree = "<group>"; };
-		1ABE12D81C9744D0005923BA /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		1ABE12D81C9744D0005923BA /* RoarProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoarProfileViewController.swift; sourceTree = "<group>"; };
 		1ABE12DB1C9744D0005923BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1ABE12DD1C9744D0005923BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1ABE12E01C9744D0005923BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -148,7 +148,7 @@
 				1AF2D0661C97856300670C89 /* RoarComposeViewController.swift */,
 				1ABE12DA1C9744D0005923BA /* Main.storyboard */,
 				1ABE12EF1C975321005923BA /* RoarTableViewCell.xib */,
-				1ABE12D81C9744D0005923BA /* SecondViewController.swift */,
+				1ABE12D81C9744D0005923BA /* RoarProfileViewController.swift */,
 				1ABE12DD1C9744D0005923BA /* Assets.xcassets */,
 				1ABE12DF1C9744D0005923BA /* LaunchScreen.storyboard */,
 				1ABE12E21C9744D0005923BA /* Info.plist */,
@@ -290,7 +290,7 @@
 			files = (
 				1ABE12EC1C9751E6005923BA /* RoarMessage.swift in Sources */,
 				1ABE12EE1C97521C005923BA /* RoarTableViewCell.swift in Sources */,
-				1ABE12D91C9744D0005923BA /* SecondViewController.swift in Sources */,
+				1ABE12D91C9744D0005923BA /* RoarProfileViewController.swift in Sources */,
 				1AF2D0671C97856300670C89 /* RoarComposeViewController.swift in Sources */,
 				1ABE12D51C9744D0005923BA /* AppDelegate.swift in Sources */,
 				1ABE12F21C9756A2005923BA /* RoarConnectivityController.swift in Sources */,
