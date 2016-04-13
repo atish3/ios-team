@@ -63,25 +63,34 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
     }
     
     func startAdvertisingPeer() {
+        
         serviceAdvertiser.startAdvertisingPeer()
         isAdvertising = true
         newMessagesReceived = 0
+        NSTimer.scheduledTimerWithTimeInterval(30.0, target: self, selector: #selector(RoarConnectivityController.stopAdvertisingPeer), userInfo: nil, repeats: false)
+        NSLog("startAdvertisingPeer begin")
+
+        
     }
     
     func stopAdvertisingPeer() {
         serviceAdvertiser.stopAdvertisingPeer()
         isAdvertising = false
+        NSLog("stopAdvertisingPeer done")
     }
     
     func startBrowsingForPeers() {
         serviceBrowser.startBrowsingForPeers()
         isBrowsing = true
         newMessagesReceived = 0
+        NSTimer.scheduledTimerWithTimeInterval(30.0, target: self, selector: #selector(RoarConnectivityController.stopBrowsingForPeers), userInfo: nil, repeats: false)
+        NSLog("startBrowsingForPeers begin")
     }
     
     func stopBrowsingForPeers() {
         serviceBrowser.stopBrowsingForPeers()
         isBrowsing = false
+        NSLog("stopBrowsingForPeers done")
     }
     
     override init() {
@@ -144,7 +153,7 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
     func browser(browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         NSLog("%@", "foundPeer: \(peerID)")
         var didInvitePeer = false
-        
+
         if let peerHashes = info
         {
             if let tableVC = tableViewController {
