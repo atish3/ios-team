@@ -216,7 +216,7 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
             if let tableVC = tableViewController {
                 if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? RoarMessageCore {
                     print("Did receive single message")
-                    if !tableVC.messageHashes.contains(message.text.sha1()) {
+                    if !tableVC.messageHashes.contains(message.text!.sha1()) {
                         tableVC.addMessage(message, didCompose: false)
                         newMessagesReceived += 1
                     }

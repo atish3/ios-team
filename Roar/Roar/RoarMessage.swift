@@ -8,33 +8,6 @@
 
 import UIKit
 
-//The core data necessary for a message
-class RoarMessageCore: NSObject, NSCoding {
-    var date: NSDate
-    var text: String
-    var user: String
-    
-    init(text: String, date: NSDate, user: String) {
-        self.text = text
-        self.date = date
-        self.user = user
-    }
-    
-    required convenience init?(coder aDecoder: NSCoder) {
-        let unarchivedDate = aDecoder.decodeObjectForKey("date") as! NSDate
-        let unarchivedText = aDecoder.decodeObjectForKey("text") as! String
-        let unarchivedUser = aDecoder.decodeObjectForKey("user") as! String
-        
-        self.init(text: unarchivedText, date: unarchivedDate, user: unarchivedUser)
-    }
-    
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.date, forKey: "date")
-        aCoder.encodeObject(self.text, forKey: "text")
-        aCoder.encodeObject(self.user, forKey: "user")
-    }
-}
-
 //Contains all of the necessary information to render a message within a table view cell. 
 //Does not contain data needed to position that message within the table view cell
 class RoarMessage {

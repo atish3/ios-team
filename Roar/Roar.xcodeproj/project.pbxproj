@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A42E0301CBED2A100E6EE86 /* RoarMessageCore+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A42E02E1CBED2A100E6EE86 /* RoarMessageCore+CoreDataProperties.swift */; };
+		1A42E0311CBED2A100E6EE86 /* RoarMessageCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A42E02F1CBED2A100E6EE86 /* RoarMessageCore.swift */; };
 		1ABE12D51C9744D0005923BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE12D41C9744D0005923BA /* AppDelegate.swift */; };
 		1ABE12D71C9744D0005923BA /* RoarNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE12D61C9744D0005923BA /* RoarNavigationController.swift */; };
 		1ABE12D91C9744D0005923BA /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE12D81C9744D0005923BA /* SecondViewController.swift */; };
@@ -91,6 +93,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1A42E02E1CBED2A100E6EE86 /* RoarMessageCore+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RoarMessageCore+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1A42E02F1CBED2A100E6EE86 /* RoarMessageCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoarMessageCore.swift; sourceTree = "<group>"; };
 		1ABE12D11C9744D0005923BA /* Roar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Roar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ABE12D41C9744D0005923BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1ABE12D61C9744D0005923BA /* RoarNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoarNavigationController.swift; sourceTree = "<group>"; };
@@ -144,10 +148,12 @@
 				1ABE12D41C9744D0005923BA /* AppDelegate.swift */,
 				1ABE12D61C9744D0005923BA /* RoarNavigationController.swift */,
 				7DD0BBB21CBC349000CF2268 /* Roar.xcdatamodeld */,
+				1A42E02E1CBED2A100E6EE86 /* RoarMessageCore+CoreDataProperties.swift */,
+				1A42E02F1CBED2A100E6EE86 /* RoarMessageCore.swift */,
+				1ABE12EB1C9751E6005923BA /* RoarMessage.swift */,
 				1ABE12E91C9750A6005923BA /* RoarTableViewController.swift */,
 				1ABE12F11C9756A2005923BA /* RoarConnectivityController.swift */,
 				1ABE12ED1C97521C005923BA /* RoarTableViewCell.swift */,
-				1ABE12EB1C9751E6005923BA /* RoarMessage.swift */,
 				1AF2D0661C97856300670C89 /* RoarComposeViewController.swift */,
 				1ABE12DA1C9744D0005923BA /* Main.storyboard */,
 				1ABE12EF1C975321005923BA /* RoarTableViewCell.xib */,
@@ -293,6 +299,8 @@
 			files = (
 				1ABE12EC1C9751E6005923BA /* RoarMessage.swift in Sources */,
 				1ABE12EE1C97521C005923BA /* RoarTableViewCell.swift in Sources */,
+				1A42E0301CBED2A100E6EE86 /* RoarMessageCore+CoreDataProperties.swift in Sources */,
+				1A42E0311CBED2A100E6EE86 /* RoarMessageCore.swift in Sources */,
 				1ABE12D91C9744D0005923BA /* SecondViewController.swift in Sources */,
 				1AF2D0671C97856300670C89 /* RoarComposeViewController.swift in Sources */,
 				1ABE12D51C9744D0005923BA /* AppDelegate.swift in Sources */,

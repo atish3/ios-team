@@ -7,15 +7,11 @@
 //
 import CryptoSwift
 import UIKit
-import CoreData
 
 class RoarTableViewController: UITableViewController {
     //An array MCChatMessageData objects. This array is where all messages are stored.
     
-    // For core data
-    var coreDataArray = [NSManagedObject]()
-    
-    var cellDataArray = [RoarMessage]() //PERSISTENT STORAGE
+    var cellDataArray = [RoarMessage]()
     var messageHashes = [String]()
     var ifCellRegistered = false
 
@@ -26,27 +22,6 @@ class RoarTableViewController: UITableViewController {
         self.tableView.cellLayoutMarginsFollowReadableWidth = false
 
         loadTestData()
-        
-        // For core data
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext
-        let fetchRequest = NSFetchRequest(entityName: "RoarMesageCore")
-        
-        do {
-            let results = try managedContext.executeFetchRequest(fetchRequest)
-            coreDataArray = results as! [NSManagedObject]
-        } catch let error as NSError {
-            print("Could not fetch \(error), \(error.userInfo)")
-        }
-        
-        for coreMessage in coreDataArray {
-            let text = coreMessage.valueForKey("text") as! String
-            let date = coreMessage.valueForKey("date") as! NSDate
-            let user = coreMessage.valueForKey("user") as! String
-            let didCompose = false
-            let message = RoarMessageCore(text: text, date: date, user: user)
-            addMessage(message, didCompose: didCompose)
-        }
     }
 
     
@@ -108,33 +83,16 @@ class RoarTableViewController: UITableViewController {
     //WHENEVER YOU NEED TO ADD A MESSAGE TO THE TABLE, USE THIS FUNCTION.
     //An all-purpose function that adds a message to the table and updates the tableView.
     func addMessage(text: String, date: NSDate, user: String, didCompose: Bool) {
-    
-        // For core data
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext
-        let entity = NSEntityDescription.entityForName("RoarMessageCore", inManagedObjectContext: managedContext)
-        let coreMessage = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
-        
-        coreMessage.setValue(text, forKey: "text")
-        coreMessage.setValue(date, forKey: "date")
-        coreMessage.setValue(user, forKey: "user")
-        
-        do {
-            try managedContext.save()
-        } catch let error as NSError {
-            print("Could not save \(error), \(error.userInfo)")
-        }
-        
         //Create a MCChatMessage object from the input parameters.
         let message = RoarMessageCore(text: text, date: date, user:user)
         addMessage(message, didCompose: didCompose)
     }
     
     func addMessage(message: RoarMessageCore, didCompose: Bool) {
-        let date = message.date
-        let text = message.text
+        let date = message.date!
+        let text = message.text!
         let ifHideDate: Bool
-        if cellDataArray.count == 0 || date.timeIntervalSinceDate(cellDataArray[cellDataArray.count - 1].message.date) > 60
+        if cellDataArray.count == 0 || date.timeIntervalSinceDate(cellDataArray[cellDataArray.count - 1].message.date!) > 60
         {
             //Display the date if it's been longer than an hour since the last message.
             ifHideDate = false
