@@ -23,7 +23,7 @@ class RoarTableViewController: UITableViewController, NSFetchedResultsController
         let fetchRequest = NSFetchRequest(entityName: "RoarMessageCore")
         
         // Add Sort Descriptors
-        let sortDescriptor = NSSortDescriptor(key: "date", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         // Initialize Fetched Results Controller
