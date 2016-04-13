@@ -95,15 +95,11 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
         
     }
     
+    
     func broadcastHashMessageDictionary(toRequester id: MCPeerID, excludingHashes hashArray: [String]) {
         do {
             if let tableVC = tableViewController {
-                var messageDictionary = [RoarMessageCore]()
-                for i in 0 ..< tableVC.messageHashes.count {
-                    if !hashArray.contains(tableVC.messageHashes[i]) {
-                        messageDictionary.append(tableVC.cellDataArray[i].message)
-                    }
-                }
+                let messageDictionary = tableVC.returnMessageDictionary(excludingHashes: hashArray)
                 let messageDictionaryData = NSKeyedArchiver.archivedDataWithRootObject(messageDictionary)
                 try self.sessionObject.sendData(messageDictionaryData, toPeers: [id], withMode: MCSessionSendDataMode.Reliable)
             }
@@ -217,26 +213,17 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
                 if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? RoarMessageCore {
                     print("Did receive single message")
                     if !tableVC.messageHashes.contains(message.text!.sha1()) {
-                        tableVC.addMessage(message, didCompose: false)
+                        tableVC.addMessage(message.text!, date: message.date!, user: message.user!)
                         newMessagesReceived += 1
-                    }
-                    dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                        tableVC.tableView.reloadData()
-                        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-                        tableVC.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
                     }
                 }
                 if let messageArray = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? [RoarMessageCore] {
                     print("Did receive dictionary of messages")
                     for message in messageArray {
-                        tableVC.addMessage(message, didCompose: false)
+                        tableVC.addMessage(message.text!, date: message.date!, user: message.user!)
                         newMessagesReceived += 1
                     }
-                    dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                        tableVC.tableView.reloadData()
-                        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-                        tableVC.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
-                    }
+
                     if self.newMessagesReceived > 20 {
                         self.sessionObject.disconnect()
                     

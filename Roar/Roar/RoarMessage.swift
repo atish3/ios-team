@@ -13,7 +13,6 @@ import UIKit
 class RoarMessage {
     let message: RoarMessageCore
     
-    let hideDate: Bool
     let dateFont: UIFont
     let dateBoldFont: UIFont
     let dateLabelHeight: CGFloat
@@ -27,11 +26,10 @@ class RoarMessage {
     private let spacing:CGFloat = 10
     let cellHeight: CGFloat
 
-    init(message: RoarMessageCore, hideDate: Bool) {
+    init(message: RoarMessageCore) {
         self.message = message
         
-        self.hideDate = hideDate
-        self.dateLabelHeight = hideDate ? 0 : 20
+        self.dateLabelHeight = 20
         self.dateFont = UIFont(name: "Helvetica", size: 10.0)!
         self.dateBoldFont = UIFont(name: "Helvetica-Bold", size: 10.0)!
         

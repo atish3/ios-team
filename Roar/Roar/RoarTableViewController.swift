@@ -7,69 +7,126 @@
 //
 import CryptoSwift
 import UIKit
+import CoreData
 
-class RoarTableViewController: UITableViewController {
+class RoarTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     //An array MCChatMessageData objects. This array is where all messages are stored.
     
-    var cellDataArray = [RoarMessage]()
+    
     var messageHashes = [String]()
     var ifCellRegistered = false
-
+    
+    var managedObjectContext: NSManagedObjectContext!
+    
+    lazy var fetchedResultsController: NSFetchedResultsController = {
+        // Initialize Fetch Request
+        let fetchRequest = NSFetchRequest(entityName: "RoarMessageCore")
+        
+        // Add Sort Descriptors
+        let sortDescriptor = NSSortDescriptor(key: "date", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        // Initialize Fetched Results Controller
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+        
+        // Configure Fetched Results Controller
+        fetchedResultsController.delegate = self
+        
+        return fetchedResultsController
+    }()
+    
     override func viewDidLoad() {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        self.managedObjectContext = appDelegate.managedObjectContext
+        
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        let didDetectIncompatibleStore = userDefaults.boolForKey("didDetectIncompatibleStore")
+        
+        if didDetectIncompatibleStore {
+            // Show Alert
+            let applicationName = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleDisplayName")
+            let message = "A serious application error occurred while \(applicationName) tried to read your data. Please contact support for help."
+            
+            self.showAlertWithTitle("Warning", message: message, cancelButtonTitle: "OK")
+        }
+        
+        do {
+            try self.fetchedResultsController.performFetch()
+        } catch {
+            let fetchError = error as NSError
+            print("\(fetchError), \(fetchError.userInfo)")
+            
+            let applicationName = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleDisplayName")
+            let message = "A serious application error occurred while \(applicationName) tried to read your data. Please contact support for help."
+            
+            self.showAlertWithTitle("Warning", message: message, cancelButtonTitle: "OK")
+        }
+        
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
         self.tableView.separatorColor = UIColor.blackColor()
         self.tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         self.tableView.cellLayoutMarginsFollowReadableWidth = false
-
-        loadTestData()
+        
+        createMessageHashes()
     }
-
+    
+    //MARK: tableViewControllerDelegate
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        if let sections = fetchedResultsController.sections {
+            return sections.count
+        }
+        return 0
+    }
     
     //This function is part of UITableViewController's built-in classes.
     //It asks for the number of rows in tableView = number of messages = size of cellDataArray.
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cellDataArray.count
+        if let sections = fetchedResultsController.sections {
+            let sectionInfo = sections[section]
+            return sectionInfo.numberOfObjects
+        }
+        return 0
     }
-
+    
     //This function is part of UITableViewController's built-in classes.
     //In it, we tell the tableView which message to render at each index of the table.
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-            //Grab the appropriate data from our cellDataArray.
-            let data = cellDataArray[indexPath.row]
-            let cell: RoarTableViewCell
+        //Grab the appropriate data from our cellDataArray.
         
-            if ifCellRegistered
-            {
-                //Create a cell of type MCChatTableViewCell
-                let reusableCell: AnyObject = tableView.dequeueReusableCellWithIdentifier("RoarTableViewCell", forIndexPath: indexPath)
-                cell = reusableCell as! RoarTableViewCell
-            }
-            else
-            {
-                //This else statement is only for technical purposes. Ignore it.
-                let cellArray = NSBundle.mainBundle().loadNibNamed("RoarTableViewCell", owner: self, options: nil)
-                cell = cellArray[0] as! RoarTableViewCell
-                
-                //register MCChatTableViewCell
-                let nib = UINib(nibName: "RoarTableViewCell", bundle: NSBundle.mainBundle())
-                self.tableView.registerNib(nib, forCellReuseIdentifier: "RoarTableViewCell")
-                ifCellRegistered = true
-            }
+        let roarMessageCoreData = fetchedResultsController.objectAtIndexPath(indexPath) as! RoarMessageCore
+        let cell: RoarTableViewCell
         
-            cell.preservesSuperviewLayoutMargins = false
-            cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-            cell.layoutMargins = UIEdgeInsetsZero
+        if ifCellRegistered
+        {
+            //Create a cell of type MCChatTableViewCell
+            let reusableCell: AnyObject = tableView.dequeueReusableCellWithIdentifier("RoarTableViewCell", forIndexPath: indexPath)
+            cell = reusableCell as! RoarTableViewCell
+        }
+        else
+        {
+            //This else statement is only for technical purposes. Ignore it.
+            let cellArray = NSBundle.mainBundle().loadNibNamed("RoarTableViewCell", owner: self, options: nil)
+            cell = cellArray[0] as! RoarTableViewCell
+            
+            //register MCChatTableViewCell
+            let nib = UINib(nibName: "RoarTableViewCell", bundle: NSBundle.mainBundle())
+            self.tableView.registerNib(nib, forCellReuseIdentifier: "RoarTableViewCell")
+            ifCellRegistered = true
+        }
         
-            //Set the cell's width to be the width of the screen.
-            cell.frame.size.width = self.tableView.frame.width
+        cell.preservesSuperviewLayoutMargins = false
+        cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        cell.layoutMargins = UIEdgeInsetsZero
         
-            //Set the cell's data to be the appropriate data. 
-            //Notice that in this line, MCChatTableViewCell's property, data, is set. 
-            //After it is set, the didSet keyword will be called, calling updateCellUI()
-            cell.data = data
+        //Set the cell's width to be the width of the screen.
+        cell.frame.size.width = self.tableView.frame.width
         
-            return cell
+        //Set the cell's data to be the appropriate data.
+        //Notice that in this line, MCChatTableViewCell's property, data, is set.
+        //After it is set, the didSet keyword will be called, calling updateCellUI()
+        cell.data = RoarMessage(message: roarMessageCoreData)
+        
+        return cell
     }
     
     //This function is part of UITableViewController's built-in classes.
@@ -77,54 +134,115 @@ class RoarTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         //Notice that MCChatCellData already have a property called cellHeight
         //that depends on the size of the message.
-        return cellDataArray[indexPath.row].cellHeight
+        let roarMessageCoreData = fetchedResultsController.objectAtIndexPath(indexPath) as! RoarMessageCore
+        
+        let roarMessageUI = RoarMessage(message: roarMessageCoreData)
+        
+        return roarMessageUI.cellHeight
+    }
+    
+    
+    // MARK: Fetched Results Controller Delegate Methods
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        tableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        tableView.endUpdates()
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        switch (type) {
+        case .Insert:
+            if let indexPath = newIndexPath {
+                tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            }
+            break;
+        case .Delete:
+            abort()
+            /*
+             if let indexPath = indexPath {
+             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+             }
+             */
+            break;
+        case .Update:
+            abort()
+            /*
+             if let indexPath = indexPath {
+             let cell = tableView.cellForRowAtIndexPath(indexPath) as! RoarTableViewCell
+             let roarMessageCoreData = fetchedResultsController.objectAtIndexPath(indexPath) as! RoarMessageCore
+             cell.data = RoarMessage(message: roarMessageCoreData)
+             }
+             */
+            break;
+        case .Move:
+            abort()
+            /*
+             if let indexPath = indexPath {
+             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+             }
+             
+             if let newIndexPath = newIndexPath {
+             tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
+             }*/
+            break;
+        }
+    }
+    
+    //MARK: helper functions
+    private func createMessageHashes() {
+        for messageCore in fetchedResultsController.fetchedObjects! {
+            if let messageCore = messageCore as? RoarMessageCore {
+                messageHashes.append(messageCore.text!.sha1())
+            }
+        }
+    }
+    
+    func returnMessageDictionary(excludingHashes hashArray: [String]) -> [RoarMessageCore] {
+        var messageDictionary = [RoarMessageCore]()
+        for i in 0 ..< self.messageHashes.count {
+            if !hashArray.contains(self.messageHashes[i]) {
+                messageDictionary.append(fetchedResultsController.fetchedObjects![i] as! RoarMessageCore)
+            }
+        }
+        return messageDictionary
+    }
+    
+    private func showAlertWithTitle(title: String, message: String, cancelButtonTitle: String) {
+        // Initialize Alert Controller
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        
+        // Configure Alert Controller
+        alertController.addAction(UIAlertAction(title: cancelButtonTitle, style: .Default, handler: { (_) -> Void in
+            let userDefaults = NSUserDefaults.standardUserDefaults()
+            userDefaults.removeObjectForKey("didDetectIncompatibleStore")
+        }))
+        
+        // Present Alert Controller
+        presentViewController(alertController, animated: true, completion: nil)
     }
     
     //WHENEVER YOU NEED TO ADD A MESSAGE TO THE TABLE, USE THIS FUNCTION.
     //An all-purpose function that adds a message to the table and updates the tableView.
-    func addMessage(text: String, date: NSDate, user: String, didCompose: Bool) {
+    func addMessage(text: String, date: NSDate, user: String) {
         //Create a MCChatMessage object from the input parameters.
-        let message = RoarMessageCore(text: text, date: date, user:user)
-        addMessage(message, didCompose: didCompose)
-    }
-    
-    func addMessage(message: RoarMessageCore, didCompose: Bool) {
-        let date = message.date!
-        let text = message.text!
-        let ifHideDate: Bool
-        if cellDataArray.count == 0 || date.timeIntervalSinceDate(cellDataArray[cellDataArray.count - 1].message.date!) > 60
-        {
-            //Display the date if it's been longer than an hour since the last message.
-            ifHideDate = false
+        
+        let entity = NSEntityDescription.entityForName("RoarMessageCore", inManagedObjectContext: self.managedObjectContext)
+        let newRoarMessageCore = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: self.managedObjectContext) as! RoarMessageCore
+        newRoarMessageCore.text = text
+        newRoarMessageCore.date = date
+        newRoarMessageCore.user = user
+        
+        do {
+            try managedObjectContext.save()
+        } catch {
+            let fetchError = error as NSError
+            print(fetchError)
+            let applicationName = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleDisplayName")
+            let message = "A serious application error occurred while \(applicationName) tried to save your data. Please contact support for help."
+            
+            self.showAlertWithTitle("Warning", message: message, cancelButtonTitle: "OK")
         }
-        else
-        {
-            //Otherwise, don't display the date.
-            ifHideDate = true
-        }
-        
-        //Create an MCChatMessageData object from the given MCChatMessage object.
-        let cellData = RoarMessage(message: message, hideDate: ifHideDate)
-        
-        //Append it to our cellDataArray.
-        cellDataArray.insert(cellData, atIndex: 0)
-        messageHashes.insert(text.sha1(), atIndex: 0)
-        
-        if didCompose {
-            let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-            self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
-            tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
-        }
-    }
-    
-        // Add test data here
-    func loadTestData()
-    {
-        addMessage("Hi!", date: NSDate(timeIntervalSinceNow: -24*60*60*23), user: "Pascal", didCompose: true)
-        addMessage("Hello World!", date: NSDate(), user: "Pascal", didCompose: true)
-        addMessage("this is a string", date: NSDate(timeIntervalSinceNow: -12*60*60+30), user: "Pascal", didCompose: true)
-        addMessage("this is a very very very very very very very very very very very very very very very very very very very very very very very very very very very very long string", date: NSDate(timeIntervalSinceNow: -30), user: "Pascal", didCompose: true)
-        addMessage("Another message", date: NSDate(), user: "Pascal", didCompose: true)
-        
     }
 }

@@ -176,8 +176,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func saveContext () {
+        print(managedObjectContext.hasChanges)
         if managedObjectContext.hasChanges {
             do {
+                print(managedObjectContext.updatedObjects)
                 try managedObjectContext.save()
             } catch {
                 // Replace this implementation with code to handle the error appropriately.

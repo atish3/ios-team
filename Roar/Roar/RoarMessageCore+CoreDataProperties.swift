@@ -9,13 +9,13 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
+
+//DO NOT TOUCH THIS FILE
 import Foundation
 import CoreData
 
 extension RoarMessageCore {
-
     @NSManaged var date: NSDate?
     @NSManaged var text: String?
     @NSManaged var user: String?
-
 }
