@@ -158,12 +158,9 @@ class RoarTableViewController: UITableViewController, NSFetchedResultsController
             }
             break;
         case .Delete:
-            abort()
-            /*
              if let indexPath = indexPath {
              tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
              }
-             */
             break;
         case .Update:
             abort()

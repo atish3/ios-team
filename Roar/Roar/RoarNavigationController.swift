@@ -18,10 +18,34 @@ class RoarNavigationController: UIViewController {
         connectivityController = RoarConnectivityController()
         connectivityController.tableViewController = tableView
         connectivityController.navigationController = self
-
+        
         let browseButton = UIBarButtonItem(title: "browse", style: UIBarButtonItemStyle.Plain , target: self, action: #selector(RoarNavigationController.toggleBrowser))
         let advertiseButton = UIBarButtonItem(title: "advertise", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(RoarNavigationController.toggleAdvertiser))
-        self.navigationItem.leftBarButtonItems = [browseButton, advertiseButton]
+        
+        let clearTableButton = UIBarButtonItem(barButtonSystemItem: .Trash, target: self, action: #selector(RoarNavigationController.clearTable))
+        
+        self.navigationItem.leftBarButtonItems = [browseButton, advertiseButton, clearTableButton]
+    }
+    
+    func clearTable() {
+        
+        let certainAlert = UIAlertController(title: "Delete all messages", message: "Are you sure you want to delete all messages?", preferredStyle: .Alert)
+        certainAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (_) in
+            for managedObject in self.tableView.fetchedResultsController.fetchedObjects! {
+                self.tableView.managedObjectContext.deleteObject(managedObject as! NSManagedObject)
+            }
+            do {
+                try self.tableView.managedObjectContext.save()
+            } catch {
+                let clearError = error as NSError
+                print(clearError)
+            }
+        }))
+        certainAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        
+        
+        presentViewController(certainAlert, animated: true, completion: nil)
+        
     }
     
     func toggleBrowser() {
@@ -50,8 +74,8 @@ class RoarNavigationController: UIViewController {
     override func canBecomeFirstResponder() -> Bool {
         return true
     }
-    //prepareForSegue is a standard swift function that is called whenever a 
-    //view "segues" (transitions) to another view. In this example, 
+    //prepareForSegue is a standard swift function that is called whenever a
+    //view "segues" (transitions) to another view. In this example,
     //we use this function to load the tableView – since the tableView is inside
     //of this view, the segue to the table view is an "Embed" segue.
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
