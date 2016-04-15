@@ -211,14 +211,14 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
         if !didReceiveRequest {
             if let tableVC = tableViewController {
                 if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? RoarMessageCore {
-                    print("Did receive single message")
+                    /*print("Did receive single message")
                     if !tableVC.messageHashes.contains(message.text!.sha1()) {
                         tableVC.addMessage(message.text!, date: message.date!, user: message.user!)
                         newMessagesReceived += 1
-                    }
+                    }*/
                 }
                 if let messageArray = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? [RoarMessageCore] {
-                    print("Did receive dictionary of messages")
+                    /*print("Did receive dictionary of messages")
                     for message in messageArray {
                         tableVC.addMessage(message.text!, date: message.date!, user: message.user!)
                         newMessagesReceived += 1
@@ -227,7 +227,7 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
                     if self.newMessagesReceived > 20 {
                         self.sessionObject.disconnect()
                     
-                    }
+                    }*/
                 }
             }
         }

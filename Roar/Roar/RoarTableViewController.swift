@@ -12,7 +12,6 @@ import CoreData
 class RoarTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     //An array MCChatMessageData objects. This array is where all messages are stored.
     
-    
     var messageHashes = [String]()
     var ifCellRegistered = false
     

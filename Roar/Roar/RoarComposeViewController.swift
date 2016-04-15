@@ -36,7 +36,7 @@ class RoarComposeViewController: UIViewController, UITextViewDelegate {
         placeholderLabel.font = composeTextView.font
         placeholderLabel.sizeToFit()
         composeTextView.addSubview(placeholderLabel)
-        placeholderLabel.frame.origin = CGPointMake(5, composeTextView.font!.pointSize / 2)
+        placeholderLabel.frame.origin = CGPointMake(5, composeTextView.font!.pointSize / 2 + 1)
         placeholderLabel.textColor = UIColor.lightGrayColor()
         
         composeTextView.becomeFirstResponder()
