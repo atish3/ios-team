@@ -87,9 +87,7 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
     override init() {
         serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: nil, serviceType: myServiceType)
         serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: myServiceType)
-        
         super.init()
-        
         serviceAdvertiser.delegate = self
         serviceBrowser.delegate = self
         
@@ -108,7 +106,7 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
         }
     }
     
-    func sendIndividualMessage(message: RoarMessageCore) {
+    func sendIndividualMessage(message: RoarMessageSentCore) {
         do {
             let messageData = NSKeyedArchiver.archivedDataWithRootObject(message)
             try self.sessionObject.sendData(messageData, toPeers: self.sessionObject.connectedPeers, withMode: MCSessionSendDataMode.Reliable)
@@ -210,24 +208,23 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
         }
         if !didReceiveRequest {
             if let tableVC = tableViewController {
-                if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? RoarMessageCore {
-                    /*print("Did receive single message")
+                if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? RoarMessageSentCore {
+                    print("Did receive single message")
                     if !tableVC.messageHashes.contains(message.text!.sha1()) {
                         tableVC.addMessage(message.text!, date: message.date!, user: message.user!)
                         newMessagesReceived += 1
-                    }*/
+                    }
                 }
-                if let messageArray = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? [RoarMessageCore] {
-                    /*print("Did receive dictionary of messages")
+                if let messageArray = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? [RoarMessageSentCore] {
+                    print("Did receive dictionary of messages")
                     for message in messageArray {
                         tableVC.addMessage(message.text!, date: message.date!, user: message.user!)
                         newMessagesReceived += 1
                     }
-
                     if self.newMessagesReceived > 20 {
                         self.sessionObject.disconnect()
                     
-                    }*/
+                    }
                 }
             }
         }

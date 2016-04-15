@@ -198,11 +198,11 @@ class RoarTableViewController: UITableViewController, NSFetchedResultsController
         }
     }
     
-    func returnMessageDictionary(excludingHashes hashArray: [String]) -> [RoarMessageCore] {
-        var messageDictionary = [RoarMessageCore]()
+    func returnMessageDictionary(excludingHashes hashArray: [String]) -> [RoarMessageSentCore] {
+        var messageDictionary = [RoarMessageSentCore]()
         for i in 0 ..< self.messageHashes.count {
             if !hashArray.contains(self.messageHashes[i]) {
-                messageDictionary.append(fetchedResultsController.fetchedObjects![i] as! RoarMessageCore)
+                messageDictionary.append(RoarMessageSentCore(message: fetchedResultsController.fetchedObjects![i] as! RoarMessageCore))
             }
         }
         return messageDictionary
@@ -232,6 +232,7 @@ class RoarTableViewController: UITableViewController, NSFetchedResultsController
         newRoarMessageCore.text = text
         newRoarMessageCore.date = date
         newRoarMessageCore.user = user
+        messageHashes.append(text.sha1())
         
         do {
             try managedObjectContext.save()
