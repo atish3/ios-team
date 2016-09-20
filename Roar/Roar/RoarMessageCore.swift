@@ -13,11 +13,11 @@ import CoreData
 class RoarMessageCore: NSManagedObject {
     // Insert code here to add functionality to your managed object subclass
     
-    convenience init(text: String, date: NSDate, user: String) {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    convenience init(text: String, date: Date, user: String) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
-        let entity = NSEntityDescription.entityForName("RoarMessageCore", inManagedObjectContext: managedContext)
-        self.init(entity: entity!, insertIntoManagedObjectContext: managedContext)
+        let entity = NSEntityDescription.entity(forEntityName: "RoarMessageCore", in: managedContext)
+        self.init(entity: entity!, insertInto: managedContext)
         self.date = date
         self.text = text
         self.user = user
@@ -25,19 +25,19 @@ class RoarMessageCore: NSManagedObject {
 }
 
 class RoarMessageSentCore: NSObject, NSCoding {
-    var date: NSDate!
+    var date: Date!
     var text: String!
     var user: String!
     
     
     convenience init(message: RoarMessageCore) {
         self.init()
-        self.date = message.date!
+        self.date = message.date! as Date!
         self.text = message.text!
         self.user = message.user!
     }
     
-    convenience init(text: String, date: NSDate, user: String) {
+    convenience init(text: String, date: Date, user: String) {
         self.init()
         
         self.date = date
@@ -48,18 +48,18 @@ class RoarMessageSentCore: NSObject, NSCoding {
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
         
-        let unarchivedDate = aDecoder.decodeObjectForKey("date") as! NSDate
-        let unarchivedText = aDecoder.decodeObjectForKey("text") as! String
-        let unarchivedUser = aDecoder.decodeObjectForKey("user") as! String
+        let unarchivedDate = aDecoder.decodeObject(forKey: "date") as! Date
+        let unarchivedText = aDecoder.decodeObject(forKey: "text") as! String
+        let unarchivedUser = aDecoder.decodeObject(forKey: "user") as! String
         self.date = unarchivedDate
         self.text = unarchivedText
         self.user = unarchivedUser
     }
     
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.date!, forKey: "date")
-        aCoder.encodeObject(self.text!, forKey: "text")
-        aCoder.encodeObject(self.user!, forKey: "user")
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.date!, forKey: "date")
+        aCoder.encode(self.text!, forKey: "text")
+        aCoder.encode(self.user!, forKey: "user")
     }
 }
 

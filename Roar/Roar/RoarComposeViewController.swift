@@ -17,12 +17,12 @@ class RoarComposeViewController: UIViewController, UITextViewDelegate {
     var placeholderLabel: UILabel!
     
     override func viewDidLoad() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(RoarComposeViewController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(RoarComposeViewController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(RoarComposeViewController.keyboardWillShow(_:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(RoarComposeViewController.keyboardWillHide(_:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
     
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: #selector(RoarComposeViewController.cancelTapped))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Post", style: .Done, target: self, action: #selector(RoarComposeViewController.postTapped))
-        self.navigationItem.rightBarButtonItem!.enabled = false
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(RoarComposeViewController.cancelTapped))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Post", style: .done, target: self, action: #selector(RoarComposeViewController.postTapped))
+        self.navigationItem.rightBarButtonItem!.isEnabled = false
         
         self.title = "Post to Feed"
         
@@ -36,53 +36,53 @@ class RoarComposeViewController: UIViewController, UITextViewDelegate {
         placeholderLabel.font = composeTextView.font
         placeholderLabel.sizeToFit()
         composeTextView.addSubview(placeholderLabel)
-        placeholderLabel.frame.origin = CGPointMake(5, composeTextView.font!.pointSize / 2 + 1)
-        placeholderLabel.textColor = UIColor.lightGrayColor()
+        placeholderLabel.frame.origin = CGPoint(x: 5, y: composeTextView.font!.pointSize / 2 + 1)
+        placeholderLabel.textColor = UIColor.lightGray
         
         composeTextView.becomeFirstResponder()
     }
     
     
-    func textViewDidChange(textView: UITextView) {
-        placeholderLabel.hidden = !textView.text.isEmpty
+    func textViewDidChange(_ textView: UITextView) {
+        placeholderLabel.isHidden = !textView.text.isEmpty
         if textView.text.characters.count > 0 {
-            self.navigationItem.rightBarButtonItem!.enabled = true
+            self.navigationItem.rightBarButtonItem!.isEnabled = true
         }
         else
         {
-            self.navigationItem.rightBarButtonItem!.enabled = false
+            self.navigationItem.rightBarButtonItem!.isEnabled = false
         }
     }
     
-    func keyboardWillShow(notification: NSNotification) {
-        var info = notification.userInfo!
-        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
-        UIView.animateWithDuration(0.1, animations: {() -> Void in
+    func keyboardWillShow(_ notification: Notification) {
+        var info = (notification as NSNotification).userInfo!
+        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        UIView.animate(withDuration: 0.1, animations: {() -> Void in
             self.composeTextView.frame.size.height -= keyboardFrame.height
         })
     }
     
-    func keyboardWillHide(notification: NSNotification) {
-        var info = notification.userInfo!
-        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
-        UIView.animateWithDuration(0.1, animations: {() -> Void in
+    func keyboardWillHide(_ notification: Notification) {
+        var info = (notification as NSNotification).userInfo!
+        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        UIView.animate(withDuration: 0.1, animations: {() -> Void in
             self.composeTextView.frame.size.height += keyboardFrame.height
         })
     }
     
-    override func canBecomeFirstResponder() -> Bool {
+    override var canBecomeFirstResponder : Bool {
         return true
     }
     
     func cancelTapped() {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     func postTapped() {
-        self.dismissViewControllerAnimated(true) { () -> Void in
-            self.roarTableVC.addMessage(self.composeTextView.text, date: NSDate(), user: "Pascal")
+        self.dismiss(animated: true) { () -> Void in
+            self.roarTableVC.addMessage(self.composeTextView.text, date: Date(), user: "Pascal")
             if self.roarCC.sessionObject.connectedPeers.count > 0 {
-                self.roarCC.sendIndividualMessage(RoarMessageSentCore(text: self.composeTextView.text, date: NSDate(), user: "Pascal"))
+                self.roarCC.sendIndividualMessage(RoarMessageSentCore(text: self.composeTextView.text, date: Date(), user: "Pascal"))
             }
         }
     }

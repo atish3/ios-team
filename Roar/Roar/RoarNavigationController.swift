@@ -19,20 +19,20 @@ class RoarNavigationController: UIViewController {
         connectivityController.tableViewController = tableView
         connectivityController.navigationController = self
         
-        let browseButton = UIBarButtonItem(title: "browse", style: UIBarButtonItemStyle.Plain , target: self, action: #selector(RoarNavigationController.toggleBrowser))
-        let advertiseButton = UIBarButtonItem(title: "advertise", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(RoarNavigationController.toggleAdvertiser))
+        let browseButton = UIBarButtonItem(title: "browse", style: UIBarButtonItemStyle.plain , target: self, action: #selector(RoarNavigationController.toggleBrowser))
+        let advertiseButton = UIBarButtonItem(title: "advertise", style: UIBarButtonItemStyle.plain, target: self, action: #selector(RoarNavigationController.toggleAdvertiser))
         
-        let clearTableButton = UIBarButtonItem(barButtonSystemItem: .Trash, target: self, action: #selector(RoarNavigationController.clearTable))
+        let clearTableButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(RoarNavigationController.clearTable))
         
         self.navigationItem.leftBarButtonItems = [browseButton, advertiseButton, clearTableButton]
     }
     
     func clearTable() {
         
-        let certainAlert = UIAlertController(title: "Delete all messages", message: "Are you sure you want to delete all messages?", preferredStyle: .Alert)
-        certainAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (_) in
+        let certainAlert = UIAlertController(title: "Delete all messages", message: "Are you sure you want to delete all messages?", preferredStyle: .alert)
+        certainAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (_) in
             for managedObject in self.tableView.fetchedResultsController.fetchedObjects! {
-                self.tableView.managedObjectContext.deleteObject(managedObject as! NSManagedObject)
+                self.tableView.managedObjectContext.delete(managedObject as NSManagedObject)
             }
             do {
                 try self.tableView.managedObjectContext.save()
@@ -41,10 +41,10 @@ class RoarNavigationController: UIViewController {
                 print(clearError)
             }
         }))
-        certainAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        certainAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         
-        presentViewController(certainAlert, animated: true, completion: nil)
+        present(certainAlert, animated: true, completion: nil)
         
     }
     
@@ -71,21 +71,21 @@ class RoarNavigationController: UIViewController {
         }
     }
     
-    override func canBecomeFirstResponder() -> Bool {
+    override var canBecomeFirstResponder : Bool {
         return true
     }
     //prepareForSegue is a standard swift function that is called whenever a
     //view "segues" (transitions) to another view. In this example,
     //we use this function to load the tableView – since the tableView is inside
     //of this view, the segue to the table view is an "Embed" segue.
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Embed"
         {
-            tableView = segue.destinationViewController as! RoarTableViewController
+            tableView = segue.destination as! RoarTableViewController
         }
         else if segue.identifier == "composeSegue"
         {
-            let destNav = segue.destinationViewController as! UINavigationController
+            let destNav = segue.destination as! UINavigationController
             let composeVC = destNav.childViewControllers[0] as! RoarComposeViewController
             composeVC.roarTableVC = tableView
             composeVC.roarCC = connectivityController

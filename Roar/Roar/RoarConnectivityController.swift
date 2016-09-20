@@ -13,9 +13,9 @@ extension MCSessionState {
     
     func stringValue() -> String {
         switch(self) {
-        case .NotConnected: return "NotConnected"
-        case .Connecting: return "Connecting"
-        case .Connected: return "Connected"
+        case .notConnected: return "NotConnected"
+        case .connecting: return "Connecting"
+        case .connected: return "Connected"
         }
     }
     
@@ -23,7 +23,7 @@ extension MCSessionState {
 
 class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate, MCSessionDelegate {
     //An MCPeerID is a unique identifier used to identify one's phone on the multipeer network.
-    var myPeerId = MCPeerID(displayName: UIDevice.currentDevice().name)
+    var myPeerId = MCPeerID(displayName: UIDevice.current.name)
     
     //serviceType is a 15-character or less string that describes
     //the function that the app is broadcasting.
@@ -98,18 +98,18 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
         do {
             if let tableVC = tableViewController {
                 let messageDictionary = tableVC.returnMessageDictionary(excludingHashes: hashArray)
-                let messageDictionaryData = NSKeyedArchiver.archivedDataWithRootObject(messageDictionary)
-                try self.sessionObject.sendData(messageDictionaryData, toPeers: [id], withMode: MCSessionSendDataMode.Reliable)
+                let messageDictionaryData = NSKeyedArchiver.archivedData(withRootObject: messageDictionary)
+                try self.sessionObject.send(messageDictionaryData, toPeers: [id], with: MCSessionSendDataMode.reliable)
             }
         } catch let error as NSError {
             NSLog("%@", error)
         }
     }
     
-    func sendIndividualMessage(message: RoarMessageSentCore) {
+    func sendIndividualMessage(_ message: RoarMessageSentCore) {
         do {
-            let messageData = NSKeyedArchiver.archivedDataWithRootObject(message)
-            try self.sessionObject.sendData(messageData, toPeers: self.sessionObject.connectedPeers, withMode: MCSessionSendDataMode.Reliable)
+            let messageData = NSKeyedArchiver.archivedData(withRootObject: message)
+            try self.sessionObject.send(messageData, toPeers: self.sessionObject.connectedPeers, with: MCSessionSendDataMode.reliable)
         } catch let error as NSError {
             NSLog("%@", error)
         }
@@ -118,8 +118,8 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
     func requestMessagesFromPeer() {
         do {
             if let tableVC = tableViewController {
-                let concatenatedHashes = tableVC.messageHashes.joinWithSeparator(" ")
-                try self.sessionObject.sendData(("@@@messagereq " + concatenatedHashes).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, toPeers: self.sessionObject.connectedPeers, withMode: MCSessionSendDataMode.Reliable)
+                let concatenatedHashes = tableVC.messageHashes.joined(separator: " ")
+                try self.sessionObject.send(("@@@messagereq " + concatenatedHashes).data(using: String.Encoding.utf8, allowLossyConversion: false)!, toPeers: self.sessionObject.connectedPeers, with: MCSessionSendDataMode.reliable)
             }
         } catch let error as NSError {
             NSLog("%@", error)
@@ -131,11 +131,11 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
         self.serviceBrowser.stopBrowsingForPeers()
     }
     
-    func browser(browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: NSError) {
+    func browser(_ browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: Error) {
         NSLog("%@", "didNotStartBrowsingForPeers: \(error)")
     }
     
-    func browser(browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
+    func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         NSLog("%@", "foundPeer: \(peerID)")
         var didInvitePeer = false
         
@@ -145,16 +145,16 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
                 for hash in tableVC.messageHashes {
                     if peerHashes[hash] == nil {
                         NSLog("%@", "invitePeer: \(peerID)")
-                        browser.invitePeer(peerID, toSession: sessionObject, withContext: nil, timeout: 5)
+                        browser.invitePeer(peerID, to: sessionObject, withContext: nil, timeout: 5)
                         didInvitePeer = true
                         break
                     }
                 }
                 if !didInvitePeer {
                     for (hash, _) in peerHashes {
-                        if tableVC.messageHashes.indexOf(hash) == nil {
+                        if tableVC.messageHashes.index(of: hash) == nil {
                             NSLog("%@", "invitePeer: \(peerID)")
-                            browser.invitePeer(peerID, toSession: sessionObject, withContext: nil, timeout: 5)
+                            browser.invitePeer(peerID, to: sessionObject, withContext: nil, timeout: 5)
                             didInvitePeer = true
                             break
                         }
@@ -173,33 +173,33 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
         }
     }
     
-    func browser(browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
+    func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
         NSLog("%@", "lostPeer: \(peerID)")
     }
     
-    func advertiser(advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: NSError) {
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error) {
         NSLog("%@", "didNotStartAdvertisingPeer: \(error)")
     }
     
-    func advertiser(advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: NSData?, invitationHandler: (Bool, MCSession) -> Void) {
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         NSLog("%@", "didReceiveInvitationFromPeer \(peerID)")
         invitationHandler(true, self.sessionObject)
     }
     
-    func session(session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, atURL localURL: NSURL, withError error: NSError?) {
+    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL, withError error: Error?) {
         NSLog("%@", "didFinishReceivingResourceWithName \(resourceName)")
     }
     
-    func session(session: MCSession, didReceiveCertificate certificate: [AnyObject]?, fromPeer peerID: MCPeerID, certificateHandler: (Bool) -> Void) {
+    func session(_ session: MCSession, didReceiveCertificate certificate: [Any]?, fromPeer peerID: MCPeerID, certificateHandler: @escaping (Bool) -> Void) {
         NSLog("%@", "didReceiveCertificate from peer \(peerID)")
         certificateHandler(true)
     }
     
-    func session(session: MCSession, didReceiveData data: NSData, fromPeer peerID: MCPeerID) {
-        NSLog("%@", "didReceiveData: \(data.length) bytes from peer \(peerID)")
+    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+        NSLog("%@", "didReceiveData: \(data.count) bytes from peer \(peerID)")
         var didReceiveRequest = false
-        if let str = NSString(data: data, encoding: NSUTF8StringEncoding) as? String {
-            let hashArray = str.componentsSeparatedByString(" ")
+        if let str = NSString(data: data, encoding: String.Encoding.utf8.rawValue) as? String {
+            let hashArray = str.components(separatedBy: " ")
             if hashArray[0] == "@@@messagereq" {
                 print("Received request for messages from \(peerID)")
                 broadcastHashMessageDictionary(toRequester: peerID, excludingHashes: Array(hashArray[1..<hashArray.count]))
@@ -208,14 +208,14 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
         }
         if !didReceiveRequest {
             if let tableVC = tableViewController {
-                if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? RoarMessageSentCore {
+                if let message = NSKeyedUnarchiver.unarchiveObject(with: data) as? RoarMessageSentCore {
                     print("Did receive single message")
                     if !tableVC.messageHashes.contains(message.text!.sha1()) {
                         tableVC.addMessage(message.text!, date: message.date!, user: message.user!)
                         newMessagesReceived += 1
                     }
                 }
-                if let messageArray = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? [RoarMessageSentCore] {
+                if let messageArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? [RoarMessageSentCore] {
                     print("Did receive dictionary of messages")
                     for message in messageArray {
                         tableVC.addMessage(message.text!, date: message.date!, user: message.user!)
@@ -230,17 +230,17 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
         }
     }
     
-    func session(session: MCSession, didReceiveStream stream: NSInputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
+    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
         NSLog("%@", "didReceiveStream withName \(streamName)")
     }
     
-    func session(session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, withProgress progress: NSProgress) {
+    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
         NSLog("%@", "didStartReceivingResourceWithName \(resourceName)")
     }
     
-    func session(session: MCSession, peer peerID: MCPeerID, didChangeState state: MCSessionState) {
+    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         NSLog("%@", "peer \(peerID) didChangeState: \(state.stringValue())")
-        if state == MCSessionState.Connected {
+        if state == MCSessionState.connected {
             requestMessagesFromPeer()
         }
         else

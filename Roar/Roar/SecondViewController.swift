@@ -16,16 +16,16 @@ class SecondViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        clickMeButton = UIButton(type: .System)
-        clickMeButton.setTitle("Click Me!", forState: UIControlState.Normal)
+        clickMeButton = UIButton(type: .system)
+        clickMeButton.setTitle("Click Me!", for: UIControlState())
         clickMeButton.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
         clickMeButton.sizeToFit()
-        clickMeButton.addTarget(self, action: #selector(SecondViewController.changeText), forControlEvents: .TouchUpInside)
+        clickMeButton.addTarget(self, action: #selector(SecondViewController.changeText), for: .touchUpInside)
         clickMeButton.translatesAutoresizingMaskIntoConstraints = false
         
         self.view.addSubview(clickMeButton)
-        let centerXConstraint = NSLayoutConstraint(item: self.view, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: clickMeButton, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0)
-        let centerYConstraint = NSLayoutConstraint(item: self.view, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: clickMeButton, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 100)
+        let centerXConstraint = NSLayoutConstraint(item: self.view, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: clickMeButton, attribute: NSLayoutAttribute.centerX, multiplier: 1.0, constant: 0)
+        let centerYConstraint = NSLayoutConstraint(item: self.view, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: clickMeButton, attribute: NSLayoutAttribute.centerY, multiplier: 1.0, constant: 100)
         
         self.view.addConstraints([centerXConstraint, centerYConstraint])
     }

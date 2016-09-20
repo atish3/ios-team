@@ -45,7 +45,7 @@ class RoarTableViewCell : UITableViewCell {
             //self.selectionStyle = UITableViewCellSelectionStyle.None
             
             //Messages shouldn't be editable or selectable
-            self.userInteractionEnabled = false
+            self.isUserInteractionEnabled = false
             
             //translatesAutoresizingMaskIntoConstraints is a boolean property that if true,
             //allows you to modify the rendering frame(size, position) and autolayout constraints (relative position)
@@ -60,12 +60,12 @@ class RoarTableViewCell : UITableViewCell {
             dateLabel.frame = CGRect(x: 0, y: 0, width: self.bounds.width, height: cellData.dateLabelHeight)
             
             //Align then date's text to the center of the label
-            dateLabel.textAlignment = NSTextAlignment.Center
+            dateLabel.textAlignment = NSTextAlignment.center
             
             //Set it to the date specified in cellData
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.AMSymbol = "AM"
-            dateFormatter.PMSymbol = "PM"
+            let dateFormatter = DateFormatter()
+            dateFormatter.amSymbol = "AM"
+            dateFormatter.pmSymbol = "PM"
             
             //Working with dates in swift is more complicated than I'd like.
             //What needs to be done is this:
@@ -75,41 +75,41 @@ class RoarTableViewCell : UITableViewCell {
             //4) Use NSMutableAttributedString to BOLD a part of the label
             //5) Set the dateLabel's attributedText to be the new string
             
-            if (NSCalendar.currentCalendar().isDateInToday(cellData.message.date!))
+            if (Calendar.current.isDateInToday(cellData.message.date! as Date))
             {
                 dateFormatter.dateFormat = "h:mm a"
-                let stringText = "Today \(dateFormatter.stringFromDate(cellData.message.date!))"
+                let stringText = "Today \(dateFormatter.string(from: cellData.message.date! as Date))"
                 let boldString = NSMutableAttributedString(string: stringText, attributes: [NSFontAttributeName: cellData.dateFont])
-                boldString.addAttribute(NSFontAttributeName, value: cellData.dateBoldFont, range: (stringText as NSString).rangeOfString("Today"))
+                boldString.addAttribute(NSFontAttributeName, value: cellData.dateBoldFont, range: (stringText as NSString).range(of: "Today"))
                 dateLabel.attributedText = boldString
             }
-            else if (NSCalendar.currentCalendar().isDateInYesterday(cellData.message.date!))
+            else if (Calendar.current.isDateInYesterday(cellData.message.date! as Date))
             {
                 dateFormatter.dateFormat = "h:mm a"
-                let stringText = "Yesterday \(dateFormatter.stringFromDate(cellData.message.date!))"
+                let stringText = "Yesterday \(dateFormatter.string(from: cellData.message.date! as Date))"
                 let boldString = NSMutableAttributedString(string: stringText, attributes: [NSFontAttributeName: cellData.dateFont])
-                boldString.addAttribute(NSFontAttributeName, value: cellData.dateBoldFont, range: (stringText as NSString).rangeOfString("Yesterday"))
+                boldString.addAttribute(NSFontAttributeName, value: cellData.dateBoldFont, range: (stringText as NSString).range(of: "Yesterday"))
                 dateLabel.attributedText = boldString
             }
             else
             {
                 dateFormatter.dateFormat = "EEE, MMM dd, h:mm a"
-                let stringText = dateFormatter.stringFromDate(cellData.message.date!)
+                let stringText = dateFormatter.string(from: cellData.message.date! as Date)
                 let boldString = NSMutableAttributedString(string: stringText, attributes: [NSFontAttributeName: cellData.dateFont])
                 var range = NSRange.init()
                 range.location = 0
-                range.length = (stringText as NSString).rangeOfString(",", options: .BackwardsSearch).location + 1
+                range.length = (stringText as NSString).range(of: ",", options: .backwards).location + 1
                 boldString.addAttribute(NSFontAttributeName, value: cellData.dateBoldFont, range: range)
                 dateLabel.attributedText = boldString
             }
             
             //Make the date have gray text
-            dateLabel.textColor = UIColor.grayColor()
+            dateLabel.textColor = UIColor.gray
             
             userLabel.text = cellData.message.user
             userLabel.font = cellData.userFont
             userLabel.numberOfLines = 1
-            userLabel.textColor = UIColor.blackColor()
+            userLabel.textColor = UIColor.black
             userLabel.frame = CGRect(origin: CGPoint(x: messageXOffset,
                 y: (cellData.dateLabelHeight * 0.5 + messageYOffset)), size: cellData.userLabelSize)
             
@@ -117,8 +117,8 @@ class RoarTableViewCell : UITableViewCell {
             messageLabel.text = cellData.message.text
             messageLabel.font = cellData.messageFont
             messageLabel.numberOfLines = 0
-            messageLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
-            messageLabel.textColor = UIColor.blackColor()
+            messageLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+            messageLabel.textColor = UIColor.black
             messageLabel.frame = CGRect(origin: CGPoint(x: messageXOffset + imageMargin,
                 y: ((self.bounds.height + cellData.dateLabelHeight * 0.5 + userLabel.frame.height) / 2) -
                     (cellData.messageLabelSize.height / 2)), size: cellData.messageLabelSize)
