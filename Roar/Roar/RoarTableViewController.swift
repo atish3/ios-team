@@ -11,7 +11,6 @@ import CoreData
 
 class RoarTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     //An array MCChatMessageData objects. This array is where all messages are stored.
-    
     var messageHashes = [String]()
     var ifCellRegistered = false
     
@@ -35,9 +34,13 @@ class RoarTableViewController: UITableViewController, NSFetchedResultsController
     }()
     
     override func viewDidLoad() {
+        //Reference the appDelegate to recover the managedObjectContext
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         self.managedObjectContext = appDelegate.managedObjectContext
         
+        //The following block of code defends against coreData migrations. 
+        //When the coreData format is changed, the OS needs to migrate the store
+        //to avoid crashes.
         let userDefaults = UserDefaults.standard
         let didDetectIncompatibleStore = userDefaults.bool(forKey: "didDetectIncompatibleStore")
         
@@ -49,6 +52,7 @@ class RoarTableViewController: UITableViewController, NSFetchedResultsController
             self.showAlertWithTitle("Warning", message: message, cancelButtonTitle: "OK")
         }
         
+        //Attempt to recover all the the persisted messages.
         do {
             try self.fetchedResultsController.performFetch()
         } catch {
@@ -61,11 +65,13 @@ class RoarTableViewController: UITableViewController, NSFetchedResultsController
             self.showAlertWithTitle("Warning", message: message, cancelButtonTitle: "OK")
         }
         
+        //Set up the tableView style
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.singleLine
         self.tableView.separatorColor = UIColor.black
         self.tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         self.tableView.cellLayoutMarginsFollowReadableWidth = false
         
+        //Generate the hash array
         createMessageHashes()
     }
     
@@ -103,7 +109,7 @@ class RoarTableViewController: UITableViewController, NSFetchedResultsController
         }
         else
         {
-            //This else statement is only for technical purposes. Ignore it.
+            //This else statement is only for technical purposes. Ignore it. IGNORE IT I SAY!
             let cellArray = Bundle.main.loadNibNamed("RoarTableViewCell", owner: self, options: nil)
             cell = cellArray?[0] as! RoarTableViewCell
             
@@ -193,7 +199,7 @@ class RoarTableViewController: UITableViewController, NSFetchedResultsController
         }
     }
     
-    func returnMessageDictionary(excludingHashes hashArray: [String]) -> [RoarMessageSentCore] {
+    func returnMessageArray(excludingHashes hashArray: [String]) -> [RoarMessageSentCore] {
         var messageDictionary = [RoarMessageSentCore]()
         for i in 0 ..< self.messageHashes.count {
             if !hashArray.contains(self.messageHashes[i]) {

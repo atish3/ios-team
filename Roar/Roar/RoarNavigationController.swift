@@ -9,28 +9,38 @@
 import UIKit
 import CoreData
 
+//The navigation controller for the "First" view on the tab bar
 class RoarNavigationController: UIViewController {
     var tableView: RoarTableViewController!
     var connectivityController: RoarConnectivityController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Link the connectivityController to its owner and display
         connectivityController = RoarConnectivityController()
         connectivityController.tableViewController = tableView
         connectivityController.navigationController = self
         
+        //Create the MC buttons. 
+        //TODO: These need to be replaced by background processes.
         let browseButton = UIBarButtonItem(title: "browse", style: UIBarButtonItemStyle.plain , target: self, action: #selector(RoarNavigationController.toggleBrowser))
         let advertiseButton = UIBarButtonItem(title: "advertise", style: UIBarButtonItemStyle.plain, target: self, action: #selector(RoarNavigationController.toggleAdvertiser))
         
+        //Create a button to clear all the messages.
+        //TODO: This needs to be replaced by a background process.
         let clearTableButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(RoarNavigationController.clearTable))
         
         self.navigationItem.leftBarButtonItems = [browseButton, advertiseButton, clearTableButton]
     }
     
     func clearTable() {
-        
+        //A function to clear the messages from the tableView
         let certainAlert = UIAlertController(title: "Delete all messages", message: "Are you sure you want to delete all messages?", preferredStyle: .alert)
         certainAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (_) in
+        
+            //Iterate through every item in the coreData store, and remove it from
+            //the context. then, save the changes.
             for managedObject in self.tableView.fetchedResultsController.fetchedObjects! {
                 self.tableView.managedObjectContext.delete(managedObject as NSManagedObject)
             }
@@ -43,9 +53,7 @@ class RoarNavigationController: UIViewController {
         }))
         certainAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
-        
         present(certainAlert, animated: true, completion: nil)
-        
     }
     
     func toggleBrowser() {
@@ -74,6 +82,7 @@ class RoarNavigationController: UIViewController {
     override var canBecomeFirstResponder : Bool {
         return true
     }
+    
     //prepareForSegue is a standard swift function that is called whenever a
     //view "segues" (transitions) to another view. In this example,
     //we use this function to load the tableView – since the tableView is inside

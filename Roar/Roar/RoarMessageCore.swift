@@ -13,6 +13,8 @@ import CoreData
 class RoarMessageCore: NSManagedObject {
     // Insert code here to add functionality to your managed object subclass
     
+    //A subclass of NSManagedObject. This class is the type that is stored
+    //in the core data model.
     convenience init(text: String, date: Date, user: String) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
@@ -29,6 +31,8 @@ class RoarMessageSentCore: NSObject, NSCoding {
     var text: String!
     var user: String!
     
+    //A subclass of NSObject that conforms to NSCoding Protocol. 
+    //This class is the type that is sent through MC
     
     convenience init(message: RoarMessageCore) {
         self.init()

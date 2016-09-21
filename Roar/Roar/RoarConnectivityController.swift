@@ -18,7 +18,6 @@ extension MCSessionState {
         case .connected: return "Connected"
         }
     }
-    
 }
 
 class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate, MCSessionDelegate {
@@ -32,6 +31,7 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
     //A property that allows this class to push messages to the tableView
     weak var tableViewController: RoarTableViewController?
     
+    //A property that allows this class to reference the owning controller
     weak var navigationController: RoarNavigationController?
     
     //An object of type MCNearbyServiceBrowser that handles searching for and finding
@@ -90,14 +90,13 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
         super.init()
         serviceAdvertiser.delegate = self
         serviceBrowser.delegate = self
-        
     }
     
     
     func broadcastHashMessageDictionary(toRequester id: MCPeerID, excludingHashes hashArray: [String]) {
         do {
             if let tableVC = tableViewController {
-                let messageDictionary = tableVC.returnMessageDictionary(excludingHashes: hashArray)
+                let messageDictionary = tableVC.returnMessageArray(excludingHashes: hashArray)
                 let messageDictionaryData = NSKeyedArchiver.archivedData(withRootObject: messageDictionary)
                 try self.sessionObject.send(messageDictionaryData, toPeers: [id], with: MCSessionSendDataMode.reliable)
             }
