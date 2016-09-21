@@ -15,6 +15,7 @@ import Foundation
 import CoreData
 
 extension RoarMessageCore {
+    @NSManaged var messageHash: String?
     @NSManaged var date: Date?
     @NSManaged var text: String?
     @NSManaged var user: String?

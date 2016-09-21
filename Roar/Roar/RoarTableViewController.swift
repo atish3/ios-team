@@ -11,10 +11,17 @@ import CoreData
 
 class RoarTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     //An array MCChatMessageData objects. This array is where all messages are stored.
-    var messageHashes = [String]()
     var ifCellRegistered = false
     
     var managedObjectContext: NSManagedObjectContext!
+    var messageHashes: [String] {
+        get {
+            let messageObjects: [RoarMessageCore] = self.fetchedResultsController.fetchedObjects!
+            return messageObjects.map({ (messageObject) -> String in
+                return messageObject.messageHash!
+            })
+        }
+    }
     
     lazy var fetchedResultsController: NSFetchedResultsController<RoarMessageCore> = {
         // Initialize Fetch Request
@@ -71,8 +78,6 @@ class RoarTableViewController: UITableViewController, NSFetchedResultsController
         self.tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         self.tableView.cellLayoutMarginsFollowReadableWidth = false
         
-        //Generate the hash array
-        createMessageHashes()
     }
     
     //MARK: tableViewControllerDelegate
@@ -192,21 +197,16 @@ class RoarTableViewController: UITableViewController, NSFetchedResultsController
         }
     }
     
-    //MARK: helper functions
-    fileprivate func createMessageHashes() {
-        for messageCore in fetchedResultsController.fetchedObjects! {
-                messageHashes.append(messageCore.text!.sha1())
-        }
-    }
-    
     func returnMessageArray(excludingHashes hashArray: [String]) -> [RoarMessageSentCore] {
-        var messageDictionary = [RoarMessageSentCore]()
-        for i in 0 ..< self.messageHashes.count {
-            if !hashArray.contains(self.messageHashes[i]) {
-                messageDictionary.append(RoarMessageSentCore(message: fetchedResultsController.fetchedObjects![i]))
+        var messageArray = [RoarMessageSentCore]()
+        let messageObjects: [RoarMessageCore] = fetchedResultsController.fetchedObjects!
+        
+        for i in 0 ..< messageObjects.count {
+            if !hashArray.contains(messageObjects[i].messageHash!) {
+                messageArray.append(RoarMessageSentCore(message: messageObjects[i]))
             }
         }
-        return messageDictionary
+        return messageArray
     }
     
     fileprivate func showAlertWithTitle(_ title: String, message: String, cancelButtonTitle: String) {
@@ -233,7 +233,7 @@ class RoarTableViewController: UITableViewController, NSFetchedResultsController
         newRoarMessageCore.text = text
         newRoarMessageCore.date = date
         newRoarMessageCore.user = user
-        messageHashes.append(text.sha1())
+        newRoarMessageCore.messageHash = text.sha1()
         
         do {
             try managedObjectContext.save()

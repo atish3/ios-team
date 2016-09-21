@@ -141,7 +141,8 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
         if let peerHashes = info
         {
             if let tableVC = tableViewController {
-                for hash in tableVC.messageHashes {
+                let messageHashes = tableVC.messageHashes
+                for hash in messageHashes {
                     if peerHashes[hash] == nil {
                         NSLog("%@", "invitePeer: \(peerID)")
                         browser.invitePeer(peerID, to: sessionObject, withContext: nil, timeout: 5)
