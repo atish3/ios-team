@@ -36,7 +36,7 @@ class RoarMessage {
         self.messageFont = UIFont(name: "Helvetica", size: 14.0)!
         self.userFont = UIFont(name: "Helvetica-Bold", size: 12.0)!
         
-        let userLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 260, height: CGFloat.greatestFiniteMagnitude))
+        let userLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 260, height: CGFloat.greatestFiniteMagnitude))
         userLabel.numberOfLines = 0
         userLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         userLabel.font = userFont
@@ -47,7 +47,7 @@ class RoarMessage {
         //Create a message label with the inputted text.
         //This message label is a "dummy label" and is never actually seen on screen.
         //Instead, it is used to calculate how big the text will be once it appears on screen.
-        let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 260, height: CGFloat.greatestFiniteMagnitude))
+        let messageLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 260, height: CGFloat.greatestFiniteMagnitude))
         messageLabel.numberOfLines = 0
         messageLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         messageLabel.font = messageFont

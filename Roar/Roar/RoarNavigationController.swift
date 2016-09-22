@@ -24,19 +24,19 @@ class RoarNavigationController: UIViewController {
         
         //Create the MC buttons. 
         //TODO: These need to be replaced by background processes.
-        let browseButton = UIBarButtonItem(title: "browse", style: UIBarButtonItemStyle.plain , target: self, action: #selector(RoarNavigationController.toggleBrowser))
-        let advertiseButton = UIBarButtonItem(title: "advertise", style: UIBarButtonItemStyle.plain, target: self, action: #selector(RoarNavigationController.toggleAdvertiser))
+        let browseButton: UIBarButtonItem = UIBarButtonItem(title: "browse", style: UIBarButtonItemStyle.plain , target: self, action: #selector(RoarNavigationController.toggleBrowser))
+        let advertiseButton: UIBarButtonItem = UIBarButtonItem(title: "advertise", style: UIBarButtonItemStyle.plain, target: self, action: #selector(RoarNavigationController.toggleAdvertiser))
         
         //Create a button to clear all the messages.
         //TODO: This needs to be replaced by a background process.
-        let clearTableButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(RoarNavigationController.clearTable))
+        let clearTableButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(RoarNavigationController.clearTable))
         
         self.navigationItem.leftBarButtonItems = [browseButton, advertiseButton, clearTableButton]
     }
     
     func clearTable() {
         //A function to clear the messages from the tableView
-        let certainAlert = UIAlertController(title: "Delete all messages", message: "Are you sure you want to delete all messages?", preferredStyle: .alert)
+        let certainAlert: UIAlertController = UIAlertController(title: "Delete all messages", message: "Are you sure you want to delete all messages?", preferredStyle: .alert)
         certainAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (_) in
         
             //Iterate through every item in the coreData store, and remove it from
@@ -47,7 +47,7 @@ class RoarNavigationController: UIViewController {
             do {
                 try self.tableView.managedObjectContext.save()
             } catch {
-                let clearError = error as NSError
+                let clearError: NSError = error as NSError
                 print(clearError)
             }
         }))
@@ -94,8 +94,8 @@ class RoarNavigationController: UIViewController {
         }
         else if segue.identifier == "composeSegue"
         {
-            let destNav = segue.destination as! UINavigationController
-            let composeVC = destNav.childViewControllers[0] as! RoarComposeViewController
+            let destNav: UINavigationController = segue.destination as! UINavigationController
+            let composeVC: RoarComposeViewController = destNav.childViewControllers[0] as! RoarComposeViewController
             composeVC.roarTableVC = tableView
             composeVC.roarCC = connectivityController
         }

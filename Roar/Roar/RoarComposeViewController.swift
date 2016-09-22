@@ -12,8 +12,8 @@ class RoarComposeViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var composeTextView: UITextView!
     weak var roarTableVC: RoarTableViewController!
     weak var roarCC: RoarConnectivityController!
-    let textViewMargins = 20
-    let placeholderText = "Post something to the world!"
+    let textViewMargins: Int = 20
+    let placeholderText: String = "Post something to the world!"
     var placeholderLabel: UILabel!
     
     override func viewDidLoad() {

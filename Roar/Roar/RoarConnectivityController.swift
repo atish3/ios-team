@@ -22,17 +22,17 @@ extension MCSessionState {
 
 class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate, MCSessionDelegate {
     //An MCPeerID is a unique identifier used to identify one's phone on the multipeer network.
-    var myPeerId = MCPeerID(displayName: UIDevice.current.name)
+    var myPeerId: MCPeerID = MCPeerID(displayName: UIDevice.current.name)
     
     //serviceType is a 15-character or less string that describes
     //the function that the app is broadcasting.
-    let myServiceType = "MDP-broadcast"
+    let myServiceType: String = "MDP-broadcast"
     
     //A property that allows this class to push messages to the tableView
-    weak var tableViewController: RoarTableViewController?
+    weak var tableViewController: RoarTableViewController!
     
     //A property that allows this class to reference the owning controller
-    weak var navigationController: RoarNavigationController?
+    weak var navigationController: RoarNavigationController!
     
     //An object of type MCNearbyServiceBrowser that handles searching for and finding
     //other phones on the network.
@@ -43,17 +43,17 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
     var serviceAdvertiser: MCNearbyServiceAdvertiser!
     
     var newMessagesReceived:Int = 0
-    var isBrowsing = false
-    var isAdvertising = false
+    var isBrowsing: Bool = false
+    var isAdvertising: Bool = false
     
     lazy var sessionObject: MCSession = {
-        let session = MCSession(peer: self.myPeerId)
+        let session: MCSession = MCSession(peer: self.myPeerId)
         session.delegate = self
         return session
     }()
     
     func createNewAdvertiser(withHashes messageHashes: [String]) {
-        var dictionary = [String: String]()
+        var dictionary: [String: String] = [String: String]()
         for hash in messageHashes {
             dictionary[hash] = ""
         }
@@ -95,11 +95,9 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
     
     func broadcastHashMessageDictionary(toRequester id: MCPeerID, excludingHashes hashArray: [String]) {
         do {
-            if let tableVC = tableViewController {
-                let messageDictionary = tableVC.returnMessageArray(excludingHashes: hashArray)
-                let messageDictionaryData = NSKeyedArchiver.archivedData(withRootObject: messageDictionary)
+                let messageDictionary: [RoarMessageSentCore] = tableViewController.returnMessageArray(excludingHashes: hashArray)
+                let messageDictionaryData: Data = NSKeyedArchiver.archivedData(withRootObject: messageDictionary)
                 try self.sessionObject.send(messageDictionaryData, toPeers: [id], with: MCSessionSendDataMode.reliable)
-            }
         } catch let error as NSError {
             NSLog("%@", error)
         }
@@ -107,7 +105,7 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
     
     func sendIndividualMessage(_ message: RoarMessageSentCore) {
         do {
-            let messageData = NSKeyedArchiver.archivedData(withRootObject: message)
+            let messageData: Data = NSKeyedArchiver.archivedData(withRootObject: message)
             try self.sessionObject.send(messageData, toPeers: self.sessionObject.connectedPeers, with: MCSessionSendDataMode.reliable)
         } catch let error as NSError {
             NSLog("%@", error)
@@ -116,10 +114,8 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
     
     func requestMessagesFromPeer() {
         do {
-            if let tableVC = tableViewController {
-                let concatenatedHashes = tableVC.messageHashes.joined(separator: " ")
+                let concatenatedHashes: String = tableViewController.messageHashes.joined(separator: " ")
                 try self.sessionObject.send(("@@@messagereq " + concatenatedHashes).data(using: String.Encoding.utf8, allowLossyConversion: false)!, toPeers: self.sessionObject.connectedPeers, with: MCSessionSendDataMode.reliable)
-            }
         } catch let error as NSError {
             NSLog("%@", error)
         }
@@ -136,12 +132,11 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
     
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         NSLog("%@", "foundPeer: \(peerID)")
-        var didInvitePeer = false
+        var didInvitePeer: Bool = false
         
         if let peerHashes = info
         {
-            if let tableVC = tableViewController {
-                let messageHashes = tableVC.messageHashes
+                let messageHashes: [String] = tableViewController.messageHashes
                 for hash in messageHashes {
                     if peerHashes[hash] == nil {
                         NSLog("%@", "invitePeer: \(peerID)")
@@ -152,14 +147,13 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
                 }
                 if !didInvitePeer {
                     for (hash, _) in peerHashes {
-                        if tableVC.messageHashes.index(of: hash) == nil {
+                        if messageHashes.index(of: hash) == nil {
                             NSLog("%@", "invitePeer: \(peerID)")
                             browser.invitePeer(peerID, to: sessionObject, withContext: nil, timeout: 5)
                             didInvitePeer = true
                             break
                         }
                     }
-                }
             }
             else {
                 print("TableView does not exist")
@@ -199,7 +193,7 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
         NSLog("%@", "didReceiveData: \(data.count) bytes from peer \(peerID)")
         var didReceiveRequest = false
         if let str = NSString(data: data, encoding: String.Encoding.utf8.rawValue) as? String {
-            let hashArray = str.components(separatedBy: " ")
+            let hashArray: [String] = str.components(separatedBy: " ")
             if hashArray[0] == "@@@messagereq" {
                 print("Received request for messages from \(peerID)")
                 broadcastHashMessageDictionary(toRequester: peerID, excludingHashes: Array(hashArray[1..<hashArray.count]))
@@ -207,18 +201,16 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
             }
         }
         if !didReceiveRequest {
-            if let tableVC = tableViewController {
                 if let message = NSKeyedUnarchiver.unarchiveObject(with: data) as? RoarMessageSentCore {
                     print("Did receive single message")
-                    if !tableVC.messageHashes.contains(message.text!.sha1()) {
-                        tableVC.addMessage(message.text!, date: message.date!, user: message.user!)
+                    if !tableViewController.messageHashes.contains(message.text!.sha1()) {
+                        tableViewController.addMessage(message.text!, date: message.date!, user: message.user!)
                         newMessagesReceived += 1
-                    }
                 }
                 if let messageArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? [RoarMessageSentCore] {
                     print("Did receive dictionary of messages")
                     for message in messageArray {
-                        tableVC.addMessage(message.text!, date: message.date!, user: message.user!)
+                        tableViewController.addMessage(message.text!, date: message.date!, user: message.user!)
                         newMessagesReceived += 1
                     }
                     if self.newMessagesReceived > 20 {

@@ -16,9 +16,9 @@ class RoarMessageCore: NSManagedObject {
     //A subclass of NSManagedObject. This class is the type that is stored
     //in the core data model.
     convenience init(text: String, date: Date, user: String) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext
-        let entity = NSEntityDescription.entity(forEntityName: "RoarMessageCore", in: managedContext)
+        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        let managedContext: NSManagedObjectContext = appDelegate.managedObjectContext
+        let entity: NSEntityDescription? = NSEntityDescription.entity(forEntityName: "RoarMessageCore", in: managedContext)
         self.init(entity: entity!, insertInto: managedContext)
         self.date = date
         self.text = text
@@ -56,9 +56,9 @@ class RoarMessageSentCore: NSObject, NSCoding {
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
         
-        let unarchivedDate = aDecoder.decodeObject(forKey: "date") as! Date
-        let unarchivedText = aDecoder.decodeObject(forKey: "text") as! String
-        let unarchivedUser = aDecoder.decodeObject(forKey: "user") as! String
+        let unarchivedDate: Date = aDecoder.decodeObject(forKey: "date") as! Date
+        let unarchivedText: String = aDecoder.decodeObject(forKey: "text") as! String
+        let unarchivedUser: String = aDecoder.decodeObject(forKey: "user") as! String
         self.date = unarchivedDate
         self.text = unarchivedText
         self.user = unarchivedUser

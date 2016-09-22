@@ -24,8 +24,8 @@ class SecondViewController: UIViewController {
         clickMeButton.translatesAutoresizingMaskIntoConstraints = false
         
         self.view.addSubview(clickMeButton)
-        let centerXConstraint = NSLayoutConstraint(item: self.view, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: clickMeButton, attribute: NSLayoutAttribute.centerX, multiplier: 1.0, constant: 0)
-        let centerYConstraint = NSLayoutConstraint(item: self.view, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: clickMeButton, attribute: NSLayoutAttribute.centerY, multiplier: 1.0, constant: 100)
+        let centerXConstraint: NSLayoutConstraint = NSLayoutConstraint(item: self.view, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: clickMeButton, attribute: NSLayoutAttribute.centerX, multiplier: 1.0, constant: 0)
+        let centerYConstraint: NSLayoutConstraint = NSLayoutConstraint(item: self.view, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: clickMeButton, attribute: NSLayoutAttribute.centerY, multiplier: 1.0, constant: 100)
         
         self.view.addConstraints([centerXConstraint, centerYConstraint])
     }
