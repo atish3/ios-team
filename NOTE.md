@@ -8,7 +8,7 @@ Note/guide for for teammates. Hope this note helps, for it took me a while to fi
 
 	```
 	git submodule init
-	git submodule update
+	git submodule update --remote
 	```
 
 4. Hit `Roar/Roar.xcodeproj` to open it in Xcode.
