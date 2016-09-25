@@ -10,7 +10,6 @@ import UIKit
 import MultipeerConnectivity
 
 extension MCSessionState {
-    
     func stringValue() -> String {
         switch(self) {
         case .notConnected: return "NotConnected"
@@ -215,7 +214,6 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
                     }
                     if self.newMessagesReceived > 20 {
                         self.sessionObject.disconnect()
-                    
                     }
                 }
             }

@@ -15,7 +15,7 @@ class RoarComposeViewController: UIViewController, UITextViewDelegate {
     let textViewMargins: Int = 20
     let placeholderText: String = "Post something to the world!"
     var placeholderLabel: UILabel!
-    var alias = "Anonymouse"
+    var alias: String = "Anonymouse"
     
     override func viewDidLoad() {
         NotificationCenter.default.addObserver(self, selector: #selector(RoarComposeViewController.keyboardWillShow(_:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil);

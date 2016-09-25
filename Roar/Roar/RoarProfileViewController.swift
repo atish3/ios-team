@@ -28,12 +28,14 @@ class RoarProfileViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        RoarComposeViewController().changeAlias(newAlias: textField.text!);
+        //The line below doesn't do anything! We should discuss this in person.
+        //RoarComposeViewController().changeAlias(newAlias: textField.text!);
     }
     
     // MARK: Actions
     @IBAction func setDefaultAlias(_ sender: UIButton) {
-        RoarComposeViewController().changeAlias(newAlias: "Anonymouse");
+        //See above
+        //RoarComposeViewController().changeAlias(newAlias: "Anonymouse");
     }
     
     

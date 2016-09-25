@@ -136,13 +136,13 @@
 				1ABE12F11C9756A2005923BA /* RoarConnectivityController.swift */,
 				1ABE12ED1C97521C005923BA /* RoarTableViewCell.swift */,
 				1AF2D0661C97856300670C89 /* RoarComposeViewController.swift */,
+				172EA8A11D9788DA00D2E127 /* RoarProfileViewController.swift */,
+				1ABE12D81C9744D0005923BA /* SecondViewController.swift */,
 				1ABE12DA1C9744D0005923BA /* Main.storyboard */,
 				1ABE12EF1C975321005923BA /* RoarTableViewCell.xib */,
-				1ABE12D81C9744D0005923BA /* SecondViewController.swift */,
 				1ABE12DD1C9744D0005923BA /* Assets.xcassets */,
 				1ABE12DF1C9744D0005923BA /* LaunchScreen.storyboard */,
 				1ABE12E21C9744D0005923BA /* Info.plist */,
-				172EA8A11D9788DA00D2E127 /* RoarProfileViewController.swift */,
 			);
 			path = Roar;
 			sourceTree = "<group>";
