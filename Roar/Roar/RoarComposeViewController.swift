@@ -15,13 +15,16 @@ class RoarComposeViewController: UIViewController, UITextViewDelegate {
     let textViewMargins: Int = 20
     let placeholderText: String = "Post something to the world!"
     var placeholderLabel: UILabel!
+    var alias = "Anonymouse"
     
     override func viewDidLoad() {
         NotificationCenter.default.addObserver(self, selector: #selector(RoarComposeViewController.keyboardWillShow(_:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil);
         NotificationCenter.default.addObserver(self, selector: #selector(RoarComposeViewController.keyboardWillHide(_:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
     
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(RoarComposeViewController.cancelTapped))
+        self.navigationItem.leftBarButtonItem?.tintColor=UIColor.white
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Post", style: .done, target: self, action: #selector(RoarComposeViewController.postTapped))
+        self.navigationItem.rightBarButtonItem?.tintColor=UIColor.white
         self.navigationItem.rightBarButtonItem!.isEnabled = false
         
         self.title = "Post to Feed"
@@ -40,6 +43,10 @@ class RoarComposeViewController: UIViewController, UITextViewDelegate {
         placeholderLabel.textColor = UIColor.lightGray
         
         composeTextView.becomeFirstResponder()
+        
+        // Change the color of the navigation bar title text.
+        navigationController!.navigationBar.titleTextAttributes =
+            [NSForegroundColorAttributeName: UIColor.white]
     }
     
     
@@ -80,10 +87,14 @@ class RoarComposeViewController: UIViewController, UITextViewDelegate {
     
     func postTapped() {
         self.dismiss(animated: true) { () -> Void in
-            self.roarTableVC.addMessage(self.composeTextView.text, date: Date(), user: "Pascal")
+            self.roarTableVC.addMessage(self.composeTextView.text, date: Date(), user: self.alias)
             if self.roarCC.sessionObject.connectedPeers.count > 0 {
-                self.roarCC.sendIndividualMessage(RoarMessageSentCore(text: self.composeTextView.text, date: Date(), user: "Pascal"))
+                self.roarCC.sendIndividualMessage(RoarMessageSentCore(text: self.composeTextView.text, date: Date(), user: self.alias))
             }
         }
+    }
+    
+    func changeAlias(newAlias: String) {
+        self.alias = newAlias;
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		172EA8A21D9788DA00D2E127 /* RoarProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172EA8A11D9788DA00D2E127 /* RoarProfileViewController.swift */; };
 		1A42E0301CBED2A100E6EE86 /* RoarMessageCore+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A42E02E1CBED2A100E6EE86 /* RoarMessageCore+CoreDataProperties.swift */; };
 		1A42E0311CBED2A100E6EE86 /* RoarMessageCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A42E02F1CBED2A100E6EE86 /* RoarMessageCore.swift */; };
 		1ABE12D51C9744D0005923BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE12D41C9744D0005923BA /* AppDelegate.swift */; };
@@ -72,6 +73,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		172EA8A11D9788DA00D2E127 /* RoarProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoarProfileViewController.swift; sourceTree = "<group>"; };
 		1A42E02E1CBED2A100E6EE86 /* RoarMessageCore+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RoarMessageCore+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1A42E02F1CBED2A100E6EE86 /* RoarMessageCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoarMessageCore.swift; sourceTree = "<group>"; };
 		1ABE12D11C9744D0005923BA /* Roar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Roar.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,6 +142,7 @@
 				1ABE12DD1C9744D0005923BA /* Assets.xcassets */,
 				1ABE12DF1C9744D0005923BA /* LaunchScreen.storyboard */,
 				1ABE12E21C9744D0005923BA /* Info.plist */,
+				172EA8A11D9788DA00D2E127 /* RoarProfileViewController.swift */,
 			);
 			path = Roar;
 			sourceTree = "<group>";
@@ -183,7 +186,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = 1AM;
 				TargetAttributes = {
 					1ABE12D01C9744D0005923BA = {
@@ -263,6 +266,7 @@
 				1ABE12F21C9756A2005923BA /* RoarConnectivityController.swift in Sources */,
 				1ABE12D71C9744D0005923BA /* RoarNavigationController.swift in Sources */,
 				1ABE12EA1C9750A6005923BA /* RoarTableViewController.swift in Sources */,
+				172EA8A21D9788DA00D2E127 /* RoarProfileViewController.swift in Sources */,
 				7DD0BBB41CBC349000CF2268 /* Roar.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -315,8 +319,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -359,8 +365,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -379,6 +387,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -386,9 +395,10 @@
 		1ABE12E61C9744D0005923BA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Roar/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.1am.Roar;
@@ -400,9 +410,10 @@
 		1ABE12E71C9744D0005923BA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Roar/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.1am.Roar;

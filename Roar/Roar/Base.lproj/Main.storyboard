@@ -59,7 +59,7 @@
                                 <rect key="frame" x="0.0" y="28" width="383" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Mfo-em-DSA" id="QGw-V6-Doo">
-                                    <frame key="frameInset" width="383" height="44"/>
+                                    <frame key="frameInset" width="383" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -163,17 +163,17 @@
                     <connections>
                         <segue destination="s4v-zd-AJo" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
-                        <segue destination="j5f-vL-dPN" kind="relationship" relationship="viewControllers" id="1nn-KZ-k2B"/>
+                        <segue destination="opg-0R-HIf" kind="relationship" relationship="viewControllers" id="DL3-01-DlT"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="0.0" y="0.0"/>
         </scene>
-        <!--View Controller-->
+        <!--Me-->
         <scene sceneID="ZaC-Dx-05R">
             <objects>
-                <viewController id="j5f-vL-dPN" sceneMemberID="viewController">
+                <viewController id="j5f-vL-dPN" customClass="RoarProfileViewController" customModule="Roar" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Oy1-6N-Pdf"/>
                         <viewControllerLayoutGuide type="bottom" id="9Ae-HG-log"/>
@@ -182,21 +182,55 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="FAVORITES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uZz-nI-G1o">
-                                <frame key="frameInset" minX="212" minY="158" width="210" height="69"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="gWc-lF-HGP">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alias" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jda-2j-iJp">
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="30" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your alias" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8bA-pg-tTN">
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X3q-ar-kyU">
+                                        <state key="normal" title="Squeak as Anonymouse"/>
+                                        <connections>
+                                            <action selector="setDefaultAlias:" destination="j5f-vL-dPN" eventType="touchUpInside" id="3Ue-x8-36L"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="8bA-pg-tTN" firstAttribute="leading" secondItem="gWc-lF-HGP" secondAttribute="leading" id="UEz-ct-hMS"/>
+                                    <constraint firstAttribute="trailing" secondItem="8bA-pg-tTN" secondAttribute="trailing" id="yHc-fP-HFq"/>
+                                </constraints>
+                            </stackView>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Ah-Vf-8Jn">
+                                <frame key="frameInset" minY="20" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Title" id="u8d-7r-c6m"/>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="gWc-lF-HGP" secondAttribute="trailing" id="BVz-8J-0Wx"/>
+                            <constraint firstItem="gWc-lF-HGP" firstAttribute="top" secondItem="Oy1-6N-Pdf" secondAttribute="bottom" constant="60" id="EG1-VX-PPA"/>
+                            <constraint firstItem="gWc-lF-HGP" firstAttribute="leading" secondItem="ebn-vr-jYv" secondAttribute="leadingMargin" id="VrQ-k1-nyy"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="favorites" id="EbG-Ef-pva"/>
+                    <tabBarItem key="tabBarItem" title="Me" image="second" id="EbG-Ef-pva" userLabel="Me"/>
+                    <navigationItem key="navigationItem" id="ceq-sE-bph"/>
+                    <connections>
+                        <outlet property="aliasTextField" destination="8bA-pg-tTN" id="hxR-PX-b1b"/>
+                        <outlet property="profileNavigationBar" destination="ceq-sE-bph" id="xx8-WP-FV4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2nh-ry-iYp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="104" y="909"/>
+            <point key="canvasLocation" x="44" y="911"/>
         </scene>
         <!--First-->
         <scene sceneID="IWw-qh-JZY">
@@ -234,6 +268,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yF9-U6-TzT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1469" y="495"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="RmU-3R-FBa">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="opg-0R-HIf" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="Mkj-f6-Vby"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="p96-EM-jwN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="j5f-vL-dPN" kind="relationship" relationship="rootViewController" id="prQ-QU-XBp"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5KI-fh-fdo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-722" y="741"/>
         </scene>
     </scenes>
     <resources>

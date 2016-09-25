@@ -30,7 +30,7 @@ class RoarNavigationController: UIViewController {
         //Create a button to clear all the messages.
         //TODO: This needs to be replaced by a background process.
         let clearTableButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(RoarNavigationController.clearTable))
-        
+
         self.navigationItem.leftBarButtonItems = [browseButton, advertiseButton, clearTableButton]
     }
     
