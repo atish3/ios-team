@@ -25,10 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().tintColor = UIColor.white
         */
         
-        print("Attempting to create tableviewcontroller")
         let mainNavigationController: RoarNavigationController = RoarNavigationController()
         
-        print("Did create tableviewcontroller")
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window!.backgroundColor = UIColor.white
         self.window!.rootViewController = mainNavigationController

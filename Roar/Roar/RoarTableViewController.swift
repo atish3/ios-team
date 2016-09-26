@@ -40,13 +40,10 @@ class RoarTableViewController: UITableViewController, NSFetchedResultsController
     }()
     
     override func viewDidLoad() {
-        print("Attempting to create tableview")
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
         tableView.register(RoarTableViewCell.self, forCellReuseIdentifier: "RoarTableViewCell")
-        
-        print("Did add tableview to controller")
         
         //Reference the appDelegate to recover the managedObjectContext
         unowned let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -213,6 +210,30 @@ class RoarTableViewController: UITableViewController, NSFetchedResultsController
         
         // Present Alert Controller
         present(alertController, animated: true, completion: nil)
+    }
+    
+    
+    func clearTable() {
+        let certainAlert: UIAlertController = UIAlertController(title: "Delete all messages", message: "Are you sure you want to delete all messages?", preferredStyle: .alert)
+        certainAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (_) in
+        
+            //Iterate through every item in the coreData store, and remove it from
+            //the context. then, save the changes.
+            for managedObject in self.fetchedResultsController.fetchedObjects! {
+                self.managedObjectContext.delete(managedObject as NSManagedObject)
+            }
+            
+            
+            do {
+                try self.managedObjectContext.save()
+            } catch {
+                let clearError: NSError = error as NSError
+                print(clearError)
+            }
+        }))
+        certainAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(certainAlert, animated: true, completion: nil)
     }
     
     //WHENEVER YOU NEED TO ADD A MESSAGE TO THE TABLE, USE THIS FUNCTION.

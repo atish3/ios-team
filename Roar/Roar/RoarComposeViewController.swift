@@ -90,7 +90,6 @@ class RoarComposeViewController: UIViewController, UITextViewDelegate {
         if self.connectivityController.sessionObject.connectedPeers.count > 0 {
             self.connectivityController.sendIndividualMessage(RoarMessageSentCore(text: self.composeTextView.text, date: Date(), user: self.alias))
         }
-        
         self.clearText()
     }
     

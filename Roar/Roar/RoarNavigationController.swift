@@ -45,35 +45,13 @@ class RoarNavigationController: UINavigationController {
         
         //Create a button to clear all the messages.
         //TODO: This needs to be replaced by a background process.
-        clearTableButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(RoarNavigationController.clearTable))
+        clearTableButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self.tableViewController, action: #selector(RoarTableViewController.clearTable))
 
         tableViewController.navigationItem.leftBarButtonItems = [browseButton, advertiseButton, clearTableButton]
     
         composeButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.compose, target: self, action: #selector(RoarNavigationController.compose))
         
         tableViewController.navigationItem.rightBarButtonItem = composeButton
-    }
-    
-    func clearTable() {
-        //A function to clear the messages from the tableView
-        let certainAlert: UIAlertController = UIAlertController(title: "Delete all messages", message: "Are you sure you want to delete all messages?", preferredStyle: .alert)
-        certainAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (_) in
-        
-            //Iterate through every item in the coreData store, and remove it from
-            //the context. then, save the changes.
-            for managedObject in self.tableViewController.fetchedResultsController.fetchedObjects! {
-                self.tableViewController.managedObjectContext.delete(managedObject as NSManagedObject)
-            }
-            do {
-                try self.tableViewController.managedObjectContext.save()
-            } catch {
-                let clearError: NSError = error as NSError
-                print(clearError)
-            }
-        }))
-        certainAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        present(certainAlert, animated: true, completion: nil)
     }
     
     func toggleBrowser() {
