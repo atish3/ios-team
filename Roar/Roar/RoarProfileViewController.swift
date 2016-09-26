@@ -13,6 +13,7 @@ class RoarProfileViewController: UIViewController, UITextFieldDelegate {
     var aliasTextField: UITextField!
     var aliasLabel: UILabel!
     var editButton: UIBarButtonItem!
+    var aliasHeader: UILabel!
     var isEditingProfile: Bool = false
     
     override func viewDidLoad() {
@@ -25,25 +26,61 @@ class RoarProfileViewController: UIViewController, UITextFieldDelegate {
         aliasLabel = UILabel(frame: aliasTextField.frame)
         aliasLabel.frame.origin.x += 7
         aliasLabel.frame.origin.y -= 1
-        aliasLabel.text = "psturm"
+        aliasLabel.text = "Anonymouse"
+        
+        aliasHeader = UILabel()
+        aliasHeader.text = "Screen name:"
+        aliasHeader.sizeToFit()
+        aliasHeader.frame.origin = aliasLabel.frame.origin
+        aliasHeader.frame.origin.y -= 30
         
         // Do any additional setup after loading the view, typically from a nib.
         aliasTextField.delegate = self
         aliasTextField.borderStyle = UITextBorderStyle.roundedRect
         aliasTextField.isHidden = true
+        aliasTextField.keyboardType = UIKeyboardType.namePhonePad
+        aliasTextField.autocorrectionType = UITextAutocorrectionType.no
         
         self.view.addSubview(aliasTextField)
         self.view.addSubview(aliasLabel)
+        self.view.addSubview(aliasHeader)
         
         editButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.plain, target: self, action: #selector(RoarProfileViewController.toggleEditMode))
         self.navigationItem.rightBarButtonItem = editButton
+        
+        let tap: UIGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RoarProfileViewController.returnKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    func returnKeyboard() {
+        aliasTextField.resignFirstResponder()
     }
     
     func toggleEditMode() {
         if isEditingProfile {
+            if let text = aliasTextField.text, text.isEmpty {
+                let emptyAliasAlert: UIAlertController = UIAlertController(title: "Username field is empty.", message: "Please enter a username", preferredStyle: UIAlertControllerStyle.alert)
+                emptyAliasAlert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: { (action) in
+                    self.aliasTextField.becomeFirstResponder()
+                }))
+                
+                self.present(emptyAliasAlert, animated: true, completion: nil)
+                return
+            }
+            
+            returnKeyboard()
+            aliasTextField.isHidden = true
+            aliasLabel.isHidden = false
+            
+            aliasLabel.text = aliasTextField.text
+        
             editButton.title = "Edit"
             editButton.style = UIBarButtonItemStyle.plain
         } else {
+            aliasTextField.isHidden = false
+            aliasLabel.isHidden = true
+            
+            aliasTextField.text = aliasLabel.text
             editButton.title = "Done"
             editButton.style = UIBarButtonItemStyle.done
         }
@@ -53,7 +90,7 @@ class RoarProfileViewController: UIViewController, UITextFieldDelegate {
     // MARK: UITextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // Hide the keyboard.
-        textField.resignFirstResponder()
+        toggleEditMode()
         return true
     }
     
@@ -62,11 +99,12 @@ class RoarProfileViewController: UIViewController, UITextFieldDelegate {
         //RoarComposeViewController().changeAlias(newAlias: textField.text!);
     }
     
-    // MARK: Actions
-    @IBAction func setDefaultAlias(_ sender: UIButton) {
-        //See above
-        //RoarComposeViewController().changeAlias(newAlias: "Anonymouse");
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if string == " " {
+            let nsString = textField.text! as NSString
+            textField.text = nsString.replacingCharacters(in: range, with: "_")
+            return false
+        }
+        return true
     }
-    
-    
 }
