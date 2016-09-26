@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RoarComposeNavigationController: UINavigationController {
+class RoarComposeNavigationController: RoarNavigationStyleController {
     var composeViewController: RoarComposeViewController!
     weak var tableViewController: RoarTableViewController!
     weak var connectivityController: RoarConnectivityController!
