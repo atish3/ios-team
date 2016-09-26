@@ -11,9 +11,10 @@ import CoreData
 
 //The navigation controller for the "First" view on the tab bar
 class RoarNavigationController: UINavigationController {
-    var tableViewController: RoarTableViewController!
     var connectivityController: RoarConnectivityController!
     var composeNavigationController: RoarComposeNavigationController!
+    var mainTabBarController: RoarTabBarController!
+    
     var tableView: UIView!
     
     var browseButton: UIBarButtonItem!
@@ -24,19 +25,18 @@ class RoarNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Create the tableView
-        tableViewController = RoarTableViewController()
+        mainTabBarController = RoarTabBarController()
         
         //Link the connectivityController to its owner and display
         connectivityController = RoarConnectivityController()
-        connectivityController.tableViewController = tableViewController
+        connectivityController.tableViewController = mainTabBarController.tableViewController
         connectivityController.navigationController = self
         
         composeNavigationController = RoarComposeNavigationController()
-        composeNavigationController.tableViewController = tableViewController
+        composeNavigationController.tableViewController = mainTabBarController.tableViewController
         composeNavigationController.connectivityController = connectivityController
         
-        self.viewControllers = [tableViewController]
+        self.viewControllers = [mainTabBarController]
         
         //Create the MC buttons. 
         //TODO: These need to be replaced by background processes.
@@ -45,13 +45,13 @@ class RoarNavigationController: UINavigationController {
         
         //Create a button to clear all the messages.
         //TODO: This needs to be replaced by a background process.
-        clearTableButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self.tableViewController, action: #selector(RoarTableViewController.clearTable))
+        clearTableButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self.mainTabBarController.tableViewController, action: #selector(RoarTableViewController.clearTable))
 
-        tableViewController.navigationItem.leftBarButtonItems = [browseButton, advertiseButton, clearTableButton]
+        mainTabBarController.navigationItem.leftBarButtonItems = [browseButton, advertiseButton, clearTableButton]
     
         composeButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.compose, target: self, action: #selector(RoarNavigationController.compose))
         
-        tableViewController.navigationItem.rightBarButtonItem = composeButton
+        mainTabBarController.navigationItem.rightBarButtonItem = composeButton
     }
     
     func toggleBrowser() {
@@ -71,7 +71,7 @@ class RoarNavigationController: UINavigationController {
             advertiseButton.title = "advertise"
         }
         else {
-            connectivityController.createNewAdvertiser(withHashes: tableViewController.messageHashes)
+            connectivityController.createNewAdvertiser(withHashes: self.mainTabBarController.tableViewController.messageHashes)
             connectivityController.startAdvertisingPeer()
             advertiseButton.title = "stop advertising"
         }

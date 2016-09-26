@@ -25,11 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().tintColor = UIColor.white
         */
         
-        let mainTabBarController: RoarTabBarController = RoarTabBarController()
+        let mainNavigationController: RoarNavigationController = RoarNavigationController()
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window!.backgroundColor = UIColor.white
-        self.window!.rootViewController = mainTabBarController
+        self.window!.rootViewController = mainNavigationController
         self.window!.makeKeyAndVisible()
 
         return true

@@ -9,20 +9,17 @@
 import UIKit
 
 class RoarTabBarController: UITabBarController, UITabBarControllerDelegate {
-    var topNavigationController: RoarNavigationController!
-    var profileViewController: RoarProfileViewController!
+    var profileViewController: RoarProfileViewController = RoarProfileViewController()
+    var tableViewController: RoarTableViewController = RoarTableViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
         
-        topNavigationController = RoarNavigationController()
-        profileViewController = RoarProfileViewController()
-        
-        topNavigationController.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.mostRecent, tag: 0)
+        tableViewController.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.mostRecent, tag: 0)
         profileViewController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "profileIcon"), tag: 1)
         
-        self.viewControllers = [topNavigationController, profileViewController]
+        self.viewControllers = [tableViewController, profileViewController]
         self.selectedIndex = 0
     }
 }
