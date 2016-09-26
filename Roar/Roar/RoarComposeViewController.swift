@@ -9,46 +9,45 @@
 import UIKit
 
 class RoarComposeViewController: UIViewController, UITextViewDelegate {
-    @IBOutlet weak var composeTextView: UITextView!
-    weak var roarTableVC: RoarTableViewController!
-    weak var roarCC: RoarConnectivityController!
+    var composeTextView: UITextView!
+    weak var tableViewController: RoarTableViewController!
+    weak var connectivityController: RoarConnectivityController!
     let textViewMargins: Int = 20
     let placeholderText: String = "Post something to the world!"
     var placeholderLabel: UILabel!
     var alias: String = "Anonymouse"
     
     override func viewDidLoad() {
+        self.view.backgroundColor = UIColor.white
+    
+        composeTextView = UITextView(frame: self.view.frame)
+        self.view.addSubview(composeTextView)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(RoarComposeViewController.keyboardWillShow(_:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil);
         NotificationCenter.default.addObserver(self, selector: #selector(RoarComposeViewController.keyboardWillHide(_:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
-    
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(RoarComposeViewController.cancelTapped))
-        self.navigationItem.leftBarButtonItem?.tintColor=UIColor.white
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Post", style: .done, target: self, action: #selector(RoarComposeViewController.postTapped))
-        self.navigationItem.rightBarButtonItem?.tintColor=UIColor.white
-        self.navigationItem.rightBarButtonItem!.isEnabled = false
         
         self.title = "Post to Feed"
-        
-        composeTextView.translatesAutoresizingMaskIntoConstraints = true
+  
         composeTextView.frame = CGRect(x: CGFloat(textViewMargins), y: 0, width: self.view.bounds.width - CGFloat(textViewMargins), height: self.view.bounds.height)
         composeTextView.delegate = self
         composeTextView.text = ""
+        composeTextView.font = UIFont(name: "Helvetica", size: 14.0)!
         
         placeholderLabel = UILabel()
         placeholderLabel.text = placeholderText
         placeholderLabel.font = composeTextView.font
         placeholderLabel.sizeToFit()
         composeTextView.addSubview(placeholderLabel)
-        placeholderLabel.frame.origin = CGPoint(x: 5, y: composeTextView.font!.pointSize / 2 + 1)
+        
+        placeholderLabel.frame.origin = CGPoint(x: 26, y: 72)
         placeholderLabel.textColor = UIColor.lightGray
         
-        composeTextView.becomeFirstResponder()
-        
-        // Change the color of the navigation bar title text.
-        navigationController!.navigationBar.titleTextAttributes =
-            [NSForegroundColorAttributeName: UIColor.white]
+        self.view.addSubview(placeholderLabel)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        composeTextView.becomeFirstResponder()
+    }
     
     func textViewDidChange(_ textView: UITextView) {
         placeholderLabel.isHidden = !textView.text.isEmpty
@@ -81,17 +80,18 @@ class RoarComposeViewController: UIViewController, UITextViewDelegate {
         return true
     }
     
-    func cancelTapped() {
-        self.dismiss(animated: true, completion: nil)
+    func clearText() {
+        composeTextView.text = ""
+        placeholderLabel.isHidden = false
     }
     
-    func postTapped() {
-        self.dismiss(animated: true) { () -> Void in
-            self.roarTableVC.addMessage(self.composeTextView.text, date: Date(), user: self.alias)
-            if self.roarCC.sessionObject.connectedPeers.count > 0 {
-                self.roarCC.sendIndividualMessage(RoarMessageSentCore(text: self.composeTextView.text, date: Date(), user: self.alias))
-            }
+    func post() {
+        self.tableViewController.addMessage(self.composeTextView.text, date: Date(), user: self.alias)
+        if self.connectivityController.sessionObject.connectedPeers.count > 0 {
+            self.connectivityController.sendIndividualMessage(RoarMessageSentCore(text: self.composeTextView.text, date: Date(), user: self.alias))
         }
+        
+        self.clearText()
     }
     
     func changeAlias(newAlias: String) {

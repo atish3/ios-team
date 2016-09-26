@@ -10,7 +10,6 @@ import UIKit
 import CoreData
 
 class RoarTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
-    //An array MCChatMessageData objects. This array is where all messages are stored.
     var ifCellRegistered: Bool = false
     
     var managedObjectContext: NSManagedObjectContext!
@@ -41,8 +40,16 @@ class RoarTableViewController: UITableViewController, NSFetchedResultsController
     }()
     
     override func viewDidLoad() {
+        print("Attempting to create tableview")
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        
+        tableView.register(RoarTableViewCell.self, forCellReuseIdentifier: "RoarTableViewCell")
+        
+        print("Did add tableview to controller")
+        
         //Reference the appDelegate to recover the managedObjectContext
-        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        unowned let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         self.managedObjectContext = appDelegate.managedObjectContext
         
         //The following block of code defends against coreData migrations. 
@@ -105,23 +112,9 @@ class RoarTableViewController: UITableViewController, NSFetchedResultsController
         let roarMessageCoreData: RoarMessageCore = fetchedResultsController.object(at: indexPath)
         let cell: RoarTableViewCell
         
-        if ifCellRegistered
-        {
-            //Create a cell of type MCChatTableViewCell
-            let reusableCell: AnyObject = tableView.dequeueReusableCell(withIdentifier: "RoarTableViewCell", for: indexPath)
-            cell = reusableCell as! RoarTableViewCell
-        }
-        else
-        {
-            //This else statement is only for technical purposes. Ignore it. IGNORE IT I SAY!
-            let cellArray: [Any]? = Bundle.main.loadNibNamed("RoarTableViewCell", owner: self, options: nil)
-            cell = cellArray?[0] as! RoarTableViewCell
-            
-            //register MCChatTableViewCell
-            let nib: UINib = UINib(nibName: "RoarTableViewCell", bundle: Bundle.main)
-            self.tableView.register(nib, forCellReuseIdentifier: "RoarTableViewCell")
-            ifCellRegistered = true
-        }
+        //Create a cell of type MCChatTableViewCell
+        let reusableCell: AnyObject = tableView.dequeueReusableCell(withIdentifier: "RoarTableViewCell", for: indexPath)
+        cell = reusableCell as! RoarTableViewCell
         
         cell.preservesSuperviewLayoutMargins = false
         cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)

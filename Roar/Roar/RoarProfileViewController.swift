@@ -10,8 +10,8 @@ import UIKit
 
 class RoarProfileViewController: UIViewController, UITextFieldDelegate {
     
-    @IBOutlet weak var aliasTextField: UITextField!
-    @IBOutlet weak var profileNavigationBar: UINavigationItem!
+    var aliasTextField: UITextField!
+    var profileNavigationBar: UINavigationItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()

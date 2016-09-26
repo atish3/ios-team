@@ -12,9 +12,9 @@ class RoarTableViewCell : UITableViewCell {
     
     //Linked to IBOutlet properties
     //These outlets appear in the MCChatTableViewCell.xib
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var messageLabel: UILabel!
-    @IBOutlet weak var userLabel: UILabel!
+    var dateLabel: UILabel!
+    var messageLabel: UILabel!
+    var userLabel: UILabel!
     
     //Constant properties to fit the message nicely into the table relative to other messages
     let imageWidthIncrease: CGFloat = 30
@@ -42,19 +42,13 @@ class RoarTableViewCell : UITableViewCell {
         //Safely unwrap data, since it is optional
         if let cellData = data
         {
+            dateLabel = UILabel()
+            messageLabel = UILabel()
+            userLabel = UILabel()
             //self.selectionStyle = UITableViewCellSelectionStyle.None
             
             //Messages shouldn't be editable or selectable
             self.isUserInteractionEnabled = false
-            
-            //translatesAutoresizingMaskIntoConstraints is a boolean property that if true,
-            //allows you to modify the rendering frame(size, position) and autolayout constraints (relative position)
-            //using code. This property is by default false for views created in the Interface Builder.
-            //Often, if a view is created in Interface Builder, we don't need to modify its frame in code.
-            //In this case, however, we do, so we set the property to true.
-            dateLabel.translatesAutoresizingMaskIntoConstraints = true
-            messageLabel.translatesAutoresizingMaskIntoConstraints = true
-            userLabel.translatesAutoresizingMaskIntoConstraints = true
             
             //Create a frame for the date label that is 20 pixels high
             dateLabel.frame = CGRect(x: 0, y: 0, width: self.bounds.width, height: cellData.dateLabelHeight)
@@ -106,6 +100,7 @@ class RoarTableViewCell : UITableViewCell {
             //Make the date have gray text
             dateLabel.textColor = UIColor.gray
             
+            
             userLabel.text = cellData.message.user
             userLabel.font = cellData.userFont
             userLabel.numberOfLines = 1
@@ -122,6 +117,10 @@ class RoarTableViewCell : UITableViewCell {
             messageLabel.frame = CGRect(origin: CGPoint(x: messageXOffset + imageMargin,
                 y: ((self.bounds.height + cellData.dateLabelHeight * 0.5 + userLabel.frame.height) / 2) -
                     (cellData.messageLabelSize.height / 2)), size: cellData.messageLabelSize)
+            
+            self.addSubview(dateLabel)
+            self.addSubview(messageLabel)
+            self.addSubview(userLabel)
         }
     }
 }

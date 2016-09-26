@@ -10,28 +10,48 @@ import UIKit
 import CoreData
 
 //The navigation controller for the "First" view on the tab bar
-class RoarNavigationController: UIViewController {
-    var tableView: RoarTableViewController!
+class RoarNavigationController: UINavigationController {
+    var tableViewController: RoarTableViewController!
     var connectivityController: RoarConnectivityController!
+    var composeNavigationController: RoarComposeNavigationController!
+    var tableView: UIView!
+    
+    var browseButton: UIBarButtonItem!
+    var advertiseButton: UIBarButtonItem!
+    var clearTableButton: UIBarButtonItem!
+    var composeButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Create the tableView
+        tableViewController = RoarTableViewController()
+        
         //Link the connectivityController to its owner and display
         connectivityController = RoarConnectivityController()
-        connectivityController.tableViewController = tableView
+        connectivityController.tableViewController = tableViewController
         connectivityController.navigationController = self
+        
+        composeNavigationController = RoarComposeNavigationController()
+        composeNavigationController.tableViewController = tableViewController
+        composeNavigationController.connectivityController = connectivityController
+        
+        self.viewControllers = [tableViewController]
         
         //Create the MC buttons. 
         //TODO: These need to be replaced by background processes.
-        let browseButton: UIBarButtonItem = UIBarButtonItem(title: "browse", style: UIBarButtonItemStyle.plain , target: self, action: #selector(RoarNavigationController.toggleBrowser))
-        let advertiseButton: UIBarButtonItem = UIBarButtonItem(title: "advertise", style: UIBarButtonItemStyle.plain, target: self, action: #selector(RoarNavigationController.toggleAdvertiser))
+        browseButton = UIBarButtonItem(title: "browse", style: UIBarButtonItemStyle.plain , target: self, action: #selector(RoarNavigationController.toggleBrowser))
+        advertiseButton = UIBarButtonItem(title: "advertise", style: UIBarButtonItemStyle.plain, target: self, action: #selector(RoarNavigationController.toggleAdvertiser))
         
         //Create a button to clear all the messages.
         //TODO: This needs to be replaced by a background process.
-        let clearTableButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(RoarNavigationController.clearTable))
+        clearTableButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(RoarNavigationController.clearTable))
 
-        self.navigationItem.leftBarButtonItems = [browseButton, advertiseButton, clearTableButton]
+        tableViewController.navigationItem.leftBarButtonItems = [browseButton, advertiseButton, clearTableButton]
+    
+        composeButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.compose, target: self, action: #selector(RoarNavigationController.compose))
+        
+        tableViewController.navigationItem.rightBarButtonItem = composeButton
     }
     
     func clearTable() {
@@ -41,11 +61,11 @@ class RoarNavigationController: UIViewController {
         
             //Iterate through every item in the coreData store, and remove it from
             //the context. then, save the changes.
-            for managedObject in self.tableView.fetchedResultsController.fetchedObjects! {
-                self.tableView.managedObjectContext.delete(managedObject as NSManagedObject)
+            for managedObject in self.tableViewController.fetchedResultsController.fetchedObjects! {
+                self.tableViewController.managedObjectContext.delete(managedObject as NSManagedObject)
             }
             do {
-                try self.tableView.managedObjectContext.save()
+                try self.tableViewController.managedObjectContext.save()
             } catch {
                 let clearError: NSError = error as NSError
                 print(clearError)
@@ -59,23 +79,23 @@ class RoarNavigationController: UIViewController {
     func toggleBrowser() {
         if connectivityController.isBrowsing {
             connectivityController.stopBrowsingForPeers()
-            self.navigationItem.leftBarButtonItems![0].title = "browse"
+            browseButton.title = "browse"
         }
         else {
             connectivityController.startBrowsingForPeers()
-            self.navigationItem.leftBarButtonItems![0].title = "stop browsing"
+            browseButton.title = "stop browsing"
         }
     }
     
     func toggleAdvertiser() {
         if connectivityController.isAdvertising {
             connectivityController.stopAdvertisingPeer()
-            self.navigationItem.leftBarButtonItems![1].title = "advertise"
+            advertiseButton.title = "advertise"
         }
         else {
-            connectivityController.createNewAdvertiser(withHashes: tableView.messageHashes)
+            connectivityController.createNewAdvertiser(withHashes: tableViewController.messageHashes)
             connectivityController.startAdvertisingPeer()
-            self.navigationItem.leftBarButtonItems![1].title = "stop advertising"
+            advertiseButton.title = "stop advertising"
         }
     }
     
@@ -83,22 +103,8 @@ class RoarNavigationController: UIViewController {
         return true
     }
     
-    //prepareForSegue is a standard swift function that is called whenever a
-    //view "segues" (transitions) to another view. In this example,
-    //we use this function to load the tableView – since the tableView is inside
-    //of this view, the segue to the table view is an "Embed" segue.
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Embed"
-        {
-            tableView = segue.destination as! RoarTableViewController
-        }
-        else if segue.identifier == "composeSegue"
-        {
-            let destNav: UINavigationController = segue.destination as! UINavigationController
-            let composeVC: RoarComposeViewController = destNav.childViewControllers[0] as! RoarComposeViewController
-            composeVC.roarTableVC = tableView
-            composeVC.roarCC = connectivityController
-        }
+    func compose() {
+        self.present(composeNavigationController, animated: true, completion: nil)
     }
 }
 
