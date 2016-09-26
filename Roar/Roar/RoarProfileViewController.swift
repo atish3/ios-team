@@ -10,10 +10,10 @@ import UIKit
 
 class RoarProfileViewController: UIViewController, UITextFieldDelegate {
     
-    var aliasTextField: UITextField!
-    var aliasLabel: UILabel!
+    var usernameTextField: UITextField!
+    var usernameLabel: UILabel!
     var editButton: UIBarButtonItem!
-    var aliasHeader: UILabel!
+    var usernameHeader: UILabel!
     var isEditingProfile: Bool = false
     
     override func viewDidLoad() {
@@ -22,28 +22,28 @@ class RoarProfileViewController: UIViewController, UITextFieldDelegate {
         let textFieldWidth: CGFloat = 250.0
         let textFieldHeight: CGFloat = 40.0
         let textFieldCenterX: CGFloat = self.view.frame.width * 0.5 - textFieldWidth * 0.5
-        aliasTextField = UITextField(frame: CGRect(x: textFieldCenterX, y: 200.0, width: textFieldWidth, height: textFieldHeight))
-        aliasLabel = UILabel(frame: aliasTextField.frame)
-        aliasLabel.frame.origin.x += 7
-        aliasLabel.frame.origin.y -= 1
-        aliasLabel.text = "Anonymouse"
+        usernameTextField = UITextField(frame: CGRect(x: textFieldCenterX, y: 200.0, width: textFieldWidth, height: textFieldHeight))
+        usernameLabel = UILabel(frame: usernameTextField.frame)
+        usernameLabel.frame.origin.x += 7
+        usernameLabel.frame.origin.y -= 1
+        usernameLabel.text = "Anonymouse"
         
-        aliasHeader = UILabel()
-        aliasHeader.text = "Screen name:"
-        aliasHeader.sizeToFit()
-        aliasHeader.frame.origin = aliasLabel.frame.origin
-        aliasHeader.frame.origin.y -= 30
+        usernameHeader = UILabel()
+        usernameHeader.text = "Screen name:"
+        usernameHeader.sizeToFit()
+        usernameHeader.frame.origin = usernameLabel.frame.origin
+        usernameHeader.frame.origin.y -= 30
         
         // Do any additional setup after loading the view, typically from a nib.
-        aliasTextField.delegate = self
-        aliasTextField.borderStyle = UITextBorderStyle.roundedRect
-        aliasTextField.isHidden = true
-        aliasTextField.keyboardType = UIKeyboardType.namePhonePad
-        aliasTextField.autocorrectionType = UITextAutocorrectionType.no
+        usernameTextField.delegate = self
+        usernameTextField.borderStyle = UITextBorderStyle.roundedRect
+        usernameTextField.isHidden = true
+        usernameTextField.keyboardType = UIKeyboardType.namePhonePad
+        usernameTextField.autocorrectionType = UITextAutocorrectionType.no
         
-        self.view.addSubview(aliasTextField)
-        self.view.addSubview(aliasLabel)
-        self.view.addSubview(aliasHeader)
+        self.view.addSubview(usernameTextField)
+        self.view.addSubview(usernameLabel)
+        self.view.addSubview(usernameHeader)
         
         editButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.plain, target: self, action: #selector(RoarProfileViewController.toggleEditMode))
         self.navigationItem.rightBarButtonItem = editButton
@@ -53,34 +53,37 @@ class RoarProfileViewController: UIViewController, UITextFieldDelegate {
     }
     
     func returnKeyboard() {
-        aliasTextField.resignFirstResponder()
+        usernameTextField.resignFirstResponder()
     }
     
     func toggleEditMode() {
         if isEditingProfile {
-            if let text = aliasTextField.text, text.isEmpty {
-                let emptyAliasAlert: UIAlertController = UIAlertController(title: "Username field is empty.", message: "Please enter a username", preferredStyle: UIAlertControllerStyle.alert)
-                emptyAliasAlert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: { (action) in
-                    self.aliasTextField.becomeFirstResponder()
+            if let text = usernameTextField.text, text.isEmpty {
+                let emptyUsernameAlert: UIAlertController = UIAlertController(title: "Username field is empty.", message: "Please enter a username", preferredStyle: UIAlertControllerStyle.alert)
+                emptyUsernameAlert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: { (action) in
+                    self.usernameTextField.becomeFirstResponder()
                 }))
                 
-                self.present(emptyAliasAlert, animated: true, completion: nil)
+                self.present(emptyUsernameAlert, animated: true, completion: nil)
                 return
             }
             
             returnKeyboard()
-            aliasTextField.isHidden = true
-            aliasLabel.isHidden = false
+            usernameTextField.isHidden = true
+            usernameLabel.isHidden = false
             
-            aliasLabel.text = aliasTextField.text
+            usernameLabel.text = usernameTextField.text
+            //Username is set here. This is a bit of a hack
+            let userPreferences: UserDefaults = UserDefaults.standard
+            userPreferences.set(usernameLabel.text!, forKey: "username")
         
             editButton.title = "Edit"
             editButton.style = UIBarButtonItemStyle.plain
         } else {
-            aliasTextField.isHidden = false
-            aliasLabel.isHidden = true
+            usernameTextField.isHidden = false
+            usernameLabel.isHidden = true
             
-            aliasTextField.text = aliasLabel.text
+            usernameTextField.text = usernameLabel.text
             editButton.title = "Done"
             editButton.style = UIBarButtonItemStyle.done
         }
@@ -96,7 +99,7 @@ class RoarProfileViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         //The line below doesn't do anything! We should discuss this in person.
-        //RoarComposeViewController().changeAlias(newAlias: textField.text!);
+        //RoarComposeViewController().changeusername(newusername: textField.text!);
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

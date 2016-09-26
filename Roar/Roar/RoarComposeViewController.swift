@@ -15,7 +15,6 @@ class RoarComposeViewController: UIViewController, UITextViewDelegate {
     let textViewMargins: Int = 20
     let placeholderText: String = "Post something to the world!"
     var placeholderLabel: UILabel!
-    var alias: String = "Anonymouse"
     
     override func viewDidLoad() {
         self.view.backgroundColor = UIColor.white
@@ -90,14 +89,14 @@ class RoarComposeViewController: UIViewController, UITextViewDelegate {
     }
     
     func post() {
-        self.tableViewController.addMessage(self.composeTextView.text, date: Date(), user: self.alias)
+        let userPreferences: UserDefaults = UserDefaults.standard
+        let username: String = userPreferences.string(forKey: "username")!
+    
+        self.tableViewController.addMessage(self.composeTextView.text, date: Date(), user: username)
         if self.connectivityController.sessionObject.connectedPeers.count > 0 {
-            self.connectivityController.sendIndividualMessage(RoarMessageSentCore(text: self.composeTextView.text, date: Date(), user: self.alias))
+            self.connectivityController.sendIndividualMessage(RoarMessageSentCore(text: self.composeTextView.text, date: Date(), user: username))
         }
         self.clearText()
     }
-    
-    func changeAlias(newAlias: String) {
-        self.alias = newAlias;
-    }
+
 }
