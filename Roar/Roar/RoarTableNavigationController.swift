@@ -10,10 +10,10 @@ import UIKit
 import CoreData
 
 //The navigation controller for the "First" view on the tab bar
-class RoarNavigationController: RoarNavigationStyleController {
+class RoarTableNavigationController: RoarSettingsNavigationController {
     var connectivityController: RoarConnectivityController!
     var composeNavigationController: RoarComposeNavigationController!
-    var mainTabBarController: RoarTabBarController!
+    var tableViewController: RoarTableViewController!
     
     var tableView: UIView!
     
@@ -23,35 +23,32 @@ class RoarNavigationController: RoarNavigationStyleController {
     var composeButton: UIBarButtonItem!
     
     override func viewDidLoad() {
+        tableViewController = RoarTableViewController()
+        self.viewControllers = [tableViewController]
         super.viewDidLoad()
-        
-        mainTabBarController = RoarTabBarController()
         
         //Link the connectivityController to its owner and display
         connectivityController = RoarConnectivityController()
-        connectivityController.tableViewController = mainTabBarController.tableViewController
-        connectivityController.navigationController = self
+        connectivityController.tableViewController = tableViewController
         
         composeNavigationController = RoarComposeNavigationController()
-        composeNavigationController.tableViewController = mainTabBarController.tableViewController
+        composeNavigationController.tableViewController = tableViewController
         composeNavigationController.connectivityController = connectivityController
-        
-        self.viewControllers = [mainTabBarController]
         
         //Create the MC buttons. 
         //TODO: These need to be replaced by background processes.
-        browseButton = UIBarButtonItem(title: "browse", style: UIBarButtonItemStyle.plain , target: self, action: #selector(RoarNavigationController.toggleBrowser))
-        advertiseButton = UIBarButtonItem(title: "advertise", style: UIBarButtonItemStyle.plain, target: self, action: #selector(RoarNavigationController.toggleAdvertiser))
+        browseButton = UIBarButtonItem(title: "browse", style: UIBarButtonItemStyle.plain , target: self, action: #selector(RoarTableNavigationController.toggleBrowser))
+        advertiseButton = UIBarButtonItem(title: "advertise", style: UIBarButtonItemStyle.plain, target: self, action: #selector(RoarTableNavigationController.toggleAdvertiser))
         
         //Create a button to clear all the messages.
         //TODO: This needs to be replaced by a background process.
-        clearTableButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self.mainTabBarController.tableViewController, action: #selector(RoarTableViewController.clearTable))
+        clearTableButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self.tableViewController, action: #selector(RoarTableViewController.clearTable))
 
-        mainTabBarController.navigationItem.leftBarButtonItems = [browseButton, advertiseButton, clearTableButton]
+        //tableViewController.navigationItem.leftBarButtonItems = [browseButton, advertiseButton, clearTableButton]
     
-        composeButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.compose, target: self, action: #selector(RoarNavigationController.compose))
+        composeButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.compose, target: self, action: #selector(RoarTableNavigationController.compose))
         
-        mainTabBarController.navigationItem.rightBarButtonItem = composeButton
+        tableViewController.navigationItem.rightBarButtonItem = composeButton
     }
     
     func toggleBrowser() {
@@ -71,7 +68,7 @@ class RoarNavigationController: RoarNavigationStyleController {
             advertiseButton.title = "advertise"
         }
         else {
-            connectivityController.createNewAdvertiser(withHashes: self.mainTabBarController.tableViewController.messageHashes)
+            connectivityController.createNewAdvertiser(withHashes: self.tableViewController.messageHashes)
             connectivityController.startAdvertisingPeer()
             advertiseButton.title = "stop advertising"
         }

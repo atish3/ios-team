@@ -9,8 +9,9 @@
 import UIKit
 
 class RoarTabBarController: UITabBarController, UITabBarControllerDelegate {
-    var profileViewController: RoarProfileViewController = RoarProfileViewController()
-    var tableViewController: RoarTableViewController = RoarTableViewController()
+    var profileNavigationController: RoarProfileNavigationController = RoarProfileNavigationController()
+    var tableNavigationController: RoarTableNavigationController = RoarTableNavigationController()
+    var settingsViewController: RoarSettingsViewController = RoarSettingsViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,10 +20,17 @@ class RoarTabBarController: UITabBarController, UITabBarControllerDelegate {
         self.tabBar.barTintColor = UIColor(red: 253.0/255.0, green: 108.0/255.0, blue: 79.0/255.0, alpha: 1.0)
         self.tabBar.tintColor = UIColor.white
         
-        tableViewController.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.mostRecent, tag: 0)
-        profileViewController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "profileIcon"), tag: 1)
+        tableNavigationController.parentTabBarController = self
+        profileNavigationController.parentTabBarController = self
         
-        self.viewControllers = [tableViewController, profileViewController]
+        tableNavigationController.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.mostRecent, tag: 0)
+        profileNavigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "profileIcon"), tag: 1)
+        
+        self.viewControllers = [tableNavigationController, profileNavigationController]
         self.selectedIndex = 0
+    }
+    
+    func presentSettings() {
+        self.present(settingsViewController, animated: true, completion: nil)
     }
 }

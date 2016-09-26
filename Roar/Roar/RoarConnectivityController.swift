@@ -30,9 +30,6 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
     //A property that allows this class to push messages to the tableView
     weak var tableViewController: RoarTableViewController!
     
-    //A property that allows this class to reference the owning controller
-    weak var navigationController: RoarNavigationController!
-    
     //An object of type MCNearbyServiceBrowser that handles searching for and finding
     //other phones on the network.
     var serviceBrowser: MCNearbyServiceBrowser!
