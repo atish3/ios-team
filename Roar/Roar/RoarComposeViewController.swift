@@ -49,6 +49,10 @@ class RoarComposeViewController: UIViewController, UITextViewDelegate {
         composeTextView.becomeFirstResponder()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        composeTextView.resignFirstResponder()
+    }
+    
     func textViewDidChange(_ textView: UITextView) {
         placeholderLabel.isHidden = !textView.text.isEmpty
         if textView.text.characters.count > 0 {

@@ -11,13 +11,14 @@ import UIKit
 class RoarProfileViewController: UIViewController, UITextFieldDelegate {
     
     var aliasTextField: UITextField!
-    var profileNavigationBar: UINavigationItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        aliasTextField = UITextField(frame: CGRect(x: 200.0, y: 50.0, width: self.view.frame.width - 100.0, height: 40.0))
+        
         // Do any additional setup after loading the view, typically from a nib.
         aliasTextField.delegate = self
-        profileNavigationBar.title = "Profile"
+        
     }
     
     // MARK: UITextFieldDelegate
