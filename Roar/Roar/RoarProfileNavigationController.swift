@@ -7,7 +7,7 @@
 //
 
 import UIKit
-class RoarProfileNavigationController: RoarSettingsNavigationController {
+class RoarProfileNavigationController: RoarTabNavigationController {
     var profileViewController: RoarProfileViewController!
     
     override func viewDidLoad() {

@@ -11,7 +11,7 @@ import UIKit
 class RoarTabBarController: UITabBarController, UITabBarControllerDelegate {
     var profileNavigationController: RoarProfileNavigationController = RoarProfileNavigationController()
     var tableNavigationController: RoarTableNavigationController = RoarTableNavigationController()
-    var settingsViewController: RoarSettingsViewController = RoarSettingsViewController()
+    var settingsNavigationController: RoarSettingsNavigationController = RoarSettingsNavigationController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +31,6 @@ class RoarTabBarController: UITabBarController, UITabBarControllerDelegate {
     }
     
     func presentSettings() {
-        self.present(settingsViewController, animated: true, completion: nil)
+        self.present(settingsNavigationController, animated: true, completion: nil)
     }
 }

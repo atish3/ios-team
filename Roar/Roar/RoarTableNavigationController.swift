@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 //The navigation controller for the "First" view on the tab bar
-class RoarTableNavigationController: RoarSettingsNavigationController {
+class RoarTableNavigationController: RoarTabNavigationController {
     var connectivityController: RoarConnectivityController!
     var composeNavigationController: RoarComposeNavigationController!
     var tableViewController: RoarTableViewController!

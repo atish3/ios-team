@@ -18,7 +18,7 @@ class RoarNavigationStyleController: UINavigationController {
     }
 }
 
-class RoarSettingsNavigationController: RoarNavigationStyleController {
+class RoarTabNavigationController: RoarNavigationStyleController {
     weak var parentTabBarController: RoarTabBarController!
     
     var settingsButton: UIBarButtonItem!
