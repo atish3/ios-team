@@ -24,6 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window!.rootViewController = mainTabBarController
         self.window!.makeKeyAndVisible()
 
+        let userPreferences: UserDefaults = UserDefaults.standard
+        userPreferences.set("Anonymouse", forKey: "username")
+
         return true
     }
 
