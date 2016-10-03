@@ -14,15 +14,11 @@ class RoarSettingsNavigationController: RoarNavigationStyleController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        settingsViewController = RoarSettingsViewController()
+        settingsViewController = RoarSettingsViewController(style: UITableViewStyle.grouped)
+        settingsViewController.messageTableViewController = parentTabBarController.tableNavigationController.tableViewController
+        settingsViewController.connectivityController = parentTabBarController.connectivityController
         
-        backButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.done, target: self, action: #selector(RoarSettingsNavigationController.dismissSettings))
-        
-        settingsViewController.navigationItem.leftBarButtonItem = backButton
         self.viewControllers = [settingsViewController]
     }
     
-    func dismissSettings() {
-        self.dismiss(animated: true, completion: nil)
-    }
 }

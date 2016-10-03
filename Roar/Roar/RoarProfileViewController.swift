@@ -19,6 +19,8 @@ class RoarProfileViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = UIColor.groupTableViewBackground
+        
         let textFieldWidth: CGFloat = 250.0
         let textFieldHeight: CGFloat = 40.0
         let textFieldCenterX: CGFloat = self.view.frame.width * 0.5 - textFieldWidth * 0.5

@@ -39,8 +39,8 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
     var serviceAdvertiser: MCNearbyServiceAdvertiser!
     
     var newMessagesReceived:Int = 0
-    var isBrowsing: Bool = false
-    var isAdvertising: Bool = false
+    var isBrowsing: Bool = true
+    var isAdvertising: Bool = true
     
     lazy var sessionObject: MCSession = {
         let session: MCSession = MCSession(peer: self.myPeerId)
@@ -86,6 +86,9 @@ class RoarConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, 
         super.init()
         serviceAdvertiser.delegate = self
         serviceBrowser.delegate = self
+        
+        startAdvertisingPeer()
+        startBrowsingForPeers()
     }
     
     

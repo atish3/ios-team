@@ -9,9 +9,9 @@
 import UIKit
 
 class RoarTabBarController: UITabBarController, UITabBarControllerDelegate {
-    var profileNavigationController: RoarProfileNavigationController = RoarProfileNavigationController()
     var tableNavigationController: RoarTableNavigationController = RoarTableNavigationController()
     var settingsNavigationController: RoarSettingsNavigationController = RoarSettingsNavigationController()
+    var connectivityController: RoarConnectivityController = RoarConnectivityController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,16 +21,14 @@ class RoarTabBarController: UITabBarController, UITabBarControllerDelegate {
         self.tabBar.tintColor = UIColor.white
         
         tableNavigationController.parentTabBarController = self
-        profileNavigationController.parentTabBarController = self
+        settingsNavigationController.parentTabBarController = self
         
         tableNavigationController.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.mostRecent, tag: 0)
-        profileNavigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "profileIcon"), tag: 1)
+        settingsNavigationController.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: "settingsIcon"), tag: 1)
         
-        self.viewControllers = [tableNavigationController, profileNavigationController]
+        tableNavigationController.connectivityController = connectivityController
+        
+        self.viewControllers = [tableNavigationController, settingsNavigationController]
         self.selectedIndex = 0
-    }
-    
-    func presentSettings() {
-        self.present(settingsNavigationController, animated: true, completion: nil)
     }
 }

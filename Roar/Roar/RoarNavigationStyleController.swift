@@ -9,6 +9,8 @@
 import UIKit
 
 class RoarNavigationStyleController: UINavigationController {
+    weak var parentTabBarController: RoarTabBarController!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,16 +20,4 @@ class RoarNavigationStyleController: UINavigationController {
     }
 }
 
-class RoarTabNavigationController: RoarNavigationStyleController {
-    weak var parentTabBarController: RoarTabBarController!
-    
-    var settingsButton: UIBarButtonItem!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        settingsButton = UIBarButtonItem(image: UIImage(named: "settingsIcon"), style: UIBarButtonItemStyle.plain, target: self.parentTabBarController, action: #selector(RoarTabBarController.presentSettings))
-        self.viewControllers[0].navigationItem.leftBarButtonItem = settingsButton
-    }
-}
 

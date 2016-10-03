@@ -49,7 +49,7 @@ class RoarTableViewController: UITableViewController, NSFetchedResultsController
         unowned let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         self.managedObjectContext = appDelegate.managedObjectContext
         
-        //The following block of code defends against coreData migrations. 
+        //The following block of code defends against coreData migrations.
         //When the coreData format is changed, the OS needs to migrate the store
         //to avoid crashes.
         let userDefaults: UserDefaults = UserDefaults.standard
@@ -158,9 +158,9 @@ class RoarTableViewController: UITableViewController, NSFetchedResultsController
             }
             break;
         case .delete:
-             if let indexPath = indexPath {
-             tableView.deleteRows(at: [indexPath], with: .fade)
-             }
+            if let indexPath = indexPath {
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
             break;
         case .update:
             abort()
@@ -214,26 +214,19 @@ class RoarTableViewController: UITableViewController, NSFetchedResultsController
     
     
     func clearTable() {
-        let certainAlert: UIAlertController = UIAlertController(title: "Delete all messages", message: "Are you sure you want to delete all messages?", preferredStyle: .alert)
-        certainAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (_) in
+        //Iterate through every item in the coreData store, and remove it from
+        //the context. then, save the changes.
+        for managedObject in self.fetchedResultsController.fetchedObjects! {
+            self.managedObjectContext.delete(managedObject as NSManagedObject)
+        }
         
-            //Iterate through every item in the coreData store, and remove it from
-            //the context. then, save the changes.
-            for managedObject in self.fetchedResultsController.fetchedObjects! {
-                self.managedObjectContext.delete(managedObject as NSManagedObject)
-            }
-            
-            
-            do {
-                try self.managedObjectContext.save()
-            } catch {
-                let clearError: NSError = error as NSError
-                print(clearError)
-            }
-        }))
-        certainAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
-        present(certainAlert, animated: true, completion: nil)
+        do {
+            try self.managedObjectContext.save()
+        } catch {
+            let clearError: NSError = error as NSError
+            print(clearError)
+        }
     }
     
     //WHENEVER YOU NEED TO ADD A MESSAGE TO THE TABLE, USE THIS FUNCTION.

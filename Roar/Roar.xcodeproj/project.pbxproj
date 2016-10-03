@@ -10,7 +10,6 @@
 		172EA8A21D9788DA00D2E127 /* RoarProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172EA8A11D9788DA00D2E127 /* RoarProfileViewController.swift */; };
 		1A42E0301CBED2A100E6EE86 /* RoarMessageCore+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A42E02E1CBED2A100E6EE86 /* RoarMessageCore+CoreDataProperties.swift */; };
 		1A42E0311CBED2A100E6EE86 /* RoarMessageCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A42E02F1CBED2A100E6EE86 /* RoarMessageCore.swift */; };
-		1A57256B1D9970E1001A08C0 /* RoarProfileNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A57256A1D9970E1001A08C0 /* RoarProfileNavigationController.swift */; };
 		1A5BA78E1D999FD1005000D5 /* RoarSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5BA78D1D999FD1005000D5 /* RoarSettingsViewController.swift */; };
 		1A95BFBB1D98B29D00A4CF92 /* RoarComposeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A95BFBA1D98B29D00A4CF92 /* RoarComposeNavigationController.swift */; };
 		1AA4D8701D9AAEE0007AB8D1 /* RoarSettingsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA4D86F1D9AAEE0007AB8D1 /* RoarSettingsNavigationController.swift */; };
@@ -79,7 +78,6 @@
 		172EA8A11D9788DA00D2E127 /* RoarProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoarProfileViewController.swift; sourceTree = "<group>"; };
 		1A42E02E1CBED2A100E6EE86 /* RoarMessageCore+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RoarMessageCore+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1A42E02F1CBED2A100E6EE86 /* RoarMessageCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoarMessageCore.swift; sourceTree = "<group>"; };
-		1A57256A1D9970E1001A08C0 /* RoarProfileNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoarProfileNavigationController.swift; sourceTree = "<group>"; };
 		1A5BA78D1D999FD1005000D5 /* RoarSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoarSettingsViewController.swift; sourceTree = "<group>"; };
 		1A95BFBA1D98B29D00A4CF92 /* RoarComposeNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoarComposeNavigationController.swift; sourceTree = "<group>"; };
 		1AA4D86F1D9AAEE0007AB8D1 /* RoarSettingsNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoarSettingsNavigationController.swift; sourceTree = "<group>"; };
@@ -144,7 +142,6 @@
 				1ABE12ED1C97521C005923BA /* RoarTableViewCell.swift */,
 				1AF2D0661C97856300670C89 /* RoarComposeViewController.swift */,
 				1A95BFBA1D98B29D00A4CF92 /* RoarComposeNavigationController.swift */,
-				1A57256A1D9970E1001A08C0 /* RoarProfileNavigationController.swift */,
 				172EA8A11D9788DA00D2E127 /* RoarProfileViewController.swift */,
 				1A5BA78D1D999FD1005000D5 /* RoarSettingsViewController.swift */,
 				1AA4D86F1D9AAEE0007AB8D1 /* RoarSettingsNavigationController.swift */,
@@ -279,7 +276,6 @@
 				172EA8A21D9788DA00D2E127 /* RoarProfileViewController.swift in Sources */,
 				7DD0BBB41CBC349000CF2268 /* Roar.xcdatamodeld in Sources */,
 				1A5BA78E1D999FD1005000D5 /* RoarSettingsViewController.swift in Sources */,
-				1A57256B1D9970E1001A08C0 /* RoarProfileNavigationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
