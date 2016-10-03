@@ -24,7 +24,11 @@ class RoarTabBarController: UITabBarController, UITabBarControllerDelegate {
         settingsNavigationController.parentTabBarController = self
         
         tableNavigationController.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.mostRecent, tag: 0)
-        settingsNavigationController.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: "settingsIcon"), tag: 1)
+        
+        let settingsTabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: "settingsIconEmpty"), selectedImage: UIImage(named: "settingsIconFilled"))
+        settingsTabBarItem.tag = 1
+        
+        settingsNavigationController.tabBarItem = settingsTabBarItem
         
         tableNavigationController.connectivityController = connectivityController
         
