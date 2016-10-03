@@ -11,7 +11,7 @@ Note/guide for for teammates. Hope this note helps, for it took me a while to fi
 	git submodule update --remote
 	```
 
-4. Hit `Roar/Roar.xcodeproj` to open it in Xcode.
+4. Hit `Anonymouse/Anonymouse.xcodeproj` to open it in Xcode.
 (`MCConnect` and `MCtests` are for unit test)
 
 5. Plug your iPhone to the Mac. Trust!
@@ -21,20 +21,20 @@ Note/guide for for teammates. Hope this note helps, for it took me a while to fi
 * AppDelegate.swift
 
 ### View Controller
-* RoarNavigationController.swift // controls the first view
-* RoarTableViewController.swift
-	* RoarTableViewCell.swift
-* RoarComposeViewController.swift
+* AnonymouseNavigationController.swift // controls the first view
+* AnonymouseTableViewController.swift
+	* AnonymouseTableViewCell.swift
+* AnonymouseComposeViewController.swift
 * SecondViewController.swift
 
 ### Connection Related
-* RoarConnectivityController.swift
+* AnonymouseConnectivityController.swift
 
 ### Data Related
-* RoarMessage.swift
-* RoarMessageCore.swift
-* RoarMessageCore+CoreDataProperties.swift // manages Core Data and RoarMeesageCore.swift
-* Roar.xcdatamodeld
+* AnonymouseMessage.swift
+* AnonymouseMessageCore.swift
+* AnonymouseMessageCore+CoreDataProperties.swift // manages Core Data and AnonymouseMeesageCore.swift
+* Anonymouse.xcdatamodeld
 
 ### UI Related
 * Assets.xcassets/

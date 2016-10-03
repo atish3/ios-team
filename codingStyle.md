@@ -11,12 +11,12 @@ if !didReceiveRequest
 ### Spacing
 - Put exactly one empty line between blocks of code that are unrelated but appear in the same scope contiguously. For example:
 ```
-NotificationCenter.default.addObserver(self, selector: #selector(RoarComposeViewController.keyboardWillShow(_:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil);
-NotificationCenter.default.addObserver(self, selector: #selector(RoarComposeViewController.keyboardWillHide(_:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
+NotificationCenter.default.addObserver(self, selector: #selector(AnonymouseComposeViewController.keyboardWillShow(_:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil);
+NotificationCenter.default.addObserver(self, selector: #selector(AnonymouseComposeViewController.keyboardWillHide(_:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
     
-self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(RoarComposeViewController.cancelTapped))
+self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(AnonymouseComposeViewController.cancelTapped))
 self.navigationItem.leftBarButtonItem?.tintColor=UIColor.white
-self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Post", style: .done, target: self, action: #selector(RoarComposeViewController.postTapped))
+self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Post", style: .done, target: self, action: #selector(AnonymouseComposeViewController.postTapped))
 self.navigationItem.rightBarButtonItem?.tintColor=UIColor.white
 self.navigationItem.rightBarButtonItem!.isEnabled = false
 ```
