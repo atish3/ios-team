@@ -1,49 +1,51 @@
 {
   "images" : [
     {
-      "idiom" : "iphone",
       "size" : "20x20",
+      "idiom" : "iphone",
+      "filename" : "RoarMessengerIcon40.png",
       "scale" : "2x"
     },
     {
-      "idiom" : "iphone",
       "size" : "20x20",
+      "idiom" : "iphone",
+      "filename" : "RoarMessengerIcon60.png",
       "scale" : "3x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "Anonymous_icon58.png",
+      "filename" : "RoarMessengerIcon58.png",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "anonymous_mask80.png",
+      "filename" : "RoarMessengerIcon87.png",
       "scale" : "3x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "Anonymous_icon80.png",
+      "filename" : "RoarMessengerIcon80.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "anonymous_mask120.png",
+      "filename" : "RoarMessengerIcon120.png",
       "scale" : "3x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "Anonymous_icon120.png",
+      "filename" : "RoarMessengerIcon120-1.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "anonymous_mask180.png",
+      "filename" : "RoarMessengerIcon180.png",
       "scale" : "3x"
     }
   ],
