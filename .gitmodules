@@ -1,3 +1,3 @@
-[submodule "Roar/CryptoSwift"]
-	path = Roar/CryptoSwift
-	url = https://github.com/krzyzanowskim/CryptoSwift.git
+[submodule "Anonymouse/CryptoSwift"]
+	path = Anonymouse/CryptoSwift
+	url = https://github.com/krzyzanowskim/CryptoSwift
