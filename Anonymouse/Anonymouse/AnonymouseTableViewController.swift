@@ -162,25 +162,20 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
             }
             break;
         case .update:
-            abort()
-            /*
              if let indexPath = indexPath {
-             let cell = tableView.cellForRowAtIndexPath(indexPath) as! AnonymouseTableViewCell
-             let anonymouseMessageCoreData = fetchedResultsController.objectAtIndexPath(indexPath) as! AnonymouseMessageCore
+             let cell = tableView.cellForRow(at: indexPath) as! AnonymouseTableViewCell
+             let anonymouseMessageCoreData = fetchedResultsController.object(at: indexPath)
              cell.data = AnonymouseMessage(message: anonymouseMessageCoreData)
              }
-             */
             break;
         case .move:
-            abort()
-            /*
              if let indexPath = indexPath {
-             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+             tableView.deleteRows(at: [indexPath], with: .fade)
              }
              
              if let newIndexPath = newIndexPath {
-             tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
-             }*/
+             tableView.insertRows(at: [newIndexPath], with: .fade)
+             }
             break;
         }
     }
