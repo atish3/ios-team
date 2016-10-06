@@ -115,8 +115,8 @@ class AnonymouseTableViewCell : UITableViewCell {
             messageLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
             messageLabel.textColor = UIColor.black
             messageLabel.frame = CGRect(origin: CGPoint(x: messageXOffset + imageMargin,
-                y: ((self.bounds.height + cellData.dateLabelHeight * 0.5 + userLabel.frame.height) / 2) -
-                    (cellData.messageLabelSize.height / 2)), size: cellData.messageLabelSize)
+                y: userLabel.frame.origin.y + 4 * messageYOffset), size: cellData.messageLabelSize)
+            
             
             self.addSubview(dateLabel)
             self.addSubview(messageLabel)

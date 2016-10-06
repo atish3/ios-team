@@ -62,6 +62,7 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         serviceAdvertiser.startAdvertisingPeer()
         isAdvertising = true
         newMessagesReceived = 0
+        
     }
     
     func stopAdvertisingPeer() {
@@ -81,6 +82,7 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
     }
     
     override init() {
+        
         serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: nil, serviceType: myServiceType)
         serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: myServiceType)
         super.init()
@@ -94,9 +96,9 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
     
     func broadcastHashMessageDictionary(toRequester id: MCPeerID, excludingHashes hashArray: [String]) {
         do {
-                let messageDictionary: [AnonymouseMessageSentCore] = tableViewController.returnMessageArray(excludingHashes: hashArray)
-                let messageDictionaryData: Data = NSKeyedArchiver.archivedData(withRootObject: messageDictionary)
-                try self.sessionObject.send(messageDictionaryData, toPeers: [id], with: MCSessionSendDataMode.reliable)
+            let messageDictionary: [AnonymouseMessageSentCore] = tableViewController.returnMessageArray(excludingHashes: hashArray)
+            let messageDictionaryData: Data = NSKeyedArchiver.archivedData(withRootObject: messageDictionary)
+            try self.sessionObject.send(messageDictionaryData, toPeers: [id], with: MCSessionSendDataMode.reliable)
         } catch let error as NSError {
             NSLog("%@", error)
         }
@@ -113,8 +115,8 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
     
     func requestMessagesFromPeer() {
         do {
-                let concatenatedHashes: String = tableViewController.messageHashes.joined(separator: " ")
-                try self.sessionObject.send(("@@@messagereq " + concatenatedHashes).data(using: String.Encoding.utf8, allowLossyConversion: false)!, toPeers: self.sessionObject.connectedPeers, with: MCSessionSendDataMode.reliable)
+            let concatenatedHashes: String = tableViewController.messageHashes.joined(separator: " ")
+            try self.sessionObject.send(("@@@messagereq " + concatenatedHashes).data(using: String.Encoding.utf8, allowLossyConversion: false)!, toPeers: self.sessionObject.connectedPeers, with: MCSessionSendDataMode.reliable)
         } catch let error as NSError {
             NSLog("%@", error)
         }
@@ -131,39 +133,7 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
     
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         NSLog("%@", "foundPeer: \(peerID)")
-        var didInvitePeer: Bool = false
-        
-        if let peerHashes = info
-        {
-                let messageHashes: [String] = tableViewController.messageHashes
-                for hash in messageHashes {
-                    if peerHashes[hash] == nil {
-                        NSLog("%@", "invitePeer: \(peerID)")
-                        browser.invitePeer(peerID, to: sessionObject, withContext: nil, timeout: 5)
-                        didInvitePeer = true
-                        break
-                    }
-                }
-                if !didInvitePeer {
-                    for (hash, _) in peerHashes {
-                        if messageHashes.index(of: hash) == nil {
-                            NSLog("%@", "invitePeer: \(peerID)")
-                            browser.invitePeer(peerID, to: sessionObject, withContext: nil, timeout: 5)
-                            didInvitePeer = true
-                            break
-                        }
-                    }
-            }
-            else {
-                print("TableView does not exist")
-            }
-        }
-        else {
-            print("Discovery info does not exist")
-        }
-        if !didInvitePeer {
-            NSLog("%@", "didNotInvitePeer: \(peerID)")
-        }
+        browser.invitePeer(peerID, to: sessionObject, withContext: nil, timeout: 10.0)
     }
     
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
@@ -200,21 +170,21 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
             }
         }
         if !didReceiveRequest {
-                if let message = NSKeyedUnarchiver.unarchiveObject(with: data) as? AnonymouseMessageSentCore {
-                    print("Did receive single message")
-                    if !tableViewController.messageHashes.contains(message.text!.sha1()) {
-                        tableViewController.addMessage(message.text!, date: message.date!, user: message.user!)
-                        newMessagesReceived += 1
+            if let message = NSKeyedUnarchiver.unarchiveObject(with: data) as? AnonymouseMessageSentCore {
+                print("Did receive single message")
+                if !tableViewController.messageHashes.contains(message.text!.sha1()) {
+                    tableViewController.addMessage(message.text!, date: message.date!, user: message.user!)
+                    newMessagesReceived += 1
                 }
-                if let messageArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? [AnonymouseMessageSentCore] {
-                    print("Did receive dictionary of messages")
-                    for message in messageArray {
-                        tableViewController.addMessage(message.text!, date: message.date!, user: message.user!)
-                        newMessagesReceived += 1
-                    }
-                    if self.newMessagesReceived > 20 {
-                        self.sessionObject.disconnect()
-                    }
+            }
+            else if let messageArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? [AnonymouseMessageSentCore] {
+                print("Did receive dictionary of messages")
+                for message in messageArray {
+                    tableViewController.addMessage(message.text!, date: message.date!, user: message.user!)
+                    newMessagesReceived += 1
+                }
+                if self.newMessagesReceived > 20 {
+                    self.sessionObject.disconnect()
                 }
             }
         }

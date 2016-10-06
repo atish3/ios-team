@@ -10,7 +10,6 @@ import UIKit
 import CoreData
 
 class AnonymouseTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
-    var ifCellRegistered: Bool = false
     
     var managedObjectContext: NSManagedObjectContext!
     var messageHashes: [String] {
@@ -216,10 +215,10 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
     func clearTable() {
         //Iterate through every item in the coreData store, and remove it from
         //the context. then, save the changes.
+        
         for managedObject in self.fetchedResultsController.fetchedObjects! {
             self.managedObjectContext.delete(managedObject as NSManagedObject)
         }
-        
         
         do {
             try self.managedObjectContext.save()
