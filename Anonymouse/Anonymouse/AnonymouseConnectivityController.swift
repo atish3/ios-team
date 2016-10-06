@@ -172,7 +172,7 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         if !didReceiveRequest {
             if let message = NSKeyedUnarchiver.unarchiveObject(with: data) as? AnonymouseMessageSentCore {
                 print("Did receive single message")
-                if !tableViewController.messageHashes.contains(message.text!.sha1()) {
+                if !tableViewController.messageHashes.contains(message.messageHash) {
                     tableViewController.addMessage(message.text!, date: message.date!, user: message.user!)
                     newMessagesReceived += 1
                 }
@@ -180,8 +180,10 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
             else if let messageArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? [AnonymouseMessageSentCore] {
                 print("Did receive dictionary of messages")
                 for message in messageArray {
-                    tableViewController.addMessage(message.text!, date: message.date!, user: message.user!)
-                    newMessagesReceived += 1
+                    if !tableViewController.messageHashes.contains(message.messageHash) {
+                        tableViewController.addMessage(message.text!, date: message.date!, user: message.user!)
+                        newMessagesReceived += 1
+                    }
                 }
                 if self.newMessagesReceived > 20 {
                     self.sessionObject.disconnect()
