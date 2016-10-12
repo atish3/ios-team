@@ -10,15 +10,10 @@ import UIKit
 
 class AnonymouseComposeNavigationController: AnonymouseNavigationStyleController {
     var composeViewController: AnonymouseComposeViewController!
-    weak var tableViewController: AnonymouseTableViewController!
-    weak var connectivityController: AnonymouseConnectivityController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         composeViewController = AnonymouseComposeViewController()
-        
-        composeViewController.tableViewController = tableViewController
-        composeViewController.connectivityController = connectivityController
         
         composeViewController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(AnonymouseComposeNavigationController.cancelTapped))
         

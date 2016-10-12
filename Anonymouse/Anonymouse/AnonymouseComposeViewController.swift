@@ -10,15 +10,20 @@ import UIKit
 
 class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
     var composeTextView: UITextView!
-    weak var tableViewController: AnonymouseTableViewController!
-    weak var connectivityController: AnonymouseConnectivityController!
     let textViewMargins: Int = 20
     let placeholderText: String = "Post something to the world!"
     var placeholderLabel: UILabel!
     
+    weak var dataController: AnonymouseDataController!
+    weak var connectivityController: AnonymouseConnectivityController!
+    
     override func viewDidLoad() {
         self.view.backgroundColor = UIColor.white
-    
+        
+        unowned let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        dataController = appDelegate.dataController
+        connectivityController = appDelegate.connectivityController
+        
         composeTextView = UITextView(frame: self.view.frame)
         self.view.addSubview(composeTextView)
         
@@ -92,7 +97,8 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
         let userPreferences: UserDefaults = UserDefaults.standard
         let username: String = userPreferences.string(forKey: "username")!
     
-        self.tableViewController.addMessage(self.composeTextView.text, date: Date(), user: username)
+        //NEEDS TO BE IMPLEMENTED IN CORE DATA CONTROLLER
+        self.dataController.addMessage(self.composeTextView.text, date: Date(), user: username)
         if self.connectivityController.sessionObject.connectedPeers.count > 0 {
             self.connectivityController.sendIndividualMessage(AnonymouseMessageSentCore(text: self.composeTextView.text, date: Date(), user: username))
         }

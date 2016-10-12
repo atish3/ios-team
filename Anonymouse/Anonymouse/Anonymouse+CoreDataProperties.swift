@@ -15,7 +15,6 @@ import Foundation
 import CoreData
 
 extension AnonymouseMessageCore {
-    @NSManaged var messageHash: String?
     @NSManaged var date: Date?
     @NSManaged var text: String?
     @NSManaged var user: String?

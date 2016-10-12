@@ -11,6 +11,7 @@
 		1A42E0301CBED2A100E6EE86 /* Anonymouse+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A42E02E1CBED2A100E6EE86 /* Anonymouse+CoreDataProperties.swift */; };
 		1A42E0311CBED2A100E6EE86 /* AnonymouseMessageCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A42E02F1CBED2A100E6EE86 /* AnonymouseMessageCore.swift */; };
 		1A5BA78E1D999FD1005000D5 /* AnonymouseSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5BA78D1D999FD1005000D5 /* AnonymouseSettingsViewController.swift */; };
+		1A692BBB1DAE964D00C03E1A /* AnonymouseDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A692BBA1DAE964D00C03E1A /* AnonymouseDataController.swift */; };
 		1A95BFBB1D98B29D00A4CF92 /* AnonymouseComposeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A95BFBA1D98B29D00A4CF92 /* AnonymouseComposeNavigationController.swift */; };
 		1AA4D8701D9AAEE0007AB8D1 /* AnonymouseSettingsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA4D86F1D9AAEE0007AB8D1 /* AnonymouseSettingsNavigationController.swift */; };
 		1ABE12D51C9744D0005923BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE12D41C9744D0005923BA /* AppDelegate.swift */; };
@@ -79,6 +80,7 @@
 		1A42E02E1CBED2A100E6EE86 /* Anonymouse+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Anonymouse+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1A42E02F1CBED2A100E6EE86 /* AnonymouseMessageCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseMessageCore.swift; sourceTree = "<group>"; };
 		1A5BA78D1D999FD1005000D5 /* AnonymouseSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseSettingsViewController.swift; sourceTree = "<group>"; };
+		1A692BBA1DAE964D00C03E1A /* AnonymouseDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseDataController.swift; sourceTree = "<group>"; };
 		1A95BFBA1D98B29D00A4CF92 /* AnonymouseComposeNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseComposeNavigationController.swift; sourceTree = "<group>"; };
 		1AA4D86F1D9AAEE0007AB8D1 /* AnonymouseSettingsNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseSettingsNavigationController.swift; sourceTree = "<group>"; };
 		1ABE12D11C9744D0005923BA /* Anonymouse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Anonymouse.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,22 +132,23 @@
 		1ABE12D31C9744D0005923BA /* Anonymouse */ = {
 			isa = PBXGroup;
 			children = (
+				1ABE12D41C9744D0005923BA /* AppDelegate.swift */,
+				1A692BBA1DAE964D00C03E1A /* AnonymouseDataController.swift */,
+				1ABE12F11C9756A2005923BA /* AnonymouseConnectivityController.swift */,
+				1AFEDAE51D986BBC00690EB5 /* AnonymouseTabBarController.swift */,
+				1AD52A951D9964A9000F13DE /* AnonymouseNavigationStyleController.swift */,
+				1ABE12D61C9744D0005923BA /* AnonymouseTableNavigationController.swift */,
+				1ABE12E91C9750A6005923BA /* AnonymouseTableViewController.swift */,
+				1ABE12ED1C97521C005923BA /* AnonymouseTableViewCell.swift */,
+				1A95BFBA1D98B29D00A4CF92 /* AnonymouseComposeNavigationController.swift */,
+				1AF2D0661C97856300670C89 /* AnonymouseComposeViewController.swift */,
+				1AA4D86F1D9AAEE0007AB8D1 /* AnonymouseSettingsNavigationController.swift */,
+				1A5BA78D1D999FD1005000D5 /* AnonymouseSettingsViewController.swift */,
+				172EA8A11D9788DA00D2E127 /* AnonymouseProfileViewController.swift */,
 				7DD0BBB21CBC349000CF2268 /* Anonymouse.xcdatamodeld */,
 				1A42E02E1CBED2A100E6EE86 /* Anonymouse+CoreDataProperties.swift */,
 				1A42E02F1CBED2A100E6EE86 /* AnonymouseMessageCore.swift */,
 				1ABE12EB1C9751E6005923BA /* AnonymouseMessage.swift */,
-				1ABE12D41C9744D0005923BA /* AppDelegate.swift */,
-				1AD52A951D9964A9000F13DE /* AnonymouseNavigationStyleController.swift */,
-				1ABE12D61C9744D0005923BA /* AnonymouseTableNavigationController.swift */,
-				1ABE12E91C9750A6005923BA /* AnonymouseTableViewController.swift */,
-				1ABE12F11C9756A2005923BA /* AnonymouseConnectivityController.swift */,
-				1ABE12ED1C97521C005923BA /* AnonymouseTableViewCell.swift */,
-				1AF2D0661C97856300670C89 /* AnonymouseComposeViewController.swift */,
-				1A95BFBA1D98B29D00A4CF92 /* AnonymouseComposeNavigationController.swift */,
-				172EA8A11D9788DA00D2E127 /* AnonymouseProfileViewController.swift */,
-				1A5BA78D1D999FD1005000D5 /* AnonymouseSettingsViewController.swift */,
-				1AA4D86F1D9AAEE0007AB8D1 /* AnonymouseSettingsNavigationController.swift */,
-				1AFEDAE51D986BBC00690EB5 /* AnonymouseTabBarController.swift */,
 				1ABE12DD1C9744D0005923BA /* Assets.xcassets */,
 				1ABE12DF1C9744D0005923BA /* LaunchScreen.storyboard */,
 				1ABE12E21C9744D0005923BA /* Info.plist */,
@@ -267,6 +270,7 @@
 			files = (
 				1ABE12EC1C9751E6005923BA /* AnonymouseMessage.swift in Sources */,
 				1AA4D8701D9AAEE0007AB8D1 /* AnonymouseSettingsNavigationController.swift in Sources */,
+				1A692BBB1DAE964D00C03E1A /* AnonymouseDataController.swift in Sources */,
 				1ABE12EE1C97521C005923BA /* AnonymouseTableViewCell.swift in Sources */,
 				1AD52A961D9964A9000F13DE /* AnonymouseNavigationStyleController.swift in Sources */,
 				1AFEDAE61D986BBC00690EB5 /* AnonymouseTabBarController.swift in Sources */,

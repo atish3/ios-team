@@ -10,16 +10,7 @@ import UIKit
 import CoreData
 
 class AnonymouseTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
-    
     var managedObjectContext: NSManagedObjectContext!
-    var messageHashes: [String] {
-        get {
-            let messageObjects: [AnonymouseMessageCore] = self.fetchedResultsController.fetchedObjects!
-            return messageObjects.map({ (messageObject) -> String in
-                return messageObject.messageHash!
-            })
-        }
-    }
     
     lazy var fetchedResultsController: NSFetchedResultsController<AnonymouseMessageCore> = {
         // Initialize Fetch Request
@@ -46,7 +37,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         
         //Reference the appDelegate to recover the managedObjectContext
         unowned let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-        self.managedObjectContext = appDelegate.managedObjectContext
+        self.managedObjectContext = appDelegate.dataController.managedObjectContext
         
         //The following block of code defends against coreData migrations.
         //When the coreData format is changed, the OS needs to migrate the store
@@ -155,41 +146,36 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
             if let indexPath = newIndexPath {
                 tableView.insertRows(at: [indexPath], with: .fade)
             }
-            break;
         case .delete:
             if let indexPath = indexPath {
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }
-            break;
         case .update:
-             if let indexPath = indexPath {
-             let cell = tableView.cellForRow(at: indexPath) as! AnonymouseTableViewCell
-             let anonymouseMessageCoreData = fetchedResultsController.object(at: indexPath)
-             cell.data = AnonymouseMessage(message: anonymouseMessageCoreData)
-             }
+            if let indexPath = indexPath {
+                let cell = tableView.cellForRow(at: indexPath) as! AnonymouseTableViewCell
+                let anonymouseMessageCoreData = fetchedResultsController.object(at: indexPath)
+                cell.data = AnonymouseMessage(message: anonymouseMessageCoreData)
+            }
+            
             break;
         case .move:
-             if let indexPath = indexPath {
-             tableView.deleteRows(at: [indexPath], with: .fade)
-             }
-             
-             if let newIndexPath = newIndexPath {
-             tableView.insertRows(at: [newIndexPath], with: .fade)
-             }
-            break;
+            if let indexPath = indexPath, let newIndexPath = newIndexPath {
+                tableView.moveRow(at: indexPath, to: newIndexPath)
+            }
         }
     }
     
-    func returnMessageArray(excludingHashes hashArray: [String]) -> [AnonymouseMessageSentCore] {
-        var messageArray: [AnonymouseMessageSentCore] = [AnonymouseMessageSentCore]()
-        let messageObjects: [AnonymouseMessageCore] = fetchedResultsController.fetchedObjects!
-        
-        for i in 0 ..< messageObjects.count {
-            if !hashArray.contains(messageObjects[i].messageHash!) {
-                messageArray.append(AnonymouseMessageSentCore(message: messageObjects[i]))
-            }
+    func controller(controller: NSFetchedResultsController<AnonymouseMessageCore>, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+        switch type {
+        case .insert:
+            tableView.insertSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
+        case .delete:
+            tableView.deleteSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
+        case .move:
+            break
+        case .update:
+            break
         }
-        return messageArray
     }
     
     fileprivate func showAlertWithTitle(_ title: String, message: String, cancelButtonTitle: String) {
@@ -204,46 +190,5 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         
         // Present Alert Controller
         present(alertController, animated: true, completion: nil)
-    }
-    
-    
-    func clearTable() {
-        //Iterate through every item in the coreData store, and remove it from
-        //the context. then, save the changes.
-        
-        for managedObject in self.fetchedResultsController.fetchedObjects! {
-            self.managedObjectContext.delete(managedObject as NSManagedObject)
-        }
-        
-        do {
-            try self.managedObjectContext.save()
-        } catch {
-            let clearError: NSError = error as NSError
-            print(clearError)
-        }
-    }
-    
-    //WHENEVER YOU NEED TO ADD A MESSAGE TO THE TABLE, USE THIS FUNCTION.
-    //An all-purpose function that adds a message to the table and updates the tableView.
-    func addMessage(_ text: String, date: Date, user: String) {
-        //Create a MCChatMessage object from the input parameters.
-        
-        let entity: NSEntityDescription? = NSEntityDescription.entity(forEntityName: "AnonymouseMessageCore", in: self.managedObjectContext)
-        let newAnonymouseMessageCore: AnonymouseMessageCore = NSManagedObject(entity: entity!, insertInto: self.managedObjectContext) as! AnonymouseMessageCore
-        newAnonymouseMessageCore.text = text
-        newAnonymouseMessageCore.date = date
-        newAnonymouseMessageCore.user = user
-        newAnonymouseMessageCore.messageHash = text.sha1()
-        
-        do {
-            try managedObjectContext.save()
-        } catch {
-            let fetchError: NSError = error as NSError
-            print(fetchError)
-            let applicationName: Any? = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName")
-            let message = "A serious application error occurred while \(applicationName) tried to save your data. Please contact support for help."
-            
-            self.showAlertWithTitle("Warning", message: message, cancelButtonTitle: "OK")
-        }
     }
 }

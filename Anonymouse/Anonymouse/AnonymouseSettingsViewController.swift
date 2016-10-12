@@ -9,13 +9,18 @@
 import UIKit
 
 class AnonymouseSettingsViewController: UITableViewController {
-    weak var messageTableViewController: AnonymouseTableViewController!
     weak var connectivityController: AnonymouseConnectivityController!
+    weak var dataController: AnonymouseDataController!
+    
     var profileViewController = AnonymouseProfileViewController()
     var broadcastLabel: UILabel!
     
     override func viewDidLoad() {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "StaticCell")
+        
+        unowned let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        dataController = appDelegate.dataController
+        connectivityController = appDelegate.connectivityController
     }
     
     //MARK: TableViewDelegate
@@ -80,7 +85,8 @@ class AnonymouseSettingsViewController: UITableViewController {
         case 2:
             let certainAlert: UIAlertController = UIAlertController(title: "Delete all messages", message: "Are you sure you want to delete all messages?", preferredStyle: .alert)
             certainAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (_) in
-                self.messageTableViewController.clearTable()
+                //NEEDS TO BE IMPLEMENTED IN CORE DATA CONTROLLER
+                self.dataController.clearContext()
             }))
             certainAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
             }))
@@ -104,7 +110,6 @@ class AnonymouseSettingsViewController: UITableViewController {
         }
         else {
             connectivityController.startBrowsingForPeers()
-            connectivityController.createNewAdvertiser(withHashes: self.messageTableViewController.messageHashes)
             connectivityController.startAdvertisingPeer()
             broadcastLabel.text = "Stop Broadcasting"
             broadcastLabel.textColor = UIColor.red

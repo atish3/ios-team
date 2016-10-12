@@ -17,13 +17,12 @@ class AnonymouseMessageCore: NSManagedObject {
     //in the core data model.
     convenience init(text: String, date: Date, user: String) {
         let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-        let managedContext: NSManagedObjectContext = appDelegate.managedObjectContext
+        let managedContext: NSManagedObjectContext = appDelegate.dataController.managedObjectContext
         let entity: NSEntityDescription? = NSEntityDescription.entity(forEntityName: "AnonymouseMessageCore", in: managedContext)
         self.init(entity: entity!, insertInto: managedContext)
         self.date = date
         self.text = text
         self.user = user
-        self.messageHash = text.sha1()
     }
 }
 

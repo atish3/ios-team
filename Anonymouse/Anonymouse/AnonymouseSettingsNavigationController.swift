@@ -10,14 +10,10 @@ import UIKit
 
 class AnonymouseSettingsNavigationController: AnonymouseNavigationStyleController {
     var settingsViewController: AnonymouseSettingsViewController!
-    var backButton: UIBarButtonItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         settingsViewController = AnonymouseSettingsViewController(style: UITableViewStyle.grouped)
-        settingsViewController.messageTableViewController = parentTabBarController.tableNavigationController.tableViewController
-        settingsViewController.connectivityController = parentTabBarController.connectivityController
-        
         self.viewControllers = [settingsViewController]
     }
     
