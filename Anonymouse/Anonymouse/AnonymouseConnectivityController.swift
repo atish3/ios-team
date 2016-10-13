@@ -30,9 +30,6 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
     //the function that the app is broadcasting.
     let myServiceType: String = "MDP-broadcast"
     
-    //A property that allows this class to push messages to the tableView
-    weak var tableViewController: AnonymouseTableViewController!
-    
     //An object of type MCNearbyServiceBrowser that handles searching for and finding
     //other phones on the network.
     var serviceBrowser: MCNearbyServiceBrowser!
@@ -148,14 +145,16 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         NSLog("%@", "didReceiveData: \(data.count) bytes from peer \(peerID)")
         if let message = NSKeyedUnarchiver.unarchiveObject(with: data) as? AnonymouseMessageSentCore {
             print("Did receive single message")
-            if !tableViewController.messageHashes.contains(message.messageHash) {
+            let messageHashes: [String] = dataController.fetchMessageHashes()
+            if !messageHashes.contains(message.messageHash) {
                 self.dataController.addMessage(message.text!, date: message.date!, user: message.user!)
             }
         }
         else if let messageArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? [AnonymouseMessageSentCore] {
             print("Did receive dictionary of messages")
+            let messageHashes: [String] = dataController.fetchMessageHashes()
             for message in messageArray {
-                if !tableViewController.messageHashes.contains(message.messageHash) {
+                if !messageHashes.contains(message.messageHash) {
                     self.dataController.addMessage(message.text!, date: message.date!, user: message.user!)
                 }
             }

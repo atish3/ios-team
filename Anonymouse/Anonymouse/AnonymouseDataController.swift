@@ -156,12 +156,19 @@ class AnonymouseDataController: NSObject {
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         do {
-            let fetchedMessages: [AnonymouseMessageCore] = try self.managedObjectContext.fetch(fetchRequest) 
+            let fetchedMessages: [AnonymouseMessageCore] = try self.managedObjectContext.fetch(fetchRequest)
             return fetchedMessages
         } catch {
             let fetchError: NSError = error as NSError
             fatalError("Failure to fetch results: \(fetchError)")
         }
+    }
+    
+    func fetchMessageHashes() -> [String] {
+        let messageCoreArray: [AnonymouseMessageCore] = fetchObjects(withKey: "date", ascending: true)
+        return messageCoreArray.map({ (messageCore) -> String in
+            return messageCore.text!.sha1()
+        })
     }
     
     func clearContext() {
