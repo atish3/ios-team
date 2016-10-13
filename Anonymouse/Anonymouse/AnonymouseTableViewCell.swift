@@ -106,7 +106,7 @@ class AnonymouseTableViewCell : UITableViewCell {
             dateLabel.sizeToFit()
             
             //Create a frame for the date label that is 20 pixels high
-            dateLabel.frame.origin = CGPoint(x: self.bounds.width - dateLabel.frame.width - messageXOffset, y: 1.5 * messageYOffset)
+            dateLabel.frame.origin = CGPoint(x: self.bounds.width - dateLabel.frame.width - messageXOffset, y: messageYOffset)
             
             let darkOrange: UIColor = UIColor(colorLiteralRed: 242.0/255.0, green: 106.0/255.0, blue: 80.0/255.0, alpha: 1.0)
             userLabel.text = cellData.message.user

@@ -99,9 +99,11 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
     func post() {
         let userPreferences: UserDefaults = UserDefaults.standard
         let username: String = userPreferences.string(forKey: "username")!
-    
-        //NEEDS TO BE IMPLEMENTED IN CORE DATA CONTROLLER
-        self.dataController.addMessage(self.composeTextView.text, date: Date(), user: username)
+        
+        var messageText = self.composeTextView.text!
+        messageText = messageText.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        
+        self.dataController.addMessage(messageText, date: Date(), user: username)
         if self.connectivityController.sessionObject.connectedPeers.count > 0 {
             self.connectivityController.send(individualMessage: AnonymouseMessageSentCore(text: self.composeTextView.text, date: Date(), user: username))
         }
