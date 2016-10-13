@@ -54,12 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         
         DispatchQueue.global(qos: DispatchQoS.QoSClass.utility).async {
-            var nextValue: Double = application.backgroundTimeRemaining.nextUp
-            while !application.backgroundTimeRemaining.isLess(than: 50.0) {
-                if application.backgroundTimeRemaining.isLess(than: nextValue) {
-                    print(application.backgroundTimeRemaining)
-                    nextValue -= 5.0
-                }
+            while !application.backgroundTimeRemaining.isLess(than: 0.0) {
             }
             
             application.endBackgroundTask(self.backgroundTask)
