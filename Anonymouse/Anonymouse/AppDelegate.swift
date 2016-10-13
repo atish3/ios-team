@@ -22,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         dataController = AnonymouseDataController()
         connectivityController = AnonymouseConnectivityController()
         
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
+
         let mainTabBarController: AnonymouseTabBarController = AnonymouseTabBarController()
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
