@@ -33,8 +33,8 @@ class AnonymouseMessage {
         self.dateFont = UIFont(name: "Helvetica", size: 10.0)!
         self.dateBoldFont = UIFont(name: "Helvetica-Bold", size: 10.0)!
         
-        self.messageFont = UIFont(name: "Helvetica", size: 14.0)!
-        self.userFont = UIFont(name: "Helvetica-Bold", size: 12.0)!
+        self.messageFont = UIFont(name: "Helvetica", size: 16.0)!
+        self.userFont = UIFont(name: "Helvetica-Bold", size: 19.0)!
         
         let userLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 260, height: CGFloat.greatestFiniteMagnitude))
         userLabel.numberOfLines = 0

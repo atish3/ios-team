@@ -19,7 +19,6 @@ class AnonymouseTableViewCell : UITableViewCell {
     //Constant properties to fit the message nicely into the table relative to other messages
     let imageWidthIncrease: CGFloat = 30
     let imageHeightIncrease: CGFloat = 10
-    let imageMargin: CGFloat = 5
     let messageXOffset: CGFloat = 13
     let messageYOffset: CGFloat = 5
     
@@ -49,9 +48,6 @@ class AnonymouseTableViewCell : UITableViewCell {
             
             //Messages shouldn't be editable or selectable
             self.isUserInteractionEnabled = false
-            
-            //Create a frame for the date label that is 20 pixels high
-            dateLabel.frame = CGRect(x: 0, y: 0, width: self.bounds.width, height: cellData.dateLabelHeight)
             
             //Align then date's text to the center of the label
             dateLabel.textAlignment = NSTextAlignment.center
@@ -99,14 +95,18 @@ class AnonymouseTableViewCell : UITableViewCell {
             
             //Make the date have gray text
             dateLabel.textColor = UIColor.gray
+            dateLabel.sizeToFit()
             
+            //Create a frame for the date label that is 20 pixels high
+            dateLabel.frame.origin = CGPoint(x: messageXOffset, y: self.bounds.height - 3.5 * messageYOffset)
             
+            let darkOrange: UIColor = UIColor(colorLiteralRed: 242.0/255.0, green: 106.0/255.0, blue: 80.0/255.0, alpha: 1.0)
             userLabel.text = cellData.message.user
             userLabel.font = cellData.userFont
             userLabel.numberOfLines = 1
-            userLabel.textColor = UIColor.black
+            userLabel.textColor = darkOrange
             userLabel.frame = CGRect(origin: CGPoint(x: messageXOffset,
-                y: (cellData.dateLabelHeight * 0.5 + messageYOffset)), size: cellData.userLabelSize)
+                y: (messageYOffset)), size: cellData.userLabelSize)
             
             //Make the messageLabel contain the cellData's text
             messageLabel.text = cellData.message.text
@@ -114,9 +114,8 @@ class AnonymouseTableViewCell : UITableViewCell {
             messageLabel.numberOfLines = 0
             messageLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
             messageLabel.textColor = UIColor.black
-            messageLabel.frame = CGRect(origin: CGPoint(x: messageXOffset + imageMargin,
-                y: userLabel.frame.origin.y + 4 * messageYOffset), size: cellData.messageLabelSize)
-            
+            messageLabel.frame = CGRect(origin: CGPoint(x: messageXOffset,
+                y: userLabel.frame.origin.y + 5 * messageYOffset), size: cellData.messageLabelSize)
             
             self.addSubview(dateLabel)
             self.addSubview(messageLabel)
