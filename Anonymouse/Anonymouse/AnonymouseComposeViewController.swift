@@ -92,7 +92,7 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
         composeTextView.text = ""
         placeholderLabel.isHidden = false
     }
-    
+
     func post() {
         let userPreferences: UserDefaults = UserDefaults.standard
         let username: String = userPreferences.string(forKey: "username")!
@@ -100,7 +100,7 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
         //NEEDS TO BE IMPLEMENTED IN CORE DATA CONTROLLER
         self.dataController.addMessage(self.composeTextView.text, date: Date(), user: username)
         if self.connectivityController.sessionObject.connectedPeers.count > 0 {
-            self.connectivityController.sendIndividualMessage(AnonymouseMessageSentCore(text: self.composeTextView.text, date: Date(), user: username))
+            self.connectivityController.send(individualMessage: AnonymouseMessageSentCore(text: self.composeTextView.text, date: Date(), user: username))
         }
         self.clearText()
     }

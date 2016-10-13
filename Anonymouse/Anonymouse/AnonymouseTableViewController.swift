@@ -11,6 +11,15 @@ import CoreData
 
 class AnonymouseTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     var managedObjectContext: NSManagedObjectContext!
+    var messageHashes: [String] {
+        get {
+            let messageCoreArray: [AnonymouseMessageCore] = fetchedResultsController.fetchedObjects!
+            return messageCoreArray.map({ (messageCore) -> String in
+                return messageCore.text!.sha1()
+            })
+        }
+    }
+    
     
     lazy var fetchedResultsController: NSFetchedResultsController<AnonymouseMessageCore> = {
         // Initialize Fetch Request
