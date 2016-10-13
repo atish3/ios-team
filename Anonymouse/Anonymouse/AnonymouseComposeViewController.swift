@@ -35,7 +35,7 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
         composeTextView.frame = CGRect(x: CGFloat(textViewMargins), y: 0, width: self.view.bounds.width - CGFloat(textViewMargins), height: self.view.bounds.height)
         composeTextView.delegate = self
         composeTextView.text = ""
-        composeTextView.font = UIFont(name: "Helvetica", size: 14.0)!
+        composeTextView.font = UIFont(name: "Helvetica", size: 17.0)!
         
         placeholderLabel = UILabel()
         placeholderLabel.text = placeholderText
@@ -43,7 +43,10 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
         placeholderLabel.sizeToFit()
         composeTextView.addSubview(placeholderLabel)
         
-        placeholderLabel.frame.origin = CGPoint(x: 26, y: 72)
+        placeholderLabel.frame.origin = composeTextView.frame.origin
+        placeholderLabel.frame.origin.x += 5
+        placeholderLabel.frame.origin.y += 8.3
+        
         placeholderLabel.textColor = UIColor.lightGray
         
         self.view.addSubview(placeholderLabel)
