@@ -102,13 +102,19 @@ class AnonymouseSettingsViewController: UITableViewController {
     
     //MARK: Connection methods
     func toggleConnection() {
+        let userPreferences: UserDefaults = UserDefaults.standard
+    
         if connectivityController.isBrowsing {
+            userPreferences.set(false, forKey: "isBroadcasting")
+            
             connectivityController.stopBrowsingForPeers()
             connectivityController.stopAdvertisingPeer()
             broadcastLabel.text = "Begin Broadcasting"
             broadcastLabel.textColor = UIColor.green
         }
         else {
+            userPreferences.set(true, forKey: "isBroadcasting")
+        
             connectivityController.startBrowsingForPeers()
             connectivityController.startAdvertisingPeer()
             broadcastLabel.text = "Stop Broadcasting"

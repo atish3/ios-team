@@ -28,7 +28,12 @@ class AnonymouseProfileViewController: UIViewController, UITextFieldDelegate {
         usernameLabel = UILabel(frame: usernameTextField.frame)
         usernameLabel.frame.origin.x += 7
         usernameLabel.frame.origin.y -= 1
-        usernameLabel.text = "Anonymouse"
+        
+        if let userName = UserDefaults.standard.string(forKey: "username") {
+            usernameLabel.text = userName
+        } else {
+            usernameLabel.text = "Anonymouse"
+        }
         
         usernameHeader = UILabel()
         usernameHeader.text = "Screen name:"

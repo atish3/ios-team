@@ -21,8 +21,11 @@ extension MCSessionState {
 }
 
 class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate, MCSessionDelegate {
+    
+    //MARK: Links
     weak var dataController: AnonymouseDataController!
     
+    //MARK: Connection Parameters
     //An MCPeerID is a unique identifier used to identify one's phone on the multipeer network.
     var myPeerId: MCPeerID = MCPeerID(displayName: UIDevice.current.name)
     
@@ -47,6 +50,7 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         return session
     }()
     
+    //MARK: Convenience methods
     func startAdvertisingPeer() {
         serviceAdvertiser.startAdvertisingPeer()
         isAdvertising = true
@@ -67,6 +71,16 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         isBrowsing = false
     }
     
+    func disconnectFromSession() {
+        self.sessionObject.disconnect()
+    }
+    
+    func killConnectionParameters() {
+        disconnectFromSession()
+        stopBrowsingForPeers()
+        stopAdvertisingPeer()
+    }
+    
     override init() {
         unowned let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         dataController = appDelegate.dataController
@@ -81,7 +95,13 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         startBrowsingForPeers()
     }
     
+    deinit {
+        self.serviceAdvertiser.stopAdvertisingPeer()
+        self.serviceBrowser.stopBrowsingForPeers()
+    }
     
+    
+    //MARK: Data transfer methods
     func sendAllMessages(toRequesters ids: [MCPeerID]) {
         let messageCoreArray: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
         let messageSentArray: [AnonymouseMessageSentCore] = messageCoreArray.map { (messageCore) -> AnonymouseMessageSentCore in
@@ -105,11 +125,7 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         }
     }
     
-    deinit {
-        self.serviceAdvertiser.stopAdvertisingPeer()
-        self.serviceBrowser.stopBrowsingForPeers()
-    }
-    
+    //MARK: MCNearbyServiceBrowserDelegate Methods
     func browser(_ browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: Error) {
         NSLog("%@", "didNotStartBrowsingForPeers: \(error)")
     }
@@ -123,6 +139,8 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         NSLog("%@", "lostPeer: \(peerID)")
     }
     
+    
+    //MARK: MCNearbyServiceAdvertiserDelegate Methods
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error) {
         NSLog("%@", "didNotStartAdvertisingPeer: \(error)")
     }
@@ -132,6 +150,7 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         invitationHandler(true, self.sessionObject)
     }
     
+    //MARK: MCSessionDelegate Methods
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL, withError error: Error?) {
         NSLog("%@", "didFinishReceivingResourceWithName \(resourceName)")
     }
