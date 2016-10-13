@@ -10,23 +10,21 @@ import UIKit
 
 class AnonymouseTableViewCell : UITableViewCell {
     
-    //Linked to IBOutlet properties
-    //These outlets appear in the MCChatTableViewCell.xib
     var dateLabel: UILabel!
     var messageLabel: UILabel!
     var userLabel: UILabel!
+    var whiteBackdrop: UIView!
     
     //Constant properties to fit the message nicely into the table relative to other messages
     let imageWidthIncrease: CGFloat = 30
     let imageHeightIncrease: CGFloat = 10
-    let messageXOffset: CGFloat = 13
-    let messageYOffset: CGFloat = 5
+    let messageXOffset: CGFloat = 20
+    let messageYOffset: CGFloat = 13
+    let userMessageDistance: CGFloat = 25
     
     //Once we set the message data, update this cell's UI
     var data: AnonymouseMessage?
         {
-        //didSet is a "Swift-only" keyword. It means, whenever this
-        //variable (data) was changed, call this block of code.
         didSet
         {
             updateCellUI()
@@ -44,8 +42,22 @@ class AnonymouseTableViewCell : UITableViewCell {
             dateLabel = UILabel()
             messageLabel = UILabel()
             userLabel = UILabel()
-            //self.selectionStyle = UITableViewCellSelectionStyle.None
+            whiteBackdrop = UIView(frame: self.bounds)
+            whiteBackdrop.frame.size.width -= 20
+            whiteBackdrop.frame.size.height -= 10
+            whiteBackdrop.frame.origin.y += 10
+            whiteBackdrop.frame.origin.x += 10
+            whiteBackdrop.layer.cornerRadius = 2.0
+            whiteBackdrop.layer.shadowOffset = CGSize(width: -1, height: 1)
+            whiteBackdrop.layer.shadowOpacity = 0.2
+            whiteBackdrop.backgroundColor = UIColor.white
             
+            self.contentView.addSubview(whiteBackdrop)
+            self.contentView.sendSubview(toBack: whiteBackdrop)
+            self.contentView.backgroundColor = UIColor.clear
+            self.backgroundColor = UIColor.clear
+            
+            //self.selectionStyle = UITableViewCellSelectionStyle.None
             //Messages shouldn't be editable or selectable
             self.isUserInteractionEnabled = false
             
@@ -67,38 +79,34 @@ class AnonymouseTableViewCell : UITableViewCell {
             
             if (Calendar.current.isDateInToday(cellData.message.date! as Date))
             {
-                dateFormatter.dateFormat = "h:mm a"
-                let stringText: String = "Today \(dateFormatter.string(from: cellData.message.date! as Date))"
-                let boldString: NSMutableAttributedString = NSMutableAttributedString(string: stringText, attributes: [NSFontAttributeName: cellData.dateFont])
-                boldString.addAttribute(NSFontAttributeName, value: cellData.dateBoldFont, range: (stringText as NSString).range(of: "Today"))
-                dateLabel.attributedText = boldString
-            }
-            else if (Calendar.current.isDateInYesterday(cellData.message.date! as Date))
-            {
-                dateFormatter.dateFormat = "h:mm a"
-                let stringText: String = "Yesterday \(dateFormatter.string(from: cellData.message.date! as Date))"
-                let boldString: NSMutableAttributedString = NSMutableAttributedString(string: stringText, attributes: [NSFontAttributeName: cellData.dateFont])
-                boldString.addAttribute(NSFontAttributeName, value: cellData.dateBoldFont, range: (stringText as NSString).range(of: "Yesterday"))
-                dateLabel.attributedText = boldString
+                var secondsSinceMessage: TimeInterval = abs(cellData.message.date!.timeIntervalSinceNow)
+                secondsSinceMessage = floor(secondsSinceMessage)
+                let stringText: String
+                
+                if secondsSinceMessage > 3600.0 {
+                    stringText = "\(Int(secondsSinceMessage / 3600))h"
+                } else if secondsSinceMessage > 60.0 {
+                    stringText = "\(Int(secondsSinceMessage / 60))m"
+                } else {
+                    stringText = "Just now"
+                }
+                
+                dateLabel.text = stringText
             }
             else
             {
-                dateFormatter.dateFormat = "EEE, MMM dd, h:mm a"
+                dateFormatter.dateFormat = "MMM dd"
                 let stringText: String = dateFormatter.string(from: cellData.message.date! as Date)
-                let boldString: NSMutableAttributedString = NSMutableAttributedString(string: stringText, attributes: [NSFontAttributeName: cellData.dateFont])
-                var range: NSRange = NSRange.init()
-                range.location = 0
-                range.length = (stringText as NSString).range(of: ",", options: .backwards).location + 1
-                boldString.addAttribute(NSFontAttributeName, value: cellData.dateBoldFont, range: range)
-                dateLabel.attributedText = boldString
+                dateLabel.text = stringText
             }
             
             //Make the date have gray text
+            dateLabel.font = cellData.dateFont
             dateLabel.textColor = UIColor.gray
             dateLabel.sizeToFit()
             
             //Create a frame for the date label that is 20 pixels high
-            dateLabel.frame.origin = CGPoint(x: messageXOffset, y: self.bounds.height - 3.5 * messageYOffset)
+            dateLabel.frame.origin = CGPoint(x: self.bounds.width - dateLabel.frame.width - messageXOffset, y: 1.5 * messageYOffset)
             
             let darkOrange: UIColor = UIColor(colorLiteralRed: 242.0/255.0, green: 106.0/255.0, blue: 80.0/255.0, alpha: 1.0)
             userLabel.text = cellData.message.user
@@ -106,7 +114,7 @@ class AnonymouseTableViewCell : UITableViewCell {
             userLabel.numberOfLines = 1
             userLabel.textColor = darkOrange
             userLabel.frame = CGRect(origin: CGPoint(x: messageXOffset,
-                y: (messageYOffset)), size: cellData.userLabelSize)
+                                                     y: messageYOffset), size: cellData.userLabelSize)
             
             //Make the messageLabel contain the cellData's text
             messageLabel.text = cellData.message.text
@@ -115,11 +123,11 @@ class AnonymouseTableViewCell : UITableViewCell {
             messageLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
             messageLabel.textColor = UIColor.black
             messageLabel.frame = CGRect(origin: CGPoint(x: messageXOffset,
-                y: userLabel.frame.origin.y + 5 * messageYOffset), size: cellData.messageLabelSize)
+                                                        y: userLabel.frame.origin.y + userMessageDistance), size: cellData.messageLabelSize)
             
-            self.addSubview(dateLabel)
-            self.addSubview(messageLabel)
-            self.addSubview(userLabel)
+            self.contentView.addSubview(dateLabel)
+            self.contentView.addSubview(messageLabel)
+            self.contentView.addSubview(userLabel)
         }
     }
 }

@@ -67,10 +67,9 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         }
         
         //Set up the tableView style
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.singleLine
-        self.tableView.separatorColor = UIColor.black
-        self.tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        self.tableView.backgroundColor = UIColor.groupTableViewBackground
         self.tableView.cellLayoutMarginsFollowReadableWidth = false
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
     }
     
     //MARK: tableViewControllerDelegate
@@ -104,7 +103,6 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         cell = reusableCell as! AnonymouseTableViewCell
         
         cell.preservesSuperviewLayoutMargins = false
-        cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         cell.layoutMargins = UIEdgeInsets.zero
         
         //Set the cell's width to be the width of the screen.

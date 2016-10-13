@@ -14,7 +14,6 @@ class AnonymouseMessage {
     let message: AnonymouseMessageCore
     
     let dateFont: UIFont
-    let dateBoldFont: UIFont
     let dateLabelHeight: CGFloat
     
     let messageFont: UIFont
@@ -23,15 +22,14 @@ class AnonymouseMessage {
     let userFont: UIFont
     let userLabelSize: CGSize
     
-    fileprivate let spacing:CGFloat = 10
+    fileprivate let spacing:CGFloat = 25
     let cellHeight: CGFloat
 
     init(message: AnonymouseMessageCore) {
         self.message = message
         
         self.dateLabelHeight = 20
-        self.dateFont = UIFont(name: "Helvetica", size: 10.0)!
-        self.dateBoldFont = UIFont(name: "Helvetica-Bold", size: 10.0)!
+        self.dateFont = UIFont(name: "Helvetica", size: 16.0)!
         
         self.messageFont = UIFont(name: "Helvetica", size: 16.0)!
         self.userFont = UIFont(name: "Helvetica-Bold", size: 19.0)!
@@ -58,6 +56,6 @@ class AnonymouseMessage {
         //Notice that the messageLabel is never presented.
         
         //Add some extra padding for the message bubble cell
-        self.cellHeight = self.messageLabelSize.height + self.userLabelSize.height + dateLabelHeight + spacing
+        self.cellHeight = self.messageLabelSize.height + self.userLabelSize.height + spacing
     }
 }
