@@ -8,9 +8,18 @@
 
 import UIKit
 
+class NoPasteTextField: UITextField {
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        if action == #selector(UITextField.paste(_:)) {
+            return false
+        }
+        return super.canPerformAction(action, withSender: sender)
+    }
+}
+
 class AnonymouseProfileViewController: UIViewController, UITextFieldDelegate {
     
-    var usernameTextField: UITextField!
+    var usernameTextField: NoPasteTextField!
     var usernameLabel: UILabel!
     var editButton: UIBarButtonItem!
     var usernameHeader: UILabel!
@@ -24,7 +33,7 @@ class AnonymouseProfileViewController: UIViewController, UITextFieldDelegate {
         let textFieldWidth: CGFloat = 250.0
         let textFieldHeight: CGFloat = 40.0
         let textFieldCenterX: CGFloat = self.view.frame.width * 0.5 - textFieldWidth * 0.5
-        usernameTextField = UITextField(frame: CGRect(x: textFieldCenterX, y: 200.0, width: textFieldWidth, height: textFieldHeight))
+        usernameTextField = NoPasteTextField(frame: CGRect(x: textFieldCenterX, y: 200.0, width: textFieldWidth, height: textFieldHeight))
         usernameLabel = UILabel(frame: usernameTextField.frame)
         usernameLabel.frame.origin.x += 7
         usernameLabel.frame.origin.y -= 1

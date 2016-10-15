@@ -84,7 +84,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         NSLog("\(application) called performFetchWithCompletionHandler")
-        completionHandler(UIBackgroundFetchResult.noData)
+        self.connectivityController.startAdvertisingPeer()
+        self.connectivityController.startBrowsingForPeers()
+        
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.background).asyncAfter(deadline: DispatchTime.now() + 20.0) {
+            NSLog("\(application) called the completionHandler")
+            self.connectivityController.killConnectionParameters()
+            completionHandler(UIBackgroundFetchResult.noData)
+        }
     }
 }
 
