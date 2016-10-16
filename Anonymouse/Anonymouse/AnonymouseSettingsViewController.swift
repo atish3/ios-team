@@ -81,11 +81,9 @@ class AnonymouseSettingsViewController: UITableViewController {
             self.tableView.deselectRow(at: indexPath, animated: true)
         case 1:
             self.navigationController!.pushViewController(profileViewController, animated: true)
-            
         case 2:
             let certainAlert: UIAlertController = UIAlertController(title: "Delete all messages", message: "Are you sure you want to delete all messages?", preferredStyle: .alert)
             certainAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (_) in
-                //NEEDS TO BE IMPLEMENTED IN CORE DATA CONTROLLER
                 self.dataController.clearContext()
             }))
             certainAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in

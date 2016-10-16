@@ -11,7 +11,8 @@ import CoreData
 
 class AnonymouseTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     var managedObjectContext: NSManagedObjectContext!
-
+    var detailViewController: AnonymouseDetailViewController!
+    
     lazy var fetchedResultsController: NSFetchedResultsController<AnonymouseMessageCore> = {
         // Initialize Fetch Request
         let fetchRequest: NSFetchRequest<AnonymouseMessageCore> = NSFetchRequest<AnonymouseMessageCore>(entityName: "AnonymouseMessageCore")
@@ -30,6 +31,8 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
     }()
     
     override func viewDidLoad() {
+        detailViewController = AnonymouseDetailViewController()
+    
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
@@ -135,7 +138,14 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         //that depends on the size of the message.
         let anonymouseMessageCoreData: AnonymouseMessageCore = fetchedResultsController.object(at: indexPath)
         
-        return AnonymouseTableViewCell.getCellHeight(withMessageText: anonymouseMessageCoreData.text!)
+        return AnonymouseTableViewCell.getClippedCellHeight(withMessageText: anonymouseMessageCoreData.text!)
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let anonymouseMessageCoreData: AnonymouseMessageCore = fetchedResultsController.object(at: indexPath)
+        
+        detailViewController.createNewCell(withData: anonymouseMessageCoreData)
+        self.navigationController!.pushViewController(detailViewController, animated: true)
     }
     
     // MARK: Fetched Results Controller Delegate Methods

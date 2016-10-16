@@ -10,12 +10,7 @@ import UIKit
 
 class AnonymouseTableViewCell : UITableViewCell {
     
-    var dateLabel: UILabel?
-    var messageLabel: UILabel?
-    var userLabel: UILabel?
-    var whiteBackdrop: UIView?
-    
-    //Constant properties to fit the message nicely into the table relative to other messages
+    //MARK: Constant Class Properties
     fileprivate static let messageXOffset: CGFloat = 20
     fileprivate static let messageYOffset: CGFloat = 13
     fileprivate static let userMessageDistance: CGFloat = 25
@@ -35,6 +30,22 @@ class AnonymouseTableViewCell : UITableViewCell {
         return messageLabel.frame.size.height + spacing
     }
     
+    static func getClippedCellHeight(withMessageText text: String) -> CGFloat {
+        let messageLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 340.0, height: CGFloat.greatestFiniteMagnitude))
+        messageLabel.numberOfLines = 3
+        messageLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+        messageLabel.font = messageFont
+        messageLabel.text = text
+        messageLabel.sizeToFit()
+        return messageLabel.frame.size.height + spacing
+    }
+    
+    //MARK: UIView Properties
+    var dateLabel: UILabel?
+    var messageLabel: UILabel?
+    var userLabel: UILabel?
+    var whiteBackdrop: UIView?
+    
     //Once we set the message data, update this cell's UI
     var data: AnonymouseMessageCore?
         {
@@ -44,6 +55,27 @@ class AnonymouseTableViewCell : UITableViewCell {
         }
     }
     
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        if let wb = whiteBackdrop {
+            if highlighted {
+                wb.backgroundColor = UIColor(white: 0.8, alpha: 1.0)
+            } else {
+                wb.backgroundColor = UIColor.white
+            }
+        }
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        if let wb = whiteBackdrop {
+            if selected {
+                wb.backgroundColor = UIColor(white: 0.8, alpha: 1.0)
+            } else {
+                wb.backgroundColor = UIColor.white
+            }
+        }
+    }
+    
+    //MARK: Initializers
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.setup()
@@ -57,9 +89,10 @@ class AnonymouseTableViewCell : UITableViewCell {
     func setup() {
         self.contentView.backgroundColor = UIColor.clear
         self.backgroundColor = UIColor.clear
-        self.isUserInteractionEnabled = false
+        self.selectionStyle = UITableViewCellSelectionStyle.none
     }
     
+    //MARK: Creation/Update Methods
     func createDateLabel() {
         dateLabel = UILabel()
         dateLabel!.textAlignment = NSTextAlignment.center
@@ -75,10 +108,11 @@ class AnonymouseTableViewCell : UITableViewCell {
         userLabel!.font = AnonymouseTableViewCell.userFont
     }
     
-    func createMessageLabel() {
+    func createMessageLabel(withNumberOfLines numberOfLines: Int) {
         messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 340.0, height: CGFloat.greatestFiniteMagnitude))
-        messageLabel!.numberOfLines = 0
-        messageLabel!.lineBreakMode = NSLineBreakMode.byWordWrapping
+        messageLabel!.numberOfLines = numberOfLines
+        messageLabel!.lineBreakMode = NSLineBreakMode.byTruncatingTail
+        
         messageLabel!.textColor = UIColor.black
         messageLabel!.font = AnonymouseTableViewCell.messageFont
     }
@@ -98,9 +132,6 @@ class AnonymouseTableViewCell : UITableViewCell {
         self.contentView.sendSubview(toBack: whiteBackdrop!)
     }
     
-    //A function that updates the UI of the cell:
-    //It creates the cell with an appropriate size based on the text
-    //And places it correctly in its superview (the table)
     func updateCellUI()
     {
         //Safely unwrap data, since it is optional
@@ -115,7 +146,7 @@ class AnonymouseTableViewCell : UITableViewCell {
             }
             
             if messageLabel == nil {
-                createMessageLabel()
+                createMessageLabel(withNumberOfLines: 3)
             }
             
             if userLabel == nil {

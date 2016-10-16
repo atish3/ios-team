@@ -113,11 +113,6 @@ class AnonymouseProfileViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        //The line below doesn't do anything! We should discuss this in person.
-        //AnonymouseComposeViewController().changeusername(newusername: textField.text!);
-    }
-    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let nsString = textField.text! as NSString
         if string == " " {
