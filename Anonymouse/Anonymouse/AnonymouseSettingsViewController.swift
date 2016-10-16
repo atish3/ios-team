@@ -16,6 +16,8 @@ class AnonymouseSettingsViewController: UITableViewController {
     var broadcastLabel: UILabel!
     
     override func viewDidLoad() {
+        self.title = "Settings"
+        
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "StaticCell")
         
         unowned let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate

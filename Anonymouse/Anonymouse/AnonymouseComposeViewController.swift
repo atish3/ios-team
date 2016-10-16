@@ -53,6 +53,7 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationItem.rightBarButtonItem!.isEnabled = false
         composeTextView.becomeFirstResponder()
     }
     

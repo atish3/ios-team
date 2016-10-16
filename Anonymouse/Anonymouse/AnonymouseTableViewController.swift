@@ -78,6 +78,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         self.refreshControl?.backgroundColor = UIColor.groupTableViewBackground
         self.refreshControl?.tintColor = UIColor.darkGray
         self.refreshControl?.addTarget(self, action: #selector(self.refreshControlDidChangeValue), for: UIControlEvents.valueChanged)
+        self.title = "Most Recent"
     }
     
     //MARK: UIRefreshControl

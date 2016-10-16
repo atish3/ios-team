@@ -28,6 +28,7 @@ class AnonymouseProfileViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "Profile"
         self.view.backgroundColor = UIColor.groupTableViewBackground
         
         let textFieldWidth: CGFloat = 250.0
