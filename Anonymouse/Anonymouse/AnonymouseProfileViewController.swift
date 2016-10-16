@@ -75,7 +75,7 @@ class AnonymouseProfileViewController: UIViewController, UITextFieldDelegate {
     func toggleEditMode() {
         if isEditingProfile {
             if let text = usernameTextField.text, text.isEmpty {
-                let emptyUsernameAlert: UIAlertController = UIAlertController(title: "Username field is empty.", message: "Please enter a username", preferredStyle: UIAlertControllerStyle.alert)
+                let emptyUsernameAlert: UIAlertController = UIAlertController(title: "Username field is empty", message: "Please enter a username.", preferredStyle: UIAlertControllerStyle.alert)
                 emptyUsernameAlert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: { (action) in
                     self.usernameTextField.becomeFirstResponder()
                 }))
@@ -92,7 +92,7 @@ class AnonymouseProfileViewController: UIViewController, UITextFieldDelegate {
             //Username is set here. This is a bit of a hack
             let userPreferences: UserDefaults = UserDefaults.standard
             userPreferences.set(usernameLabel.text!, forKey: "username")
-        
+            
             editButton.title = "Edit"
             editButton.style = UIBarButtonItemStyle.plain
         } else {
@@ -119,9 +119,18 @@ class AnonymouseProfileViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let nsString = textField.text! as NSString
         if string == " " {
-            let nsString = textField.text! as NSString
             textField.text = nsString.replacingCharacters(in: range, with: "_")
+            return false
+        }
+        if nsString.replacingCharacters(in: range, with: string).characters.count > 15 {
+            let tooManyCharactersAlert: UIAlertController = UIAlertController(title: "Too many characters", message: "The username field is limited to 15 characters.", preferredStyle: UIAlertControllerStyle.alert)
+            tooManyCharactersAlert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: { (action) in
+                self.usernameTextField.becomeFirstResponder()
+            }))
+            
+            self.present(tooManyCharactersAlert, animated: true, completion: nil)
             return false
         }
         return true
