@@ -70,6 +70,17 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         self.tableView.backgroundColor = UIColor.groupTableViewBackground
         self.tableView.cellLayoutMarginsFollowReadableWidth = false
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl?.backgroundColor = UIColor.groupTableViewBackground
+        self.refreshControl?.tintColor = UIColor.darkGray
+        self.refreshControl?.addTarget(self, action: #selector(self.refreshControlDidChangeValue), for: UIControlEvents.valueChanged)
+    }
+    
+    //MARK: UIRefreshControl
+    func refreshControlDidChangeValue() {
+        self.tableView.reloadData()
+        self.refreshControl?.endRefreshing()
     }
     
     //MARK: tableViewControllerDelegate
