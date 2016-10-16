@@ -98,6 +98,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         let anonymouseMessageCoreData: AnonymouseMessageCore = fetchedResultsController.object(at: indexPath)
         let cell: AnonymouseTableViewCell
         
+        
         //Create a cell of type MCChatTableViewCell
         let reusableCell: AnyObject = tableView.dequeueReusableCell(withIdentifier: "AnonymouseTableViewCell", for: indexPath)
         cell = reusableCell as! AnonymouseTableViewCell
@@ -111,7 +112,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         //Set the cell's data to be the appropriate data.
         //Notice that in this line, MCChatTableViewCell's property, data, is set.
         //After it is set, the didSet keyword will be called, calling updateCellUI()
-        cell.data = AnonymouseMessage(message: anonymouseMessageCoreData)
+        cell.data = anonymouseMessageCoreData
         
         return cell
     }
@@ -123,11 +124,8 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         //that depends on the size of the message.
         let anonymouseMessageCoreData: AnonymouseMessageCore = fetchedResultsController.object(at: indexPath)
         
-        let anonymouseMessageUI: AnonymouseMessage = AnonymouseMessage(message: anonymouseMessageCoreData)
-        
-        return anonymouseMessageUI.cellHeight
+        return AnonymouseTableViewCell.getCellHeight(withMessageText: anonymouseMessageCoreData.text!)
     }
-    
     
     // MARK: Fetched Results Controller Delegate Methods
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -152,7 +150,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
             if let indexPath = indexPath {
                 let cell = tableView.cellForRow(at: indexPath) as! AnonymouseTableViewCell
                 let anonymouseMessageCoreData = fetchedResultsController.object(at: indexPath)
-                cell.data = AnonymouseMessage(message: anonymouseMessageCoreData)
+                cell.data = anonymouseMessageCoreData
             }
             
             break;

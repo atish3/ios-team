@@ -20,7 +20,6 @@
 		1ABE12DE1C9744D0005923BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1ABE12DD1C9744D0005923BA /* Assets.xcassets */; };
 		1ABE12E11C9744D0005923BA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ABE12DF1C9744D0005923BA /* LaunchScreen.storyboard */; };
 		1ABE12EA1C9750A6005923BA /* AnonymouseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE12E91C9750A6005923BA /* AnonymouseTableViewController.swift */; };
-		1ABE12EC1C9751E6005923BA /* AnonymouseMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE12EB1C9751E6005923BA /* AnonymouseMessage.swift */; };
 		1ABE12EE1C97521C005923BA /* AnonymouseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE12ED1C97521C005923BA /* AnonymouseTableViewCell.swift */; };
 		1ABE12F21C9756A2005923BA /* AnonymouseConnectivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE12F11C9756A2005923BA /* AnonymouseConnectivityController.swift */; };
 		1ABE13081C976A4B005923BA /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABE12FD1C976A1F005923BA /* CryptoSwift.framework */; };
@@ -92,7 +91,6 @@
 		1ABE12E01C9744D0005923BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1ABE12E21C9744D0005923BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1ABE12E91C9750A6005923BA /* AnonymouseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseTableViewController.swift; sourceTree = "<group>"; };
-		1ABE12EB1C9751E6005923BA /* AnonymouseMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseMessage.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1ABE12ED1C97521C005923BA /* AnonymouseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseTableViewCell.swift; sourceTree = "<group>"; };
 		1ABE12F11C9756A2005923BA /* AnonymouseConnectivityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseConnectivityController.swift; sourceTree = "<group>"; };
 		1ABE12F41C976A1F005923BA /* CryptoSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CryptoSwift.xcodeproj; path = CryptoSwift/CryptoSwift.xcodeproj; sourceTree = "<group>"; };
@@ -150,7 +148,6 @@
 				7DD0BBB21CBC349000CF2268 /* Anonymouse.xcdatamodeld */,
 				1A42E02E1CBED2A100E6EE86 /* Anonymouse+CoreDataProperties.swift */,
 				1A42E02F1CBED2A100E6EE86 /* AnonymouseMessageCore.swift */,
-				1ABE12EB1C9751E6005923BA /* AnonymouseMessage.swift */,
 				1ABE12DD1C9744D0005923BA /* Assets.xcassets */,
 				1ABE12DF1C9744D0005923BA /* LaunchScreen.storyboard */,
 				1ABE12E21C9744D0005923BA /* Info.plist */,
@@ -272,7 +269,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1ABE12EC1C9751E6005923BA /* AnonymouseMessage.swift in Sources */,
 				1AA4D8701D9AAEE0007AB8D1 /* AnonymouseSettingsNavigationController.swift in Sources */,
 				1A692BBB1DAE964D00C03E1A /* AnonymouseDataController.swift in Sources */,
 				1ABE12EE1C97521C005923BA /* AnonymouseTableViewCell.swift in Sources */,
