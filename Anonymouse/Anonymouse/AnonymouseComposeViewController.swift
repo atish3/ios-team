@@ -24,14 +24,13 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
         dataController = appDelegate.dataController
         connectivityController = appDelegate.connectivityController
         
-        composeTextView = UITextView(frame: self.view.frame)
-        self.view.addSubview(composeTextView)
+        composeTextView = UITextView()
         
         NotificationCenter.default.addObserver(self, selector: #selector(AnonymouseComposeViewController.keyboardWillShow(_:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil);
         NotificationCenter.default.addObserver(self, selector: #selector(AnonymouseComposeViewController.keyboardWillHide(_:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
         
         self.title = "Post to Feed"
-  
+        
         composeTextView.frame = CGRect(x: CGFloat(textViewMargins), y: 0, width: self.view.bounds.width - CGFloat(textViewMargins), height: self.view.bounds.height)
         composeTextView.delegate = self
         composeTextView.text = ""
@@ -41,15 +40,15 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
         placeholderLabel.text = placeholderText
         placeholderLabel.font = composeTextView.font
         placeholderLabel.sizeToFit()
-        composeTextView.addSubview(placeholderLabel)
         
-        placeholderLabel.frame.origin = composeTextView.frame.origin
-        placeholderLabel.frame.origin.x += 5
-        placeholderLabel.frame.origin.y += 8.3
+        placeholderLabel.frame.origin.x = 5
+        placeholderLabel.frame.origin.y = 8.3
         
         placeholderLabel.textColor = UIColor.lightGray
         
         self.view.addSubview(placeholderLabel)
+        composeTextView.addSubview(placeholderLabel)
+        self.view.addSubview(composeTextView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -96,7 +95,7 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
         composeTextView.text = ""
         placeholderLabel.isHidden = false
     }
-
+    
     func post() {
         let userPreferences: UserDefaults = UserDefaults.standard
         let username: String = userPreferences.string(forKey: "username")!
@@ -110,5 +109,5 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
         }
         self.clearText()
     }
-
+    
 }
