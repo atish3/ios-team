@@ -74,6 +74,19 @@ class AnonymouseDataController: NSObject {
         }
     }
     
+    // MARK: - Migration Support
+    fileprivate func migrate() {
+//http://yzhong.co/tag/swift/
+        
+//        func begin(NSEntityMapping, with: NSMigrationManager)
+//        func createDestinationInstances(forSource: NSManagedObject, in: NSEntityMapping, manager: NSMigrationManager)
+//        func endInstanceCreation(forMapping: NSEntityMapping, manager: NSMigrationManager)
+//        func createRelationships(forDestination: NSManagedObject, in: NSEntityMapping, manager: NSMigrationManager)
+//        func endRelationshipCreation(forMapping: NSEntityMapping, manager: NSMigrationManager)
+//        func performCustomValidation(forMapping: NSEntityMapping, manager: NSMigrationManager)
+//        func end(NSEntityMapping, manager: NSMigrationManager)
+    }
+    
     // MARK: - Core Data Saving support
     fileprivate func applicationStoresDirectory() -> URL {
         let fm = FileManager.default
@@ -128,6 +141,10 @@ class AnonymouseDataController: NSObject {
         }
         return URL
     }
+    
+    
+    
+    
     
     func saveContext() {
         if managedObjectContext.hasChanges {
