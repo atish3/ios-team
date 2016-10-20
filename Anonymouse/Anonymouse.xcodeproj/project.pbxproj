@@ -29,7 +29,7 @@
 		1AD52A961D9964A9000F13DE /* AnonymouseNavigationStyleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD52A951D9964A9000F13DE /* AnonymouseNavigationStyleController.swift */; };
 		1AF2D0671C97856300670C89 /* AnonymouseComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF2D0661C97856300670C89 /* AnonymouseComposeViewController.swift */; };
 		1AFEDAE61D986BBC00690EB5 /* AnonymouseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFEDAE51D986BBC00690EB5 /* AnonymouseTabBarController.swift */; };
-		7DB197D71DB8076C001D89F6 /* AnonymouseMappingModel.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7DB197D61DB8076C001D89F6 /* AnonymouseMappingModel.xcmappingmodel */; };
+		7D4ECF771DB9141800066F36 /* AnonymouseMappingModel.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7D4ECF761DB9141800066F36 /* AnonymouseMappingModel.xcmappingmodel */; };
 		7DB197D91DB807AF001D89F6 /* AnonymouseMigrationPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB197D81DB807AF001D89F6 /* AnonymouseMigrationPolicy.swift */; };
 		7DD0BBB41CBC349000CF2268 /* Anonymouse.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7DD0BBB21CBC349000CF2268 /* Anonymouse.xcdatamodeld */; };
 /* End PBXBuildFile section */
@@ -103,8 +103,8 @@
 		1AD52A951D9964A9000F13DE /* AnonymouseNavigationStyleController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseNavigationStyleController.swift; sourceTree = "<group>"; };
 		1AF2D0661C97856300670C89 /* AnonymouseComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseComposeViewController.swift; sourceTree = "<group>"; };
 		1AFEDAE51D986BBC00690EB5 /* AnonymouseTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseTabBarController.swift; sourceTree = "<group>"; };
+		7D4ECF761DB9141800066F36 /* AnonymouseMappingModel.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = AnonymouseMappingModel.xcmappingmodel; sourceTree = SOURCE_ROOT; };
 		7DB197D41DB805A8001D89F6 /* Anonymouse 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Anonymouse 2.xcdatamodel"; sourceTree = "<group>"; };
-		7DB197D61DB8076C001D89F6 /* AnonymouseMappingModel.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = AnonymouseMappingModel.xcmappingmodel; sourceTree = "<group>"; };
 		7DB197D81DB807AF001D89F6 /* AnonymouseMigrationPolicy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseMigrationPolicy.swift; sourceTree = "<group>"; };
 		7DD0BBB31CBC349000CF2268 /* Anonymouse.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Anonymouse.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -146,11 +146,11 @@
 		1A932A531DB3CAA8004294A9 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				7D4ECF761DB9141800066F36 /* AnonymouseMappingModel.xcmappingmodel */,
 				7DD0BBB21CBC349000CF2268 /* Anonymouse.xcdatamodeld */,
 				1A692BBA1DAE964D00C03E1A /* AnonymouseDataController.swift */,
 				1A42E02E1CBED2A100E6EE86 /* Anonymouse+CoreDataProperties.swift */,
 				1A42E02F1CBED2A100E6EE86 /* AnonymouseMessageCore.swift */,
-				7DB197D61DB8076C001D89F6 /* AnonymouseMappingModel.xcmappingmodel */,
 				7DB197D81DB807AF001D89F6 /* AnonymouseMigrationPolicy.swift */,
 			);
 			name = Data;
@@ -324,6 +324,7 @@
 			files = (
 				1AA4D8701D9AAEE0007AB8D1 /* AnonymouseSettingsNavigationController.swift in Sources */,
 				1A692BBB1DAE964D00C03E1A /* AnonymouseDataController.swift in Sources */,
+				7D4ECF771DB9141800066F36 /* AnonymouseMappingModel.xcmappingmodel in Sources */,
 				1ABE12EE1C97521C005923BA /* AnonymouseTableViewCell.swift in Sources */,
 				1AD52A961D9964A9000F13DE /* AnonymouseNavigationStyleController.swift in Sources */,
 				1AFEDAE61D986BBC00690EB5 /* AnonymouseTabBarController.swift in Sources */,
@@ -336,7 +337,6 @@
 				1ABE12F21C9756A2005923BA /* AnonymouseConnectivityController.swift in Sources */,
 				1A95BFBB1D98B29D00A4CF92 /* AnonymouseComposeNavigationController.swift in Sources */,
 				1ABE12D71C9744D0005923BA /* AnonymouseTableNavigationController.swift in Sources */,
-				7DB197D71DB8076C001D89F6 /* AnonymouseMappingModel.xcmappingmodel in Sources */,
 				1ABE12EA1C9750A6005923BA /* AnonymouseTableViewController.swift in Sources */,
 				172EA8A21D9788DA00D2E127 /* AnonymouseProfileViewController.swift in Sources */,
 				1A932A551DB3CAC7004294A9 /* AnonymouseMessageSentCore.swift in Sources */,

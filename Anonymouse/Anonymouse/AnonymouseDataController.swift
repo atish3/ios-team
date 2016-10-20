@@ -76,6 +76,23 @@ class AnonymouseDataController: NSObject {
     
     // MARK: - Migration Support
     fileprivate func migrate() {
+        guard let oldModelURL: URL = Bundle.main.url(forResource: "Anonymouse.momd/Anonymouse", withExtension: "mom") else {
+            fatalError("Fatal error loading Anonymouse.momd from main Bundle")
+        }
+        guard let newModelURL: URL = Bundle.main.url(forResource: "Anonymouse.momd/Anonymouse 2", withExtension: "mom") else {
+            fatalError("Fatal error loading Anonymouse.momd from main Bundle")
+        }
+        
+        let oldManagedObjectModel = NSManagedObjectModel.init(contentsOf: oldModelURL)
+        let newManagedObjectModel = NSManagedObjectModel.init(contentsOf: newModelURL)
+        
+        let mappingModel = NSMappingModel.init(from: nil, forSourceModel: oldManagedObjectModel, destinationModel: newManagedObjectModel)
+        
+        let migrationManager = NSMigrationManager.init(sourceModel: oldManagedObjectModel!, destinationModel: newManagedObjectModel!)
+        
+        let url = self.applicationStoresDirectory()
+        try! migrationManager.migrateStore(from: url, sourceType: NSSQLiteStoreType, options: nil, with: mappingModel, toDestinationURL: url, destinationType: NSSQLiteStoreType, destinationOptions: nil)
+        
 //http://yzhong.co/tag/swift/
         
 //        func begin(NSEntityMapping, with: NSMigrationManager)
