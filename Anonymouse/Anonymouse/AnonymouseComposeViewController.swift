@@ -75,7 +75,7 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
         var info = (notification as NSNotification).userInfo!
         let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         UIView.animate(withDuration: 0.1, animations: {() -> Void in
-            self.composeTextView.frame.size.height -= keyboardFrame.height
+            self.composeTextView.frame.size.height = keyboardFrame.height
         })
     }
     
