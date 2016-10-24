@@ -44,6 +44,9 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
     var isBrowsing: Bool = true
     var isAdvertising: Bool = true
     
+    //An MCSession object is an object that manages communication among peers.
+    //When a peer wants to send data to another connected peer, they send it through the 
+    //sessionObject.
     lazy var sessionObject: MCSession = {
         let session: MCSession = MCSession(peer: self.myPeerId)
         session.delegate = self
@@ -81,6 +84,8 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         stopAdvertisingPeer()
     }
     
+    //Class constructor: it sets the link to the dataController,
+    //and creates the advertiser and browser objects
     override init() {
         unowned let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         dataController = appDelegate.dataController
@@ -102,6 +107,11 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
     
     
     //MARK: Data transfer methods
+    
+    //This function sends all owned messages to the passed-in peers.
+    //It maps the stored messages, which are saved as CoreArray objects, 
+    //to SentArray objects, which conform to NSCoding protocol.
+    //It is meant to be used when a peer first connects with another peer.
     func sendAllMessages(toRequesters ids: [MCPeerID]) {
         let messageCoreArray: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
         let messageSentArray: [AnonymouseMessageSentCore] = messageCoreArray.map { (messageCore) -> AnonymouseMessageSentCore in
@@ -109,6 +119,7 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         }
         
         do {
+            //Encode the messages for sending
             let archivedSentArray: Data = NSKeyedArchiver.archivedData(withRootObject: messageSentArray)
             try self.sessionObject.send(archivedSentArray, toPeers: ids, with: MCSessionSendDataMode.reliable)
         } catch let error as NSError {
@@ -116,6 +127,9 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         }
     }
     
+    //This functions sends an individual message to all connected peers. 
+    //It is meant to be used when the user is connected to nearby peers 
+    //and they compose a new message.
     func send(individualMessage message: AnonymouseMessageSentCore) {
         do {
             let archivedMessage: Data = NSKeyedArchiver.archivedData(withRootObject: message)
@@ -132,6 +146,8 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
     
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         NSLog("%@", "foundPeer: \(peerID)")
+        //When a new peer is found, invite it immediately
+        //This needs to be changed to only invite peers that are using this app
         browser.invitePeer(peerID, to: sessionObject, withContext: nil, timeout: 30.0)
     }
     
@@ -147,6 +163,9 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
     
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         NSLog("%@", "didReceiveInvitationFromPeer \(peerID)")
+        
+        //When this app receives an invitation to connect, it accepts it immediatey.
+        //This needs to be changed to only accept peers that are using this app.
         invitationHandler(true, self.sessionObject)
     }
     
@@ -157,22 +176,30 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
     
     func session(_ session: MCSession, didReceiveCertificate certificate: [Any]?, fromPeer peerID: MCPeerID, certificateHandler: @escaping (Bool) -> Void) {
         NSLog("%@", "didReceiveCertificate from peer \(peerID)")
+        //Check the certificate of a peer. 
+        //This needs to be changed to validate the certificate the peer sends.
         certificateHandler(true)
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         NSLog("%@", "didReceiveData: \(data.count) bytes from peer \(peerID)")
+        //There are only two types of data that this app sends: a single message, or a group of messages
+        
+        //Check if the message sent was a single message
         if let message = NSKeyedUnarchiver.unarchiveObject(with: data) as? AnonymouseMessageSentCore {
             print("Did receive single message")
             let messageHashes: [String] = dataController.fetchMessageHashes()
+            //Add the message if we don't have it already
             if !messageHashes.contains(message.messageHash) {
                 self.dataController.addMessage(message.text!, date: message.date!, user: message.user!)
             }
         }
+        //Check if the message sent was an array of messages
         else if let messageArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? [AnonymouseMessageSentCore] {
             print("Did receive dictionary of messages")
             let messageHashes: [String] = dataController.fetchMessageHashes()
             for message in messageArray {
+                //Add each message if we don't have it
                 if !messageHashes.contains(message.messageHash) {
                     self.dataController.addMessage(message.text!, date: message.date!, user: message.user!)
                 }
@@ -190,6 +217,7 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         NSLog("%@", "peer \(peerID) didChangeState: \(state.stringValue())")
+        //The moment we connect to a peer, send them all of our messages.
         if state == MCSessionState.connected {
             self.sendAllMessages(toRequesters: [peerID])
         }
