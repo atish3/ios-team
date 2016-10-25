@@ -45,6 +45,8 @@ class AnonymouseTableViewCell : UITableViewCell {
     var messageLabel: UILabel?
     var userLabel: UILabel?
     var whiteBackdrop: UIView?
+    var favoriteButton: UIButton?
+    var isFavorite = false
     
     //Once we set the message data, update this cell's UI
     var data: AnonymouseMessageCore?
@@ -102,7 +104,7 @@ class AnonymouseTableViewCell : UITableViewCell {
     
     func createUserLabel() {
         userLabel = UILabel()
-        let darkOrange: UIColor = UIColor(colorLiteralRed: 242.0/255.0, green: 106.0/255.0, blue: 80.0/255.0, alpha: 1.0)
+        let darkOrange: UIColor = UIColor(colorLiteralRed: 255.0/255.0, green: 107.0/255.0, blue: 72.0/255.0, alpha: 1.0)
         userLabel!.numberOfLines = 1
         userLabel!.textColor = darkOrange
         userLabel!.font = AnonymouseTableViewCell.userFont
@@ -132,6 +134,27 @@ class AnonymouseTableViewCell : UITableViewCell {
         self.contentView.sendSubview(toBack: whiteBackdrop!)
     }
     
+    func createFavoriteButton() {
+        favoriteButton = UIButton(frame: CGRect(x: self.bounds.width - AnonymouseTableViewCell.messageXOffset*2, y: (userLabel?.frame.origin.y)! + AnonymouseTableViewCell.userMessageDistance*1.5 , width: 20, height: 20))
+        //favoriteButton!.setImage(#imageLiteral(resourceName: "favorite"), for: .normal)
+        let origImage = UIImage(named: "favorite")
+        let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        favoriteButton!.setImage(tintedImage, for: .normal)
+        
+        favoriteButton!.tintColor = UIColor.gray
+        favoriteButton!.addTarget(self, action: #selector(favouriteButtonClicked), for: .touchUpInside)
+    }
+    
+    func favouriteButtonClicked() {
+        if (isFavorite) {
+            favoriteButton!.tintColor = UIColor.gray
+        } else {
+            
+            favoriteButton!.tintColor = UIColor(colorLiteralRed: 255.0/255.0, green: 107.0/255.0, blue: 72.0/255.0, alpha: 1.0)
+        }
+        isFavorite = !isFavorite
+    }
+    
     func updateCellUI()
     {
         //Safely unwrap data, since it is optional
@@ -151,6 +174,10 @@ class AnonymouseTableViewCell : UITableViewCell {
             
             if userLabel == nil {
                 createUserLabel()
+            }
+            
+            if favoriteButton == nil {
+                createFavoriteButton()
             }
             
             let dateFormatter: DateFormatter = DateFormatter()
@@ -200,6 +227,9 @@ class AnonymouseTableViewCell : UITableViewCell {
             }
             if !self.contentView.subviews.contains(messageLabel!) {
                 self.contentView.addSubview(messageLabel!)
+            }
+            if !self.contentView.subviews.contains(favoriteButton!) {
+                self.contentView.addSubview(favoriteButton!)
             }
         }
     }
