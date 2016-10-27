@@ -164,11 +164,15 @@ class AnonymouseTableViewCell : UITableViewCell {
         
         upvoteButton!.frame.origin.x = grayFeatureBar!.frame.width - 30
         downvoteButton!.frame.origin.x = upvoteButton!.frame.origin.x - 30
+        favoriteButton!.frame.origin.x = downvoteButton!.frame.origin.x - 30
         
         guard let messageData = data else {
             return
         }
         guard let likeStatus = messageData.likeStatus as? Int else {
+            return
+        }
+        guard let isFavorite = messageData.isFavorite as? Bool else {
             return
         }
         
@@ -183,6 +187,13 @@ class AnonymouseTableViewCell : UITableViewCell {
         else {
             upvoteButton!.setImage(UIImage(named: "upvoteEmpty"), for: UIControlState.normal)
             downvoteButton!.setImage(UIImage(named: "downvoteEmpty"), for: UIControlState.normal)
+        }
+        
+        if isFavorite {
+            favoriteButton!.setImage(UIImage(named: "favoriteFilled"), for: UIControlState.normal)
+        }
+        else {
+            favoriteButton!.setImage(UIImage(named: "favoriteEmpty"), for: UIControlState.normal)
         }
     }
     
@@ -217,6 +228,13 @@ class AnonymouseTableViewCell : UITableViewCell {
         downvoteButton!.setImage(UIImage(named: "downvoteEmpty"), for: UIControlState.normal)
         downvoteButton!.addTarget(self, action: #selector(AnonymouseTableViewCell.featureBarButtonTapped(sender:)), for: UIControlEvents.touchUpInside)
         self.grayFeatureBar!.addSubview(downvoteButton!)
+        
+        favoriteButton = UIButton(frame: CGRect(x: 0.0, y: buttonY, width: 25, height: 25))
+        favoriteButton!.tag = 2
+        favoriteButton!.alpha = 0.5
+        favoriteButton!.setImage(UIImage(named: "favoriteEmpty"), for: UIControlState.normal)
+        favoriteButton!.addTarget(self, action: #selector(AnonymouseTableViewCell.featureBarButtonTapped(sender:)), for: UIControlEvents.touchUpInside)
+        self.grayFeatureBar!.addSubview(favoriteButton!)
     }
     
     
@@ -298,37 +316,47 @@ class AnonymouseTableViewCell : UITableViewCell {
         }
     }
     
+    func favoriteTapped() {
+        guard let messageData = data else {
+            return
+        }
+        guard let favoriteStatus = messageData.isFavorite as? Bool else {
+            return
+        }
+        
+        //Favorite Tapped
+        if !favoriteStatus {
+            favoriteButton!.alpha = 0.5
+            favoriteButton!.setImage(UIImage(named: "favoriteEmpty"), for: UIControlState.normal)
+            
+            favoriteButton!.alpha = 1.0
+            favoriteButton!.setImage(UIImage(named: "favoriteFilled"), for: UIControlState.normal)
+
+            expandAnimate(imageNamed: "favoriteFilled", fromPoint: favoriteButton!.frame.origin, withSuperView: grayFeatureBar!)
+            
+            messageData.isFavorite = NSNumber(booleanLiteral: true)
+            
+        } else {
+            favoriteButton!.alpha = 0.5
+            favoriteButton!.setImage(UIImage(named: "favoriteEmpty"), for: UIControlState.normal)
+            
+            messageData.isFavorite = NSNumber(booleanLiteral: false)
+        }
+    }
+    
     func featureBarButtonTapped(sender: AnyObject) {
         switch sender.tag {
         case 0:
             upvoteTapped()
         case 1:
             downvoteTapped()
+        case 2:
+            favoriteTapped()
         default:
             break
         }
     }
     
-    func createFavoriteButton() {
-        favoriteButton = UIButton(frame: CGRect(x: self.bounds.width - AnonymouseTableViewCell.messageXOffset*2, y: (userLabel?.frame.origin.y)! + AnonymouseTableViewCell.userMessageDistance*1.5 , width: 20, height: 20))
-        //favoriteButton!.setImage(#imageLiteral(resourceName: "favorite"), for: .normal)
-        let origImage = UIImage(named: "favorite")
-        let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-        favoriteButton!.setImage(tintedImage, for: .normal)
-        
-        favoriteButton!.tintColor = UIColor.gray
-        favoriteButton!.addTarget(self, action: #selector(favouriteButtonClicked), for: .touchUpInside)
-    }
-    
-    func favouriteButtonClicked() {
-        if (isFavorite) {
-            favoriteButton!.tintColor = UIColor.gray
-        } else {
-            
-            favoriteButton!.tintColor = UIColor(colorLiteralRed: 255.0/255.0, green: 107.0/255.0, blue: 72.0/255.0, alpha: 1.0)
-        }
-        isFavorite = !isFavorite
-    }
     
     func updateCellUI()
     {
@@ -351,9 +379,6 @@ class AnonymouseTableViewCell : UITableViewCell {
                 createUserLabel()
             }
             
-            if favoriteButton == nil {
-                createFavoriteButton()
-            }
             
             let dateFormatter: DateFormatter = DateFormatter()
             dateFormatter.amSymbol = "AM"
@@ -402,9 +427,6 @@ class AnonymouseTableViewCell : UITableViewCell {
             }
             if !self.contentView.subviews.contains(messageLabel!) {
                 self.contentView.addSubview(messageLabel!)
-            }
-            if !self.contentView.subviews.contains(favoriteButton!) {
-                self.contentView.addSubview(favoriteButton!)
             }
         }
     }
