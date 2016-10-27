@@ -143,9 +143,9 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let anonymouseMessageCoreData: AnonymouseMessageCore = fetchedResultsController.object(at: indexPath)
+        var anonymouseMessageCoreData: AnonymouseMessageCore = fetchedResultsController.object(at: indexPath)
         
-        detailViewController.createNewCell(withData: anonymouseMessageCoreData)
+        detailViewController.createNewCell(withData: &anonymouseMessageCoreData)
         self.navigationController!.pushViewController(detailViewController, animated: true)
     }
     

@@ -164,6 +164,26 @@ class AnonymouseTableViewCell : UITableViewCell {
         
         upvoteButton!.frame.origin.x = grayFeatureBar!.frame.width - 30
         downvoteButton!.frame.origin.x = upvoteButton!.frame.origin.x - 30
+        
+        guard let messageData = data else {
+            return
+        }
+        guard let likeStatus = messageData.likeStatus as? Int else {
+            return
+        }
+        
+        if likeStatus == 1 {
+            upvoteButton!.setImage(UIImage(named: "upvoteFilled"), for: UIControlState.normal)
+            downvoteButton!.setImage(UIImage(named: "downvoteEmpty"), for: UIControlState.normal)
+        }
+        else if likeStatus == 2 {
+            upvoteButton!.setImage(UIImage(named: "upvoteEmpty"), for: UIControlState.normal)
+            downvoteButton!.setImage(UIImage(named: "downvoteFilled"), for: UIControlState.normal)
+        }
+        else {
+            upvoteButton!.setImage(UIImage(named: "upvoteEmpty"), for: UIControlState.normal)
+            downvoteButton!.setImage(UIImage(named: "downvoteEmpty"), for: UIControlState.normal)
+        }
     }
     
     func createGrayLine() {
@@ -210,7 +230,7 @@ class AnonymouseTableViewCell : UITableViewCell {
             expandImage.frame.size.width *= 2
             expandImage.frame.size.height *= 2
             expandImage.alpha = 0
-            }) { (didFinish) in
+        }) { (didFinish) in
             expandImage.removeFromSuperview()
         }
     }
@@ -229,6 +249,11 @@ class AnonymouseTableViewCell : UITableViewCell {
             downvoteButton!.alpha = 0.5
             downvoteButton!.setImage(UIImage(named: "downvoteEmpty"), for: UIControlState.normal)
             
+            if likeStatus == 2 {
+                messageData.rating = NSNumber(integerLiteral: messageData.rating!.intValue + 1)
+            }
+            messageData.rating = NSNumber(integerLiteral: messageData.rating!.intValue + 1)
+            
             messageData.likeStatus = 1
             expandAnimate(imageNamed: "upvoteFilled", fromPoint: upvoteButton!.frame.origin, withSuperView: grayFeatureBar!)
         } else {
@@ -236,6 +261,7 @@ class AnonymouseTableViewCell : UITableViewCell {
             upvoteButton!.setImage(UIImage(named: "upvoteEmpty"), for: UIControlState.normal)
             
             messageData.likeStatus = 0
+            messageData.rating = NSNumber(integerLiteral: messageData.rating!.intValue - 1)
         }
         
     }
@@ -257,12 +283,18 @@ class AnonymouseTableViewCell : UITableViewCell {
             downvoteButton!.setImage(UIImage(named: "downvoteFilled"), for: UIControlState.normal)
             expandAnimate(imageNamed: "downvoteFilled", fromPoint: downvoteButton!.frame.origin, withSuperView: grayFeatureBar!)
             
+            if likeStatus == 1 {
+                messageData.rating = NSNumber(integerLiteral: messageData.rating!.intValue - 1)
+            }
+            messageData.rating = NSNumber(integerLiteral: messageData.rating!.intValue - 1)
+            
             messageData.likeStatus = 2
         } else {
             downvoteButton!.alpha = 0.5
             downvoteButton!.setImage(UIImage(named: "downvoteEmpty"), for: UIControlState.normal)
             
             messageData.likeStatus = 0
+            messageData.rating = NSNumber(integerLiteral: messageData.rating!.intValue + 1)
         }
     }
     
