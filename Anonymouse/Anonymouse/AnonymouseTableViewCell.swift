@@ -128,7 +128,7 @@ class AnonymouseTableViewCell : UITableViewCell {
     
     func createUserLabel() {
         userLabel = UILabel()
-        let darkOrange: UIColor = UIColor(colorLiteralRed: 242.0/255.0, green: 106.0/255.0, blue: 80.0/255.0, alpha: 1.0)
+        let darkOrange: UIColor = UIColor(colorLiteralRed: 255.0/255.0, green: 107.0/255.0, blue: 72.0/255.0, alpha: 1.0)
         userLabel!.numberOfLines = 1
         userLabel!.textColor = darkOrange
         userLabel!.font = AnonymouseTableViewCell.userFont
@@ -173,9 +173,17 @@ class AnonymouseTableViewCell : UITableViewCell {
         guard let likeStatus = messageData.likeStatus as? Int else {
             return
         }
+
+         print(messageData.isFavorite!)
+        guard let isFavorite = messageData.isFavorite as? Bool else {
+            return
+        }
+        
         guard let rating = messageData.rating as? Int else {
             return
         }
+       
+        
         numLikes!.text = "\(rating)"
         
         if likeStatus == 1 {
@@ -191,11 +199,18 @@ class AnonymouseTableViewCell : UITableViewCell {
             downvoteButton!.setImage(UIImage(named: "downvoteEmpty"), for: UIControlState.normal)
         }
         
+
+        if isFavorite {
+            favoriteButton!.setImage(UIImage(named: "favoriteFilled"), for: UIControlState.normal)
+        }
+        else {
+            favoriteButton!.setImage(UIImage(named: "favoriteEmpty"), for: UIControlState.normal)
+        }
+
         upvoteButton!.frame.origin.x = grayFeatureBar!.frame.width - 30
-        
         numLikes!.frame.origin.x = upvoteButton!.frame.origin.x - numLikes!.frame.width - 5
-        
         downvoteButton!.frame.origin.x = numLikes!.frame.origin.x - 30
+        favoriteButton!.frame.origin.x = downvoteButton!.frame.origin.x - 30
     }
     
     func createGrayLine() {
@@ -230,6 +245,14 @@ class AnonymouseTableViewCell : UITableViewCell {
         downvoteButton!.addTarget(self, action: #selector(AnonymouseTableViewCell.featureBarButtonTapped(sender:)), for: UIControlEvents.touchUpInside)
         self.grayFeatureBar!.addSubview(downvoteButton!)
         
+
+        favoriteButton = UIButton(frame: CGRect(x: 0.0, y: buttonY, width: 25, height: 25))
+        favoriteButton!.tag = 2
+        favoriteButton!.alpha = 0.5
+        favoriteButton!.setImage(UIImage(named: "favoriteEmpty"), for: UIControlState.normal)
+        favoriteButton!.addTarget(self, action: #selector(AnonymouseTableViewCell.featureBarButtonTapped(sender:)), for: UIControlEvents.touchUpInside)
+        self.grayFeatureBar!.addSubview(favoriteButton!)
+
         numLikes = UILabel()
         numLikes!.font = AnonymouseTableViewCell.dateFont
         numLikes!.text = "0000"
@@ -239,6 +262,7 @@ class AnonymouseTableViewCell : UITableViewCell {
         numLikes!.frame.origin.y = 2 * buttonY
         numLikes!.textColor = UIColor.gray
         self.grayFeatureBar!.addSubview(numLikes!)
+
     }
     
     
@@ -312,6 +336,29 @@ class AnonymouseTableViewCell : UITableViewCell {
         }
     }
     
+    func favoriteTapped() {
+        guard let messageData = data else {
+            return
+        }
+        guard let favoriteStatus = messageData.isFavorite as? Bool else {
+            return
+        }
+        
+        //Favorite Tapped
+        if !favoriteStatus {
+            favoriteButton!.setImage(UIImage(named: "favoriteFilled"), for: UIControlState.normal)
+
+            expandAnimate(imageNamed: "favoriteFilled", fromPoint: favoriteButton!.frame.origin, withSuperView: grayFeatureBar!)
+            
+            messageData.isFavorite = NSNumber(booleanLiteral: true)
+            
+        } else {
+            favoriteButton!.setImage(UIImage(named: "favoriteEmpty"), for: UIControlState.normal)
+            
+            messageData.isFavorite = NSNumber(booleanLiteral: false)
+        }
+    }
+    
     func featureBarButtonTapped(sender: AnyObject) {
         switch sender.tag {
         case 0:
@@ -320,10 +367,14 @@ class AnonymouseTableViewCell : UITableViewCell {
         case 1:
             downvoteTapped()
             updateFeatureBar()
+        case 2:
+            favoriteTapped()
+            updateFeatureBar()
         default:
             break
         }
     }
+    
     
     func updateCellUI()
     {
@@ -345,6 +396,7 @@ class AnonymouseTableViewCell : UITableViewCell {
             if userLabel == nil {
                 createUserLabel()
             }
+            
             
             let dateFormatter: DateFormatter = DateFormatter()
             dateFormatter.amSymbol = "AM"
