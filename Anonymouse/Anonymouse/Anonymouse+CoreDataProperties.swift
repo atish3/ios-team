@@ -16,6 +16,9 @@ import CoreData
 
 extension AnonymouseMessageCore {
     @NSManaged var date: Date?
+    @NSManaged var likeStatus: NSNumber?
+    @NSManaged var isFavorite: NSNumber?
+    @NSManaged var rating: NSNumber?
     @NSManaged var text: String?
     @NSManaged var user: String?
 }

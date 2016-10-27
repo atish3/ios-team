@@ -14,6 +14,7 @@ class AnonymouseTableViewCell : UITableViewCell {
     fileprivate static let messageXOffset: CGFloat = 20
     fileprivate static let messageYOffset: CGFloat = 13
     fileprivate static let userMessageDistance: CGFloat = 25
+    fileprivate static let featuresBarHeight: CGFloat = 30.0
     
     fileprivate static let dateFont: UIFont = UIFont(name: "Helvetica", size: 16.0)!
     fileprivate static let messageFont: UIFont = UIFont(name: "Helvetica", size: 16.0)!
@@ -27,7 +28,7 @@ class AnonymouseTableViewCell : UITableViewCell {
         messageLabel.font = messageFont
         messageLabel.text = text
         messageLabel.sizeToFit()
-        return messageLabel.frame.size.height + spacing
+        return messageLabel.frame.size.height + spacing + featuresBarHeight
     }
     
     static func getClippedCellHeight(withMessageText text: String) -> CGFloat {
@@ -37,7 +38,7 @@ class AnonymouseTableViewCell : UITableViewCell {
         messageLabel.font = messageFont
         messageLabel.text = text
         messageLabel.sizeToFit()
-        return messageLabel.frame.size.height + spacing
+        return messageLabel.frame.size.height + spacing + featuresBarHeight
     }
     
     //MARK: UIView Properties
@@ -45,8 +46,11 @@ class AnonymouseTableViewCell : UITableViewCell {
     var messageLabel: UILabel?
     var userLabel: UILabel?
     var whiteBackdrop: UIView?
+    var grayLine: UIView?
+    var grayFeatureBar: UIView?
+    var upvoteButton: UIButton?
+    var downvoteButton: UIButton?
     var favoriteButton: UIButton?
-    var isFavorite = false
     
     //Once we set the message data, update this cell's UI
     var data: AnonymouseMessageCore?
@@ -57,23 +61,35 @@ class AnonymouseTableViewCell : UITableViewCell {
         }
     }
     
+    func highlightBackground() {
+        if let wb = whiteBackdrop, let gb = grayFeatureBar, let gl = grayLine {
+            wb.backgroundColor = UIColor(white: 0.8, alpha: 1.0)
+            gb.backgroundColor = UIColor(white: 0.7, alpha: 1.0)
+            gl.backgroundColor = UIColor(white: 0.6, alpha: 1.0)
+        }
+    }
+    
+    func releaseBackground() {
+        if let wb = whiteBackdrop, let gb = grayFeatureBar, let gl = grayLine {
+            wb.backgroundColor = UIColor.white
+            gb.backgroundColor = UIColor(white: 0.93, alpha: 1.0)
+            gl.backgroundColor = UIColor(white: 0.85, alpha: 1.0)
+        }
+    }
+    
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        if let wb = whiteBackdrop {
-            if highlighted {
-                wb.backgroundColor = UIColor(white: 0.8, alpha: 1.0)
-            } else {
-                wb.backgroundColor = UIColor.white
-            }
+        if highlighted {
+            highlightBackground()
+        } else {
+            releaseBackground()
         }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
-        if let wb = whiteBackdrop {
-            if selected {
-                wb.backgroundColor = UIColor(white: 0.8, alpha: 1.0)
-            } else {
-                wb.backgroundColor = UIColor.white
-            }
+        if selected {
+            highlightBackground()
+        } else {
+            releaseBackground()
         }
     }
     
@@ -92,6 +108,13 @@ class AnonymouseTableViewCell : UITableViewCell {
         self.contentView.backgroundColor = UIColor.clear
         self.backgroundColor = UIColor.clear
         self.selectionStyle = UITableViewCellSelectionStyle.none
+        if grayLine == nil {
+            createGrayLine()
+        }
+        
+        if grayFeatureBar == nil {
+            createGrayFeatureBar()
+        }
     }
     
     //MARK: Creation/Update Methods
@@ -132,6 +155,158 @@ class AnonymouseTableViewCell : UITableViewCell {
         
         self.contentView.addSubview(whiteBackdrop!)
         self.contentView.sendSubview(toBack: whiteBackdrop!)
+        
+        grayLine!.frame.size.width = whiteBackdrop!.frame.width
+        grayLine!.frame.origin.y = whiteBackdrop!.frame.height - AnonymouseTableViewCell.featuresBarHeight + 9
+        
+        grayFeatureBar!.frame.size.width = whiteBackdrop!.frame.width
+        grayFeatureBar!.frame.origin.y = grayLine!.frame.origin.y + 1
+        
+        upvoteButton!.frame.origin.x = grayFeatureBar!.frame.width - 30
+        downvoteButton!.frame.origin.x = upvoteButton!.frame.origin.x - 30
+        
+        guard let messageData = data else {
+            return
+        }
+        guard let likeStatus = messageData.likeStatus as? Int else {
+            return
+        }
+        
+        if likeStatus == 1 {
+            upvoteButton!.setImage(UIImage(named: "upvoteFilled"), for: UIControlState.normal)
+            downvoteButton!.setImage(UIImage(named: "downvoteEmpty"), for: UIControlState.normal)
+        }
+        else if likeStatus == 2 {
+            upvoteButton!.setImage(UIImage(named: "upvoteEmpty"), for: UIControlState.normal)
+            downvoteButton!.setImage(UIImage(named: "downvoteFilled"), for: UIControlState.normal)
+        }
+        else {
+            upvoteButton!.setImage(UIImage(named: "upvoteEmpty"), for: UIControlState.normal)
+            downvoteButton!.setImage(UIImage(named: "downvoteEmpty"), for: UIControlState.normal)
+        }
+    }
+    
+    func createGrayLine() {
+        grayLine = UIView()
+        grayLine!.frame.size.height = 1.0
+        grayLine!.frame.origin.x = 10
+        grayLine!.backgroundColor = UIColor(white: 0.85, alpha: 1.0)
+        
+        self.contentView.addSubview(grayLine!)
+    }
+    
+    func createGrayFeatureBar() {
+        grayFeatureBar = UIView()
+        grayFeatureBar!.frame.origin.x = 10
+        grayFeatureBar!.backgroundColor = UIColor(white: 0.93, alpha: 1.0)
+        grayFeatureBar!.frame.size.height = AnonymouseTableViewCell.featuresBarHeight
+        
+        self.contentView.addSubview(grayFeatureBar!)
+        
+        let buttonY: CGFloat = 2.5
+        upvoteButton = UIButton(frame: CGRect(x: 0.0, y: buttonY, width: 25, height: 25))
+        upvoteButton!.tag = 0
+        upvoteButton!.alpha = 0.5
+        upvoteButton!.setImage(UIImage(named: "upvoteEmpty"), for: UIControlState.normal)
+        upvoteButton!.addTarget(self, action: #selector(AnonymouseTableViewCell.featureBarButtonTapped(sender:)), for: UIControlEvents.touchUpInside)
+        self.grayFeatureBar!.addSubview(upvoteButton!)
+        
+        downvoteButton = UIButton(frame: CGRect(x: 0.0, y: buttonY, width: 25, height: 25))
+        downvoteButton!.tag = 1
+        downvoteButton!.alpha = 0.5
+        downvoteButton!.setImage(UIImage(named: "downvoteEmpty"), for: UIControlState.normal)
+        downvoteButton!.addTarget(self, action: #selector(AnonymouseTableViewCell.featureBarButtonTapped(sender:)), for: UIControlEvents.touchUpInside)
+        self.grayFeatureBar!.addSubview(downvoteButton!)
+    }
+    
+    
+    //MARK: Button Methods
+    func expandAnimate(imageNamed name: String, fromPoint point: CGPoint, withSuperView superView: UIView) {
+        let expandImage: UIImageView = UIImageView(image: UIImage(named: name))
+        superView.addSubview(expandImage)
+        expandImage.frame.origin = point
+        UIImageView.animate(withDuration: 0.4, animations: {
+            expandImage.frame.origin.y -= 20
+            expandImage.frame.size.width *= 2
+            expandImage.frame.size.height *= 2
+            expandImage.alpha = 0
+        }) { (didFinish) in
+            expandImage.removeFromSuperview()
+        }
+    }
+    
+    func upvoteTapped() {
+        guard let messageData = data else {
+            return
+        }
+        guard let likeStatus = messageData.likeStatus as? Int else {
+            return
+        }
+        if likeStatus != 1 {
+            upvoteButton!.alpha = 1.0
+            upvoteButton!.setImage(UIImage(named: "upvoteFilled"), for: UIControlState.normal)
+            
+            downvoteButton!.alpha = 0.5
+            downvoteButton!.setImage(UIImage(named: "downvoteEmpty"), for: UIControlState.normal)
+            
+            if likeStatus == 2 {
+                messageData.rating = NSNumber(integerLiteral: messageData.rating!.intValue + 1)
+            }
+            messageData.rating = NSNumber(integerLiteral: messageData.rating!.intValue + 1)
+            
+            messageData.likeStatus = 1
+            expandAnimate(imageNamed: "upvoteFilled", fromPoint: upvoteButton!.frame.origin, withSuperView: grayFeatureBar!)
+        } else {
+            upvoteButton!.alpha = 0.5
+            upvoteButton!.setImage(UIImage(named: "upvoteEmpty"), for: UIControlState.normal)
+            
+            messageData.likeStatus = 0
+            messageData.rating = NSNumber(integerLiteral: messageData.rating!.intValue - 1)
+        }
+        
+    }
+    
+    func downvoteTapped() {
+        guard let messageData = data else {
+            return
+        }
+        guard let likeStatus = messageData.likeStatus as? Int else {
+            return
+        }
+        
+        //Downvote Tapped
+        if likeStatus != 2 {
+            upvoteButton!.alpha = 0.5
+            upvoteButton!.setImage(UIImage(named: "upvoteEmpty"), for: UIControlState.normal)
+            
+            downvoteButton!.alpha = 1.0
+            downvoteButton!.setImage(UIImage(named: "downvoteFilled"), for: UIControlState.normal)
+            expandAnimate(imageNamed: "downvoteFilled", fromPoint: downvoteButton!.frame.origin, withSuperView: grayFeatureBar!)
+            
+            if likeStatus == 1 {
+                messageData.rating = NSNumber(integerLiteral: messageData.rating!.intValue - 1)
+            }
+            messageData.rating = NSNumber(integerLiteral: messageData.rating!.intValue - 1)
+            
+            messageData.likeStatus = 2
+        } else {
+            downvoteButton!.alpha = 0.5
+            downvoteButton!.setImage(UIImage(named: "downvoteEmpty"), for: UIControlState.normal)
+            
+            messageData.likeStatus = 0
+            messageData.rating = NSNumber(integerLiteral: messageData.rating!.intValue + 1)
+        }
+    }
+    
+    func featureBarButtonTapped(sender: AnyObject) {
+        switch sender.tag {
+        case 0:
+            upvoteTapped()
+        case 1:
+            downvoteTapped()
+        default:
+            break
+        }
     }
     
     func createFavoriteButton() {
