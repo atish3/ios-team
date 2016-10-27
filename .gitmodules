@@ -1,3 +1,6 @@
 [submodule "Anonymouse/CryptoSwift"]
 	path = Anonymouse/CryptoSwift
 	url = https://github.com/krzyzanowskim/CryptoSwift
+[submodule "Anonymouse/EncryptedCoreData"]
+	path = Anonymouse/EncryptedCoreData
+	url = git@github.com:project-imas/encrypted-core-data.git
