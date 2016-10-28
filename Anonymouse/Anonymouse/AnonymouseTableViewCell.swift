@@ -52,6 +52,7 @@ class AnonymouseTableViewCell : UITableViewCell {
     var downvoteButton: UIButton?
     var favoriteButton: UIButton?
     var numLikes: UILabel?
+    var divider: UIView?
     
     //Once we set the message data, update this cell's UI
     var data: AnonymouseMessageCore?
@@ -174,7 +175,6 @@ class AnonymouseTableViewCell : UITableViewCell {
             return
         }
 
-         print(messageData.isFavorite!)
         guard let isFavorite = messageData.isFavorite as? Bool else {
             return
         }
@@ -210,7 +210,8 @@ class AnonymouseTableViewCell : UITableViewCell {
         upvoteButton!.frame.origin.x = grayFeatureBar!.frame.width - 30
         numLikes!.frame.origin.x = upvoteButton!.frame.origin.x - numLikes!.frame.width - 5
         downvoteButton!.frame.origin.x = numLikes!.frame.origin.x - 30
-        favoriteButton!.frame.origin.x = downvoteButton!.frame.origin.x - 30
+        divider!.frame.origin.x = downvoteButton!.frame.origin.x - 10
+        favoriteButton!.frame.origin.x = divider!.frame.origin.x - 35
     }
     
     func createGrayLine() {
@@ -262,6 +263,11 @@ class AnonymouseTableViewCell : UITableViewCell {
         numLikes!.frame.origin.y = 2 * buttonY
         numLikes!.textColor = UIColor.gray
         self.grayFeatureBar!.addSubview(numLikes!)
+        
+        let dividerHeight: CGFloat = 25
+        divider = UIView(frame: CGRect( x: 0.0, y: buttonY, width: 1, height: dividerHeight))
+        divider?.backgroundColor = UIColor(white: 0.85, alpha: 1.0)
+        self.grayFeatureBar!.addSubview(divider!)
 
     }
     
