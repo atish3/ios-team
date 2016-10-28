@@ -34,8 +34,12 @@ class AnonymouseDetailViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        if let parentNavigationController = self.navigationController as? AnonymouseTableNavigationController {
-            parentNavigationController.tableViewController.tableView.reloadData()
+        if let parentNavigationController = self.navigationController as? AnonymouseNavigationStyleController {
+            if let tableVC = parentNavigationController.viewControllers[0] as? AnonymouseTableViewController {
+                tableVC.tableView.reloadData()
+                return
+            }
         }
+        abort()
     }
 }

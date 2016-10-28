@@ -17,6 +17,7 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
     weak var dataController: AnonymouseDataController!
     weak var connectivityController: AnonymouseConnectivityController!
     
+    //MARK: Navigation
     override func viewDidLoad() {
         self.view.backgroundColor = UIColor.white
         
@@ -30,6 +31,11 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(AnonymouseComposeViewController.keyboardWillHide(_:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
         
         self.title = "Post to Feed"
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(AnonymouseComposeViewController.cancelTapped))
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Post", style: .done, target: self, action: #selector(AnonymouseComposeViewController.postTapped))
+        self.navigationItem.rightBarButtonItem!.isEnabled = false
         
         composeTextView.frame = CGRect(x: CGFloat(textViewMargins), y: 0, width: self.view.bounds.width - CGFloat(textViewMargins), height: self.view.bounds.height)
         composeTextView.delegate = self
@@ -60,6 +66,19 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
         composeTextView.resignFirstResponder()
     }
     
+    func cancelTapped() {
+        self.dismiss(animated: true) { () -> Void in
+            self.clearText()
+        }
+    }
+    
+    func postTapped() {
+        self.dismiss(animated: true) { () -> Void in
+            self.post()
+        }
+    }
+    
+    //MARK: TextView Methods
     func textViewDidChange(_ textView: UITextView) {
         placeholderLabel.isHidden = !textView.text.isEmpty
         if textView.text.characters.count > 0 {

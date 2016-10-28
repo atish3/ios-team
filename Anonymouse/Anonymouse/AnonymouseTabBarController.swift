@@ -7,14 +7,70 @@
 //
 
 import UIKit
+import CoreData
 
 class AnonymouseTabBarController: UITabBarController, UITabBarControllerDelegate {
-    var tableNavigationController: AnonymouseTableNavigationController = AnonymouseTableNavigationController()
-    var settingsNavigationController: AnonymouseSettingsNavigationController = AnonymouseSettingsNavigationController()
+    var composeNavigationController: AnonymouseNavigationStyleController = AnonymouseNavigationStyleController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
+        
+        let composeViewController: AnonymouseComposeViewController = AnonymouseComposeViewController()
+        composeNavigationController.viewControllers = [composeViewController]
+        
+        let mostRecentFetchRequest: NSFetchRequest<AnonymouseMessageCore> = NSFetchRequest<AnonymouseMessageCore>(entityName: "AnonymouseMessageCore")
+        let mostRecentSortDescriptor: NSSortDescriptor = NSSortDescriptor(key: "date", ascending: false)
+        mostRecentFetchRequest.sortDescriptors = [mostRecentSortDescriptor]
+        
+        let favoriteFetchRequest: NSFetchRequest<AnonymouseMessageCore> = NSFetchRequest<AnonymouseMessageCore>(entityName: "AnonymouseMessageCore")
+        let favoriteSortDescriptor: NSSortDescriptor = NSSortDescriptor(key: "date", ascending: false)
+        favoriteFetchRequest.sortDescriptors = [favoriteSortDescriptor]
+        let favoritePredicate: NSPredicate = NSPredicate(format: "isFavorite == %@", NSNumber(booleanLiteral: true))
+        favoriteFetchRequest.predicate = favoritePredicate
+        
+        let bestRatedFetchRequest: NSFetchRequest<AnonymouseMessageCore> = NSFetchRequest<AnonymouseMessageCore>(entityName: "AnonymouseMessageCore")
+        let bestRatedSortDescriptor: NSSortDescriptor = NSSortDescriptor(key: "rating", ascending: false)
+        bestRatedFetchRequest.sortDescriptors = [bestRatedSortDescriptor, mostRecentSortDescriptor]
+        
+        let mostRecentTableViewController: AnonymouseTableViewController = AnonymouseTableViewController(withFetchRequest: mostRecentFetchRequest)
+        let favoriteTableViewController: AnonymouseTableViewController = AnonymouseTableViewController(withFetchRequest: favoriteFetchRequest)
+        let bestRatedTableViewController: AnonymouseTableViewController = AnonymouseTableViewController(withFetchRequest: bestRatedFetchRequest)
+        
+        mostRecentTableViewController.title = "Most Recent"
+        favoriteTableViewController.title = "Favorites"
+        bestRatedTableViewController.title = "Top Rated"
+        
+        let composeButtonA = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.compose, target: self, action: #selector(AnonymouseTabBarController.compose))
+        let composeButtonB = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.compose, target: self, action: #selector(AnonymouseTabBarController.compose))
+        let composeButtonC = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.compose, target: self, action: #selector(AnonymouseTabBarController.compose))
+        mostRecentTableViewController.navigationItem.rightBarButtonItem = composeButtonA
+        favoriteTableViewController.navigationItem.rightBarButtonItem = composeButtonB
+        bestRatedTableViewController.navigationItem.rightBarButtonItem = composeButtonC
+        
+        let mostRecentNavigationController: AnonymouseNavigationStyleController = AnonymouseNavigationStyleController()
+        let favoriteNavigationController: AnonymouseNavigationStyleController = AnonymouseNavigationStyleController()
+        let bestRatedNavigationController: AnonymouseNavigationStyleController = AnonymouseNavigationStyleController()
+        mostRecentNavigationController.viewControllers = [mostRecentTableViewController]
+        favoriteNavigationController.viewControllers = [favoriteTableViewController]
+        bestRatedNavigationController.viewControllers = [bestRatedTableViewController]
+        
+        mostRecentNavigationController.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.mostRecent, tag: 0)
+        favoriteNavigationController.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.favorites, tag: 1)
+        
+        let bestRatedTabBarItem = UITabBarItem(title: "Top Rated", image: UIImage(named: "upvoteEmptyTab"), selectedImage: UIImage(named: "upvoteFilledTab"))
+        bestRatedTabBarItem.tag = 2
+        bestRatedNavigationController.tabBarItem = bestRatedTabBarItem
+        
+        let settingsTabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: "settingsIconEmpty"), selectedImage: UIImage(named: "settingsIconFilled"))
+        settingsTabBarItem.tag = 3
+        let settingsNavigationController: AnonymouseNavigationStyleController = AnonymouseNavigationStyleController()
+        let settingsViewController: AnonymouseSettingsViewController = AnonymouseSettingsViewController(style: UITableViewStyle.grouped)
+        settingsNavigationController.viewControllers = [settingsViewController]
+        settingsNavigationController.tabBarItem = settingsTabBarItem
+        
+        self.viewControllers = [mostRecentNavigationController, favoriteNavigationController, bestRatedNavigationController, settingsNavigationController]
+        self.selectedIndex = 0
         
         let gradientLayer: CAGradientLayer = CAGradientLayer()
         gradientLayer.frame = self.tabBar.bounds
@@ -30,19 +86,11 @@ class AnonymouseTabBarController: UITabBarController, UITabBarControllerDelegate
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        
         self.tabBar.backgroundImage = image
         self.tabBar.tintColor = UIColor.white
-        
-        tableNavigationController.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.mostRecent, tag: 0)
-        
-        let settingsTabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: "settingsIconEmpty"), selectedImage: UIImage(named: "settingsIconFilled"))
-        settingsTabBarItem.tag = 1
-        
-        settingsNavigationController.tabBarItem = settingsTabBarItem
-        
-        self.viewControllers = [tableNavigationController, settingsNavigationController]
-        self.selectedIndex = 0
     }
     
+    func compose() {
+        self.present(composeNavigationController, animated: true, completion: nil)
+    }
 }
