@@ -174,7 +174,6 @@ class AnonymouseTableViewCell : UITableViewCell {
             return
         }
 
-         print(messageData.isFavorite!)
         guard let isFavorite = messageData.isFavorite as? Bool else {
             return
         }
