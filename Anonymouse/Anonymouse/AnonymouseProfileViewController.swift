@@ -99,19 +99,19 @@ class AnonymouseProfileViewController: UIViewController, UITextFieldDelegate {
             editButton.style = UIBarButtonItemStyle.plain
         } else {
             //Get the last time the user updated the uername
-            if let lastTimeUpdateUsername = UserDefaults.standard.date(forKey: "timeUpdateUsername") {
+            if let lastTimeUpdateUsername = UserDefaults.standard.object(forKey: "timeUpdateUsername") as! Date! {
                 
                 //Calculate the date difference since last update of username
-                var secondsSinceLastUpdate: TimeInterval = abs(lastTimeUpdateUsername.timeIntervalSinceNow)
+                let secondsSinceLastUpdate: TimeInterval = abs(lastTimeUpdateUsername.timeIntervalSinceNow)
                 
                 // Disable update of username if it has been less than seven days since last update
                 if secondsSinceLastUpdate < 604800 {
                     let unableUpdateUsernameAlert: UIAlertController = UIAlertController(title: "Unable to update username", message: "Please do not update username more than once in a week", preferredStyle: UIAlertControllerStyle.alert)
-                    emptyUsernameAlert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: { (action) in
+                    unableUpdateUsernameAlert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: { (action) in
                         self.usernameTextField.becomeFirstResponder()
                     }))
                     
-                    self.present(emptyUsernameAlert, animated: true, completion: nil)
+                    self.present(unableUpdateUsernameAlert, animated: true, completion: nil)
                     return
                 }
             }
