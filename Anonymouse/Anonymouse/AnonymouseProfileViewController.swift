@@ -93,10 +93,29 @@ class AnonymouseProfileViewController: UIViewController, UITextFieldDelegate {
             //Username is set here. This is a bit of a hack
             let userPreferences: UserDefaults = UserDefaults.standard
             userPreferences.set(usernameLabel.text!, forKey: "username")
+            userPreferences.set(Date(), forKey: "timeUpdateUsername")
             
             editButton.title = "Edit"
             editButton.style = UIBarButtonItemStyle.plain
         } else {
+            //Get the last time the user updated the uername
+            if let lastTimeUpdateUsername = UserDefaults.standard.date(forKey: "timeUpdateUsername") {
+                
+                //Calculate the date difference since last update of username
+                var secondsSinceLastUpdate: TimeInterval = abs(lastTimeUpdateUsername.timeIntervalSinceNow)
+                
+                // Disable update of username if it has been less than seven days since last update
+                if secondsSinceLastUpdate < 604800 {
+                    let unableUpdateUsernameAlert: UIAlertController = UIAlertController(title: "Unable to update username", message: "Please do not update username more than once in a week", preferredStyle: UIAlertControllerStyle.alert)
+                    emptyUsernameAlert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: { (action) in
+                        self.usernameTextField.becomeFirstResponder()
+                    }))
+                    
+                    self.present(emptyUsernameAlert, animated: true, completion: nil)
+                    return
+                }
+            }
+            
             usernameTextField.isHidden = false
             usernameLabel.isHidden = true
             
