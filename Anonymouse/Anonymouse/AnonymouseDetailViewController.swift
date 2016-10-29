@@ -10,9 +10,13 @@ import UIKit
 
 class AnonymouseDetailViewController: UIViewController {
     var cellView: AnonymouseTableViewCell?
+    var scrollView: UIScrollView!
     
     override func viewDidLoad() {
         self.view.backgroundColor = UIColor.groupTableViewBackground
+        scrollView = UIScrollView(frame: view.bounds)
+        scrollView.backgroundColor = UIColor.groupTableViewBackground
+        self.view.addSubview(scrollView)
     }
     
     func createNewCell(withData data: inout AnonymouseMessageCore) {
@@ -30,7 +34,11 @@ class AnonymouseDetailViewController: UIViewController {
         
         cellView!.data = data
         
-        self.view.addSubview(cellView!)
+        // make the size of scrollView equal to size of cellViewFrame
+        var cellViewFrame: UIView?
+        cellViewFrame = UIView(frame: CGRect( x: 0.0, y: 0.0, width: self.view.frame.width, height: cellHeight + 120))
+        scrollView.contentSize = (cellViewFrame?.bounds.size)!
+        self.scrollView.addSubview(cellView!)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
