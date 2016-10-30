@@ -101,7 +101,7 @@ class AnonymouseProfileViewController: UIViewController, UITextFieldDelegate {
             editButton.style = UIBarButtonItemStyle.plain
         } else {
             //Get the last time the user updated the uername
-            /*if let lastTimeUpdateUsername = UserDefaults.standard.object(forKey: "timeUpdateUsername") as! Date! {
+            if let lastTimeUpdateUsername = UserDefaults.standard.object(forKey: "timeUpdateUsername") as! Date! {
                 
                 //Calculate the date difference since last update of username
                 let secondsSinceLastUpdate: TimeInterval = abs(lastTimeUpdateUsername.timeIntervalSinceNow)
@@ -116,7 +116,7 @@ class AnonymouseProfileViewController: UIViewController, UITextFieldDelegate {
                     self.present(unableUpdateUsernameAlert, animated: true, completion: nil)
                     return
                 }
-            }*/
+            }
             
             usernameTextField.isHidden = false
             usernameLabel.isHidden = true
