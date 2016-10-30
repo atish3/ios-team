@@ -136,7 +136,7 @@ class AnonymouseProfileViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let nsString = textField.text! as NSString
+        let nsString: NSString = textField.text! as NSString
         if string == " " {
             textField.text = nsString.replacingCharacters(in: range, with: "_")
             return false
