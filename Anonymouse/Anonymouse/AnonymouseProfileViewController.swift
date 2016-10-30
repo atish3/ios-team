@@ -89,11 +89,13 @@ class AnonymouseProfileViewController: UIViewController, UITextFieldDelegate {
             usernameTextField.isHidden = true
             usernameLabel.isHidden = false
             
-            usernameLabel.text = usernameTextField.text
-            //Username is set here. This is a bit of a hack
-            let userPreferences: UserDefaults = UserDefaults.standard
-            userPreferences.set(usernameLabel.text!, forKey: "username")
-            userPreferences.set(Date(), forKey: "timeUpdateUsername")
+            if usernameLabel.text != usernameTextField.text {
+                usernameLabel.text = usernameTextField.text
+                //Username is set here. This is a bit of a hack
+                let userPreferences: UserDefaults = UserDefaults.standard
+                userPreferences.set(usernameLabel.text!, forKey: "username")
+                userPreferences.set(Date(), forKey: "timeUpdateUsername")
+            }
             
             editButton.title = "Edit"
             editButton.style = UIBarButtonItemStyle.plain
