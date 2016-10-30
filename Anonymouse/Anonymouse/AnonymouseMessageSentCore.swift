@@ -12,7 +12,7 @@ class AnonymouseMessageSentCore: NSObject, NSCoding {
     var date: Date!
     var text: String!
     var user: String!
-    var rating: Int!
+    var rating: Int?
     var messageHash: String!
     
     //A subclass of NSObject that conforms to NSCoding Protocol.
@@ -43,7 +43,7 @@ class AnonymouseMessageSentCore: NSObject, NSCoding {
         let unarchivedDate: Date = aDecoder.decodeObject(forKey: "date") as! Date
         let unarchivedText: String = aDecoder.decodeObject(forKey: "text") as! String
         let unarchivedUser: String = aDecoder.decodeObject(forKey: "user") as! String
-        let unarchivedRating: Int = aDecoder.decodeObject(forKey: "rating") as! Int
+        let unarchivedRating: Int = aDecoder.decodeInteger(forKey: "rating")
         
         self.date = unarchivedDate
         self.text = unarchivedText

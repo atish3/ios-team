@@ -22,8 +22,8 @@ class AnonymouseMessageCore: NSManagedObject {
         self.date = date
         self.text = text
         self.user = user
-        self.rating = 0
-        self.likeStatus = 0
+        self.rating = NSNumber(integerLiteral: 0)
+        self.likeStatus = NSNumber(integerLiteral: 0)
         self.isFavorite = NSNumber(booleanLiteral: false)
     }
 }
