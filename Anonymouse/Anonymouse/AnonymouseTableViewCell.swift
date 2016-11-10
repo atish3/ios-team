@@ -136,7 +136,8 @@ class AnonymouseTableViewCell : UITableViewCell {
     }
     
     func createMessageLabel(withNumberOfLines numberOfLines: Int) {
-        messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 340.0, height: CGFloat.greatestFiniteMagnitude))
+        let messageWidth = UIScreen.main.bounds.width * 0.9
+        messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: messageWidth, height: CGFloat.greatestFiniteMagnitude))
         messageLabel!.numberOfLines = numberOfLines
         messageLabel!.lineBreakMode = NSLineBreakMode.byTruncatingTail
         
