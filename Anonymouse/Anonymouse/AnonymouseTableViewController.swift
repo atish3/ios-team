@@ -180,9 +180,10 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
             }
         case .update:
             if let indexPath = indexPath {
-                let cell = tableView.cellForRow(at: indexPath) as! AnonymouseTableViewCell
-                let anonymouseMessageCoreData = fetchedResultsController.object(at: indexPath)
-                cell.data = anonymouseMessageCoreData
+                if let cell = tableView.cellForRow(at: indexPath) as? AnonymouseTableViewCell {
+                    let anonymouseMessageCoreData = fetchedResultsController.object(at: indexPath)
+                    cell.data = anonymouseMessageCoreData
+                }
             }
             
             break;

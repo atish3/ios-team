@@ -31,7 +31,7 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
     
     //serviceType is a 15-character or less string that describes
     //the function that the app is broadcasting.
-    let myServiceType: String = "MDP-broadcast"
+    let myServiceType: String = "Anonymouse"
     
     //An object of type MCNearbyServiceBrowser that handles searching for and finding
     //other phones on the network.
@@ -191,9 +191,6 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
             let messageHashes: [String] = dataController.fetchMessageHashes()
             //Add the message if we don't have it already
             if !messageHashes.contains(message.messageHash) {
-                while self.dataController.getSize() > 1000 {
-                    self.dataController.deleteLastMessage()
-                }
                 self.dataController.addMessage(message.text!, date: message.date!, user: message.user!)
             }
         }
@@ -204,9 +201,6 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
             for message in messageArray {
                 //Add each message if we don't have it
                 if !messageHashes.contains(message.messageHash) {
-                    while self.dataController.getSize() > 1000 {
-                       self.dataController.deleteLastMessage()
-                    }
                     self.dataController.addMessage(message.text!, date: message.date!, user: message.user!)
                 }
             }
