@@ -178,4 +178,14 @@ class AnonymouseDataController: NSObject {
         
         self.saveContext()
     }
+    
+    func getSize() -> Int {
+        //Get how many messages are in the core
+        return fetchObjects(withKey: "date", ascending: true).count
+    }
+    
+    func deleteLastMessage() {
+        // delete the last(oldest) message in core data
+        self.managedObjectContext.delete(self.fetchObjects(withKey: "date", ascending: false).last!)
+    }
 }
