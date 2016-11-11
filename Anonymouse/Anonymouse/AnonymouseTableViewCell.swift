@@ -64,18 +64,20 @@ class AnonymouseTableViewCell : UITableViewCell {
     }
     
     func highlightBackground() {
-        if let wb = whiteBackdrop, let gb = grayFeatureBar, let gl = grayLine {
+        if let wb = whiteBackdrop, let gb = grayFeatureBar, let gl = grayLine, let di = divider {
             wb.backgroundColor = UIColor(white: 0.8, alpha: 1.0)
             gb.backgroundColor = UIColor(white: 0.7, alpha: 1.0)
             gl.backgroundColor = UIColor(white: 0.6, alpha: 1.0)
+            di.backgroundColor = UIColor(white: 0.6, alpha: 1.0)
         }
     }
     
     func releaseBackground() {
-        if let wb = whiteBackdrop, let gb = grayFeatureBar, let gl = grayLine {
+        if let wb = whiteBackdrop, let gb = grayFeatureBar, let gl = grayLine, let di = divider {
             wb.backgroundColor = UIColor.white
             gb.backgroundColor = UIColor(white: 0.93, alpha: 1.0)
             gl.backgroundColor = UIColor(white: 0.85, alpha: 1.0)
+            di.backgroundColor = UIColor(white: 0.85, alpha: 1.0)
         }
     }
     

@@ -37,7 +37,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
     }()
     
     override func viewDidLoad() {
-        detailViewController = AnonymouseDetailViewController()
+        detailViewController = AnonymouseDetailViewController(style: UITableViewStyle.grouped)
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -153,10 +153,10 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var anonymouseMessageCoreData: AnonymouseMessageCore = fetchedResultsController.object(at: indexPath)
-        
-        detailViewController.createNewCell(withData: &anonymouseMessageCoreData)
-        self.navigationController!.pushViewController(detailViewController, animated: true)
+        if let selectedCell: AnonymouseTableViewCell = tableView.cellForRow(at: indexPath) as? AnonymouseTableViewCell {
+            detailViewController.cellData = selectedCell.data!
+            self.navigationController!.pushViewController(detailViewController, animated: true)
+        }
     }
     
     // MARK: Fetched Results Controller Delegate Methods

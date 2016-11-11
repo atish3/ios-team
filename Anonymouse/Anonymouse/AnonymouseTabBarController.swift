@@ -21,7 +21,8 @@ class AnonymouseTabBarController: UITabBarController, UITabBarControllerDelegate
         
         let mostRecentFetchRequest: NSFetchRequest<AnonymouseMessageCore> = NSFetchRequest<AnonymouseMessageCore>(entityName: "AnonymouseMessageCore")
         let mostRecentSortDescriptor: NSSortDescriptor = NSSortDescriptor(key: "date", ascending: false)
-        mostRecentFetchRequest.sortDescriptors = [mostRecentSortDescriptor]
+        let bestRatedSortDescriptor: NSSortDescriptor = NSSortDescriptor(key: "rating", ascending: false)
+        mostRecentFetchRequest.sortDescriptors = [mostRecentSortDescriptor, bestRatedSortDescriptor]
         
         let favoriteFetchRequest: NSFetchRequest<AnonymouseMessageCore> = NSFetchRequest<AnonymouseMessageCore>(entityName: "AnonymouseMessageCore")
         let favoriteSortDescriptor: NSSortDescriptor = NSSortDescriptor(key: "date", ascending: false)
@@ -30,7 +31,6 @@ class AnonymouseTabBarController: UITabBarController, UITabBarControllerDelegate
         favoriteFetchRequest.predicate = favoritePredicate
         
         let bestRatedFetchRequest: NSFetchRequest<AnonymouseMessageCore> = NSFetchRequest<AnonymouseMessageCore>(entityName: "AnonymouseMessageCore")
-        let bestRatedSortDescriptor: NSSortDescriptor = NSSortDescriptor(key: "rating", ascending: false)
         bestRatedFetchRequest.sortDescriptors = [bestRatedSortDescriptor, mostRecentSortDescriptor]
         
         let mostRecentTableViewController: AnonymouseTableViewController = AnonymouseTableViewController(withFetchRequest: mostRecentFetchRequest)
