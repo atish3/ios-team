@@ -191,6 +191,9 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
             let messageHashes: [String] = dataController.fetchMessageHashes()
             //Add the message if we don't have it already
             if !messageHashes.contains(message.messageHash) {
+                while self.dataController.getSize() > 1000 {
+                    self.dataController.deleteLastMessage()
+                }
                 self.dataController.addMessage(message.text!, date: message.date!, user: message.user!)
             }
         }
@@ -201,6 +204,9 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
             for message in messageArray {
                 //Add each message if we don't have it
                 if !messageHashes.contains(message.messageHash) {
+                    while self.dataController.getSize() > 1000 {
+                       self.dataController.deleteLastMessage()
+                    }
                     self.dataController.addMessage(message.text!, date: message.date!, user: message.user!)
                 }
             }
