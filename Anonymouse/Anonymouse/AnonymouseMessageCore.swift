@@ -26,4 +26,55 @@ class AnonymouseMessageCore: NSManagedObject {
         self.likeStatus = NSNumber(integerLiteral: 0)
         self.isFavorite = NSNumber(booleanLiteral: false)
     }
+    
+    func like() {
+        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        let connectivityController: AnonymouseConnectivityController = appDelegate.connectivityController
+        guard let likeStatus = self.likeStatus as? Int else {
+            return
+        }
+        if likeStatus != 1 {
+            if likeStatus == 2 {
+                self.rating = NSNumber(integerLiteral: self.rating!.intValue + 2)
+                let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: 2, messageHash: self.text!.sha1())
+                connectivityController.send(individualRating: sentRatingObject)
+            } else {
+                self.rating = NSNumber(integerLiteral: self.rating!.intValue + 1)
+                let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: 1, messageHash: self.text!.sha1())
+                connectivityController.send(individualRating: sentRatingObject)
+            }
+            self.likeStatus = 1
+        } else {
+            self.likeStatus = 0
+            self.rating = NSNumber(integerLiteral: self.rating!.intValue - 1)
+            let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: -1, messageHash: self.text!.sha1())
+            connectivityController.send(individualRating: sentRatingObject)
+        }
+    }
+    
+    func dislike() {
+        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        let connectivityController: AnonymouseConnectivityController = appDelegate.connectivityController
+        guard let likeStatus = self.likeStatus as? Int else {
+            return
+        }
+        if likeStatus != 2 {
+            if likeStatus == 1 {
+                self.rating = NSNumber(integerLiteral: self.rating!.intValue - 2)
+                let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: -2, messageHash: self.text!.sha1())
+                connectivityController.send(individualRating: sentRatingObject)
+            } else {
+                self.rating = NSNumber(integerLiteral: self.rating!.intValue - 1)
+                let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: -1, messageHash: self.text!.sha1())
+                connectivityController.send(individualRating: sentRatingObject)
+            }
+            self.likeStatus = 2
+        } else {
+            self.likeStatus = 0
+            self.rating = NSNumber(integerLiteral: self.rating!.intValue + 1)
+            let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: 1, messageHash: self.text!.sha1())
+            connectivityController.send(individualRating: sentRatingObject)
+        }
+        
+    }
 }

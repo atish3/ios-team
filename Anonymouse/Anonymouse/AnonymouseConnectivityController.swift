@@ -45,7 +45,7 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
     var isAdvertising: Bool = true
     
     //An MCSession object is an object that manages communication among peers.
-    //When a peer wants to send data to another connected peer, they send it through the 
+    //When a peer wants to send data to another connected peer, they send it through the
     //sessionObject.
     lazy var sessionObject: MCSession = {
         let session: MCSession = MCSession(peer: self.myPeerId)
@@ -109,7 +109,7 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
     //MARK: Data transfer methods
     
     //This function sends all owned messages to the passed-in peers.
-    //It maps the stored messages, which are saved as CoreArray objects, 
+    //It maps the stored messages, which are saved as CoreArray objects,
     //to SentArray objects, which conform to NSCoding protocol.
     //It is meant to be used when a peer first connects with another peer.
     func sendAllMessages(toRequesters ids: [MCPeerID]) {
@@ -117,23 +117,46 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         let messageSentArray: [AnonymouseMessageSentCore] = messageCoreArray.map { (messageCore) -> AnonymouseMessageSentCore in
             return AnonymouseMessageSentCore(message: messageCore)
         }
+        let ratingSentArray: [AnonymouseRatingSentCore] = messageCoreArray.map { (messageCore) -> AnonymouseRatingSentCore in
+            return AnonymouseRatingSentCore(message: messageCore)
+        }
         
         do {
             //Encode the messages for sending
-            let archivedSentArray: Data = NSKeyedArchiver.archivedData(withRootObject: messageSentArray)
-            try self.sessionObject.send(archivedSentArray, toPeers: ids, with: MCSessionSendDataMode.reliable)
+            let archivedMessageArray: Data = NSKeyedArchiver.archivedData(withRootObject: messageSentArray)
+            try self.sessionObject.send(archivedMessageArray, toPeers: ids, with: MCSessionSendDataMode.reliable)
+            
+            let archivedRatingArray: Data = NSKeyedArchiver.archivedData(withRootObject: ratingSentArray)
+            try self.sessionObject.send(archivedRatingArray, toPeers: ids, with: MCSessionSendDataMode.reliable)
         } catch let error as NSError {
             NSLog("%@", error)
         }
     }
     
-    //This functions sends an individual message to all connected peers. 
-    //It is meant to be used when the user is connected to nearby peers 
+    //This functions sends an individual message to all connected peers.
+    //It is meant to be used when the user is connected to nearby peers
     //and they compose a new message.
     func send(individualMessage message: AnonymouseMessageSentCore) {
+        guard sessionObject.connectedPeers.count > 0 else {
+            return
+        }
+        
         do {
             let archivedMessage: Data = NSKeyedArchiver.archivedData(withRootObject: message)
             try self.sessionObject.send(archivedMessage, toPeers: sessionObject.connectedPeers, with: MCSessionSendDataMode.reliable)
+        } catch let error as NSError {
+            NSLog("%@", error)
+        }
+    }
+    
+    func send(individualRating rating: AnonymouseRatingSentCore) {
+        guard sessionObject.connectedPeers.count > 0 else {
+            return
+        }
+        
+        do {
+            let archivedRating: Data = NSKeyedArchiver.archivedData(withRootObject: rating)
+            try self.sessionObject.send(archivedRating, toPeers: sessionObject.connectedPeers, with: MCSessionSendDataMode.reliable)
         } catch let error as NSError {
             NSLog("%@", error)
         }
@@ -164,7 +187,7 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         NSLog("%@", "didReceiveInvitationFromPeer \(peerID)")
         
-        //When this app receives an invitation to connect, it accepts it immediatey.
+        //When this app receives an invitation to connect, it accepts it immediately.
         //This needs to be changed to only accept peers that are using this app.
         invitationHandler(true, self.sessionObject)
     }
@@ -176,7 +199,7 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
     
     func session(_ session: MCSession, didReceiveCertificate certificate: [Any]?, fromPeer peerID: MCPeerID, certificateHandler: @escaping (Bool) -> Void) {
         NSLog("%@", "didReceiveCertificate from peer \(peerID)")
-        //Check the certificate of a peer. 
+        //Check the certificate of a peer.
         //This needs to be changed to validate the certificate the peer sends.
         certificateHandler(true)
     }
@@ -187,21 +210,42 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         
         //Check if the message sent was a single message
         if let message = NSKeyedUnarchiver.unarchiveObject(with: data) as? AnonymouseMessageSentCore {
-            print("Did receive single message")
             let messageHashes: [String] = dataController.fetchMessageHashes()
             //Add the message if we don't have it already
             if !messageHashes.contains(message.messageHash) {
                 self.dataController.addMessage(message.text!, date: message.date!, user: message.user!)
             }
         }
-        //Check if the message sent was an array of messages
+            //Check if the message sent was an array of messages
         else if let messageArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? [AnonymouseMessageSentCore] {
-            print("Did receive dictionary of messages")
             let messageHashes: [String] = dataController.fetchMessageHashes()
             for message in messageArray {
                 //Add each message if we don't have it
                 if !messageHashes.contains(message.messageHash) {
                     self.dataController.addMessage(message.text!, date: message.date!, user: message.user!)
+                }
+            }
+        }
+        else if let rating = NSKeyedUnarchiver.unarchiveObject(with: data) as? AnonymouseRatingSentCore {
+            let messageCoreArray: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
+            for message in messageCoreArray {
+                if message.text!.sha1() == rating.messageHash {
+                    let previousRating: Int = Int(message.rating!)
+                    message.rating = NSNumber(integerLiteral: rating.rating! + previousRating)
+                }
+            }
+        }
+        else if let ratingArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? [AnonymouseRatingSentCore] {
+            let messageCoreArray: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
+            var messageCoreDictionary: [String: AnonymouseMessageCore] = [String: AnonymouseMessageCore]()
+            for message in messageCoreArray {
+                messageCoreDictionary[message.text!.sha1()] = message
+            }
+            
+            for rating in ratingArray {
+                if let message = messageCoreDictionary[rating.messageHash] {
+                    let previousRating: Int = Int(message.rating!)
+                    message.rating = NSNumber(integerLiteral: rating.rating! + previousRating)
                 }
             }
         }

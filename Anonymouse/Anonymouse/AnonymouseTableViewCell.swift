@@ -177,7 +177,7 @@ class AnonymouseTableViewCell : UITableViewCell {
         guard let likeStatus = messageData.likeStatus as? Int else {
             return
         }
-
+        
         guard let isFavorite = messageData.isFavorite as? Bool else {
             return
         }
@@ -185,7 +185,7 @@ class AnonymouseTableViewCell : UITableViewCell {
         guard let rating = messageData.rating as? Int else {
             return
         }
-       
+        
         
         numLikes!.text = "\(rating)"
         
@@ -202,14 +202,14 @@ class AnonymouseTableViewCell : UITableViewCell {
             downvoteButton!.setImage(UIImage(named: "downvoteEmpty"), for: UIControlState.normal)
         }
         
-
+        
         if isFavorite {
             favoriteButton!.setImage(UIImage(named: "favoriteFilled"), for: UIControlState.normal)
         }
         else {
             favoriteButton!.setImage(UIImage(named: "favoriteEmpty"), for: UIControlState.normal)
         }
-
+        
         upvoteButton!.frame.origin.x = grayFeatureBar!.frame.width - 30
         numLikes!.frame.origin.x = upvoteButton!.frame.origin.x - numLikes!.frame.width - 5
         downvoteButton!.frame.origin.x = numLikes!.frame.origin.x - 30
@@ -249,14 +249,14 @@ class AnonymouseTableViewCell : UITableViewCell {
         downvoteButton!.addTarget(self, action: #selector(AnonymouseTableViewCell.featureBarButtonTapped(sender:)), for: UIControlEvents.touchUpInside)
         self.grayFeatureBar!.addSubview(downvoteButton!)
         
-
+        
         favoriteButton = UIButton(frame: CGRect(x: 0.0, y: buttonY, width: 25, height: 25))
         favoriteButton!.tag = 2
         favoriteButton!.alpha = 0.5
         favoriteButton!.setImage(UIImage(named: "favoriteEmpty"), for: UIControlState.normal)
         favoriteButton!.addTarget(self, action: #selector(AnonymouseTableViewCell.featureBarButtonTapped(sender:)), for: UIControlEvents.touchUpInside)
         self.grayFeatureBar!.addSubview(favoriteButton!)
-
+        
         numLikes = UILabel()
         numLikes!.font = AnonymouseTableViewCell.dateFont
         numLikes!.text = "0000"
@@ -271,7 +271,7 @@ class AnonymouseTableViewCell : UITableViewCell {
         divider = UIView(frame: CGRect( x: 0.0, y: buttonY, width: 1, height: dividerHeight))
         divider?.backgroundColor = UIColor(white: 0.85, alpha: 1.0)
         self.grayFeatureBar!.addSubview(divider!)
-
+        
     }
     
     
@@ -301,20 +301,12 @@ class AnonymouseTableViewCell : UITableViewCell {
         if likeStatus != 1 {
             upvoteButton!.setImage(UIImage(named: "upvoteFilled"), for: UIControlState.normal)
             downvoteButton!.setImage(UIImage(named: "downvoteEmpty"), for: UIControlState.normal)
-            
-            if likeStatus == 2 {
-                messageData.rating = NSNumber(integerLiteral: messageData.rating!.intValue + 1)
-            }
-            messageData.rating = NSNumber(integerLiteral: messageData.rating!.intValue + 1)
-            
-            messageData.likeStatus = 1
             expandAnimate(imageNamed: "upvoteFilled", fromPoint: upvoteButton!.frame.origin, withSuperView: grayFeatureBar!)
         } else {
             upvoteButton!.setImage(UIImage(named: "upvoteEmpty"), for: UIControlState.normal)
-            
-            messageData.likeStatus = 0
-            messageData.rating = NSNumber(integerLiteral: messageData.rating!.intValue - 1)
         }
+        
+        messageData.like()
     }
     
     func downvoteTapped() {
@@ -330,19 +322,11 @@ class AnonymouseTableViewCell : UITableViewCell {
             upvoteButton!.setImage(UIImage(named: "upvoteEmpty"), for: UIControlState.normal)
             downvoteButton!.setImage(UIImage(named: "downvoteFilled"), for: UIControlState.normal)
             expandAnimate(imageNamed: "downvoteFilled", fromPoint: downvoteButton!.frame.origin, withSuperView: grayFeatureBar!)
-            
-            if likeStatus == 1 {
-                messageData.rating = NSNumber(integerLiteral: messageData.rating!.intValue - 1)
-            }
-            messageData.rating = NSNumber(integerLiteral: messageData.rating!.intValue - 1)
-            
-            messageData.likeStatus = 2
         } else {
             downvoteButton!.setImage(UIImage(named: "downvoteEmpty"), for: UIControlState.normal)
-            
-            messageData.likeStatus = 0
-            messageData.rating = NSNumber(integerLiteral: messageData.rating!.intValue + 1)
         }
+        
+        messageData.dislike()
     }
     
     func favoriteTapped() {
@@ -356,7 +340,7 @@ class AnonymouseTableViewCell : UITableViewCell {
         //Favorite Tapped
         if !favoriteStatus {
             favoriteButton!.setImage(UIImage(named: "favoriteFilled"), for: UIControlState.normal)
-
+            
             expandAnimate(imageNamed: "favoriteFilled", fromPoint: favoriteButton!.frame.origin, withSuperView: grayFeatureBar!)
             
             messageData.isFavorite = NSNumber(booleanLiteral: true)
