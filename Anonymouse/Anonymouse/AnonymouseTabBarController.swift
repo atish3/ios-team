@@ -88,6 +88,7 @@ class AnonymouseTabBarController: UITabBarController, UITabBarControllerDelegate
         
         self.tabBar.backgroundImage = image
         self.tabBar.tintColor = UIColor.white
+        self.tabBar.barTintColor = UIColor.white
     }
     
     func compose() {

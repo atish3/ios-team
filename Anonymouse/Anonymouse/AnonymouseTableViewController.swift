@@ -36,13 +36,30 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         return fetchedResultsController
     }()
     
+    func performDetailTransition(notification: Notification) {
+        guard self.view.window != nil else {
+            return
+        }
+    
+        guard let dictionary = notification.userInfo as? [String: AnonymouseTableViewCell] else {
+            return
+        }
+        if let selectedCell = dictionary["cell"] {
+            detailViewController.cellData = selectedCell.data!
+            detailViewController.shouldDisplayReply = true
+            self.navigationController!.pushViewController(detailViewController, animated: true)
+        }
+    }
+    
     override func viewDidLoad() {
-        detailViewController = AnonymouseDetailViewController(style: UITableViewStyle.grouped)
+        detailViewController = AnonymouseDetailViewController()
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
         tableView.register(AnonymouseTableViewCell.self, forCellReuseIdentifier: "AnonymouseTableViewCell")
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(AnonymouseTableViewController.performDetailTransition), name: NSNotification.Name("messageWasRepliedTo"), object: nil)
         
         //Reference the appDelegate to recover the managedObjectContext
         unowned let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
