@@ -59,7 +59,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         
         tableView.register(AnonymouseTableViewCell.self, forCellReuseIdentifier: "AnonymouseTableViewCell")
         
-        NotificationCenter.default.addObserver(self, selector: #selector(AnonymouseTableViewController.performDetailTransition), name: NSNotification.Name("messageWasRepliedTo"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AnonymouseTableViewController.performDetailTransition), name: NSNotification.Name("performDetailTransitionFromMessage"), object: nil)
         
         //Reference the appDelegate to recover the managedObjectContext
         unowned let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate

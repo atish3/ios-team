@@ -21,7 +21,17 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
         guard let mainUser = cellData.user else {
             return
         }
-    
+        guard !replyTextView.isFirstResponder else {
+            let shakeAnimation: CABasicAnimation = CABasicAnimation(keyPath: "position")
+            shakeAnimation.duration = 0.05
+            shakeAnimation.repeatCount = 3
+            shakeAnimation.autoreverses = true
+            shakeAnimation.fromValue = NSValue(cgPoint: CGPoint(x: self.replyTextView.center.x, y: self.replyTextView.center.y - 5))
+            shakeAnimation.toValue = NSValue(cgPoint: CGPoint(x: self.replyTextView.center.x, y: self.replyTextView.center.y + 5))
+            self.replyTextView.layer.add(shakeAnimation, forKey: "position")
+            return
+        }
+        
         shouldDisplayReply = false
         self.replyLabel.isHidden = true
         self.replyTextView.text = "@\(mainUser): "
@@ -82,11 +92,11 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
         
         replyLabel = UILabel()
         replyLabel.font = replyTextView.font
-        replyLabel.text = "Add a reply."
+        replyLabel.text = "Add a reply..."
         replyLabel.textColor = UIColor.lightGray
         replyLabel.sizeToFit()
-        replyLabel.frame.origin.x = 5
-        replyLabel.frame.origin.y = 8.3
+        replyLabel.frame.origin.x = 10
+        replyLabel.frame.origin.y = 8
         replyTextView.addSubview(replyLabel)
         
         replyView = UIView(frame: CGRect(x: 0.0, y: self.view.frame.height, width: self.view.frame.width, height: replyHeight))
@@ -106,6 +116,7 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
         
         NotificationCenter.default.addObserver(self, selector: #selector(AnonymouseDetailViewController.keyboardWillShow(_:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(AnonymouseDetailViewController.keyboardWillHide(_:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AnonymouseDetailViewController.displayReply), name: NSNotification.Name("replyTextViewBecomeFirstResponder"), object: nil)
         
         let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(AnonymouseDetailViewController.dismissKeyboard))
         self.view.addGestureRecognizer(tapGestureRecognizer)
@@ -132,6 +143,7 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
         dismissKeyboard()
         replyTextView.text = ""
         self.replyLabel.isHidden = false
+        self.replyButton.isHidden = true
         if let parentNavigationController = self.navigationController as? AnonymouseNavigationStyleController {
             if let tableVC = parentNavigationController.viewControllers[0] as? AnonymouseTableViewController {
                 tableVC.tableView.reloadData()
@@ -142,6 +154,7 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
     //MARK: Button Methods
     func replyTapped() {
         replyButton.alpha = 0.5
+        replyButton.isHidden = true
         replyTextView.text = ""
         self.replyLabel.isHidden = false
         dismissKeyboard()
@@ -161,7 +174,8 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        replyButton.isHidden = textView.text.isEmpty
+        let testString: String = textView.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        replyButton.isHidden = testString.isEmpty
         replyLabel.isHidden = !textView.text.isEmpty
     }
     

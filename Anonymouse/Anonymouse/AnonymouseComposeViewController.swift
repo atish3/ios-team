@@ -49,8 +49,8 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
         placeholderLabel.font = composeTextView.font
         placeholderLabel.sizeToFit()
         
-        placeholderLabel.frame.origin.x = 5
-        placeholderLabel.frame.origin.y = 8.3
+        placeholderLabel.frame.origin.x = 10
+        placeholderLabel.frame.origin.y = 8
         
         placeholderLabel.textColor = UIColor.lightGray
         
