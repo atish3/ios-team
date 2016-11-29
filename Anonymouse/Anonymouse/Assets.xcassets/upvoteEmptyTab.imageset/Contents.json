@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "upvoteEmptyTab.png",
+      "filename" : "Thumb Up_25.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "upvoteEmptyTab@2x.png",
+      "filename" : "Thumb Up_50.png",
       "scale" : "2x"
     },
     {
