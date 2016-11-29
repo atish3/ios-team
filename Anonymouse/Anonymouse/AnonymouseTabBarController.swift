@@ -55,14 +55,22 @@ class AnonymouseTabBarController: UITabBarController, UITabBarControllerDelegate
         favoriteNavigationController.viewControllers = [favoriteTableViewController]
         bestRatedNavigationController.viewControllers = [bestRatedTableViewController]
         
-        mostRecentNavigationController.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.mostRecent, tag: 0)
-        favoriteNavigationController.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.favorites, tag: 1)
+//        mostRecentNavigationController.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.mostRecent, tag: 0)
+//        favoriteNavigationController.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.favorites, tag: 1)
         
-        let bestRatedTabBarItem = UITabBarItem(title: "Top Rated", image: UIImage(named: "upvoteEmptyTab"), selectedImage: UIImage(named: "upvoteFilledTab"))
+        let mostRecentTabBarItem = UITabBarItem(title: "Most Recent", image: UIImage(named: "mostRecentEmpty")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "mostRecentFilled"))
+        mostRecentTabBarItem.tag = 0
+        mostRecentNavigationController.tabBarItem = mostRecentTabBarItem
+        
+        let favoriteTabBarItem = UITabBarItem(title: "Favorites", image: UIImage(named: "favoriteEmpty")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "favoriteFilled"))
+        favoriteTabBarItem.tag = 1
+        favoriteNavigationController.tabBarItem = favoriteTabBarItem
+        
+        let bestRatedTabBarItem = UITabBarItem(title: "Top Rated", image: UIImage(named: "upvoteEmptyTab")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "upvoteFilledTab"))
         bestRatedTabBarItem.tag = 2
         bestRatedNavigationController.tabBarItem = bestRatedTabBarItem
         
-        let settingsTabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: "settingsIconEmpty"), selectedImage: UIImage(named: "settingsIconFilled"))
+        let settingsTabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: "settingsIconEmpty")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "settingsIconFilled"))
         settingsTabBarItem.tag = 3
         let settingsNavigationController: AnonymouseNavigationStyleController = AnonymouseNavigationStyleController()
         let settingsViewController: AnonymouseSettingsViewController = AnonymouseSettingsViewController(style: UITableViewStyle.grouped)
@@ -85,10 +93,20 @@ class AnonymouseTabBarController: UITabBarController, UITabBarControllerDelegate
         gradientLayer.render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        
+        let greyColor: UIColor = UIColor(colorLiteralRed: 234.0/255.0, green: 234.0/255.0, blue: 234.0/255.0, alpha: 1.0)
+        for item in self.tabBar.items! {
+            let unselectedItem = [NSForegroundColorAttributeName: greyColor]
+            
+            let selectedItem = [NSForegroundColorAttributeName: UIColor.white]
+            
+            item.setTitleTextAttributes(unselectedItem, for: .normal)
+            //item.
+            item.setTitleTextAttributes(selectedItem, for: .selected)
+        }
+        tabBarItem.selectedImage = UIImage(named: "upvoteEmptyTab")!.withRenderingMode(.alwaysOriginal)
+
         self.tabBar.backgroundImage = image
         self.tabBar.tintColor = UIColor.white
-        self.tabBar.barTintColor = UIColor.white
     }
     
     func compose() {
