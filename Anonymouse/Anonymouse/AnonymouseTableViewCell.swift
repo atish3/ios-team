@@ -307,7 +307,9 @@ class AnonymouseTableViewCell : UITableViewCell {
 
     func replyTapped() {
         if isInTable {
-            NotificationCenter.default.post(name: NSNotification.Name("messageWasRepliedTo"), object: nil, userInfo: ["cell": self])
+            NotificationCenter.default.post(name: NSNotification.Name("performDetailTransitionFromMessage"), object: nil, userInfo: ["cell": self])
+        } else {
+            NotificationCenter.default.post(name: NSNotification.Name("replyTextViewBecomeFirstResponder"), object: nil)
         }
     }
     
