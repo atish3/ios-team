@@ -62,7 +62,7 @@ class AnonymouseTabBarController: UITabBarController, UITabBarControllerDelegate
         mostRecentTabBarItem.tag = 0
         mostRecentNavigationController.tabBarItem = mostRecentTabBarItem
         
-        let favoriteTabBarItem = UITabBarItem(title: "Favorites", image: UIImage(named: "favoriteEmpty")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "favoriteFilled"))
+        let favoriteTabBarItem = UITabBarItem(title: "Favorites", image: UIImage(named: "favoriteEmptyTab")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "favoriteFilled"))
         favoriteTabBarItem.tag = 1
         favoriteNavigationController.tabBarItem = favoriteTabBarItem
         
