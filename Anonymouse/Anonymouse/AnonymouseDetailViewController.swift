@@ -17,6 +17,9 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
     var tableView: UITableView!
     var shouldDisplayReply: Bool = false
     
+    let maxCharacters: Int = 301
+    var charactersLeftLabel: UILabel!
+    
     func displayReply() {
         guard let mainUser = cellData.user else {
             return
@@ -67,7 +70,7 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
         
         self.view.addSubview(tableView)
         
-        let replyHeight: CGFloat = 60.0
+        let replyHeight: CGFloat = 50.0
         
         replyButton = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: 40.0, height: 40.0))
         replyButton.setImage(UIImage(named: "sendFilled"), for: UIControlState.normal)
@@ -81,7 +84,8 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
         replyButton.isHidden = true
         
         let replyTextWidth: CGFloat = replyButton.frame.origin.x - 20.0
-        let replyFrame: CGRect = CGRect(x: 10.0, y: replyHeight * 0.25, width: replyTextWidth, height: replyHeight * 0.5)
+        
+        let replyFrame: CGRect = CGRect(x: 10.0, y: (replyHeight - 34.5) * 0.5, width: replyTextWidth, height: 34.5)
         replyTextView = UITextView(frame: replyFrame)
         replyTextView.isScrollEnabled = false
         replyTextView.delegate = self
@@ -103,6 +107,15 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
         replyView.backgroundColor = UIColor.white
         replyView.layer.shadowOffset = CGSize(width: -1, height: 1)
         replyView.layer.shadowOpacity = 0.4
+        replyView.autoresizingMask = UIViewAutoresizing.flexibleHeight
+        
+        charactersLeftLabel = UILabel()
+        charactersLeftLabel.font = replyTextView.font
+        charactersLeftLabel.textColor = UIColor.lightGray
+        charactersLeftLabel.text = "\(maxCharacters - 1)"
+        charactersLeftLabel.sizeToFit()
+        charactersLeftLabel.frame.origin = replyButton.frame.origin
+        charactersLeftLabel.frame.origin.y = replyView.frame.height
         
         let grayTopBar: UIView = UIView()
         grayTopBar.frame.size.width = self.view.frame.width
@@ -113,6 +126,7 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
         replyView.addSubview(replyButton)
         replyView.addSubview(replyTextView)
         replyView.addSubview(grayTopBar)
+        replyView.addSubview(charactersLeftLabel)
         
         NotificationCenter.default.addObserver(self, selector: #selector(AnonymouseDetailViewController.keyboardWillShow(_:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(AnonymouseDetailViewController.keyboardWillHide(_:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -177,6 +191,50 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
         let testString: String = textView.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         replyButton.isHidden = testString.isEmpty
         replyLabel.isHidden = !textView.text.isEmpty
+        let numLines: Int = Int(textView.contentSize.height/textView.font!.lineHeight)
+        
+        if numLines >= 4 {
+            textView.isScrollEnabled = true
+        } else {
+            textView.isScrollEnabled = false
+            let bestSize: CGSize = textView.sizeThatFits(textView.frame.size)
+            let bestHeight: CGFloat = bestSize.height
+            let currentHeight: CGFloat = textView.frame.height
+            if bestHeight != currentHeight {
+                let difference: CGFloat = bestHeight - currentHeight
+                textView.frame.size.height = bestHeight
+                replyView.frame.size.height += difference
+                replyView.frame.origin.y -= difference
+                
+                let newNumLines: Int = Int(textView.contentSize.height/textView.font!.lineHeight)
+                if newNumLines >= 2 {
+                    self.charactersLeftLabel.frame.origin.y = replyView.frame.height - charactersLeftLabel.frame.height - 5
+                } else {
+                    self.charactersLeftLabel.frame.origin.y = replyView.frame.height
+                }
+            }
+        }
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let nsString: NSString = textView.text! as NSString
+        let numCharacters: Int = nsString.replacingCharacters(in: range, with: text).characters.count
+        let remainingCharacters: Int = maxCharacters - numCharacters
+        
+        if remainingCharacters < 40 {
+            charactersLeftLabel.textColor = UIColor.red
+            charactersLeftLabel.alpha = 0.7
+        } else {
+            charactersLeftLabel.textColor = UIColor.lightGray
+            charactersLeftLabel.alpha = 1.0
+        }
+        
+        if remainingCharacters < 1 {
+            return false
+        }
+        
+        charactersLeftLabel.text = "\(remainingCharacters - 1)"
+        return true
     }
     
     //MARK: TableViewDelegate Methods
