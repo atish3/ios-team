@@ -7,9 +7,33 @@
 //
 
 import UIKit
+import CoreData
 
-class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource {
-    var cellData: AnonymouseMessageCore!
+class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
+    var cellData: AnonymouseMessageCore! {
+        didSet {
+            self.fetchRequest = NSFetchRequest<AnonymouseReplyCore>(entityName: "AnonymouseReplyCore")
+            let parentPredicate: NSPredicate = NSPredicate(format: "parentMessage == %@", cellData)
+            self.fetchRequest.predicate = parentPredicate
+            let sortDescriptor: NSSortDescriptor = NSSortDescriptor(key: "date", ascending: true)
+            fetchRequest.sortDescriptors = [sortDescriptor]
+            
+            self.fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+            self.fetchedResultsController.delegate = self
+            
+            do {
+                try self.fetchedResultsController.performFetch()
+            } catch {
+                let fetchError: NSError = error as NSError
+                print("\(fetchError), \(fetchError.userInfo)")
+                
+                let applicationName: Any? = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName")
+                let message: String = "A serious application error occurred while \(applicationName) tried to read your data. Please contact support for help."
+                
+                self.showAlertWithTitle("Warning", message: message, cancelButtonTitle: "OK")
+            }
+        }
+    }
     var replyTextView: UITextView!
     var replyView: UIView!
     var replyButton: UIButton!
@@ -17,11 +41,19 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
     var tableView: UITableView!
     var shouldDisplayReply: Bool = false
     
+    var managedObjectContext: NSManagedObjectContext!
+    var fetchRequest: NSFetchRequest<AnonymouseReplyCore>!
+    
+    var fetchedResultsController: NSFetchedResultsController<AnonymouseReplyCore>!
+    
     let maxCharacters: Int = 301
     var charactersLeftLabel: UILabel!
     
+    weak var dataController: AnonymouseDataController!
+    weak var connectivityController: AnonymouseConnectivityController!
+    
     func displayReply() {
-        guard let mainUser = cellData.user else {
+        guard let mainUser: String = cellData.user else {
             return
         }
         guard !replyTextView.isFirstResponder else {
@@ -56,9 +88,27 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
     
     //MARK: View Methods
     override func viewDidLoad() {
+        unowned let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        dataController = appDelegate.dataController
+        connectivityController = appDelegate.connectivityController
+        
+        let userDefaults: UserDefaults = UserDefaults.standard
+        let didDetectIncompatibleStore: Bool = userDefaults.bool(forKey: "didDetectIncompatibleStore")
+        
+        if didDetectIncompatibleStore {
+            // Show Alert
+            let applicationName: Any? = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName")
+            let message: String = "A serious application error occurred while \(applicationName) tried to read your data. Please contact support for help."
+            
+            self.showAlertWithTitle("Warning", message: message, cancelButtonTitle: "OK")
+        }
+        
+        let replyHeight: CGFloat = 50.0
+        var tableViewFrame: CGRect = self.view.frame
+        tableViewFrame.size.height -= replyHeight + 40.0
         
         self.view.backgroundColor = UIColor.groupTableViewBackground
-        tableView = UITableView(frame: self.view.frame, style: UITableViewStyle.grouped)
+        tableView = UITableView(frame: tableViewFrame, style: UITableViewStyle.grouped)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.cellLayoutMarginsFollowReadableWidth = false
@@ -66,11 +116,10 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
         tableView.allowsSelection = false
         tableView.contentInset = UIEdgeInsetsMake(-36, 0, 0, 0)
         
-        tableView.register(AnonymouseTableViewCell.self, forCellReuseIdentifier: "StaticMessage")
+        tableView.register(AnonymouseTableViewCell.self, forCellReuseIdentifier: "AnonymouseTableViewCell")
+        tableView.register(AnonymouseReplyViewCell.self, forCellReuseIdentifier: "AnonymouseReplyViewCell")
         
         self.view.addSubview(tableView)
-        
-        let replyHeight: CGFloat = 50.0
         
         replyButton = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: 40.0, height: 40.0))
         replyButton.setImage(UIImage(named: "sendFilled"), for: UIControlState.normal)
@@ -132,7 +181,7 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
         NotificationCenter.default.addObserver(self, selector: #selector(AnonymouseDetailViewController.keyboardWillHide(_:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(AnonymouseDetailViewController.displayReply), name: NSNotification.Name("replyTextViewBecomeFirstResponder"), object: nil)
         
-        let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(AnonymouseDetailViewController.dismissKeyboard))
+        let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(AnonymouseDetailViewController.tappedOutsideOfEdit))
         self.view.addGestureRecognizer(tapGestureRecognizer)
     }
     
@@ -154,10 +203,7 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        dismissKeyboard()
-        replyTextView.text = ""
-        self.replyLabel.isHidden = false
-        self.replyButton.isHidden = true
+        resetInputAccessoryView()
         if let parentNavigationController = self.navigationController as? AnonymouseNavigationStyleController {
             if let tableVC = parentNavigationController.viewControllers[0] as? AnonymouseTableViewController {
                 tableVC.tableView.reloadData()
@@ -165,13 +211,27 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
             }
         }
     }
-    //MARK: Button Methods
-    func replyTapped() {
-        replyButton.alpha = 0.5
+    
+    func resetInputAccessoryView() {
         replyButton.isHidden = true
         replyTextView.text = ""
-        self.replyLabel.isHidden = false
+        replyLabel.isHidden = false
+        replyButton.isHidden = true
+        charactersLeftLabel.frame.origin.y = replyView.frame.height
+        replyButton.alpha = 0.5
         dismissKeyboard()
+    }
+    
+    //MARK: Button Methods
+    func replyTapped() {
+        var replyText: String = replyTextView.text
+        replyText = replyText.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        let userPreferences: UserDefaults = UserDefaults.standard
+        let username: String = userPreferences.string(forKey: "username")!
+        
+        self.dataController.addReply(withText: replyText, date: Date(), user: username, toMessage: cellData)
+        
+        resetInputAccessoryView()
     }
     
     func replySelected() {
@@ -180,6 +240,34 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
     
     func replyReleased() {
         replyButton.alpha = 0.5
+    }
+    
+    func tappedOutsideOfEdit() {
+        guard let mainUser: String = cellData.user else {
+            return
+        }
+        
+        if replyTextView.text.isEmpty || replyTextView.text == "@\(mainUser): " {
+            self.resetInputAccessoryView()
+            return
+        }
+        
+        let title: String = "Discard Comment?"
+        let alertController: UIAlertController = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        
+        
+        // Configure Alert Controller
+        alertController.addAction(UIAlertAction(title: "Keep Writing", style: .default, handler: nil))
+        alertController.addAction(UIAlertAction(title: "Discard", style: .destructive, handler: { (_) in
+            self.resetInputAccessoryView()
+        }))
+        
+        let alertWindow = UIWindow(frame: UIScreen.main.bounds)
+        alertWindow.rootViewController = UIViewController()
+        alertWindow.windowLevel = 10000001
+        alertWindow.isHidden = false
+        // Present Alert Controller
+        alertWindow.rootViewController!.present(alertController, animated: true, completion: nil)
     }
     
     //MARK: TextView Methods
@@ -202,6 +290,10 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
             let currentHeight: CGFloat = textView.frame.height
             if bestHeight != currentHeight {
                 let difference: CGFloat = bestHeight - currentHeight
+                guard abs(difference) < 80 else {
+                    return
+                }
+                
                 textView.frame.size.height = bestHeight
                 replyView.frame.size.height += difference
                 replyView.frame.origin.y -= difference
@@ -239,17 +331,23 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
     
     //MARK: TableViewDelegate Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1 //Needs to be number of replies
+        if section == 0 {
+            return 1
+        } else {
+            let sections: [NSFetchedResultsSectionInfo] = fetchedResultsController.sections!
+            let sectionInfo: NSFetchedResultsSectionInfo = sections[0]
+            return sectionInfo.numberOfObjects
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             if indexPath.row == 0 {
-                let cell: AnonymouseTableViewCell = tableView.dequeueReusableCell(withIdentifier: "StaticMessage", for: indexPath) as! AnonymouseTableViewCell
+                let cell: AnonymouseTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AnonymouseTableViewCell", for: indexPath) as! AnonymouseTableViewCell
                 cell.preservesSuperviewLayoutMargins = false
                 cell.layoutMargins = UIEdgeInsets.zero
                 cell.frame.size.width = self.tableView.frame.width
@@ -259,8 +357,21 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
                 cell.data = cellData
                 return cell
             }
+        } else if indexPath.section == 1 {
+            let section: Int = 0
+            let updatedIndexPath: IndexPath = IndexPath(row: indexPath.row, section: section)
+            
+            let replyData: AnonymouseReplyCore = fetchedResultsController.object(at: updatedIndexPath)
+            let cell: AnonymouseReplyViewCell = tableView.dequeueReusableCell(withIdentifier: "AnonymouseReplyViewCell", for: indexPath) as! AnonymouseReplyViewCell
+            cell.preservesSuperviewLayoutMargins = false
+            cell.layoutMargins = UIEdgeInsets.zero
+            cell.frame.size.width = self.tableView.frame.width - 20
+            cell.createMessageLabel(withNumberOfLines: 0)
+            cell.isInTable = false
+            cell.reply = replyData
+            
+            return cell
         }
-        
         return AnonymouseTableViewCell()
     }
     
@@ -271,7 +382,13 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
                     return AnonymouseTableViewCell.getCellHeight(withMessageText: text)
                 }
             }
+        } else {
+            let section: Int = 0
+            let updatedIndexPath: IndexPath = IndexPath(row: indexPath.row, section: section)
+            let anonymouseReplyCoreData: AnonymouseReplyCore = fetchedResultsController.object(at: updatedIndexPath)
+            return AnonymouseTableViewCell.getCellHeight(withMessageText: anonymouseReplyCoreData.text!)
         }
+        
         return 0.0
     }
     
@@ -283,5 +400,82 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
     
     func keyboardWillHide(_ notification: Notification) {
         
+    }
+    
+    // MARK: Fetched Results Controller Delegate Methods
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch (type) {
+        case .insert:
+            if let indexPath = newIndexPath {
+                let section: Int = 1
+                let row: Int = indexPath.row
+                let updatedIndexPath: IndexPath = IndexPath(row: row, section: section)
+                tableView.insertRows(at: [updatedIndexPath], with: .fade)
+            }
+        case .delete:
+            if let indexPath = indexPath {
+                let section: Int = 1
+                let row: Int = indexPath.row
+                let updatedIndexPath: IndexPath = IndexPath(row: row, section: section)
+                tableView.deleteRows(at: [updatedIndexPath], with: .fade)
+            }
+        case .update:
+            if let indexPath = indexPath {
+                let section: Int = 1
+                let row: Int = indexPath.row
+                let updatedIndexPath: IndexPath = IndexPath(row: row, section: section)
+                if let cell = tableView.cellForRow(at: updatedIndexPath) as? AnonymouseReplyViewCell {
+                    let anonymouseReplyCoreData = fetchedResultsController.object(at: indexPath)
+                    cell.reply = anonymouseReplyCoreData
+                }
+            }
+            
+            break;
+        case .move:
+            if let indexPath = indexPath, let newIndexPath = newIndexPath {
+                let section: Int = 1
+                let updatedIndexPath: IndexPath = IndexPath(row: indexPath.row, section: section)
+                let newUpdatedIndexPath: IndexPath = IndexPath(row: newIndexPath.row, section: section)
+                tableView.moveRow(at: updatedIndexPath, to: newUpdatedIndexPath)
+            }
+        }
+    }
+    
+    func controller(controller: NSFetchedResultsController<AnonymouseReplyCore>, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+        fatalError("Section info should never change")
+//        switch type {
+//        case .insert:
+//            tableView.insertSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
+//        case .delete:
+//            tableView.deleteSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
+//        case .move:
+//            break
+//        case .update:
+//            break
+//        }
+    }
+
+    
+    //MARK: Helpers
+    fileprivate func showAlertWithTitle(_ title: String, message: String, cancelButtonTitle: String) {
+        // Initialize Alert Controller
+        let alertController: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        // Configure Alert Controller
+        alertController.addAction(UIAlertAction(title: cancelButtonTitle, style: .default, handler: { (_) -> Void in
+            let userDefaults: UserDefaults = UserDefaults.standard
+            userDefaults.removeObject(forKey: "didDetectIncompatibleStore")
+        }))
+        
+        // Present Alert Controller
+        present(alertController, animated: true, completion: nil)
     }
 }

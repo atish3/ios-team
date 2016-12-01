@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0286D4CA1DEFA10000EEDE07 /* AnonymouseReplyViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0286D4C91DEFA10000EEDE07 /* AnonymouseReplyViewCell.swift */; };
+		02F9C78A1DEDFCE800CA631D /* AnonymouseMessageCore+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F9C7861DEDFCE800CA631D /* AnonymouseMessageCore+CoreDataProperties.swift */; };
+		02F9C78B1DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F9C7871DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataClass.swift */; };
+		02F9C78C1DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F9C7881DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataProperties.swift */; };
 		172EA8A21D9788DA00D2E127 /* AnonymouseProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172EA8A11D9788DA00D2E127 /* AnonymouseProfileViewController.swift */; };
-		1A42E0301CBED2A100E6EE86 /* Anonymouse+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A42E02E1CBED2A100E6EE86 /* Anonymouse+CoreDataProperties.swift */; };
 		1A42E0311CBED2A100E6EE86 /* AnonymouseMessageCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A42E02F1CBED2A100E6EE86 /* AnonymouseMessageCore.swift */; };
 		1A5BA78E1D999FD1005000D5 /* AnonymouseSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5BA78D1D999FD1005000D5 /* AnonymouseSettingsViewController.swift */; };
 		1A692BBB1DAE964D00C03E1A /* AnonymouseDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A692BBA1DAE964D00C03E1A /* AnonymouseDataController.swift */; };
@@ -76,8 +79,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0286D4C91DEFA10000EEDE07 /* AnonymouseReplyViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseReplyViewCell.swift; sourceTree = "<group>"; };
+		02F9C7861DEDFCE800CA631D /* AnonymouseMessageCore+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnonymouseMessageCore+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		02F9C7871DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnonymouseReplyCore+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		02F9C7881DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnonymouseReplyCore+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		172EA8A11D9788DA00D2E127 /* AnonymouseProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseProfileViewController.swift; sourceTree = "<group>"; };
-		1A42E02E1CBED2A100E6EE86 /* Anonymouse+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Anonymouse+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1A42E02F1CBED2A100E6EE86 /* AnonymouseMessageCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseMessageCore.swift; sourceTree = "<group>"; };
 		1A5BA78D1D999FD1005000D5 /* AnonymouseSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseSettingsViewController.swift; sourceTree = "<group>"; };
 		1A692BBA1DAE964D00C03E1A /* AnonymouseDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseDataController.swift; sourceTree = "<group>"; };
@@ -138,8 +144,10 @@
 			children = (
 				7DD0BBB21CBC349000CF2268 /* Anonymouse.xcdatamodeld */,
 				1A692BBA1DAE964D00C03E1A /* AnonymouseDataController.swift */,
-				1A42E02E1CBED2A100E6EE86 /* Anonymouse+CoreDataProperties.swift */,
+				02F9C7861DEDFCE800CA631D /* AnonymouseMessageCore+CoreDataProperties.swift */,
 				1A42E02F1CBED2A100E6EE86 /* AnonymouseMessageCore.swift */,
+				02F9C7871DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataClass.swift */,
+				02F9C7881DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataProperties.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -158,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				1ABE12ED1C97521C005923BA /* AnonymouseTableViewCell.swift */,
+				0286D4C91DEFA10000EEDE07 /* AnonymouseReplyViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -241,7 +250,7 @@
 					1ABE12D01C9744D0005923BA = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = SQXYK344KH;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0810;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -310,15 +319,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A692BBB1DAE964D00C03E1A /* AnonymouseDataController.swift in Sources */,
+				0286D4CA1DEFA10000EEDE07 /* AnonymouseReplyViewCell.swift in Sources */,
 				1ABE12EE1C97521C005923BA /* AnonymouseTableViewCell.swift in Sources */,
 				1AD52A961D9964A9000F13DE /* AnonymouseNavigationStyleController.swift in Sources */,
 				1AFEDAE61D986BBC00690EB5 /* AnonymouseTabBarController.swift in Sources */,
-				1A42E0301CBED2A100E6EE86 /* Anonymouse+CoreDataProperties.swift in Sources */,
+				02F9C78B1DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataClass.swift in Sources */,
 				1A42E0311CBED2A100E6EE86 /* AnonymouseMessageCore.swift in Sources */,
 				1A932A591DB3D37A004294A9 /* AnonymouseDetailViewController.swift in Sources */,
 				1AF2D0671C97856300670C89 /* AnonymouseComposeViewController.swift in Sources */,
 				1ABE12D51C9744D0005923BA /* AppDelegate.swift in Sources */,
+				02F9C78A1DEDFCE800CA631D /* AnonymouseMessageCore+CoreDataProperties.swift in Sources */,
 				1ABE12F21C9756A2005923BA /* AnonymouseConnectivityController.swift in Sources */,
+				02F9C78C1DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataProperties.swift in Sources */,
 				1ABE12EA1C9750A6005923BA /* AnonymouseTableViewController.swift in Sources */,
 				172EA8A21D9788DA00D2E127 /* AnonymouseProfileViewController.swift in Sources */,
 				1A932A551DB3CAC7004294A9 /* AnonymouseMessageSentCore.swift in Sources */,
@@ -446,6 +458,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = SQXYK344KH;
 				ENABLE_BITCODE = YES;
@@ -454,6 +467,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.1am.Anonymouse;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -463,6 +477,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = SQXYK344KH;
 				ENABLE_BITCODE = YES;

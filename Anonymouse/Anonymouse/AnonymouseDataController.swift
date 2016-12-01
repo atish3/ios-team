@@ -30,7 +30,6 @@ class AnonymouseDataController: NSObject {
         managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
         
-        
         super.init()
         
         let URLPersistentStore = self.applicationStoresDirectory().appendingPathComponent("Anonymouse.sqlite")
@@ -156,6 +155,12 @@ class AnonymouseDataController: NSObject {
         //The creation of this object inserts it into the context
         let _: AnonymouseMessageCore = AnonymouseMessageCore(text: text, date: date, user: user)
         
+        self.saveContext()
+    }
+    
+    func addReply(withText text: String, date: Date, user: String, toMessage message: AnonymouseMessageCore) {
+        let reply: AnonymouseReplyCore = AnonymouseReplyCore(text: text, date: date, user: user)
+        reply.parentMessage = message
         self.saveContext()
     }
     

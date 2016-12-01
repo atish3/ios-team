@@ -36,6 +36,8 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         return fetchedResultsController
     }()
     
+    //MARK: View Methods
+    
     func performDetailTransition(notification: Notification) {
         guard self.view.window != nil else {
             return
@@ -52,7 +54,11 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
     }
     
     override func viewDidLoad() {
+        unowned let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        self.managedObjectContext = appDelegate.dataController.managedObjectContext
+        
         detailViewController = AnonymouseDetailViewController()
+        detailViewController.managedObjectContext = self.managedObjectContext
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -60,10 +66,6 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         tableView.register(AnonymouseTableViewCell.self, forCellReuseIdentifier: "AnonymouseTableViewCell")
         
         NotificationCenter.default.addObserver(self, selector: #selector(AnonymouseTableViewController.performDetailTransition), name: NSNotification.Name("performDetailTransitionFromMessage"), object: nil)
-        
-        //Reference the appDelegate to recover the managedObjectContext
-        unowned let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-        self.managedObjectContext = appDelegate.dataController.managedObjectContext
         
         //The following block of code defends against coreData migrations.
         //When the coreData format is changed, the OS needs to migrate the store

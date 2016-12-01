@@ -7,19 +7,20 @@
 //
 
 import UIKit
+//TODO: SUBCLASS THIS AnonymouseReplyViewCell to handle weird gray bar moving
 
 class AnonymouseTableViewCell : UITableViewCell {
     
     //MARK: Constant Class Properties
-    fileprivate static let messageXOffset: CGFloat = 20
-    fileprivate static let messageYOffset: CGFloat = 13
-    fileprivate static let userMessageDistance: CGFloat = 25
-    fileprivate static let featuresBarHeight: CGFloat = 30.0
+    static let messageXOffset: CGFloat = 8
+    static let messageYOffset: CGFloat = 5
+    static let userMessageDistance: CGFloat = 25
+    static let featuresBarHeight: CGFloat = 30.0
     
-    fileprivate static let dateFont: UIFont = UIFont(name: "Helvetica", size: 16.0)!
-    fileprivate static let messageFont: UIFont = UIFont(name: "Helvetica", size: 16.0)!
-    fileprivate static let userFont: UIFont = UIFont(name: "Helvetica-Bold", size: 19.0)!
-    fileprivate static let spacing: CGFloat = 47.0
+    static let dateFont: UIFont = UIFont(name: "Helvetica", size: 16.0)!
+    static let messageFont: UIFont = UIFont(name: "Helvetica", size: 16.0)!
+    static let userFont: UIFont = UIFont(name: "Helvetica-Bold", size: 19.0)!
+    static let spacing: CGFloat = 47.0
     
     static func getCellHeight(withMessageText text: String) -> CGFloat {
         let messageLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 340.0, height: CGFloat.greatestFiniteMagnitude))
@@ -59,8 +60,7 @@ class AnonymouseTableViewCell : UITableViewCell {
     var isInTable: Bool = true
     
     //Once we set the message data, update this cell's UI
-    var data: AnonymouseMessageCore?
-        {
+    var data: AnonymouseMessageCore? {
         didSet
         {
             updateCellUI()
@@ -69,29 +69,33 @@ class AnonymouseTableViewCell : UITableViewCell {
     
     func highlightBackground() {
         guard let wb = whiteBackdrop else { return }
-        guard let gb = grayFeatureBar else { return }
-        guard let d1 = divider1 else { return }
-        guard let d2 = divider2 else { return }
-        
         wb.backgroundColor = UIColor(white: 0.8, alpha: 1.0)
-        gb.backgroundColor = UIColor(white: 0.7, alpha: 1.0)
         wb.layer.borderColor = UIColor(white: 0.6, alpha: 1.0).cgColor
+        
+        guard let gb = grayFeatureBar else { return }
+        gb.backgroundColor = UIColor(white: 0.7, alpha: 1.0)
         gb.layer.borderColor = UIColor(white: 0.6, alpha: 1.0).cgColor
+        
+        guard let d1 = divider1 else { return }
         d1.backgroundColor = UIColor(white: 0.6, alpha: 1.0)
+        
+        guard let d2 = divider2 else { return }
         d2.backgroundColor = UIColor(white: 0.6, alpha: 1.0)
     }
     
     func releaseBackground() {
         guard let wb = whiteBackdrop else { return }
-        guard let gb = grayFeatureBar else { return }
-        guard let d1 = divider1 else { return }
-        guard let d2 = divider2 else { return }
-        
         wb.backgroundColor = UIColor.white
-        gb.backgroundColor = UIColor(white: 0.93, alpha: 1.0)
         wb.layer.borderColor = UIColor(white: 0.85, alpha: 1.0).cgColor
+        
+        guard let gb = grayFeatureBar else { return }
+        gb.backgroundColor = UIColor(white: 0.93, alpha: 1.0)
         gb.layer.borderColor = UIColor(white: 0.85, alpha: 1.0).cgColor
+        
+        guard let d1 = divider1 else { return }
         d1.backgroundColor = UIColor(white: 0.85, alpha: 1.0)
+        
+        guard let d2 = divider2 else { return }
         d2.backgroundColor = UIColor(white: 0.85, alpha: 1.0)
     }
     
@@ -149,7 +153,7 @@ class AnonymouseTableViewCell : UITableViewCell {
     }
     
     func createMessageLabel(withNumberOfLines numberOfLines: Int) {
-        let messageWidth: CGFloat = UIScreen.main.bounds.width * 0.9
+        let messageWidth: CGFloat = self.frame.width - 5 * AnonymouseTableViewCell.messageXOffset
         messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: messageWidth, height: CGFloat.greatestFiniteMagnitude))
         messageLabel!.numberOfLines = numberOfLines
         messageLabel!.lineBreakMode = NSLineBreakMode.byTruncatingTail
@@ -174,26 +178,19 @@ class AnonymouseTableViewCell : UITableViewCell {
         
         grayFeatureBar!.frame.size.width = whiteBackdrop!.frame.width
         grayFeatureBar!.frame.origin.y = whiteBackdrop!.frame.height - AnonymouseTableViewCell.featuresBarHeight + 10
+        grayFeatureBar!.frame.origin.x = whiteBackdrop!.frame.origin.x
         
         updateFeatureBar()
     }
     
     func updateFeatureBar() {
+        
         guard let messageData = data else {
             return
         }
-        guard let likeStatus = messageData.likeStatus as? Int else {
-            return
-        }
-        
-        guard let isFavorite = messageData.isFavorite as? Bool else {
-            return
-        }
-        
-        guard let rating = messageData.rating as? Int else {
-            return
-        }
-        
+        let likeStatus: Int = messageData.likeStatus as! Int
+        let isFavorite: Bool = messageData.isFavorite as! Bool
+        let rating: Int = messageData.rating as! Int
         
         numLikes!.text = "\(rating)"
         
@@ -210,6 +207,9 @@ class AnonymouseTableViewCell : UITableViewCell {
             downvoteButton!.setImage(UIImage(named: "downvoteEmpty"), for: UIControlState.normal)
         }
         
+        upvoteButton!.frame.origin.x = grayFeatureBar!.frame.width - 30
+        numLikes!.frame.origin.x = upvoteButton!.frame.origin.x - numLikes!.frame.width - 5
+        downvoteButton!.frame.origin.x = numLikes!.frame.origin.x - 30
         
         if isFavorite {
             favoriteButton!.setImage(UIImage(named: "favoriteFilled"), for: UIControlState.normal)
@@ -218,9 +218,6 @@ class AnonymouseTableViewCell : UITableViewCell {
             favoriteButton!.setImage(UIImage(named: "favoriteEmpty"), for: UIControlState.normal)
         }
         
-        upvoteButton!.frame.origin.x = grayFeatureBar!.frame.width - 30
-        numLikes!.frame.origin.x = upvoteButton!.frame.origin.x - numLikes!.frame.width - 5
-        downvoteButton!.frame.origin.x = numLikes!.frame.origin.x - 30
         divider1!.frame.origin.x = downvoteButton!.frame.origin.x - 10
         favoriteButton!.frame.origin.x = divider1!.frame.origin.x - 35
         divider2!.frame.origin.x = favoriteButton!.frame.origin.x - 10
@@ -229,7 +226,6 @@ class AnonymouseTableViewCell : UITableViewCell {
     
     func createGrayFeatureBar() {
         grayFeatureBar = UIView()
-        grayFeatureBar!.frame.origin.x = 10
         grayFeatureBar!.backgroundColor = UIColor(white: 0.93, alpha: 1.0)
         grayFeatureBar!.frame.size.height = AnonymouseTableViewCell.featuresBarHeight
         grayFeatureBar!.layer.borderColor = UIColor(white: 0.85, alpha: 1.0).cgColor
@@ -304,7 +300,7 @@ class AnonymouseTableViewCell : UITableViewCell {
             expandImage.removeFromSuperview()
         }
     }
-
+    
     func replyTapped() {
         if isInTable {
             NotificationCenter.default.post(name: NSNotification.Name("performDetailTransitionFromMessage"), object: nil, userInfo: ["cell": self])
@@ -317,9 +313,9 @@ class AnonymouseTableViewCell : UITableViewCell {
         guard let messageData = data else {
             return
         }
-        guard let likeStatus = messageData.likeStatus as? Int else {
-            return
-        }
+        let likeStatus: Int = Int(messageData.likeStatus!)
+        messageData.like()
+        
         if likeStatus != 1 {
             upvoteButton!.setImage(UIImage(named: "upvoteFilled"), for: UIControlState.normal)
             downvoteButton!.setImage(UIImage(named: "downvoteEmpty"), for: UIControlState.normal)
@@ -327,17 +323,14 @@ class AnonymouseTableViewCell : UITableViewCell {
         } else {
             upvoteButton!.setImage(UIImage(named: "upvoteEmpty"), for: UIControlState.normal)
         }
-        
-        messageData.like()
     }
     
     func downvoteTapped() {
         guard let messageData = data else {
             return
         }
-        guard let likeStatus = messageData.likeStatus as? Int else {
-            return
-        }
+        let likeStatus: Int = Int(messageData.likeStatus!)
+        messageData.dislike()
         
         //Downvote Tapped
         if likeStatus != 2 {
@@ -347,8 +340,6 @@ class AnonymouseTableViewCell : UITableViewCell {
         } else {
             downvoteButton!.setImage(UIImage(named: "downvoteEmpty"), for: UIControlState.normal)
         }
-        
-        messageData.dislike()
     }
     
     func favoriteTapped() {
@@ -394,76 +385,81 @@ class AnonymouseTableViewCell : UITableViewCell {
     }
     
     
-    func updateCellUI()
-    {
+    func updateCellUI() {
+        guard let cellData = data else {
+            return
+        }
+        let dataDate: NSDate? = cellData.date
+        let dataText: String? = cellData.text
+        let dataUser: String? = cellData.user
+        
+        
         //Safely unwrap data, since it is optional
-        if let cellData = data
+        if whiteBackdrop == nil {
+            createBackdrop()
+        }
+        
+        if dateLabel == nil {
+            createDateLabel()
+        }
+        
+        if messageLabel == nil {
+            createMessageLabel(withNumberOfLines: 3)
+        }
+        
+        if userLabel == nil {
+            createUserLabel()
+        }
+        
+        let dateFormatter: DateFormatter = DateFormatter()
+        dateFormatter.amSymbol = "AM"
+        dateFormatter.pmSymbol = "PM"
+        
+        if (Calendar.current.isDateInToday(dataDate as! Date))
         {
-            if whiteBackdrop == nil {
-                createBackdrop()
+            var secondsSinceMessage: TimeInterval = abs(dataDate!.timeIntervalSinceNow)
+            secondsSinceMessage = floor(secondsSinceMessage)
+            let stringText: String
+            
+            if secondsSinceMessage > 3600.0 {
+                stringText = "\(Int(secondsSinceMessage / 3600))h"
+            } else if secondsSinceMessage > 60.0 {
+                stringText = "\(Int(secondsSinceMessage / 60))m"
+            } else {
+                stringText = "Just now"
             }
             
-            if dateLabel == nil {
-                createDateLabel()
-            }
-            
-            if messageLabel == nil {
-                createMessageLabel(withNumberOfLines: 3)
-            }
-            
-            if userLabel == nil {
-                createUserLabel()
-            }
-            
-            
-            let dateFormatter: DateFormatter = DateFormatter()
-            dateFormatter.amSymbol = "AM"
-            dateFormatter.pmSymbol = "PM"
-            
-            if (Calendar.current.isDateInToday(cellData.date! as Date))
-            {
-                var secondsSinceMessage: TimeInterval = abs(cellData.date!.timeIntervalSinceNow)
-                secondsSinceMessage = floor(secondsSinceMessage)
-                let stringText: String
-                
-                if secondsSinceMessage > 3600.0 {
-                    stringText = "\(Int(secondsSinceMessage / 3600))h"
-                } else if secondsSinceMessage > 60.0 {
-                    stringText = "\(Int(secondsSinceMessage / 60))m"
-                } else {
-                    stringText = "Just now"
-                }
-                
-                dateLabel!.text = stringText
-            }
-            else
-            {
-                dateFormatter.dateFormat = "MMM dd"
-                let stringText: String = dateFormatter.string(from: cellData.date! as Date)
-                dateLabel!.text = stringText
-            }
-            
-            dateLabel!.sizeToFit()
-            dateLabel!.frame.origin = CGPoint(x: self.bounds.width - (dateLabel?.frame.width)! - AnonymouseTableViewCell.messageXOffset, y: AnonymouseTableViewCell.messageYOffset)
-            
-            userLabel!.text = cellData.user
-            userLabel!.sizeToFit()
-            userLabel!.frame.origin = CGPoint(x: AnonymouseTableViewCell.messageXOffset, y: AnonymouseTableViewCell.messageYOffset)
-            
-            //Make the messageLabel contain the cellData's text
-            messageLabel!.text = cellData.text
-            messageLabel!.sizeToFit()
-            messageLabel!.frame.origin = CGPoint(x: AnonymouseTableViewCell.messageXOffset, y: (userLabel?.frame.origin.y)! + AnonymouseTableViewCell.userMessageDistance)
-            
-            if !self.contentView.subviews.contains(dateLabel!) {
-                self.contentView.addSubview(dateLabel!)
-            }
-            if !self.contentView.subviews.contains(userLabel!) {
-                self.contentView.addSubview(userLabel!)
-            }
-            if !self.contentView.subviews.contains(messageLabel!) {
-                self.contentView.addSubview(messageLabel!)
-            }
+            dateLabel!.text = stringText
+        }
+        else
+        {
+            dateFormatter.dateFormat = "MMM dd"
+            let stringText: String = dateFormatter.string(from: dataDate as! Date)
+            dateLabel!.text = stringText
+        }
+        
+        dateLabel!.sizeToFit()
+        dateLabel!.frame.origin = CGPoint(x: self.whiteBackdrop!.frame.width - (dateLabel?.frame.width)! - AnonymouseTableViewCell.messageXOffset, y: AnonymouseTableViewCell.messageYOffset)
+        
+        let baseX: CGFloat = AnonymouseTableViewCell.messageXOffset
+        
+        userLabel!.text = dataUser
+        userLabel!.sizeToFit()
+        userLabel!.frame.origin = CGPoint(x: baseX, y: AnonymouseTableViewCell.messageYOffset)
+        
+        //Make the messageLabel contain the cellData's text
+        messageLabel!.text = dataText
+        messageLabel!.sizeToFit()
+        messageLabel!.frame.origin = CGPoint(x: baseX, y: (userLabel?.frame.origin.y)! + AnonymouseTableViewCell.userMessageDistance)
+        
+        if !self.whiteBackdrop!.subviews.contains(dateLabel!) {
+            self.whiteBackdrop!.addSubview(dateLabel!)
+        }
+        if !self.whiteBackdrop!.subviews.contains(userLabel!) {
+            self.whiteBackdrop!.addSubview(userLabel!)
+        }
+        if !self.whiteBackdrop!.subviews.contains(messageLabel!) {
+            self.whiteBackdrop!.addSubview(messageLabel!)
         }
     }
     
