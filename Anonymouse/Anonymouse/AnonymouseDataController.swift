@@ -207,4 +207,30 @@ class AnonymouseDataController: NSObject {
         
         self.saveContext()
     }
+
+    func fetchMessageTag() -> [String:Int] {
+        var tagCount = [String: Int]()
+        let messageCoreArray: [AnonymouseMessageCore] = fetchObjects(withKey: "date", ascending: true)
+        
+        for messageCore in messageCoreArray {
+            if tagCount[messageCore.text!] != nil {
+                tagCount[messageCore.text!] = tagCount[messageCore.text!]! + 1
+            } else {
+                tagCount[messageCore.text!] = 1
+            }
+        }
+        
+        return tagCount
+    }
+    
+    func extractMessageTag(_ str: String) -> [String] {
+        var tags: [String] = []
+        let words: [String] = str.components(separatedBy: " ")
+        for word in words {
+            if word.hasPrefix("#") {
+                tags.append(String(word.characters.dropFirst()))
+            }
+        }
+        return tags
+    }
 }
