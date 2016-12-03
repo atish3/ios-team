@@ -167,7 +167,7 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
         
         self.dataController.addMessage(messageText, date: Date(), user: username)
         if self.connectivityController.sessionObject.connectedPeers.count > 0 {
-            self.connectivityController.send(individualMessage: AnonymouseMessageSentCore(text: self.composeTextView.text, date: Date(), user: username, rating: 0))
+            self.connectivityController.send(individualMessage: AnonymouseMessageSentCore(text: self.composeTextView.text, date: Date(), user: username))
         }
         self.clearText()
     }

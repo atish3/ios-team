@@ -186,6 +186,27 @@ class AnonymouseDataController: NSObject {
         })
     }
     
+    func fetchReplies(withKey key: String, ascending: Bool) -> [AnonymouseReplyCore] {
+        let fetchRequest: NSFetchRequest<AnonymouseReplyCore> = AnonymouseReplyCore.fetchRequest()
+        let sortDescriptor: NSSortDescriptor = NSSortDescriptor(key: key, ascending: ascending)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        do {
+            let fetchedReplies: [AnonymouseReplyCore] = try self.managedObjectContext.fetch(fetchRequest)
+            return fetchedReplies
+        } catch {
+            let fetchError: NSError = error as NSError
+            fatalError("Failure to fetch replies: \(fetchError)")
+        }
+    }
+    
+    func fetchReplyHashes() -> [String] {
+        let replyCoreArray: [AnonymouseReplyCore] = fetchReplies(withKey: "date", ascending: true)
+        return replyCoreArray.map({ (replyCore) -> String in
+            return replyCore.text!.sha1()
+        })
+    }
+    
     func clearContext() {
         for managedObject in self.fetchObjects(withKey: "date", ascending: true) {
             self.managedObjectContext.delete(managedObject)

@@ -16,6 +16,12 @@ class AnonymouseRatingSentCore: NSObject, NSCoding {
         self.rating = message.rating!.intValue
         self.messageHash = message.text!.sha1()
     }
+
+    convenience init(reply: AnonymouseReplyCore) {
+        self.init()
+        self.rating = reply.rating!.intValue
+        self.messageHash = reply.text!.sha1()
+    }
     
     convenience init(rating: Int, messageHash: String) {
         self.init()
