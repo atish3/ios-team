@@ -105,7 +105,7 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
         
         let replyHeight: CGFloat = 50.0
         var tableViewFrame: CGRect = self.view.frame
-        tableViewFrame.size.height -= replyHeight + 40.0
+        tableViewFrame.size.height -= replyHeight + 60.0
         
         self.view.backgroundColor = UIColor.groupTableViewBackground
         tableView = UITableView(frame: tableViewFrame, style: UITableViewStyle.grouped)
@@ -115,6 +115,8 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         tableView.allowsSelection = false
         tableView.contentInset = UIEdgeInsetsMake(-36, 0, 0, 0)
+        tableView.sectionFooterHeight = 0.0
+        tableView.sectionHeaderHeight = 5.0
         
         tableView.register(AnonymouseTableViewCell.self, forCellReuseIdentifier: "AnonymouseTableViewCell")
         tableView.register(AnonymouseReplyViewCell.self, forCellReuseIdentifier: "AnonymouseReplyViewCell")
