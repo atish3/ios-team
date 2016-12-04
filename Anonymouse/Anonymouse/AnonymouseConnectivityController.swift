@@ -244,9 +244,10 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         
         //Check if the message sent was a single message
         if let message = NSKeyedUnarchiver.unarchiveObject(with: data) as? AnonymouseMessageSentCore {
+            let messageHash: String = message.text.sha1()
             let messageHashes: [String] = dataController.fetchMessageHashes()
             //Add the message if we don't have it already
-            if !messageHashes.contains(message.messageHash) {
+            if !messageHashes.contains(messageHash) {
                 self.dataController.addMessage(message.text!, date: message.date!, user: message.user!)
             }
         }
@@ -255,14 +256,16 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
             let messageHashes: [String] = dataController.fetchMessageHashes()
             for message in messageArray {
                 //Add each message if we don't have it
-                if !messageHashes.contains(message.messageHash) {
+                let messageHash: String = message.text.sha1()
+                if !messageHashes.contains(messageHash) {
                     self.dataController.addMessage(message.text!, date: message.date!, user: message.user!)
                 }
             }
         }
         else if let reply = NSKeyedUnarchiver.unarchiveObject(with: data) as? AnonymouseReplySentCore {
             let replyHashes: [String] = dataController.fetchReplyHashes()
-            if !replyHashes.contains(reply.messageHash) {
+            let replyHash: String = reply.text.sha1()
+            if !replyHashes.contains(replyHash) {
                 let messageObjects: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
                 for message in messageObjects {
                     if message.text!.sha1() == reply.parentHash {
@@ -276,7 +279,8 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
             let replyHashes: [String] = dataController.fetchReplyHashes()
             let messageObjects: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
             for reply in replyArray {
-                if !replyHashes.contains(reply.messageHash) {
+                let replyHash: String = reply.text.sha1()
+                if !replyHashes.contains(replyHash) {
                     for message in messageObjects {
                         if message.text!.sha1() == reply.parentHash {
                             dataController.addReply(withText: reply.text!, date: reply.date!, user: reply.user!, toMessage: message)

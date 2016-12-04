@@ -12,7 +12,6 @@ class AnonymouseReplySentCore: NSObject, NSCoding {
     var date: Date!
     var text: String!
     var user: String!
-    var messageHash: String! //GET RID OF THIS, also in MessageSentCore
     var parentHash: String!
     
     convenience init(reply: AnonymouseReplyCore) {
@@ -20,7 +19,6 @@ class AnonymouseReplySentCore: NSObject, NSCoding {
         self.date = reply.date! as Date!
         self.text = reply.text!
         self.user = reply.user!
-        self.messageHash = text.sha1()
         self.parentHash = reply.parentMessage!.text!.sha1()
     }
     
@@ -30,7 +28,6 @@ class AnonymouseReplySentCore: NSObject, NSCoding {
         self.date = date
         self.text = text
         self.user = user
-        self.messageHash = text.sha1()
         self.parentHash = parentText.sha1()
     }
     
@@ -45,7 +42,6 @@ class AnonymouseReplySentCore: NSObject, NSCoding {
         self.date = unarchivedDate
         self.text = unarchivedText
         self.user = unarchivedUser
-        self.messageHash = text.sha1()
         self.parentHash = unarchivedParent
     }
     

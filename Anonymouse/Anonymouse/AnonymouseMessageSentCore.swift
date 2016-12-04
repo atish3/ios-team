@@ -12,7 +12,6 @@ class AnonymouseMessageSentCore: NSObject, NSCoding {
     var date: Date!
     var text: String!
     var user: String!
-    var messageHash: String!
     
     //A subclass of NSObject that conforms to NSCoding Protocol.
     //This class is the type that is sent through MC
@@ -22,7 +21,6 @@ class AnonymouseMessageSentCore: NSObject, NSCoding {
         self.date = message.date! as Date!
         self.text = message.text!
         self.user = message.user!
-        self.messageHash = text.sha1()
     }
     
     convenience init(text: String, date: Date, user: String) {
@@ -31,7 +29,6 @@ class AnonymouseMessageSentCore: NSObject, NSCoding {
         self.date = date
         self.text = text
         self.user = user
-        self.messageHash = text.sha1()
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
@@ -44,7 +41,6 @@ class AnonymouseMessageSentCore: NSObject, NSCoding {
         self.date = unarchivedDate
         self.text = unarchivedText
         self.user = unarchivedUser
-        self.messageHash = text.sha1()
     }
     
     func encode(with aCoder: NSCoder) {
