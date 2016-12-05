@@ -219,6 +219,19 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
         replyTextView.text = ""
         replyLabel.isHidden = false
         replyButton.isHidden = true
+        let bestSize: CGSize = replyTextView.sizeThatFits(replyTextView.frame.size)
+        let bestHeight: CGFloat = bestSize.height
+        let currentHeight: CGFloat = replyTextView.frame.height
+        if bestHeight != currentHeight {
+            let difference: CGFloat = bestHeight - currentHeight
+            guard abs(difference) < 80 else {
+                return
+            }
+            
+            replyTextView.frame.size.height = bestHeight
+            replyView.frame.size.height += difference
+            replyView.frame.origin.y -= difference
+        }
         charactersLeftLabel.frame.origin.y = replyView.frame.height
         replyButton.alpha = 0.5
         dismissKeyboard()
