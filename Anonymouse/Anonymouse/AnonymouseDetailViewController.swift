@@ -399,12 +399,19 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
     
     //MARK: Keyboard Methods
     func keyboardWillShow(_ notification: Notification) {
-        //        var info = (notification as NSNotification).userInfo!
-        //        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        var info = (notification as NSNotification).userInfo!
+        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        if keyboardFrame.height > 100 {
+            tableView.frame.size.height -= keyboardFrame.height - 50.0
+        }
     }
     
     func keyboardWillHide(_ notification: Notification) {
-        
+        var info = (notification as NSNotification).userInfo!
+        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        if keyboardFrame.height > 100 {
+            tableView.frame.size.height += keyboardFrame.height - 50.0
+        }
     }
     
     // MARK: Fetched Results Controller Delegate Methods
@@ -456,18 +463,18 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
     
     func controller(controller: NSFetchedResultsController<AnonymouseReplyCore>, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
         fatalError("Section info should never change")
-//        switch type {
-//        case .insert:
-//            tableView.insertSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
-//        case .delete:
-//            tableView.deleteSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
-//        case .move:
-//            break
-//        case .update:
-//            break
-//        }
+        //        switch type {
+        //        case .insert:
+        //            tableView.insertSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
+        //        case .delete:
+        //            tableView.deleteSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
+        //        case .move:
+        //            break
+        //        case .update:
+        //            break
+        //        }
     }
-
+    
     
     //MARK: Helpers
     fileprivate func showAlertWithTitle(_ title: String, message: String, cancelButtonTitle: String) {
