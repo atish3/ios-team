@@ -126,6 +126,9 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         self.refreshControl?.backgroundColor = UIColor.groupTableViewBackground
         self.refreshControl?.tintColor = UIColor.darkGray
         self.refreshControl?.addTarget(self, action: #selector(self.refreshControlDidChangeValue), for: UIControlEvents.valueChanged)
+        
+        // This is a hard coded fix for searchBar related UI bug
+        self.automaticallyAdjustsScrollViewInsets = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -142,13 +145,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
     //MARK: Scroll to show searchBar
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let yPos: CGFloat = scrollView.contentOffset.y
-        print(yPos)
-        
-        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-        //self.automaticallyAdjustsScrollViewInsets = false
-        //tableView.contentInset = UIEdgeInsets.zero;
-        print(self)
-        
+
         if (tableView.tableHeaderView == nil && yPos < 0) {
             tableView.tableHeaderView = searchController.searchBar
         }
@@ -302,10 +299,10 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
     }
     
     // MARK: UISearchBarDelegate
+    // This is a hard coded fix for searchBar related UI bug
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        print("in searchBarCancelButtonClicked")
-        
-
+        tableView.contentInset = UIEdgeInsets.zero;
+        //self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     }
     
     // MARK: UISearchResultsUpdating
