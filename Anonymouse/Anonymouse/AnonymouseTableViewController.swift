@@ -9,7 +9,7 @@ import CryptoSwift
 import UIKit
 import CoreData
 
-class AnonymouseTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
+class AnonymouseTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
     var managedObjectContext: NSManagedObjectContext!
     var detailViewController: AnonymouseDetailViewController!
     var searchController: UISearchController!
@@ -18,7 +18,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
     
     init(withFetchRequest fetchRequest: NSFetchRequest<AnonymouseMessageCore>) {
         self.fetchRequest = fetchRequest
-        self.searchRequest = fetchRequest
+        self.searchRequest.sortDescriptors = fetchRequest.sortDescriptors
         super.init(style: UITableViewStyle.plain)
     }
     
@@ -115,7 +115,8 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         searchController.definesPresentationContext = true
         definesPresentationContext = true
         tableView.tableHeaderView = nil
-        
+        searchController.searchBar.delegate = self
+
         //Set up the tableView style
         self.tableView.backgroundColor = UIColor.groupTableViewBackground
         self.tableView.cellLayoutMarginsFollowReadableWidth = false
@@ -146,7 +147,6 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
         //self.automaticallyAdjustsScrollViewInsets = false
         //tableView.contentInset = UIEdgeInsets.zero;
-        print("aloha")
         print(self)
         
         if (tableView.tableHeaderView == nil && yPos < 0) {
@@ -301,6 +301,13 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         present(alertController, animated: true, completion: nil)
     }
     
+    // MARK: UISearchBarDelegate
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        print("in searchBarCancelButtonClicked")
+        
+
+    }
+    
     // MARK: UISearchResultsUpdating
     func updateSearchResults(for searchController: UISearchController) {
         filterContentForSearchResult(searchText: searchController.searchBar.text!)
@@ -320,7 +327,8 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
             
             self.showAlertWithTitle("Warning", message: message, cancelButtonTitle: "OK")
         }
-        
+
         tableView.reloadData()
+        
     }
 }
