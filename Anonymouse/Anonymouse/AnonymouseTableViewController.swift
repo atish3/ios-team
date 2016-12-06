@@ -26,7 +26,6 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         self.fetchRequest = NSFetchRequest<AnonymouseMessageCore>(entityName: "AnonymouseMessageCore")
         let sortDescriptor: NSSortDescriptor = NSSortDescriptor(key: "date", ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
-        searchRequest.sortDescriptors = [sortDescriptor]
         super.init(coder: aDecoder)
     }
     
@@ -41,10 +40,10 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
     }()
     
     lazy var searchResultsController: NSFetchedResultsController<AnonymouseMessageCore> = {
-        // Initialize Fetched Results Controller
+        // Initialize Search Results Controller
         let searchResultsController: NSFetchedResultsController<AnonymouseMessageCore> = NSFetchedResultsController(fetchRequest: self.searchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
         
-        // Configure Fetched Results Controller
+        // Configure Search Results Controller
         searchResultsController.delegate = self
         
         return searchResultsController
