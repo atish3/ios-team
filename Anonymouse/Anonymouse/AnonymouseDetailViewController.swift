@@ -105,7 +105,7 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
         
         let replyHeight: CGFloat = 50.0
         var tableViewFrame: CGRect = self.view.frame
-        tableViewFrame.size.height -= replyHeight + 40.0
+        tableViewFrame.size.height -= replyHeight + 60.0
         
         self.view.backgroundColor = UIColor.groupTableViewBackground
         tableView = UITableView(frame: tableViewFrame, style: UITableViewStyle.grouped)
@@ -115,6 +115,8 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         tableView.allowsSelection = false
         tableView.contentInset = UIEdgeInsetsMake(-36, 0, 0, 0)
+        tableView.sectionFooterHeight = 0.0
+        tableView.sectionHeaderHeight = 5.0
         
         tableView.register(AnonymouseTableViewCell.self, forCellReuseIdentifier: "AnonymouseTableViewCell")
         tableView.register(AnonymouseReplyViewCell.self, forCellReuseIdentifier: "AnonymouseReplyViewCell")
@@ -217,6 +219,19 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
         replyTextView.text = ""
         replyLabel.isHidden = false
         replyButton.isHidden = true
+        let bestSize: CGSize = replyTextView.sizeThatFits(replyTextView.frame.size)
+        let bestHeight: CGFloat = bestSize.height
+        let currentHeight: CGFloat = replyTextView.frame.height
+        if bestHeight != currentHeight {
+            let difference: CGFloat = bestHeight - currentHeight
+            guard abs(difference) < 80 else {
+                return
+            }
+            
+            replyTextView.frame.size.height = bestHeight
+            replyView.frame.size.height += difference
+            replyView.frame.origin.y -= difference
+        }
         charactersLeftLabel.frame.origin.y = replyView.frame.height
         replyButton.alpha = 0.5
         dismissKeyboard()
@@ -230,6 +245,9 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
         let username: String = userPreferences.string(forKey: "username")!
         
         self.dataController.addReply(withText: replyText, date: Date(), user: username, toMessage: cellData)
+        if self.connectivityController.sessionObject.connectedPeers.count > 0 {
+            self.connectivityController.send(individualReply: AnonymouseReplySentCore(text: replyText, date: Date(), user: username, parentText: cellData.text!))
+        }
         
         resetInputAccessoryView()
     }
@@ -394,12 +412,19 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
     
     //MARK: Keyboard Methods
     func keyboardWillShow(_ notification: Notification) {
-        //        var info = (notification as NSNotification).userInfo!
-        //        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        var info = (notification as NSNotification).userInfo!
+        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        if keyboardFrame.height > 100 {
+            tableView.frame.size.height -= keyboardFrame.height - 50.0
+        }
     }
     
     func keyboardWillHide(_ notification: Notification) {
-        
+        var info = (notification as NSNotification).userInfo!
+        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        if keyboardFrame.height > 100 {
+            tableView.frame.size.height += keyboardFrame.height - 50.0
+        }
     }
     
     // MARK: Fetched Results Controller Delegate Methods
@@ -451,18 +476,18 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
     
     func controller(controller: NSFetchedResultsController<AnonymouseReplyCore>, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
         fatalError("Section info should never change")
-//        switch type {
-//        case .insert:
-//            tableView.insertSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
-//        case .delete:
-//            tableView.deleteSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
-//        case .move:
-//            break
-//        case .update:
-//            break
-//        }
+        //        switch type {
+        //        case .insert:
+        //            tableView.insertSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
+        //        case .delete:
+        //            tableView.deleteSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
+        //        case .move:
+        //            break
+        //        case .update:
+        //            break
+        //        }
     }
-
+    
     
     //MARK: Helpers
     fileprivate func showAlertWithTitle(_ title: String, message: String, cancelButtonTitle: String) {

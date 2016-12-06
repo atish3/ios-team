@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0286D4CA1DEFA10000EEDE07 /* AnonymouseReplyViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0286D4C91DEFA10000EEDE07 /* AnonymouseReplyViewCell.swift */; };
+		02B6E4421DF3719B00B2AE15 /* AnonymouseReplySentCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B6E4411DF3719B00B2AE15 /* AnonymouseReplySentCore.swift */; };
 		02F9C78A1DEDFCE800CA631D /* AnonymouseMessageCore+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F9C7861DEDFCE800CA631D /* AnonymouseMessageCore+CoreDataProperties.swift */; };
 		02F9C78B1DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F9C7871DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataClass.swift */; };
 		02F9C78C1DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F9C7881DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataProperties.swift */; };
@@ -80,6 +81,7 @@
 
 /* Begin PBXFileReference section */
 		0286D4C91DEFA10000EEDE07 /* AnonymouseReplyViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseReplyViewCell.swift; sourceTree = "<group>"; };
+		02B6E4411DF3719B00B2AE15 /* AnonymouseReplySentCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseReplySentCore.swift; sourceTree = "<group>"; };
 		02F9C7861DEDFCE800CA631D /* AnonymouseMessageCore+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnonymouseMessageCore+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		02F9C7871DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnonymouseReplyCore+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		02F9C7881DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnonymouseReplyCore+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
@@ -157,6 +159,7 @@
 			children = (
 				1ABE12F11C9756A2005923BA /* AnonymouseConnectivityController.swift */,
 				1A932A541DB3CAC7004294A9 /* AnonymouseMessageSentCore.swift */,
+				02B6E4411DF3719B00B2AE15 /* AnonymouseReplySentCore.swift */,
 				1AE809CA1DD6B10A0009D7D1 /* AnonymouseRatingSentCore.swift */,
 			);
 			name = Connection;
@@ -319,6 +322,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A692BBB1DAE964D00C03E1A /* AnonymouseDataController.swift in Sources */,
+				02B6E4421DF3719B00B2AE15 /* AnonymouseReplySentCore.swift in Sources */,
 				0286D4CA1DEFA10000EEDE07 /* AnonymouseReplyViewCell.swift in Sources */,
 				1ABE12EE1C97521C005923BA /* AnonymouseTableViewCell.swift in Sources */,
 				1AD52A961D9964A9000F13DE /* AnonymouseNavigationStyleController.swift in Sources */,

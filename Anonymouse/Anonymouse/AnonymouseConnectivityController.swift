@@ -133,6 +133,27 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         }
     }
     
+    func sendAllReplies(toRequesters ids: [MCPeerID]) {
+        let replyCoreArray: [AnonymouseReplyCore] = dataController.fetchReplies(withKey: "date", ascending: true)
+        let replySentArray: [AnonymouseReplySentCore] = replyCoreArray.map { (replyCore) -> AnonymouseReplySentCore in
+            return AnonymouseReplySentCore(reply: replyCore)
+        }
+        let ratingSentArray: [AnonymouseRatingSentCore] = replyCoreArray.map { (replyCore) -> AnonymouseRatingSentCore in
+            return AnonymouseRatingSentCore(reply: replyCore)
+        }
+        
+        do {
+            let archivedReplyArray: Data = NSKeyedArchiver.archivedData(withRootObject: replySentArray)
+            try self.sessionObject.send(archivedReplyArray, toPeers: ids, with: MCSessionSendDataMode.reliable)
+            
+            let archivedRatingArray: Data = NSKeyedArchiver.archivedData(withRootObject: ratingSentArray)
+            try self.sessionObject.send(archivedRatingArray, toPeers: ids, with: MCSessionSendDataMode.reliable)
+        } catch let error as NSError {
+            NSLog("%@", error)
+        }
+    }
+    
+    
     //This functions sends an individual message to all connected peers.
     //It is meant to be used when the user is connected to nearby peers
     //and they compose a new message.
@@ -143,6 +164,19 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         
         do {
             let archivedMessage: Data = NSKeyedArchiver.archivedData(withRootObject: message)
+            try self.sessionObject.send(archivedMessage, toPeers: sessionObject.connectedPeers, with: MCSessionSendDataMode.reliable)
+        } catch let error as NSError {
+            NSLog("%@", error)
+        }
+    }
+    
+    func send(individualReply reply: AnonymouseReplySentCore) {
+        guard sessionObject.connectedPeers.count > 0 else {
+            return
+        }
+        
+        do {
+            let archivedMessage: Data = NSKeyedArchiver.archivedData(withRootObject: reply)
             try self.sessionObject.send(archivedMessage, toPeers: sessionObject.connectedPeers, with: MCSessionSendDataMode.reliable)
         } catch let error as NSError {
             NSLog("%@", error)
@@ -210,9 +244,10 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         
         //Check if the message sent was a single message
         if let message = NSKeyedUnarchiver.unarchiveObject(with: data) as? AnonymouseMessageSentCore {
+            let messageHash: String = message.text.sha1()
             let messageHashes: [String] = dataController.fetchMessageHashes()
             //Add the message if we don't have it already
-            if !messageHashes.contains(message.messageHash) {
+            if !messageHashes.contains(messageHash) {
                 self.dataController.addMessage(message.text!, date: message.date!, user: message.user!)
             }
         }
@@ -221,8 +256,37 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
             let messageHashes: [String] = dataController.fetchMessageHashes()
             for message in messageArray {
                 //Add each message if we don't have it
-                if !messageHashes.contains(message.messageHash) {
+                let messageHash: String = message.text.sha1()
+                if !messageHashes.contains(messageHash) {
                     self.dataController.addMessage(message.text!, date: message.date!, user: message.user!)
+                }
+            }
+        }
+        else if let reply = NSKeyedUnarchiver.unarchiveObject(with: data) as? AnonymouseReplySentCore {
+            let replyHashes: [String] = dataController.fetchReplyHashes()
+            let replyHash: String = reply.text.sha1()
+            if !replyHashes.contains(replyHash) {
+                let messageObjects: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
+                for message in messageObjects {
+                    if message.text!.sha1() == reply.parentHash {
+                        dataController.addReply(withText: reply.text!, date: reply.date!, user: reply.user!, toMessage: message)
+                        break
+                    }
+                }
+            }
+        }
+        else if let replyArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? [AnonymouseReplySentCore] {
+            let replyHashes: [String] = dataController.fetchReplyHashes()
+            let messageObjects: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
+            for reply in replyArray {
+                let replyHash: String = reply.text.sha1()
+                if !replyHashes.contains(replyHash) {
+                    for message in messageObjects {
+                        if message.text!.sha1() == reply.parentHash {
+                            dataController.addReply(withText: reply.text!, date: reply.date!, user: reply.user!, toMessage: message)
+                            break
+                        }
+                    }
                 }
             }
         }
@@ -232,6 +296,15 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
                 if message.text!.sha1() == rating.messageHash {
                     let previousRating: Int = Int(message.rating!)
                     message.rating = NSNumber(integerLiteral: rating.rating! + previousRating)
+                    return
+                }
+            }
+            let replyCoreArray: [AnonymouseReplyCore] = dataController.fetchReplies(withKey: "date", ascending: true)
+            for reply in replyCoreArray {
+                if reply.text!.sha1() == rating.messageHash {
+                    let previousRating: Int = Int(reply.rating!)
+                    reply.rating = NSNumber(integerLiteral: rating.rating! + previousRating)
+                    return
                 }
             }
         }
@@ -242,10 +315,20 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
                 messageCoreDictionary[message.text!.sha1()] = message
             }
             
+            let replyCoreArray: [AnonymouseReplyCore] = dataController.fetchReplies(withKey: "date", ascending: true)
+            var replyCoreDictionary: [String: AnonymouseReplyCore] = [String:AnonymouseReplyCore]()
+            for reply in replyCoreArray {
+                replyCoreDictionary[reply.text!.sha1()] = reply
+            }
+            
             for rating in ratingArray {
                 if let message = messageCoreDictionary[rating.messageHash] {
                     let previousRating: Int = Int(message.rating!)
                     message.rating = NSNumber(integerLiteral: rating.rating! + previousRating)
+                }
+                if let reply = replyCoreDictionary[rating.messageHash] {
+                    let previousRating: Int = Int(reply.rating!)
+                    reply.rating = NSNumber(integerLiteral: rating.rating! + previousRating)
                 }
             }
         }
@@ -264,6 +347,7 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         //The moment we connect to a peer, send them all of our messages.
         if state == MCSessionState.connected {
             self.sendAllMessages(toRequesters: [peerID])
+            self.sendAllReplies(toRequesters: [peerID])
         }
         else if state == MCSessionState.connecting
         {
