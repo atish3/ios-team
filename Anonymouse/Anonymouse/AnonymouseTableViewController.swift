@@ -9,13 +9,16 @@ import CryptoSwift
 import UIKit
 import CoreData
 
-class AnonymouseTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class AnonymouseTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
     var managedObjectContext: NSManagedObjectContext!
     var detailViewController: AnonymouseDetailViewController!
+    var searchController: UISearchController!
     var fetchRequest: NSFetchRequest<AnonymouseMessageCore>
+    var searchRequest: NSFetchRequest<AnonymouseMessageCore> = NSFetchRequest<AnonymouseMessageCore>(entityName: "AnonymouseMessageCore")
     
     init(withFetchRequest fetchRequest: NSFetchRequest<AnonymouseMessageCore>) {
         self.fetchRequest = fetchRequest
+        self.searchRequest.sortDescriptors = fetchRequest.sortDescriptors
         super.init(style: UITableViewStyle.plain)
     }
     
@@ -34,6 +37,16 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         fetchedResultsController.delegate = self
         
         return fetchedResultsController
+    }()
+    
+    lazy var searchResultsController: NSFetchedResultsController<AnonymouseMessageCore> = {
+        // Initialize Search Results Controller
+        let searchResultsController: NSFetchedResultsController<AnonymouseMessageCore> = NSFetchedResultsController(fetchRequest: self.searchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+        
+        // Configure Search Results Controller
+        searchResultsController.delegate = self
+        
+        return searchResultsController
     }()
     
     //MARK: View Methods
@@ -94,6 +107,15 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
             self.showAlertWithTitle("Warning", message: message, cancelButtonTitle: "OK")
         }
         
+        //Initialize search controller (but not show it in the table view yet)
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.definesPresentationContext = true
+        definesPresentationContext = true
+        tableView.tableHeaderView = nil
+        searchController.searchBar.delegate = self
+
         //Set up the tableView style
         self.tableView.backgroundColor = UIColor.groupTableViewBackground
         self.tableView.cellLayoutMarginsFollowReadableWidth = false
@@ -103,6 +125,9 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         self.refreshControl?.backgroundColor = UIColor.groupTableViewBackground
         self.refreshControl?.tintColor = UIColor.darkGray
         self.refreshControl?.addTarget(self, action: #selector(self.refreshControlDidChangeValue), for: UIControlEvents.valueChanged)
+        
+        // This is a hard coded fix for searchBar related UI bug
+        self.automaticallyAdjustsScrollViewInsets = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -116,6 +141,15 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         self.refreshControl?.endRefreshing()
     }
     
+    //MARK: Scroll to show searchBar
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let yPos: CGFloat = scrollView.contentOffset.y
+
+        if (tableView.tableHeaderView == nil && yPos < 0) {
+            tableView.tableHeaderView = searchController.searchBar
+        }
+    }
+    
     //MARK: tableViewControllerDelegate
     override func numberOfSections(in tableView: UITableView) -> Int {
         if let sections: [NSFetchedResultsSectionInfo] = fetchedResultsController.sections {
@@ -127,21 +161,38 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
     //This function is part of UITableViewController's built-in classes.
     //It asks for the number of rows in tableView = number of messages = size of cellDataArray.
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let sections: [NSFetchedResultsSectionInfo] = fetchedResultsController.sections {
+        var frc: NSFetchedResultsController<NSFetchRequestResult>
+        
+        if searchController.isActive && searchController.searchBar.text != "" {
+            frc = searchResultsController as! NSFetchedResultsController<NSFetchRequestResult>
+        } else {
+            frc = fetchedResultsController as! NSFetchedResultsController<NSFetchRequestResult>
+        }
+        
+        if let sections: [NSFetchedResultsSectionInfo] = frc.sections {
             let sectionInfo: NSFetchedResultsSectionInfo = sections[section]
             return sectionInfo.numberOfObjects
         }
+        
         return 0
     }
     
     //This function is part of UITableViewController's built-in classes.
     //In it, we tell the tableView which message to render at each index of the table.
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        var frc: NSFetchedResultsController<NSFetchRequestResult>
+        
+        if searchController.isActive && searchController.searchBar.text != "" {
+            frc = searchResultsController as! NSFetchedResultsController<NSFetchRequestResult>
+        } else {
+            frc = fetchedResultsController as! NSFetchedResultsController<NSFetchRequestResult>
+        }
+        
         //Grab the appropriate data from our cellDataArray.
         
-        let anonymouseMessageCoreData: AnonymouseMessageCore = fetchedResultsController.object(at: indexPath)
+        let anonymouseMessageCoreData: AnonymouseMessageCore = frc.object(at: indexPath) as! AnonymouseMessageCore
         let cell: AnonymouseTableViewCell
-        
         
         //Create a cell of type MCChatTableViewCell
         let reusableCell: AnyObject = tableView.dequeueReusableCell(withIdentifier: "AnonymouseTableViewCell", for: indexPath)
@@ -164,9 +215,15 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
     //This function is part of UITableViewController's built-in classes.
     //In it, we determine the height of each cell in the tableView.
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        //Notice that MCChatCellData already have a property called cellHeight
-        //that depends on the size of the message.
-        let anonymouseMessageCoreData: AnonymouseMessageCore = fetchedResultsController.object(at: indexPath)
+        
+        var frc: NSFetchedResultsController<NSFetchRequestResult>
+        if searchController.isActive && searchController.searchBar.text != "" {
+            frc = searchResultsController as! NSFetchedResultsController<NSFetchRequestResult>
+        } else {
+            frc = fetchedResultsController as! NSFetchedResultsController<NSFetchRequestResult>
+        }
+        
+        let anonymouseMessageCoreData: AnonymouseMessageCore = frc.object(at: indexPath) as! AnonymouseMessageCore
         
         return AnonymouseTableViewCell.getClippedCellHeight(withMessageText: anonymouseMessageCoreData.text!)
     }
@@ -238,5 +295,36 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         
         // Present Alert Controller
         present(alertController, animated: true, completion: nil)
+    }
+    
+    // MARK: UISearchBarDelegate
+    // This is a hard coded fix for searchBar related UI bug
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        tableView.contentInset = UIEdgeInsets.zero;
+        //self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    }
+    
+    // MARK: UISearchResultsUpdating
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchResult(searchText: searchController.searchBar.text!)
+    }
+    
+    func filterContentForSearchResult(searchText: String, scope: String = "All") {
+        let predicate = NSPredicate(format: "text contains[c] %@", searchText)
+        searchRequest.predicate = predicate
+        do {
+            try searchResultsController.performFetch()
+        } catch {
+            let fetchError: NSError = error as NSError
+            print("\(fetchError), \(fetchError.userInfo)")
+            
+            let applicationName: Any? = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName")
+            let message: String = "A serious application error occurred while \(applicationName) tried to read your data. Please contact support for help."
+            
+            self.showAlertWithTitle("Warning", message: message, cancelButtonTitle: "OK")
+        }
+
+        tableView.reloadData()
+        
     }
 }
