@@ -60,7 +60,7 @@
 * Write comments for your codes. Remember you are not developing alone. 
 
 ## Team Members that Participated Before
-* Pascal
+* Pascal psturm@umich.edu
 * Qinye Li qinyeli@umich.edu
 * Yufan Sun yufansun@umich.edu
 * Kevin
