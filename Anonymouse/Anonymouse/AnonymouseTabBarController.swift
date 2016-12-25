@@ -9,13 +9,23 @@
 import UIKit
 import CoreData
 
+/**
+ A subclass of `UITabBarController` that conforms to `UITabBarControllerDelegate`.
+ This class has a custom orange gradient and white buttons.
+ 
+ This class contains the three tableViews (Most Recent, Favorites, Top Rated) that display messages,
+ as well as the settings view controller. It also connects the tableViews to the compose action, which
+ brings up the message composition view.
+ */
 class AnonymouseTabBarController: UITabBarController, UITabBarControllerDelegate {
+    ///An instance of `AnonymouseNavigationStyleController` that contains an `AnonymouseComposeViewController`.
     var composeNavigationController: AnonymouseNavigationStyleController = AnonymouseNavigationStyleController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
         
+        ///A view controller to compose new messages.
         let composeViewController: AnonymouseComposeViewController = AnonymouseComposeViewController()
         composeNavigationController.viewControllers = [composeViewController]
         
@@ -33,8 +43,11 @@ class AnonymouseTabBarController: UITabBarController, UITabBarControllerDelegate
         let bestRatedFetchRequest: NSFetchRequest<AnonymouseMessageCore> = NSFetchRequest<AnonymouseMessageCore>(entityName: "AnonymouseMessageCore")
         bestRatedFetchRequest.sortDescriptors = [bestRatedSortDescriptor, mostRecentSortDescriptor]
         
+        ///Displays the most recent messages.
         let mostRecentTableViewController: AnonymouseTableViewController = AnonymouseTableViewController(withFetchRequest: mostRecentFetchRequest)
+        ///Displays messages that the user has favorited.
         let favoriteTableViewController: AnonymouseTableViewController = AnonymouseTableViewController(withFetchRequest: favoriteFetchRequest)
+        ///Displays the highest rated messages.
         let bestRatedTableViewController: AnonymouseTableViewController = AnonymouseTableViewController(withFetchRequest: bestRatedFetchRequest)
         
         mostRecentTableViewController.title = "Most Recent"
@@ -55,9 +68,6 @@ class AnonymouseTabBarController: UITabBarController, UITabBarControllerDelegate
         favoriteNavigationController.viewControllers = [favoriteTableViewController]
         bestRatedNavigationController.viewControllers = [bestRatedTableViewController]
         
-//        mostRecentNavigationController.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.mostRecent, tag: 0)
-//        favoriteNavigationController.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.favorites, tag: 1)
-        
         let mostRecentTabBarItem: UITabBarItem = UITabBarItem(title: "Most Recent", image: UIImage(named: "mostRecentEmpty")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "mostRecentFilled"))
         mostRecentTabBarItem.tag = 0
         mostRecentNavigationController.tabBarItem = mostRecentTabBarItem
@@ -73,6 +83,7 @@ class AnonymouseTabBarController: UITabBarController, UITabBarControllerDelegate
         let settingsTabBarItem: UITabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: "settingsIconEmpty")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "settingsIconFilled"))
         settingsTabBarItem.tag = 3
         let settingsNavigationController: AnonymouseNavigationStyleController = AnonymouseNavigationStyleController()
+        ///A `viewController` to display the app's settings.
         let settingsViewController: AnonymouseSettingsViewController = AnonymouseSettingsViewController(style: UITableViewStyle.grouped)
         settingsNavigationController.viewControllers = [settingsViewController]
         settingsNavigationController.tabBarItem = settingsTabBarItem
@@ -109,6 +120,7 @@ class AnonymouseTabBarController: UITabBarController, UITabBarControllerDelegate
         self.tabBar.tintColor = UIColor.white
     }
     
+    ///Display the compose view, which allows the user to write and send new messages.
     func compose() {
         self.present(composeNavigationController, animated: true, completion: nil)
     }

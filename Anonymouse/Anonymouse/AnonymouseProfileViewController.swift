@@ -8,6 +8,7 @@
 
 import UIKit
 
+///A subclass of `UITextField` that does not allow pasting; used to input the username.
 class NoPasteTextField: UITextField {
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         if action == #selector(UITextField.paste(_:)) {
@@ -17,12 +18,25 @@ class NoPasteTextField: UITextField {
     }
 }
 
+/**
+ A subclass of `UIViewController` that is displayed when
+ the user wants to change their username. 
+ 
+ Prevents usernames that are greater than 15 characters; removes all spaces from usernames
+ and prevents pasting. Also prevents the user from changing their username 
+ more than once a week.
+ */
 class AnonymouseProfileViewController: UIViewController, UITextFieldDelegate {
     
+    ///The `textField` in which the user enters their username.
     var usernameTextField: NoPasteTextField!
+    ///The label which displays the username when it is not being edited.
     var usernameLabel: UILabel!
+    ///The button that allows a user to edit their username.
     var editButton: UIBarButtonItem!
+    ///The label above the `usernameTextField` that says `"Screen name:"`.
     var usernameHeader: UILabel!
+    ///`true` if the user is currently editing their username; false otherwise.
     var isEditingProfile: Bool = false
     
     override func viewDidLoad() {
@@ -69,10 +83,15 @@ class AnonymouseProfileViewController: UIViewController, UITextFieldDelegate {
         view.addGestureRecognizer(tap)
     }
     
+    ///Dismisses the keyboard if it is currently active.
     func returnKeyboard() {
         usernameTextField.resignFirstResponder()
     }
     
+    /**
+     Saves the inputted username and returns the keyboard if the user is editing.
+     Displays the keyboard and the `usernameTextField` if the user is not editing.
+     */
     func toggleEditMode() {
         if isEditingProfile {
             if let text = usernameTextField.text, text.isEmpty {

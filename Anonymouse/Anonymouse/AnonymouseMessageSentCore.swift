@@ -8,14 +8,22 @@
 
 import UIKit
 
+///A subclass of `NSObject` that conforms to `NSCoding`. This class is used to send messages to nearby peers.
 class AnonymouseMessageSentCore: NSObject, NSCoding {
+    ///The date the message was composed.
     var date: Date!
+    ///The text of the message.
     var text: String!
+    ///The user that composed the message.
     var user: String!
     
-    //A subclass of NSObject that conforms to NSCoding Protocol.
-    //This class is the type that is sent through MC
     
+    /**
+        Initialize a sent message object from a stored message object.
+     
+        - Parameters:
+            - message: The stored message to send.
+     */
     convenience init(message: AnonymouseMessageCore) {
         self.init()
         self.date = message.date! as Date!
@@ -23,6 +31,14 @@ class AnonymouseMessageSentCore: NSObject, NSCoding {
         self.user = message.user!
     }
     
+    /**
+        Initialize a sent message object with the text `text`, date `date`, and user `user`.
+     
+        - Parameters:
+            - text: The text of the message.
+            - date: The date the message was composed.
+            - user: The user that composed the message.
+     */
     convenience init(text: String, date: Date, user: String) {
         self.init()
         

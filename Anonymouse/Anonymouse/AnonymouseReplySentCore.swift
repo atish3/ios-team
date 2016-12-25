@@ -8,12 +8,23 @@
 
 import UIKit
 
+///A sublcass of `NSObject` that conforms to `NSCoding`. This class is used to send replies to nearby peers.
 class AnonymouseReplySentCore: NSObject, NSCoding {
+    ///The date the reply was composed.
     var date: Date!
+    ///The text of the reply.
     var text: String!
+    ///The user that composed the reply.
     var user: String!
+    ///The sha1() hash of the text of the parent message, used to find the parent.
     var parentHash: String!
     
+    /**
+        Initialize a sent reply object from a stored reply object.
+     
+        - Parameters:
+            - reply: The stored reply to send.
+     */
     convenience init(reply: AnonymouseReplyCore) {
         self.init()
         self.date = reply.date! as Date!
@@ -22,6 +33,15 @@ class AnonymouseReplySentCore: NSObject, NSCoding {
         self.parentHash = reply.parentMessage!.text!.sha1()
     }
     
+    /**
+        Initialize a send reply object with the text `text`, date `date`, and user `user`.
+    
+        - Parameters:
+            - text: The text of the reply.
+            - date: The date the reply was composed.
+            - user: The user that composed the reply.
+            - parentText: The sha1() hash of the text of the parent message.
+     */
     convenience init(text: String, date: Date, user: String, parentText: String) {
         self.init()
         

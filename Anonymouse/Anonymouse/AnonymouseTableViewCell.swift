@@ -7,21 +7,36 @@
 //
 
 import UIKit
-//TODO: SUBCLASS THIS AnonymouseReplyViewCell to handle weird gray bar moving
 
+///A custom `UITableViewCell` that displays messages in the main tables.
 class AnonymouseTableViewCell : UITableViewCell {
     
     //MARK: Constant Class Properties
+    ///The distance from the left side of the white cell to the message.
     static let messageXOffset: CGFloat = 8
+    ///The distance from the top of the white cell to the username.
     static let messageYOffset: CGFloat = 5
+    ///The vertical distance from the username to the message body.
     static let userMessageDistance: CGFloat = 25
+    ///The height of the gray feature bar below the white cell.
     static let featuresBarHeight: CGFloat = 30.0
     
+    ///The font of the date label.
     static let dateFont: UIFont = UIFont(name: "Helvetica", size: 16.0)!
+    ///The font of the message label.
     static let messageFont: UIFont = UIFont(name: "Helvetica", size: 16.0)!
+    ///The font of the username label.
     static let userFont: UIFont = UIFont(name: "Helvetica-Bold", size: 19.0)!
+    ///The amount of extra space needed to define the height of the cell.
     static let spacing: CGFloat = 47.0
     
+    
+    /**
+        - Returns: The height an instance of `AnonymouseTableViewCell` would have if it had the given text.
+    
+        - Parameters:
+            - text: The text to put in the message body to determine the height of the cell.
+    */
     static func getCellHeight(withMessageText text: String) -> CGFloat {
         let messageLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 340.0, height: CGFloat.greatestFiniteMagnitude))
         messageLabel.numberOfLines = 0
@@ -32,6 +47,12 @@ class AnonymouseTableViewCell : UITableViewCell {
         return messageLabel.frame.size.height + spacing + featuresBarHeight
     }
     
+    /**
+        - Returns: The height an instance of `AnonymouseTableViewCell` would have if it had the given text, clipped at three maximum lines of text.
+     
+        - Parameters:
+            - text: The text to put in the message body to determine the height of the cell.
+     */
     static func getClippedCellHeight(withMessageText text: String) -> CGFloat {
         let messageLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 340.0, height: CGFloat.greatestFiniteMagnitude))
         messageLabel.numberOfLines = 3
@@ -43,23 +64,37 @@ class AnonymouseTableViewCell : UITableViewCell {
     }
     
     //MARK: UIView Properties
+    ///Displays the date the message was composed.
     var dateLabel: UILabel?
+    ///Displays the main body of the message.
     var messageLabel: UILabel?
+    ///Displays the user that composed the message.
     var userLabel: UILabel?
+    ///The white rectangle that defines each cell.
     var whiteBackdrop: UIView?
+    ///The gray rectangle that defines the feature bar.
     var grayFeatureBar: UIView?
+    ///The like button.
     var upvoteButton: UIButton?
+    ///The dislike button.
     var downvoteButton: UIButton?
+    ///The favorite button.
     var favoriteButton: UIButton?
+    ///Displays the rating of the given message.
     var numLikes: UILabel?
+    ///The line between the dislike button and the favorite button.
     var divider1: UIView?
+    ///The line between the favorite button and the reply button.
     var divider2: UIView?
+    ///The reply button.
     var replyButton: UIButton?
+    //TODO: Make this display the number of replies the message has.
     var replyLabel: UILabel?
     
+    ///`true` if this message is in a table of other messages, `false` if this message is alone in the detail view.
     var isInTable: Bool = true
     
-    //Once we set the message data, update this cell's UI
+    ///The variable that holds the data of the message.
     var data: AnonymouseMessageCore? {
         didSet
         {
@@ -67,6 +102,7 @@ class AnonymouseTableViewCell : UITableViewCell {
         }
     }
     
+    ///Called when the cell is tapped; selects the cell.
     func highlightBackground() {
         guard let wb = whiteBackdrop else { return }
         wb.backgroundColor = UIColor(white: 0.8, alpha: 1.0)
@@ -83,6 +119,7 @@ class AnonymouseTableViewCell : UITableViewCell {
         d2.backgroundColor = UIColor(white: 0.6, alpha: 1.0)
     }
     
+    ///Called when the cell is released; deselects the cell.
     func releaseBackground() {
         guard let wb = whiteBackdrop else { return }
         wb.backgroundColor = UIColor.white
@@ -126,6 +163,7 @@ class AnonymouseTableViewCell : UITableViewCell {
         self.setup()
     }
     
+    ///Called when the cell is first created. Sets default UI properties common to all cells.
     func setup() {
         self.contentView.backgroundColor = UIColor.clear
         self.backgroundColor = UIColor.clear
@@ -137,6 +175,7 @@ class AnonymouseTableViewCell : UITableViewCell {
     }
     
     //MARK: Creation/Update Methods
+    ///Creates the label that displays the date.
     func createDateLabel() {
         dateLabel = UILabel()
         dateLabel!.textAlignment = NSTextAlignment.center
@@ -144,6 +183,7 @@ class AnonymouseTableViewCell : UITableViewCell {
         dateLabel!.font = AnonymouseTableViewCell.dateFont
     }
     
+    ///Creates the label that displays the username.
     func createUserLabel() {
         userLabel = UILabel()
         let darkOrange: UIColor = UIColor(colorLiteralRed: 255.0/255.0, green: 107.0/255.0, blue: 72.0/255.0, alpha: 1.0)
@@ -152,6 +192,13 @@ class AnonymouseTableViewCell : UITableViewCell {
         userLabel!.font = AnonymouseTableViewCell.userFont
     }
     
+    /**
+     Creates the label that displays the message body.
+     
+     - Parameters: 
+        - numberOfLines: The maximum number of lines the message body should have; clips if the message
+            body exceeds the number of lines.
+     */
     func createMessageLabel(withNumberOfLines numberOfLines: Int) {
         let messageWidth: CGFloat = self.frame.width - 5 * AnonymouseTableViewCell.messageXOffset
         messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: messageWidth, height: CGFloat.greatestFiniteMagnitude))
@@ -162,6 +209,7 @@ class AnonymouseTableViewCell : UITableViewCell {
         messageLabel!.font = AnonymouseTableViewCell.messageFont
     }
     
+    ///Creates the white rectangle that defines the cell.
     func createBackdrop() {
         whiteBackdrop = UIView(frame: self.bounds)
         whiteBackdrop!.frame.size.width -= 20
@@ -183,6 +231,7 @@ class AnonymouseTableViewCell : UITableViewCell {
         updateFeatureBar()
     }
     
+    ///Updates the feature bar to correctly reflect the rating of the message, and whether or not it is favorited.
     func updateFeatureBar() {
         
         guard let messageData = data else {
@@ -224,6 +273,7 @@ class AnonymouseTableViewCell : UITableViewCell {
         replyButton!.frame.origin.x = divider2!.frame.origin.x - 35
     }
     
+    ///Create the gray feature bar at the bottom of the cell.
     func createGrayFeatureBar() {
         grayFeatureBar = UIView()
         grayFeatureBar!.backgroundColor = UIColor(white: 0.93, alpha: 1.0)
@@ -286,6 +336,15 @@ class AnonymouseTableViewCell : UITableViewCell {
     
     
     //MARK: Button Methods
+    
+    /**
+     Animates the image named `name` at point `point`, expanding outwards and fading out over the duration of 0.4 seconds.
+     
+     - Parameters:  
+        - name: The string name of the image to animate outwards.
+        - point: The `CGPoint` at which to place the animation.
+        - superView: The view to add the animation to.
+     */
     func expandAnimate(imageNamed name: String, fromPoint point: CGPoint, withSuperView superView: UIView) {
         let expandImage: UIImageView = UIImageView(image: UIImage(named: name))
         expandImage.alpha = 0.5
@@ -301,6 +360,11 @@ class AnonymouseTableViewCell : UITableViewCell {
         }
     }
     
+    /**
+        Called when the reply button is tapped.
+        Transitions to the detail view if the message is in the table, 
+        displays the `replyTextView` of the detail view if the cell is in the detail view already.
+     */
     func replyTapped() {
         if isInTable {
             NotificationCenter.default.post(name: NSNotification.Name("performDetailTransitionFromMessage"), object: nil, userInfo: ["cell": self])
@@ -309,6 +373,7 @@ class AnonymouseTableViewCell : UITableViewCell {
         }
     }
     
+    ///Called when the like button is tapped. Likes the message, and displays a like animation.
     func upvoteTapped() {
         guard let messageData = data else {
             return
@@ -325,6 +390,7 @@ class AnonymouseTableViewCell : UITableViewCell {
         }
     }
     
+    ///Called when the dislike button is tapped. Dislikes the message, and displays a dislike animation.
     func downvoteTapped() {
         guard let messageData = data else {
             return
@@ -342,6 +408,7 @@ class AnonymouseTableViewCell : UITableViewCell {
         }
     }
     
+    ///Called when the favorite button is tapped. Favorites the message, and displays a favorite animation.
     func favoriteTapped() {
         guard let messageData = data else {
             return
@@ -365,6 +432,7 @@ class AnonymouseTableViewCell : UITableViewCell {
         }
     }
     
+    ///Called when any of the feature bar buttons are tapped; calls the correct method depending on which button was tapped.
     func featureBarButtonTapped(sender: AnyObject) {
         switch sender.tag {
         case 0:
@@ -384,13 +452,16 @@ class AnonymouseTableViewCell : UITableViewCell {
         }
     }
     
-    
+    ///Called when the property `data` is set. Updates the UI to reflect the current `data`.
     func updateCellUI() {
         guard let cellData = data else {
             return
         }
+        ///The optional date from `data`.
         let dataDate: NSDate? = cellData.date
+        ///The optional text from `data`.
         let dataText: String? = cellData.text
+        ///The optional user from `data`.
         let dataUser: String? = cellData.user
         
         

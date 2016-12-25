@@ -8,6 +8,9 @@
 
 import UIKit
 
+/**
+ A child of `UINavigationController` with an orange gradient and white text.
+ */
 class AnonymouseNavigationStyleController: UINavigationController {
 
     override func viewDidLoad() {

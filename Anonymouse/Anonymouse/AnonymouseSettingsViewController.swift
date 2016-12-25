@@ -8,11 +8,21 @@
 
 import UIKit
 
+/**
+ A sub-class of `UITableViewController` that displays the settings of the app in a static table view.
+ Through this view controller, the user can start/stop broadcasting messages, change their username,
+ and delete all of the stored messages.
+ */
 class AnonymouseSettingsViewController: UITableViewController {
+    ///A weak reference to the connectivityController; this allows the user to toggle broadcast settings.
     weak var connectivityController: AnonymouseConnectivityController!
+    ///A weak reference to the dataController; this allows the user to delete all messages from the settings view.
     weak var dataController: AnonymouseDataController!
     
+    ///An instance of `AnonymouseProfileViewController` that allows users to change their usernames.
     var profileViewController = AnonymouseProfileViewController()
+    
+    ///The label on the broadcast button; has the text `"Stop Broadcasting"` or `"Begin Broadcasting"`.
     var broadcastLabel: UILabel!
     
     override func viewDidLoad() {
@@ -101,6 +111,8 @@ class AnonymouseSettingsViewController: UITableViewController {
     }
     
     //MARK: Connection methods
+    
+    ///A function that toggles whether or not the user is broadcasting/receiving messages or not.
     func toggleConnection() {
         let userPreferences: UserDefaults = UserDefaults.standard
     

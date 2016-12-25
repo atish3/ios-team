@@ -9,13 +9,25 @@ import CryptoSwift
 import UIKit
 import CoreData
 
+///A subclass of `UITableViewController` that displays user messages.
 class AnonymouseTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
+    ///The `NSManagedObjectContext` from which the messages appear.
     var managedObjectContext: NSManagedObjectContext!
+    ///The `viewController` that is shown when a message is tapped; also displays the tapped message's replies.
     var detailViewController: AnonymouseDetailViewController!
+    ///The object that controls the search functionality at the top of the `tableView`.
     var searchController: UISearchController!
+    ///The `NSFetchRequest` object that fetches messages from the `managedObjectContext`.
     var fetchRequest: NSFetchRequest<AnonymouseMessageCore>
+    ///The `NSFetchRequest` object that fetches messages based on what the user is searching for
     var searchRequest: NSFetchRequest<AnonymouseMessageCore> = NSFetchRequest<AnonymouseMessageCore>(entityName: "AnonymouseMessageCore")
     
+    /**
+     Returns an `AnonymouseTableViewController` with a specific `fetchRequest`.
+     
+     - parameters:
+        - fetchRequest: The `NSFetchRequest` used to fetch messages that are displayed in the table.
+     */
     init(withFetchRequest fetchRequest: NSFetchRequest<AnonymouseMessageCore>) {
         self.fetchRequest = fetchRequest
         self.searchRequest.sortDescriptors = fetchRequest.sortDescriptors
@@ -29,6 +41,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         super.init(coder: aDecoder)
     }
     
+    ///The object that fetches messages from the persistent store.
     lazy var fetchedResultsController: NSFetchedResultsController<AnonymouseMessageCore> = {
         // Initialize Fetched Results Controller
         let fetchedResultsController: NSFetchedResultsController<AnonymouseMessageCore> = NSFetchedResultsController(fetchRequest: self.fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
@@ -39,6 +52,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         return fetchedResultsController
     }()
     
+    ///The object that fetches messages related to the user's search.
     lazy var searchResultsController: NSFetchedResultsController<AnonymouseMessageCore> = {
         // Initialize Search Results Controller
         let searchResultsController: NSFetchedResultsController<AnonymouseMessageCore> = NSFetchedResultsController(fetchRequest: self.searchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
@@ -51,6 +65,13 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
     
     //MARK: View Methods
     
+    /**
+     Dispalys the `detailViewController` with the message in `notification`.
+     
+     - parameters:
+        - notification: a `Notification` that contains a `userInfo[String: AnonymouseTableViewCell]` dictionary
+            with `userInfo["cell"]` being the cell to display in detail.
+     */
     func performDetailTransition(notification: Notification) {
         guard self.view.window != nil else {
             return
@@ -91,7 +112,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
             let applicationName: Any? = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName")
             let message: String = "A serious application error occurred while \(applicationName) tried to read your data. Please contact support for help."
             
-            self.showAlertWithTitle("Warning", message: message, cancelButtonTitle: "OK")
+            self.showAlert(withTitle: "Warning", message: message, cancelButtonTitle: "OK")
         }
         
         //Attempt to recover all the the persisted messages.
@@ -104,7 +125,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
             let applicationName: Any? = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName")
             let message: String = "A serious application error occurred while \(applicationName) tried to read your data. Please contact support for help."
             
-            self.showAlertWithTitle("Warning", message: message, cancelButtonTitle: "OK")
+            self.showAlert(withTitle: "Warning", message: message, cancelButtonTitle: "OK")
         }
         
         //Initialize search controller (but not show it in the table view yet)
@@ -136,12 +157,16 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
     }
     
     //MARK: UIRefreshControl
+    ///Called when the `tableView` is pulled down to reveal the `refreshControl`.
     func refreshControlDidChangeValue() {
         self.tableView.reloadData()
         self.refreshControl?.endRefreshing()
     }
     
-    //MARK: Scroll to show searchBar
+    //MARK: Search Bar Methods
+    /**
+        Called when the search bar appears on the `tableView`.
+     */
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let yPos: CGFloat = scrollView.contentOffset.y
 
@@ -158,8 +183,6 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         return 0
     }
     
-    //This function is part of UITableViewController's built-in classes.
-    //It asks for the number of rows in tableView = number of messages = size of cellDataArray.
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var frc: NSFetchedResultsController<NSFetchRequestResult>
         
@@ -177,8 +200,6 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         return 0
     }
     
-    //This function is part of UITableViewController's built-in classes.
-    //In it, we tell the tableView which message to render at each index of the table.
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         var frc: NSFetchedResultsController<NSFetchRequestResult>
@@ -212,8 +233,6 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         return cell
     }
     
-    //This function is part of UITableViewController's built-in classes.
-    //In it, we determine the height of each cell in the tableView.
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         var frc: NSFetchedResultsController<NSFetchRequestResult>
@@ -283,7 +302,9 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         }
     }
     
-    fileprivate func showAlertWithTitle(_ title: String, message: String, cancelButtonTitle: String) {
+    /**Displays an alert with the given title, message and cancel button title.
+     */
+    fileprivate func showAlert(withTitle title: String, message: String, cancelButtonTitle: String) {
         // Initialize Alert Controller
         let alertController: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
@@ -309,6 +330,13 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         filterContentForSearchResult(searchText: searchController.searchBar.text!)
     }
     
+    /**
+     Displays messages based on the inputted `searchText`.
+     
+     - Parameters:
+        - searchText: The text to filter the messages by.
+        - scope: Honestly not sure what this is for. Ask Sindy.
+     */
     func filterContentForSearchResult(searchText: String, scope: String = "All") {
         let predicate = NSPredicate(format: "text contains[c] %@", searchText)
         searchRequest.predicate = predicate
@@ -321,7 +349,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
             let applicationName: Any? = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName")
             let message: String = "A serious application error occurred while \(applicationName) tried to read your data. Please contact support for help."
             
-            self.showAlertWithTitle("Warning", message: message, cancelButtonTitle: "OK")
+            self.showAlert(withTitle: "Warning", message: message, cancelButtonTitle: "OK")
         }
 
         tableView.reloadData()

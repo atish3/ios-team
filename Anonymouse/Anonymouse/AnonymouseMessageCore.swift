@@ -9,11 +9,17 @@
 import UIKit
 import CoreData
 
+
+///A subclass of `NSManagedObject`. This class is the type that represents messages in the core data model.
 class AnonymouseMessageCore: NSManagedObject {
-    // Insert code here to add functionality to your managed object subclass
+    /**
+    Initializes a new core data message, and inserts it into the `managedObjectContext`.
     
-    //A subclass of NSManagedObject. This class is the type that is stored
-    //in the core data model.
+    - Parameters:
+        - text: The text of the message.
+        - date: The date the message was composed.
+        - user: The user that composed the message.
+     */
     convenience init(text: String, date: Date, user: String) {
         let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext: NSManagedObjectContext = appDelegate.dataController.managedObjectContext
@@ -27,6 +33,7 @@ class AnonymouseMessageCore: NSManagedObject {
         self.isFavorite = NSNumber(booleanLiteral: false)
     }
     
+    ///Likes the message; changes the like status to 1, and sends a like message to nearby peers.
     func like() {
         let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         let connectivityController: AnonymouseConnectivityController = appDelegate.connectivityController
@@ -52,6 +59,7 @@ class AnonymouseMessageCore: NSManagedObject {
         }
     }
     
+    ///Dislikes the messages; changes the like status to 2, and sends a dislike message to nearby peers.
     func dislike() {
         let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         let connectivityController: AnonymouseConnectivityController = appDelegate.connectivityController

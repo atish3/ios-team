@@ -8,20 +8,25 @@
 
 import UIKit
 
+///A subclass of `AnonymouseTableViewCell` that displays replies in the detail view.
 class AnonymouseReplyViewCell: AnonymouseTableViewCell {
+    ///The amount of indent applied to replies relative to the main message.
     static let leftPadding: CGFloat = 20.0
     
+    ///The reply to display in the cell.
     var reply: AnonymouseReplyCore? {
         didSet {
             updateCellUI()
         }
     }
     
-    func pushLeft() {
+    ///Moves the cell right by `leftPadding` pixels.
+    func pushRight() {
         whiteBackdrop!.frame.origin.x += AnonymouseReplyViewCell.leftPadding
         grayFeatureBar!.frame.origin.x += AnonymouseReplyViewCell.leftPadding
     }
     
+    ///Creates the gray feature bar at the bottom of the cell, without the reply or favorite buttons.
     override func createGrayFeatureBar() {
         grayFeatureBar = UIView()
         grayFeatureBar!.backgroundColor = UIColor(white: 0.93, alpha: 1.0)
@@ -57,6 +62,7 @@ class AnonymouseReplyViewCell: AnonymouseTableViewCell {
         self.grayFeatureBar!.addSubview(numLikes!)
     }
     
+    ///Updates the UI to correctly reflect the rating of the reply.
     override func updateFeatureBar() {
         guard let replyData = reply else {
             return
@@ -85,6 +91,7 @@ class AnonymouseReplyViewCell: AnonymouseTableViewCell {
         downvoteButton!.frame.origin.x = numLikes!.frame.origin.x - 30
     }
     
+    ///Called when the `reply` property is set. Updates the UI to reflect the current reply.
     override func updateCellUI() {
         guard let replyData = reply else {
             return
@@ -97,7 +104,7 @@ class AnonymouseReplyViewCell: AnonymouseTableViewCell {
         //Safely unwrap data, since it is optional
         if whiteBackdrop == nil {
             createBackdrop()
-            pushLeft()
+            pushRight()
         }
         
         if dateLabel == nil {
@@ -164,6 +171,7 @@ class AnonymouseReplyViewCell: AnonymouseTableViewCell {
         }
     }
     
+    ///Called when the like button is tapped. Likes the current reply.
     override func upvoteTapped() {
         guard let replyData = reply else {
             return
@@ -180,6 +188,7 @@ class AnonymouseReplyViewCell: AnonymouseTableViewCell {
         }
     }
     
+    ///Called when the dislike button is tapped. Dislikes the current reply.
     override func downvoteTapped() {
         guard let replyData = reply else {
             return

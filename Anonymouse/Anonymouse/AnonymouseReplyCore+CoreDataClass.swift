@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 
+///A subclass of `NSManagedObject`. This class is the type that represents reply in the core data model.
 class AnonymouseReplyCore: NSManagedObject {
     convenience init(text: String, date: Date, user: String) {
         let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -22,6 +23,7 @@ class AnonymouseReplyCore: NSManagedObject {
         self.likeStatus = NSNumber(integerLiteral: 0)
     }
     
+    ///Likes the reply; changes the like status to 1, and sends a like message to nearby peers.
     func like() {
         let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         let connectivityController: AnonymouseConnectivityController = appDelegate.connectivityController
@@ -47,6 +49,7 @@ class AnonymouseReplyCore: NSManagedObject {
         }
     }
     
+    ///Dislikes the reply; changes the like status to 2, and sends a dislike message to nearby peers.
     func dislike() {
         let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         let connectivityController: AnonymouseConnectivityController = appDelegate.connectivityController
