@@ -20,7 +20,8 @@
 
 5. Plug your iPhone to the Mac. Trust!
 
-## Directory Structure
+## Application Structure
+![App Structure](AnonymouseAppStructure.png)
 ### THE MAIN
 * `AppDelegate.swift` 
 This class contains the entire app. It manages the methods that relate to app execution, such as handling background execution, and managing application states, such as foreground and background transition. It also contains the tab bar controller, the data controller and the connectivity controller.
