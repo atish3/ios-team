@@ -23,6 +23,10 @@ extension MCSessionState {
 ///A class that mnanages the connectivity protocols; sending messages and rating objects to nearby peers.
 class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate, MCSessionDelegate {
     
+    
+    //Hash set for compare
+    var visitedMessages: Set<String> = Set<String>()
+    
     //MARK: Links
     ///A weak reference to the `dataController`, which allows this class to store received messages.
     weak var dataController: AnonymouseDataController!
@@ -108,6 +112,19 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         self.serviceBrowser.stopBrowsingForPeers()
     }
     
+    //Compare message function
+    //Uses hash set to avoid redundancy in sending messages
+    func hashHasAlreadyBeenBroadcasted(hashToSend: String) -> Bool {
+        if (!visitedMessages.contains(hashToSend)) {
+            visitedMessages.insert(hashToSend);
+            return false;
+        }
+        return true;
+    }
+    
+    func addReceivedHash(hashReceived: String) {
+        visitedMessages.insert(hashReceived);
+    }
     
     //MARK: Data transfer methods
     
@@ -136,6 +153,29 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
             
             let archivedRatingArray: Data = NSKeyedArchiver.archivedData(withRootObject: ratingSentArray)
             try self.sessionObject.send(archivedRatingArray, toPeers: ids, with: MCSessionSendDataMode.reliable)
+        } catch let error as NSError {
+            NSLog("%@", error)
+        }
+    }
+    
+    //MARK: send filtered messages
+    //Uses hash set to eliminate redundant messages before sending
+    func sendFilteredMessages(toRequesters ids: [MCPeerID]) {
+        let messageCoreArray: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
+        var messageSentArray: [AnonymouseMessageSentCore] = messageCoreArray.map { (messageCore) -> AnonymouseMessageSentCore in
+            return AnonymouseMessageSentCore(message: messageCore)
+        }
+        //filter messageSentArray
+        for (index, message) in messageSentArray.enumerated(){
+            
+            //hash member needs added to messageSentCores
+            if hashHasAlreadyBeenBroadcasted(hashToSend: message.messageHash){
+                messageSentArray.remove(at: index)
+            }
+        }
+        do {
+            let archivedSentArray: Data = NSKeyedArchiver.archivedData(withRootObject: messageSentArray)
+            try self.sessionObject.send(archivedSentArray, toPeers: ids, with: MCSessionSendDataMode.reliable)
         } catch let error as NSError {
             NSLog("%@", error)
         }
