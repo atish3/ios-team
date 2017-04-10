@@ -21,10 +21,12 @@ class AnonymouseReplyCore: NSManagedObject {
         self.user = user
         self.rating = NSNumber(integerLiteral: 0)
         self.likeStatus = NSNumber(integerLiteral: 0)
+        self.userID = UIDevice.current.identifierForVendor!.uuidString
+        self.uniqueLikes = [String: Int]()
     }
     
-    ///Likes the reply; changes the like status to 1, and sends a like message to nearby peers.
-    func like() {
+    ///old implementation: Likes the reply; changes the like status to 1, and sends a like message to nearby peers.
+    func like2() {
         let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         let connectivityController: AnonymouseConnectivityController = appDelegate.connectivityController
         guard let likeStatus = self.likeStatus as? Int else {
@@ -33,24 +35,53 @@ class AnonymouseReplyCore: NSManagedObject {
         if likeStatus != 1 {
             if likeStatus == 2 {
                 self.rating = NSNumber(integerLiteral: self.rating!.intValue + 2)
-                let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: 2, messageHash: self.text!.sha1())
+                let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: 1, messageHash: self.text!.sha1(), likeHash: (self.text!+self.userID!).sha1())
                 connectivityController.send(individualRating: sentRatingObject)
             } else {
                 self.rating = NSNumber(integerLiteral: self.rating!.intValue + 1)
-                let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: 1, messageHash: self.text!.sha1())
+                let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: 1, messageHash: self.text!.sha1(), likeHash: (self.text!+self.userID!).sha1())
                 connectivityController.send(individualRating: sentRatingObject)
             }
             self.likeStatus = 1
         } else {
             self.likeStatus = 0
             self.rating = NSNumber(integerLiteral: self.rating!.intValue - 1)
-            let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: -1, messageHash: self.text!.sha1())
+            let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: -1, messageHash: self.text!.sha1(), likeHash: (self.text!+self.userID!).sha1())
+            connectivityController.send(individualRating: sentRatingObject)
+        }
+        
+    }
+    ///new implementation of like system using dictionary
+    func like(){
+        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        let connectivityController: AnonymouseConnectivityController = appDelegate.connectivityController
+        guard let likeStatus = self.likeStatus as? Int else {
+            return
+        }
+        if likeStatus != 1 {
+            self.uniqueLikes[(self.text!+self.userID!).sha1()] = 1
+            self.rating = NSNumber(0)
+            for likeNum in self.uniqueLikes!.values{
+                self.rating = NSNumber(integerLiteral: self.rating!.intValue + likeNum)
+            }
+            let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: 1, messageHash: self.text!.sha1(), likeHash: (self.text!+self.userID!).sha1())
+                connectivityController.send(individualRating: sentRatingObject)
+            self.likeStatus = 1
+            
+        } else {
+            self.uniqueLikes[(self.text!+self.userID!).sha1()] = 0;
+            self.likeStatus = 0
+            self.rating = NSNumber(0)
+            for likeNum in self.uniqueLikes!.values{
+                self.rating = NSNumber(integerLiteral: self.rating!.intValue + likeNum)
+            }
+            let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: -1, messageHash: self.text!.sha1(), likeHash: (self.text!+self.userID!).sha1())
             connectivityController.send(individualRating: sentRatingObject)
         }
     }
     
-    ///Dislikes the reply; changes the like status to 2, and sends a dislike message to nearby peers.
-    func dislike() {
+    /// old implementation: Dislikes the reply; changes the like status to 2, and sends a dislike message to nearby peers.
+    func dislike2() {
         let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         let connectivityController: AnonymouseConnectivityController = appDelegate.connectivityController
         guard let likeStatus = self.likeStatus as? Int else {
@@ -59,18 +90,46 @@ class AnonymouseReplyCore: NSManagedObject {
         if likeStatus != 2 {
             if likeStatus == 1 {
                 self.rating = NSNumber(integerLiteral: self.rating!.intValue - 2)
-                let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: -2, messageHash: self.text!.sha1())
+                let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: -1, messageHash: self.text!.sha1(), likeHash: (self.text!+self.userID!).sha1())
                 connectivityController.send(individualRating: sentRatingObject)
             } else {
                 self.rating = NSNumber(integerLiteral: self.rating!.intValue - 1)
-                let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: -1, messageHash: self.text!.sha1())
+                let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: -1, messageHash: self.text!.sha1(), likeHash: (self.text!+self.userID!).sha1())
                 connectivityController.send(individualRating: sentRatingObject)
             }
             self.likeStatus = 2
         } else {
             self.likeStatus = 0
             self.rating = NSNumber(integerLiteral: self.rating!.intValue + 1)
-            let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: 1, messageHash: self.text!.sha1())
+            let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: 1, messageHash: self.text!.sha1(), likeHash: (self.text!+self.userID!).sha1())
+            connectivityController.send(individualRating: sentRatingObject)
+        }
+    }
+    
+    ///new implementation of like system using dictionary
+    func dislike(){
+        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        let connectivityController: AnonymouseConnectivityController = appDelegate.connectivityController
+        guard let likeStatus = self.likeStatus as? Int else {
+            return
+        }
+        if likeStatus != 2 {
+            self.uniqueLikes[(self.text!+self.userID!).sha1()] = -1
+            self.rating = NSNumber(0)
+            for likeNum in self.uniqueLikes!.values{
+                self.rating = NSNumber(integerLiteral: self.rating!.intValue + likeNum)
+            }
+            let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: -1, messageHash: self.text!.sha1(), likeHash: (self.text!+self.userID!).sha1())
+            connectivityController.send(individualRating: sentRatingObject)
+            self.likeStatus = 2
+        } else {
+            self.uniqueLikes[(self.text!+self.userID!).sha1()] = 0;
+            self.likeStatus = 0
+            self.rating = NSNumber(0)
+            for likeNum in self.uniqueLikes!.values{
+                self.rating = NSNumber(integerLiteral: self.rating!.intValue + likeNum)
+            }
+            let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: -1, messageHash: self.text!.sha1(), likeHash: (self.text!+self.userID!).sha1())
             connectivityController.send(individualRating: sentRatingObject)
         }
     }

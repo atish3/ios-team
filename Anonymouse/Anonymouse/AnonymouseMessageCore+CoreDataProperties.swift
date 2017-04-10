@@ -31,7 +31,10 @@ extension AnonymouseMessageCore {
     @NSManaged public var user: String?
     ///The replies to this message.
     @NSManaged public var ownedMessages: NSSet?
-
+    ///The unique id of the user
+    @NSManaged public var userID: String?
+    ///dictionary of unique likes
+    @NSManaged public var uniqueLikes: Dictionary<String, Int>?
 }
 
 // MARK: Generated accessors for ownedMessages

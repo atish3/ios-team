@@ -406,16 +406,31 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
             let messageCoreArray: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
             for message in messageCoreArray {
                 if message.text!.sha1() == rating.messageHash {
+                    /* Previous implementation of rating without dictionary of hashes
                     let previousRating: Int = Int(message.rating!)
                     message.rating = NSNumber(integerLiteral: rating.rating! + previousRating)
+                     */
+                    message.uniqueLikes?[rating.likeHash] = rating.rating
+                    message.rating? = NSNumber(0)
+                    for likeNum in message.uniqueLikes!.values{
+                        message.rating = NSNumber(integerLiteral: message.rating!.intValue + likeNum)
+                    }
                     return
                 }
             }
             let replyCoreArray: [AnonymouseReplyCore] = dataController.fetchReplies(withKey: "date", ascending: true)
             for reply in replyCoreArray {
                 if reply.text!.sha1() == rating.messageHash {
+                    /* Previous implementation of rating without dictionary of hashes
                     let previousRating: Int = Int(reply.rating!)
                     reply.rating = NSNumber(integerLiteral: rating.rating! + previousRating)
+                    */
+                    
+                    reply.uniqueLikes?[rating.likeHash] = rating.rating
+                    reply.rating? = NSNumber(0)
+                    for likeNum in reply.uniqueLikes!.values{
+                        reply.rating = NSNumber(integerLiteral: reply.rating!.intValue + likeNum)
+                    }
                     return
                 }
             }
@@ -436,12 +451,28 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
             
             for rating in ratingArray {
                 if let message = messageCoreDictionary[rating.messageHash] {
+                    /* Previous implementation of rating without set of hashes
                     let previousRating: Int = Int(message.rating!)
                     message.rating = NSNumber(integerLiteral: rating.rating! + previousRating)
+                     */
+                    message.uniqueLikes?[rating.likeHash] = rating.rating
+                    message.rating? = NSNumber(0)
+                    for likeNum in message.uniqueLikes!.values{
+                        message.rating = NSNumber(integerLiteral: message.rating!.intValue + likeNum)
+                    }
+                    return
                 }
                 if let reply = replyCoreDictionary[rating.messageHash] {
+                    /* Previous implementation of rating without set of hashes
                     let previousRating: Int = Int(reply.rating!)
                     reply.rating = NSNumber(integerLiteral: rating.rating! + previousRating)
+                    */
+                    reply.uniqueLikes?[rating.likeHash] = rating.rating
+                    reply.rating? = NSNumber(0)
+                    for likeNum in reply.uniqueLikes!.values{
+                        reply.rating = NSNumber(integerLiteral: reply.rating!.intValue + likeNum)
+                    }
+                    return
                 }
             }
         }

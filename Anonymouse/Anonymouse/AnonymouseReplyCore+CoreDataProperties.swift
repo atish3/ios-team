@@ -29,5 +29,10 @@ extension AnonymouseReplyCore {
     @NSManaged public var user: String?
     ///The parent message that this reply is replying to.
     @NSManaged public var parentMessage: AnonymouseMessageCore?
+    ///The unique id of the user
+    @NSManaged public var userID: String?
+    ///dictionary of unique likes
+    @NSManaged public var uniqueLikes: Dictionary<String, Int>?
+    
 
 }
