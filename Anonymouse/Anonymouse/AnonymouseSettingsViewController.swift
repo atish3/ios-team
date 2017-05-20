@@ -50,7 +50,7 @@ class AnonymouseSettingsViewController: UITableViewController {
         case 0:
             return "Connectivity Stuff"
         case 1:
-            return "Here Be You"
+            return "Change Screen Name"
         case 2:
             return "Danger Zone"
         default:
