@@ -240,9 +240,11 @@ class AnonymouseTableViewCell : UITableViewCell {
         let likeStatus: Int = messageData.likeStatus as! Int
         let isFavorite: Bool = messageData.isFavorite as! Bool
         let rating: Int = messageData.rating as! Int
+        let numReplies: Int = messageData.numReplies as! Int
         
         numLikes!.text = "\(rating)"
-        
+        replyLabel!.text = "\(numReplies)"
+    
         if likeStatus == 1 {
             upvoteButton!.setImage(UIImage(named: "upvoteFilled"), for: UIControlState.normal)
             downvoteButton!.setImage(UIImage(named: "downvoteEmpty"), for: UIControlState.normal)
@@ -260,6 +262,7 @@ class AnonymouseTableViewCell : UITableViewCell {
         numLikes!.frame.origin.x = upvoteButton!.frame.origin.x - numLikes!.frame.width - 5
         downvoteButton!.frame.origin.x = numLikes!.frame.origin.x - 30
         
+        
         if isFavorite {
             favoriteButton!.setImage(UIImage(named: "favoriteFilled"), for: UIControlState.normal)
         }
@@ -271,6 +274,7 @@ class AnonymouseTableViewCell : UITableViewCell {
         favoriteButton!.frame.origin.x = divider1!.frame.origin.x - 35
         divider2!.frame.origin.x = favoriteButton!.frame.origin.x - 10
         replyButton!.frame.origin.x = divider2!.frame.origin.x - 35
+        replyLabel!.frame.origin.x = replyButton!.frame.origin.x - replyLabel!.frame.width - 5
     }
     
     ///Create the gray feature bar at the bottom of the cell.
@@ -315,6 +319,16 @@ class AnonymouseTableViewCell : UITableViewCell {
         numLikes!.frame.origin.y = 2 * buttonY
         numLikes!.textColor = UIColor.gray
         self.grayFeatureBar!.addSubview(numLikes!)
+        
+        replyLabel = UILabel()
+        replyLabel!.font = AnonymouseTableViewCell.dateFont
+        replyLabel!.text = "0000"
+        replyLabel!.sizeToFit()
+        replyLabel!.text = "0"
+        replyLabel!.textAlignment = NSTextAlignment.center
+        replyLabel!.frame.origin.y = 2 * buttonY
+        replyLabel!.textColor = UIColor.gray
+        self.grayFeatureBar!.addSubview(replyLabel!)
         
         let dividerHeight: CGFloat = 25
         divider1 = UIView(frame: CGRect( x: 0.0, y: buttonY, width: 1, height: dividerHeight))
@@ -486,7 +500,7 @@ class AnonymouseTableViewCell : UITableViewCell {
         dateFormatter.amSymbol = "AM"
         dateFormatter.pmSymbol = "PM"
         
-        if (Calendar.current.isDateInToday(dataDate as! Date))
+        if (Calendar.current.isDateInToday(dataDate! as Date))
         {
             var secondsSinceMessage: TimeInterval = abs(dataDate!.timeIntervalSinceNow)
             secondsSinceMessage = floor(secondsSinceMessage)
@@ -505,7 +519,7 @@ class AnonymouseTableViewCell : UITableViewCell {
         else
         {
             dateFormatter.dateFormat = "MMM dd"
-            let stringText: String = dateFormatter.string(from: dataDate as! Date)
+            let stringText: String = dateFormatter.string(from: dataDate! as Date)
             dateLabel!.text = stringText
         }
         

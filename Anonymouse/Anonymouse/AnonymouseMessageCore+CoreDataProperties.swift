@@ -31,6 +31,8 @@ extension AnonymouseMessageCore {
     @NSManaged public var user: String?
     ///The replies to this message.
     @NSManaged public var ownedMessages: NSSet?
+    //The number of replies to the message
+    @NSManaged public var numReplies: NSNumber?
 
 }
 

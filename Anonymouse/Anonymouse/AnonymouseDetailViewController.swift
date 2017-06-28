@@ -89,6 +89,7 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
         
         shouldDisplayReply = false
         self.replyLabel.isHidden = true
+        //TODO: this is kinda confusing, we should figure out if this needs to stay
         self.replyTextView.text = "@\(mainUser): "
         self.replyTextView.becomeFirstResponder()
     }

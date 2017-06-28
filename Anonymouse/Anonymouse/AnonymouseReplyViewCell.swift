@@ -123,7 +123,7 @@ class AnonymouseReplyViewCell: AnonymouseTableViewCell {
         dateFormatter.amSymbol = "AM"
         dateFormatter.pmSymbol = "PM"
         
-        if (Calendar.current.isDateInToday(dataDate as! Date))
+        if (Calendar.current.isDateInToday(dataDate! as Date))
         {
             var secondsSinceMessage: TimeInterval = abs(dataDate!.timeIntervalSinceNow)
             secondsSinceMessage = floor(secondsSinceMessage)
@@ -142,7 +142,7 @@ class AnonymouseReplyViewCell: AnonymouseTableViewCell {
         else
         {
             dateFormatter.dateFormat = "MMM dd"
-            let stringText: String = dateFormatter.string(from: dataDate as! Date)
+            let stringText: String = dateFormatter.string(from: dataDate! as Date)
             dateLabel!.text = stringText
         }
         

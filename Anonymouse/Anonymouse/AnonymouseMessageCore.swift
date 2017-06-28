@@ -31,6 +31,7 @@ class AnonymouseMessageCore: NSManagedObject {
         self.rating = NSNumber(integerLiteral: 0)
         self.likeStatus = NSNumber(integerLiteral: 0)
         self.isFavorite = NSNumber(booleanLiteral: false)
+        self.numReplies = NSNumber(integerLiteral: 0)
     }
     
     ///Likes the message; changes the like status to 1, and sends a like message to nearby peers.
