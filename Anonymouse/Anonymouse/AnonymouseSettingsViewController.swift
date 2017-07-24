@@ -48,11 +48,11 @@ class AnonymouseSettingsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "Connectivity Stuff"
+            return "Connectivity"
         case 1:
             return "Change Screen Name"
         case 2:
-            return "Danger Zone"
+            return "Danger"
         default:
             return "Default"
         }

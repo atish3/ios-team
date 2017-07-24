@@ -45,7 +45,7 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
     ///The button that sends the reply to the main message when tapped.
     var replyButton: UIButton!
     ///The placeholder label that appears when the `replyTextView` is empty.
-    var replyLabel: UILabel!
+    //var replyLabel: UILabel!
     ///The `tableView` used to display the replies to the main message.
     var tableView: UITableView!
     /**`true` if this view was pushed by a reply button tapped event, `false`
@@ -88,8 +88,7 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
         }
         
         shouldDisplayReply = false
-        self.replyLabel.isHidden = true
-        //TODO: this is kinda confusing, we should figure out if this needs to stay
+        //self.replyLabel.isHidden = true
         self.replyTextView.text = "@\(mainUser): "
         self.replyTextView.becomeFirstResponder()
     }
@@ -110,6 +109,10 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
     
     //MARK: View Methods
     override func viewDidLoad() {
+        guard let mainUser: String = cellData.user else {
+            return
+        }
+        
         unowned let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         dataController = appDelegate.dataController
         connectivityController = appDelegate.connectivityController
@@ -162,19 +165,10 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
         replyTextView = UITextView(frame: replyFrame)
         replyTextView.isScrollEnabled = false
         replyTextView.delegate = self
-        replyTextView.text = ""
+        replyTextView.text = "@\(mainUser): "
         replyTextView.font = UIFont(name: "Helvetica", size: 16.0)!
         replyTextView.backgroundColor = UIColor.white
         replyTextView.contentSize = replyTextView.frame.size
-        
-        replyLabel = UILabel()
-        replyLabel.font = replyTextView.font
-        replyLabel.text = "Add a reply..."
-        replyLabel.textColor = UIColor.lightGray
-        replyLabel.sizeToFit()
-        replyLabel.frame.origin.x = 10
-        replyLabel.frame.origin.y = 8
-        replyTextView.addSubview(replyLabel)
         
         replyView = UIView(frame: CGRect(x: 0.0, y: self.view.frame.height, width: self.view.frame.width, height: replyHeight))
         replyView.backgroundColor = UIColor.white
@@ -239,9 +233,12 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
     
     ///Clears the `replyView` of the currently-edited message text, and dismisses it.
     func resetInputAccessoryView() {
+        guard let mainUser: String = cellData.user else {
+            return
+        }
         replyButton.isHidden = true
-        replyTextView.text = ""
-        replyLabel.isHidden = false
+        replyTextView.text = "@\(mainUser): "
+        //replyLabel.isHidden = false
         replyButton.isHidden = true
         let bestSize: CGSize = replyTextView.sizeThatFits(replyTextView.frame.size)
         let bestHeight: CGFloat = bestSize.height
@@ -325,7 +322,7 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
     func textViewDidChange(_ textView: UITextView) {
         let testString: String = textView.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         replyButton.isHidden = testString.isEmpty
-        replyLabel.isHidden = !textView.text.isEmpty
+      //  replyLabel.isHidden = !textView.text.isEmpty
         let numLines: Int = Int(textView.contentSize.height/textView.font!.lineHeight)
         
         if numLines >= 4 {
