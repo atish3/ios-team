@@ -127,7 +127,7 @@ class AnonymouseProfileViewController: UIViewController, UITextFieldDelegate {
                 
                 // Disable update of username if it has been less than seven days since last update
                 if secondsSinceLastUpdate < 604800 {
-                    let unableUpdateUsernameAlert: UIAlertController = UIAlertController(title: "Unable to update username", message: "Please do not update username more than once in a week", preferredStyle: UIAlertControllerStyle.alert)
+                    let unableUpdateUsernameAlert: UIAlertController = UIAlertController(title: "Unable to update username", message: "Please do not update username more than once in a week (to prevent spam)", preferredStyle: UIAlertControllerStyle.alert)
                     unableUpdateUsernameAlert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: { (action) in
                         self.usernameTextField.becomeFirstResponder()
                     }))

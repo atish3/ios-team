@@ -215,10 +215,11 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         - rating: The rating to send to all connected peers.
     */
     func send(individualRating rating: AnonymouseRatingSentCore) {
+        
         guard sessionObject.connectedPeers.count > 0 else {
             return
         }
-        
+ 
         do {
             let archivedRating: Data = NSKeyedArchiver.archivedData(withRootObject: rating)
             try self.sessionObject.send(archivedRating, toPeers: sessionObject.connectedPeers, with: MCSessionSendDataMode.reliable)
@@ -381,12 +382,8 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
             self.sendAllMessages(toRequesters: [peerID])
             self.sendAllReplies(toRequesters: [peerID])
         }
-        else if state == MCSessionState.connecting
-        {
-            
-        }
         else if state == MCSessionState.notConnected {
-            
+            killConnectionParameters()
         }
     }
 }

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="16B2555" minimumToolsVersion="Xcode 7.0" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16F73" minimumToolsVersion="Xcode 7.0" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="AnonymouseMessageCore" representedClassName=".AnonymouseMessageCore" syncable="YES">
         <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="isFavorite" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="likeStatus" attributeType="Integer 16" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="numReplies" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="rating" attributeType="Integer 32" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="text" attributeType="String" syncable="YES"/>
         <attribute name="user" attributeType="String" syncable="YES"/>
@@ -18,7 +19,7 @@
         <relationship name="parentMessage" maxCount="1" deletionRule="Nullify" destinationEntity="AnonymouseMessageCore" inverseName="ownedMessages" inverseEntity="AnonymouseMessageCore" syncable="YES"/>
     </entity>
     <elements>
-        <element name="AnonymouseMessageCore" positionX="-63" positionY="-18" width="128" height="148"/>
+        <element name="AnonymouseMessageCore" positionX="-63" positionY="-18" width="128" height="163"/>
         <element name="AnonymouseReplyCore" positionX="-63" positionY="27" width="128" height="135"/>
     </elements>
 </model>
