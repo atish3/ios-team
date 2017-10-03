@@ -1,0 +1,8 @@
+This branch is using Cocoapods <https://cocoapods.org/> for easier dependency management.
+
+For first timers, please do the following:
+
+- install cocoapods on your Mac with "sudo gem install cocoapods"
+- cd into the anonymouse project directory where a file called Podfile exists and then install dependencies with "pod install"
+- open the .xcodeworkspace file (VERY IMPORTANT)
+- build and run as usual
