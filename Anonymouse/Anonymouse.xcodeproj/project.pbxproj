@@ -29,8 +29,7 @@
 		1AE809CB1DD6B10A0009D7D1 /* AnonymouseRatingSentCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE809CA1DD6B10A0009D7D1 /* AnonymouseRatingSentCore.swift */; };
 		1AF2D0671C97856300670C89 /* AnonymouseComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF2D0661C97856300670C89 /* AnonymouseComposeViewController.swift */; };
 		1AFEDAE61D986BBC00690EB5 /* AnonymouseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFEDAE51D986BBC00690EB5 /* AnonymouseTabBarController.swift */; };
-		3C0249E11F7D602D00B3FF51 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C0249DE1F7D5FEA00B3FF51 /* CryptoSwift.framework */; };
-		3C0249E21F7D602D00B3FF51 /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C0249DE1F7D5FEA00B3FF51 /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		54C0CA17B65E58256F3BC170 /* Pods_Anonymouse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583A4439EE13596C326DE55B /* Pods_Anonymouse.framework */; };
 		7DD0BBB41CBC349000CF2268 /* Anonymouse.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7DD0BBB21CBC349000CF2268 /* Anonymouse.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -49,28 +48,7 @@
 			remoteGlobalIDString = 754BE46019693E190098E6F3;
 			remoteInfo = Tests;
 		};
-		3C0249E31F7D602D00B3FF51 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3C0249D81F7D5FEA00B3FF51 /* CryptoSwift.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 754BE45419693E190098E6F3;
-			remoteInfo = CryptoSwift;
-		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		1ABE130D1C976A5A005923BA /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				3C0249E21F7D602D00B3FF51 /* CryptoSwift.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0286D4C91DEFA10000EEDE07 /* AnonymouseReplyViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseReplyViewCell.swift; sourceTree = "<group>"; };
@@ -98,7 +76,11 @@
 		1AF2D0661C97856300670C89 /* AnonymouseComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseComposeViewController.swift; sourceTree = "<group>"; };
 		1AFEDAE51D986BBC00690EB5 /* AnonymouseTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseTabBarController.swift; sourceTree = "<group>"; };
 		3C0249D81F7D5FEA00B3FF51 /* CryptoSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CryptoSwift.xcodeproj; path = ../../CryptoSwift/CryptoSwift.xcodeproj; sourceTree = "<group>"; };
+		4BBF3E731F83C50B0081CED5 /* CryptoSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CryptoSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		583A4439EE13596C326DE55B /* Pods_Anonymouse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Anonymouse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DD0BBB31CBC349000CF2268 /* Anonymouse.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Anonymouse.xcdatamodel; sourceTree = "<group>"; };
+		8B21278EEF6271FAF60175F2 /* Pods-Anonymouse.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anonymouse.release.xcconfig"; path = "Pods/Target Support Files/Pods-Anonymouse/Pods-Anonymouse.release.xcconfig"; sourceTree = "<group>"; };
+		FC741ACAEF5F52595DDA6E36 /* Pods-Anonymouse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anonymouse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Anonymouse/Pods-Anonymouse.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,13 +88,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C0249E11F7D602D00B3FF51 /* CryptoSwift.framework in Frameworks */,
+				54C0CA17B65E58256F3BC170 /* Pods_Anonymouse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A06032CF9F19351661625CA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				583A4439EE13596C326DE55B /* Pods_Anonymouse.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		1A932A501DB3CA58004294A9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,8 +160,11 @@
 		1ABE12C81C9744D0005923BA = {
 			isa = PBXGroup;
 			children = (
+				4BBF3E731F83C50B0081CED5 /* CryptoSwift.framework */,
 				1ABE12D21C9744D0005923BA /* Products */,
 				1ABE12D31C9744D0005923BA /* Anonymouse */,
+				5FD7CDB6AB7F90222232B9A4 /* Pods */,
+				1A06032CF9F19351661625CA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -210,6 +203,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		5FD7CDB6AB7F90222232B9A4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FC741ACAEF5F52595DDA6E36 /* Pods-Anonymouse.debug.xcconfig */,
+				8B21278EEF6271FAF60175F2 /* Pods-Anonymouse.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -217,15 +219,16 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1ABE12E51C9744D0005923BA /* Build configuration list for PBXNativeTarget "Anonymouse" */;
 			buildPhases = (
+				F426C8DFC719B91111F1FE6A /* [CP] Check Pods Manifest.lock */,
 				1ABE12CD1C9744D0005923BA /* Sources */,
 				1ABE12CE1C9744D0005923BA /* Frameworks */,
 				1ABE12CF1C9744D0005923BA /* Resources */,
-				1ABE130D1C976A5A005923BA /* Embed Frameworks */,
+				260F3B40408CD3EC9FF3B06C /* [CP] Embed Pods Frameworks */,
+				9B9EFF434AEFD7153955CEF0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				3C0249E41F7D602D00B3FF51 /* PBXTargetDependency */,
 			);
 			name = Anonymouse;
 			productName = Anonymouse;
@@ -309,6 +312,60 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		260F3B40408CD3EC9FF3B06C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Anonymouse/Pods-Anonymouse-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Anonymouse/Pods-Anonymouse-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9B9EFF434AEFD7153955CEF0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Anonymouse/Pods-Anonymouse-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F426C8DFC719B91111F1FE6A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Anonymouse-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1ABE12CD1C9744D0005923BA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -338,14 +395,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		3C0249E41F7D602D00B3FF51 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = CryptoSwift;
-			targetProxy = 3C0249E31F7D602D00B3FF51 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		1ABE12DF1C9744D0005923BA /* LaunchScreen.storyboard */ = {
@@ -459,8 +508,8 @@
 		};
 		1ABE12E61C9744D0005923BA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FC741ACAEF5F52595DDA6E36 /* Pods-Anonymouse.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -481,8 +530,8 @@
 		};
 		1ABE12E71C9744D0005923BA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8B21278EEF6271FAF60175F2 /* Pods-Anonymouse.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

@@ -31,7 +31,7 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
                 print("\(fetchError), \(fetchError.userInfo)")
                 
                 let applicationName: Any? = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName")
-                let message: String = "A serious application error occurred while \(applicationName) tried to read your data. Please contact support for help."
+                let message: String = "A serious application error occurred while \(String(describing: applicationName)) tried to read your data. Please contact support for help."
                 
                 self.showAlertWithTitle("Warning", message: message, cancelButtonTitle: "OK")
             }
@@ -123,7 +123,7 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
         if didDetectIncompatibleStore {
             // Show Alert
             let applicationName: Any? = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName")
-            let message: String = "A serious application error occurred while \(applicationName) tried to read your data. Please contact support for help."
+            let message: String = "A serious application error occurred while \(String(describing: applicationName)) tried to read your data. Please contact support for help."
             
             self.showAlertWithTitle("Warning", message: message, cancelButtonTitle: "OK")
         }
