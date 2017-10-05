@@ -12,6 +12,10 @@
 		02F9C78A1DEDFCE800CA631D /* AnonymouseMessageCore+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F9C7861DEDFCE800CA631D /* AnonymouseMessageCore+CoreDataProperties.swift */; };
 		02F9C78B1DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F9C7871DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataClass.swift */; };
 		02F9C78C1DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F9C7881DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataProperties.swift */; };
+		081720721F85D8530000070F /* Anonymouse.xcworkspace in Resources */ = {isa = PBXBuildFile; fileRef = 081720711F85D8530000070F /* Anonymouse.xcworkspace */; };
+		081720741F85D8580000070F /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 081720731F85D8580000070F /* Podfile */; };
+		081720771F85D85D0000070F /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = 081720751F85D85D0000070F /* Podfile.lock */; };
+		081720781F85D85D0000070F /* Pods in Resources */ = {isa = PBXBuildFile; fileRef = 081720761F85D85D0000070F /* Pods */; };
 		172EA8A21D9788DA00D2E127 /* AnonymouseProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172EA8A11D9788DA00D2E127 /* AnonymouseProfileViewController.swift */; };
 		1A42E0311CBED2A100E6EE86 /* AnonymouseMessageCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A42E02F1CBED2A100E6EE86 /* AnonymouseMessageCore.swift */; };
 		1A5BA78E1D999FD1005000D5 /* AnonymouseSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5BA78D1D999FD1005000D5 /* AnonymouseSettingsViewController.swift */; };
@@ -56,6 +60,10 @@
 		02F9C7861DEDFCE800CA631D /* AnonymouseMessageCore+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnonymouseMessageCore+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		02F9C7871DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnonymouseReplyCore+CoreDataClass.swift"; sourceTree = "<group>"; };
 		02F9C7881DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnonymouseReplyCore+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		081720711F85D8530000070F /* Anonymouse.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = Anonymouse.xcworkspace; sourceTree = "<group>"; };
+		081720731F85D8580000070F /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		081720751F85D85D0000070F /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
+		081720761F85D85D0000070F /* Pods */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Pods; sourceTree = "<group>"; };
 		172EA8A11D9788DA00D2E127 /* AnonymouseProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseProfileViewController.swift; sourceTree = "<group>"; };
 		1A42E02F1CBED2A100E6EE86 /* AnonymouseMessageCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseMessageCore.swift; sourceTree = "<group>"; };
 		1A5BA78D1D999FD1005000D5 /* AnonymouseSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseSettingsViewController.swift; sourceTree = "<group>"; };
@@ -160,6 +168,10 @@
 		1ABE12C81C9744D0005923BA = {
 			isa = PBXGroup;
 			children = (
+				081720751F85D85D0000070F /* Podfile.lock */,
+				081720761F85D85D0000070F /* Pods */,
+				081720731F85D8580000070F /* Podfile */,
+				081720711F85D8530000070F /* Anonymouse.xcworkspace */,
 				4BBF3E731F83C50B0081CED5 /* CryptoSwift.framework */,
 				1ABE12D21C9744D0005923BA /* Products */,
 				1ABE12D31C9744D0005923BA /* Anonymouse */,
@@ -304,6 +316,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				081720771F85D85D0000070F /* Podfile.lock in Resources */,
+				081720781F85D85D0000070F /* Pods in Resources */,
+				081720741F85D8580000070F /* Podfile in Resources */,
+				081720721F85D8530000070F /* Anonymouse.xcworkspace in Resources */,
 				1ABE12E11C9744D0005923BA /* LaunchScreen.storyboard in Resources */,
 				1ABE12DE1C9744D0005923BA /* Assets.xcassets in Resources */,
 				1A9CE5A71DAFBEC8000AD6C0 /* DefaultPreferences.plist in Resources */,
