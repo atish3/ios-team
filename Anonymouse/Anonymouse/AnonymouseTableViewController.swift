@@ -110,7 +110,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         if didDetectIncompatibleStore {
             // Show Alert
             let applicationName: Any? = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName")
-            let message: String = "A serious application error occurred while \(applicationName) tried to read your data. Please contact support for help."
+            let message: String = "A serious application error occurred while \(String(describing: applicationName)) tried to read your data. Please contact support for help."
             
             self.showAlert(withTitle: "Warning", message: message, cancelButtonTitle: "OK")
         }
@@ -123,7 +123,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
             print("\(fetchError), \(fetchError.userInfo)")
             
             let applicationName: Any? = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName")
-            let message: String = "A serious application error occurred while \(applicationName) tried to read your data. Please contact support for help."
+            let message: String = "A serious application error occurred while \(String(describing: applicationName)) tried to read your data. Please contact support for help."
             
             self.showAlert(withTitle: "Warning", message: message, cancelButtonTitle: "OK")
         }
@@ -347,7 +347,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
             print("\(fetchError), \(fetchError.userInfo)")
             
             let applicationName: Any? = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName")
-            let message: String = "A serious application error occurred while \(applicationName) tried to read your data. Please contact support for help."
+            let message: String = "A serious application error occurred while \(String(describing: applicationName)) tried to read your data. Please contact support for help."
             
             self.showAlert(withTitle: "Warning", message: message, cancelButtonTitle: "OK")
         }
