@@ -16,6 +16,7 @@
 		081720741F85D8580000070F /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 081720731F85D8580000070F /* Podfile */; };
 		081720771F85D85D0000070F /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = 081720751F85D85D0000070F /* Podfile.lock */; };
 		081720781F85D85D0000070F /* Pods in Resources */ = {isa = PBXBuildFile; fileRef = 081720761F85D85D0000070F /* Pods */; };
+		084CF1F01F866C320036FD22 /* VPNViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084CF1EF1F866C320036FD22 /* VPNViewController.swift */; };
 		172EA8A21D9788DA00D2E127 /* AnonymouseProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172EA8A11D9788DA00D2E127 /* AnonymouseProfileViewController.swift */; };
 		1A42E0311CBED2A100E6EE86 /* AnonymouseMessageCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A42E02F1CBED2A100E6EE86 /* AnonymouseMessageCore.swift */; };
 		1A5BA78E1D999FD1005000D5 /* AnonymouseSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5BA78D1D999FD1005000D5 /* AnonymouseSettingsViewController.swift */; };
@@ -64,6 +65,7 @@
 		081720731F85D8580000070F /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		081720751F85D85D0000070F /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
 		081720761F85D85D0000070F /* Pods */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Pods; sourceTree = "<group>"; };
+		084CF1EF1F866C320036FD22 /* VPNViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPNViewController.swift; sourceTree = "<group>"; };
 		172EA8A11D9788DA00D2E127 /* AnonymouseProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseProfileViewController.swift; sourceTree = "<group>"; };
 		1A42E02F1CBED2A100E6EE86 /* AnonymouseMessageCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseMessageCore.swift; sourceTree = "<group>"; };
 		1A5BA78D1D999FD1005000D5 /* AnonymouseSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseSettingsViewController.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				1A5BA78D1D999FD1005000D5 /* AnonymouseSettingsViewController.swift */,
+				084CF1EF1F866C320036FD22 /* VPNViewController.swift */,
 				172EA8A11D9788DA00D2E127 /* AnonymouseProfileViewController.swift */,
 				1AF2D0661C97856300670C89 /* AnonymouseComposeViewController.swift */,
 				1ABE12E91C9750A6005923BA /* AnonymouseTableViewController.swift */,
@@ -405,6 +408,7 @@
 				172EA8A21D9788DA00D2E127 /* AnonymouseProfileViewController.swift in Sources */,
 				1A932A551DB3CAC7004294A9 /* AnonymouseMessageSentCore.swift in Sources */,
 				7DD0BBB41CBC349000CF2268 /* Anonymouse.xcdatamodeld in Sources */,
+				084CF1F01F866C320036FD22 /* VPNViewController.swift in Sources */,
 				1A5BA78E1D999FD1005000D5 /* AnonymouseSettingsViewController.swift in Sources */,
 				1AE809CB1DD6B10A0009D7D1 /* AnonymouseRatingSentCore.swift in Sources */,
 			);

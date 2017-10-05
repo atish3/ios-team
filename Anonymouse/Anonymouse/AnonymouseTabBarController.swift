@@ -82,11 +82,22 @@ class AnonymouseTabBarController: UITabBarController, UITabBarControllerDelegate
         
         let settingsTabBarItem: UITabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: "settingsIconEmpty")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "settingsIconFilled"))
         settingsTabBarItem.tag = 3
+        
+        let VPNTabBarItem: UITabBarItem = UITabBarItem(title: "VPN", image: UIImage(named: "settingsIconEmpty")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "settingsIconFilled"))
+        settingsTabBarItem.tag = 4
+        
+        
         let settingsNavigationController: AnonymouseNavigationStyleController = AnonymouseNavigationStyleController()
         ///A `viewController` to display the app's settings.
         let settingsViewController: AnonymouseSettingsViewController = AnonymouseSettingsViewController(style: UITableViewStyle.grouped)
         settingsNavigationController.viewControllers = [settingsViewController]
         settingsNavigationController.tabBarItem = settingsTabBarItem
+
+        let VPNNavigationController: AnonymouseNavigationStyleController = AnonymouseNavigationStyleController()
+        ///A `viewController` to display the app's VPN settings.
+        let VPNSettingsViewController: VPNViewController = VPNViewController(style: UITableViewStyle.grouped)
+        VPNNavigationController.viewControllers = [settingsViewController]
+        VPNNavigationController.tabBarItem = VPNTabBarItem
         
         self.viewControllers = [mostRecentNavigationController, favoriteNavigationController, bestRatedNavigationController, settingsNavigationController]
         self.selectedIndex = 0
