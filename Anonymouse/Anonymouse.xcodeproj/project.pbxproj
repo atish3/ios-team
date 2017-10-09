@@ -12,6 +12,7 @@
 		02F9C78A1DEDFCE800CA631D /* AnonymouseMessageCore+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F9C7861DEDFCE800CA631D /* AnonymouseMessageCore+CoreDataProperties.swift */; };
 		02F9C78B1DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F9C7871DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataClass.swift */; };
 		02F9C78C1DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F9C7881DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataProperties.swift */; };
+		081378291F8823E200E806DB /* NEPacketTunnelVPNDemoTunnel in Resources */ = {isa = PBXBuildFile; fileRef = 081378281F8823E200E806DB /* NEPacketTunnelVPNDemoTunnel */; };
 		081720721F85D8530000070F /* Anonymouse.xcworkspace in Resources */ = {isa = PBXBuildFile; fileRef = 081720711F85D8530000070F /* Anonymouse.xcworkspace */; };
 		081720741F85D8580000070F /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 081720731F85D8580000070F /* Podfile */; };
 		081720771F85D85D0000070F /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = 081720751F85D85D0000070F /* Podfile.lock */; };
@@ -38,29 +39,13 @@
 		7DD0BBB41CBC349000CF2268 /* Anonymouse.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7DD0BBB21CBC349000CF2268 /* Anonymouse.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		3C0249DD1F7D5FEA00B3FF51 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3C0249D81F7D5FEA00B3FF51 /* CryptoSwift.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 754BE45519693E190098E6F3;
-			remoteInfo = CryptoSwift;
-		};
-		3C0249DF1F7D5FEA00B3FF51 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3C0249D81F7D5FEA00B3FF51 /* CryptoSwift.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 754BE46019693E190098E6F3;
-			remoteInfo = Tests;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		0286D4C91DEFA10000EEDE07 /* AnonymouseReplyViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseReplyViewCell.swift; sourceTree = "<group>"; };
 		02B6E4411DF3719B00B2AE15 /* AnonymouseReplySentCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseReplySentCore.swift; sourceTree = "<group>"; };
 		02F9C7861DEDFCE800CA631D /* AnonymouseMessageCore+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnonymouseMessageCore+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		02F9C7871DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnonymouseReplyCore+CoreDataClass.swift"; sourceTree = "<group>"; };
 		02F9C7881DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnonymouseReplyCore+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		081378281F8823E200E806DB /* NEPacketTunnelVPNDemoTunnel */ = {isa = PBXFileReference; lastKnownFileType = folder; path = NEPacketTunnelVPNDemoTunnel; sourceTree = SOURCE_ROOT; };
 		081720711F85D8530000070F /* Anonymouse.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = Anonymouse.xcworkspace; sourceTree = "<group>"; };
 		081720731F85D8580000070F /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		081720751F85D85D0000070F /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
@@ -85,8 +70,6 @@
 		1AE809CA1DD6B10A0009D7D1 /* AnonymouseRatingSentCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseRatingSentCore.swift; sourceTree = "<group>"; };
 		1AF2D0661C97856300670C89 /* AnonymouseComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseComposeViewController.swift; sourceTree = "<group>"; };
 		1AFEDAE51D986BBC00690EB5 /* AnonymouseTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseTabBarController.swift; sourceTree = "<group>"; };
-		3C0249D81F7D5FEA00B3FF51 /* CryptoSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CryptoSwift.xcodeproj; path = ../../CryptoSwift/CryptoSwift.xcodeproj; sourceTree = "<group>"; };
-		4BBF3E731F83C50B0081CED5 /* CryptoSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CryptoSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		583A4439EE13596C326DE55B /* Pods_Anonymouse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Anonymouse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DD0BBB31CBC349000CF2268 /* Anonymouse.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Anonymouse.xcdatamodel; sourceTree = "<group>"; };
 		8B21278EEF6271FAF60175F2 /* Pods-Anonymouse.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anonymouse.release.xcconfig"; path = "Pods/Target Support Files/Pods-Anonymouse/Pods-Anonymouse.release.xcconfig"; sourceTree = "<group>"; };
@@ -127,6 +110,7 @@
 			children = (
 				1A5BA78D1D999FD1005000D5 /* AnonymouseSettingsViewController.swift */,
 				084CF1EF1F866C320036FD22 /* VPNViewController.swift */,
+				081378281F8823E200E806DB /* NEPacketTunnelVPNDemoTunnel */,
 				172EA8A11D9788DA00D2E127 /* AnonymouseProfileViewController.swift */,
 				1AF2D0661C97856300670C89 /* AnonymouseComposeViewController.swift */,
 				1ABE12E91C9750A6005923BA /* AnonymouseTableViewController.swift */,
@@ -175,7 +159,6 @@
 				081720761F85D85D0000070F /* Pods */,
 				081720731F85D8580000070F /* Podfile */,
 				081720711F85D8530000070F /* Anonymouse.xcworkspace */,
-				4BBF3E731F83C50B0081CED5 /* CryptoSwift.framework */,
 				1ABE12D21C9744D0005923BA /* Products */,
 				1ABE12D31C9744D0005923BA /* Anonymouse */,
 				5FD7CDB6AB7F90222232B9A4 /* Pods */,
@@ -204,18 +187,8 @@
 				1ABE12DF1C9744D0005923BA /* LaunchScreen.storyboard */,
 				1ABE12E21C9744D0005923BA /* Info.plist */,
 				1A9CE5A61DAFBEC8000AD6C0 /* DefaultPreferences.plist */,
-				3C0249D81F7D5FEA00B3FF51 /* CryptoSwift.xcodeproj */,
 			);
 			path = Anonymouse;
-			sourceTree = "<group>";
-		};
-		3C0249D91F7D5FEA00B3FF51 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3C0249DE1F7D5FEA00B3FF51 /* CryptoSwift.framework */,
-				3C0249E01F7D5FEA00B3FF51 /* Tests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		5FD7CDB6AB7F90222232B9A4 /* Pods */ = {
@@ -284,35 +257,12 @@
 			mainGroup = 1ABE12C81C9744D0005923BA;
 			productRefGroup = 1ABE12D21C9744D0005923BA /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 3C0249D91F7D5FEA00B3FF51 /* Products */;
-					ProjectRef = 3C0249D81F7D5FEA00B3FF51 /* CryptoSwift.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				1ABE12D01C9744D0005923BA /* Anonymouse */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		3C0249DE1F7D5FEA00B3FF51 /* CryptoSwift.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = CryptoSwift.framework;
-			remoteRef = 3C0249DD1F7D5FEA00B3FF51 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3C0249E01F7D5FEA00B3FF51 /* Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = Tests.xctest;
-			remoteRef = 3C0249DF1F7D5FEA00B3FF51 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1ABE12CF1C9744D0005923BA /* Resources */ = {
@@ -322,6 +272,7 @@
 				081720771F85D85D0000070F /* Podfile.lock in Resources */,
 				081720781F85D85D0000070F /* Pods in Resources */,
 				081720741F85D8580000070F /* Podfile in Resources */,
+				081378291F8823E200E806DB /* NEPacketTunnelVPNDemoTunnel in Resources */,
 				081720721F85D8530000070F /* Anonymouse.xcworkspace in Resources */,
 				1ABE12E11C9744D0005923BA /* LaunchScreen.storyboard in Resources */,
 				1ABE12DE1C9744D0005923BA /* Assets.xcassets in Resources */,

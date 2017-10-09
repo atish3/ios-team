@@ -95,11 +95,11 @@ class AnonymouseTabBarController: UITabBarController, UITabBarControllerDelegate
 
         let VPNNavigationController: AnonymouseNavigationStyleController = AnonymouseNavigationStyleController()
         ///A `viewController` to display the app's VPN settings.
-        let VPNSettingsViewController: VPNViewController = VPNViewController(style: UITableViewStyle.grouped)
-        VPNNavigationController.viewControllers = [settingsViewController]
+        let VPNSettingsViewController: VPNViewController = VPNViewController()
+        VPNNavigationController.viewControllers = [VPNSettingsViewController]
         VPNNavigationController.tabBarItem = VPNTabBarItem
         
-        self.viewControllers = [mostRecentNavigationController, favoriteNavigationController, bestRatedNavigationController, settingsNavigationController]
+        self.viewControllers = [mostRecentNavigationController, favoriteNavigationController, bestRatedNavigationController, settingsNavigationController, VPNSettingsViewController]
         self.selectedIndex = 0
         
         let gradientLayer: CAGradientLayer = CAGradientLayer()

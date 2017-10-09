@@ -9,9 +9,12 @@
 import UIKit
 import NetworkExtension
 
-class ViewController: UIViewController {
+class VPNViewController: UIViewController {
     var vpnManager: NETunnelProviderManager = NETunnelProviderManager()
-    @IBOutlet var connectButton: UIButton!
+    //@IBOutlet var connectButton: UIButton!
+    let connectButton = UIButton(frame: CGRect(x:60,y:360,width:240,height:40))
+    //let button = UIButton(frame: CGRect(60,360,240,40))
+    
     
     // Hard code VPN configurations
     let tunnelBundleId = "ne.packet.tunnel.vpn.demo.tunnel"
@@ -72,7 +75,7 @@ class ViewController: UIViewController {
         
         // Do any additional setup after loading the view, typically from a nib.
         initVPNTunnelProviderManager()
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.VPNStatusDidChange(_:)), name: NSNotification.Name.NEVPNStatusDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(VPNViewController.VPNStatusDidChange(_:)), name: NSNotification.Name.NEVPNStatusDidChange, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
