@@ -267,9 +267,9 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
         let username: String = userPreferences.string(forKey: "username")!
         
         self.dataController.addReply(withText: replyText, date: Date(), user: username, toMessage: cellData)
-        if self.connectivityController.sessionObject.connectedPeers.count > 0 {
-            self.connectivityController.send(individualReply: AnonymouseReplySentCore(text: replyText, date: Date(), user: username, parentText: cellData.text!))
-        }
+//        if self.connectivityController.sessionObject.connectedPeers.count > 0 {
+//            self.connectivityController.send(individualReply: AnonymouseReplySentCore(text: replyText, date: Date(), user: username, parentText: cellData.text!))
+//        }
         
         resetInputAccessoryView()
     }

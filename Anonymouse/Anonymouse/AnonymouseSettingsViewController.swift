@@ -89,7 +89,7 @@ class AnonymouseSettingsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            toggleConnection()
+            //toggleConnection()
             self.tableView.deselectRow(at: indexPath, animated: true)
         case 1:
             self.navigationController!.pushViewController(profileViewController, animated: true)
@@ -113,24 +113,24 @@ class AnonymouseSettingsViewController: UITableViewController {
     //MARK: Connection methods
     
     ///A function that toggles whether or not the user is broadcasting/receiving messages or not.
-    func toggleConnection() {
-        let userPreferences: UserDefaults = UserDefaults.standard
-    
-        if connectivityController.isBrowsing {
-            userPreferences.set(false, forKey: "isBroadcasting")
-            
-            connectivityController.stopBrowsingForPeers()
-            connectivityController.stopAdvertisingPeer()
-            broadcastLabel.text = "Begin Broadcasting"
-            broadcastLabel.textColor = UIColor.green
-        }
-        else {
-            userPreferences.set(true, forKey: "isBroadcasting")
-        
-            connectivityController.startBrowsingForPeers()
-            connectivityController.startAdvertisingPeer()
-            broadcastLabel.text = "Stop Broadcasting"
-            broadcastLabel.textColor = UIColor.red
-        }
-    }
+//    func toggleConnection() {
+//        let userPreferences: UserDefaults = UserDefaults.standard
+//    
+//        if connectivityController.isBrowsing {
+//            userPreferences.set(false, forKey: "isBroadcasting")
+//            
+//            connectivityController.stopBrowsingForPeers()
+//            connectivityController.stopAdvertisingPeer()
+//            broadcastLabel.text = "Begin Broadcasting"
+//            broadcastLabel.textColor = UIColor.green
+//        }
+//        else {
+//            userPreferences.set(true, forKey: "isBroadcasting")
+//        
+//            connectivityController.startBrowsingForPeers()
+//            connectivityController.startAdvertisingPeer()
+//            broadcastLabel.text = "Stop Broadcasting"
+//            broadcastLabel.textColor = UIColor.red
+//        }
+//    }
 }

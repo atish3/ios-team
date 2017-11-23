@@ -10,116 +10,27 @@ import UIKit
 import MultipeerConnectivity
 import CoreData
 
-extension MCSessionState {
-    func stringValue() -> String {
-        switch(self) {
-        case .notConnected: return "NotConnected"
-        case .connecting: return "Connecting"
-        case .connected: return "Connected"
-        }
-    }
-}
+
 
 ///A class that mnanages the connectivity protocols; sending messages and rating objects to nearby peers.
-class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate, MCSessionDelegate {
+//class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate, MCSessionDelegate {
+class AnonymouseConnectivityController : NSObject {
     
     //MARK: Links
     ///A weak reference to the `dataController`, which allows this class to store received messages.
     weak var dataController: AnonymouseDataController!
     
-    //MARK: Connection Parameters
-    ///A unique identifier used to identify one's phone on the multipeer network.
-    var myPeerId: MCPeerID = MCPeerID(displayName: UIDevice.current.name)
-    
-    ///A 15-character or less string that describes the function that the app is broadcasting.
-    let myServiceType: String = "Anonymouse"
-    
-    ///An object that handles searching for and finding other phones on the network.
-    var serviceBrowser: MCNearbyServiceBrowser!
-    
-    ///An object that handles broadcasting one's presence on the network.
-    var serviceAdvertiser: MCNearbyServiceAdvertiser!
-    
-    ///`true` if this object is currently browsing.
-    var isBrowsing: Bool = true
-    ///`true` if this object is currently advertising.
-    var isAdvertising: Bool = true
-    
-    ///An object that manages communication among peers.
-    lazy var sessionObject: MCSession = {
-        let session: MCSession = MCSession(peer: self.myPeerId)
-        session.delegate = self
-        return session
-    }()
-    
-    //MARK: Convenience methods
-    ///Begins advertising the current peer on the network.
-    func startAdvertisingPeer() {
-        serviceAdvertiser.startAdvertisingPeer()
-        isAdvertising = true
-    }
-    
-    ///Stops advertising the current peer.
-    func stopAdvertisingPeer() {
-        serviceAdvertiser.stopAdvertisingPeer()
-        isAdvertising = false
-    }
-    
-    ///Begins browsing for other peers on the network.
-    func startBrowsingForPeers() {
-        serviceBrowser.startBrowsingForPeers()
-        isBrowsing = true
-    }
-    
-    ///Stops browsing for other peers.
-    func stopBrowsingForPeers() {
-        serviceBrowser.stopBrowsingForPeers()
-        isBrowsing = false
-    }
-    
-    ///Breaks the connection with the currently connected peers.
-    func disconnectFromSession() {
-        self.sessionObject.disconnect()
-    }
-    
-    ///Kills the connection with currently connected peers and takes this object's presence off the network. =
-    func killConnectionParameters() {
-        disconnectFromSession()
-        stopBrowsingForPeers()
-        stopAdvertisingPeer()
-    }
-    
     override init() {
         unowned let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         dataController = appDelegate.dataController
-        
-        serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: nil, serviceType: myServiceType)
-        serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: myServiceType)
-        super.init()
-        serviceAdvertiser.delegate = self
-        serviceBrowser.delegate = self
-        
-        startAdvertisingPeer()
-        startBrowsingForPeers()
+        //add http request object
     }
     
     deinit {
-        self.serviceAdvertiser.stopAdvertisingPeer()
-        self.serviceBrowser.stopBrowsingForPeers()
+        //delete http request object
     }
     
     
-    //MARK: Data transfer methods
-    
-    /**
-     Sends all owned messages to the passed-in peers.
-     It maps the stored messages, which are saved as CoreArray objects,
-     to SentArray objects, which conform to `NSCoding` protocol.
-     It is meant to be used when a peer first connects with another peer.
-     
-     - Parameters:
-        - ids: An array of `MCPeerID` objects that represent peers to send mesages to.
-     */
     func sendAllMessages(toRequesters ids: [MCPeerID]) {
         let messageCoreArray: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
         let messageSentArray: [AnonymouseMessageSentCore] = messageCoreArray.map { (messageCore) -> AnonymouseMessageSentCore in
@@ -132,10 +43,10 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         do {
             //Encode the messages for sending
             let archivedMessageArray: Data = NSKeyedArchiver.archivedData(withRootObject: messageSentArray)
-            try self.sessionObject.send(archivedMessageArray, toPeers: ids, with: MCSessionSendDataMode.reliable)
+            //try self.sessionObject.send(archivedMessageArray, toPeers: ids, with: MCSessionSendDataMode.reliable)
             
             let archivedRatingArray: Data = NSKeyedArchiver.archivedData(withRootObject: ratingSentArray)
-            try self.sessionObject.send(archivedRatingArray, toPeers: ids, with: MCSessionSendDataMode.reliable)
+            //try self.sessionObject.send(archivedRatingArray, toPeers: ids, with: MCSessionSendDataMode.reliable)
         } catch let error as NSError {
             NSLog("%@", error)
         }
@@ -158,10 +69,10 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         
         do {
             let archivedReplyArray: Data = NSKeyedArchiver.archivedData(withRootObject: replySentArray)
-            try self.sessionObject.send(archivedReplyArray, toPeers: ids, with: MCSessionSendDataMode.reliable)
+            //try self.sessionObject.send(archivedReplyArray, toPeers: ids, with: MCSessionSendDataMode.reliable)
             
             let archivedRatingArray: Data = NSKeyedArchiver.archivedData(withRootObject: ratingSentArray)
-            try self.sessionObject.send(archivedRatingArray, toPeers: ids, with: MCSessionSendDataMode.reliable)
+            //try self.sessionObject.send(archivedRatingArray, toPeers: ids, with: MCSessionSendDataMode.reliable)
         } catch let error as NSError {
             NSLog("%@", error)
         }
@@ -177,13 +88,13 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         - message: The message to send to the connected peers.
         */
     func send(individualMessage message: AnonymouseMessageSentCore) {
-        guard sessionObject.connectedPeers.count > 0 else {
-            return
-        }
+//        guard sessionObject.connectedPeers.count > 0 else {
+//            return
+//        }
         
         do {
             let archivedMessage: Data = NSKeyedArchiver.archivedData(withRootObject: message)
-            try self.sessionObject.send(archivedMessage, toPeers: sessionObject.connectedPeers, with: MCSessionSendDataMode.reliable)
+            //try self.sessionObject.send(archivedMessage, toPeers: sessionObject.connectedPeers, with: MCSessionSendDataMode.reliable)
         } catch let error as NSError {
             NSLog("%@", error)
         }
@@ -196,13 +107,13 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         - reply: The reply to send to the connected peers.
      */
     func send(individualReply reply: AnonymouseReplySentCore) {
-        guard sessionObject.connectedPeers.count > 0 else {
-            return
-        }
+//        guard sessionObject.connectedPeers.count > 0 else {
+//            return
+//        }
         
         do {
             let archivedMessage: Data = NSKeyedArchiver.archivedData(withRootObject: reply)
-            try self.sessionObject.send(archivedMessage, toPeers: sessionObject.connectedPeers, with: MCSessionSendDataMode.reliable)
+            //try self.sessionObject.send(archivedMessage, toPeers: sessionObject.connectedPeers, with: MCSessionSendDataMode.reliable)
         } catch let error as NSError {
             NSLog("%@", error)
         }
@@ -216,57 +127,19 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
     */
     func send(individualRating rating: AnonymouseRatingSentCore) {
         
-        guard sessionObject.connectedPeers.count > 0 else {
-            return
-        }
+//        guard sessionObject.connectedPeers.count > 0 else {
+//            return
+//        }
  
         do {
             let archivedRating: Data = NSKeyedArchiver.archivedData(withRootObject: rating)
-            try self.sessionObject.send(archivedRating, toPeers: sessionObject.connectedPeers, with: MCSessionSendDataMode.reliable)
+            //try self.sessionObject.send(archivedRating, toPeers: sessionObject.connectedPeers, with: MCSessionSendDataMode.reliable)
         } catch let error as NSError {
             NSLog("%@", error)
         }
     }
     
-    //MARK: MCNearbyServiceBrowserDelegate Methods
-    func browser(_ browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: Error) {
-        NSLog("%@", "didNotStartBrowsingForPeers: \(error)")
-    }
     
-    func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
-        NSLog("%@", "foundPeer: \(peerID)")
-        browser.invitePeer(peerID, to: sessionObject, withContext: nil, timeout: 30.0)
-    }
-    
-    func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
-        NSLog("%@", "lostPeer: \(peerID)")
-    }
-    
-    
-    //MARK: MCNearbyServiceAdvertiserDelegate Methods
-    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error) {
-        NSLog("%@", "didNotStartAdvertisingPeer: \(error)")
-    }
-    
-    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
-        NSLog("%@", "didReceiveInvitationFromPeer \(peerID)")
-        
-        //When this app receives an invitation to connect, it accepts it immediately.
-        //This needs to be changed to only accept peers that are using this app.
-        invitationHandler(true, self.sessionObject)
-    }
-    
-    //MARK: MCSessionDelegate Methods
-    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL, withError error: Error?) {
-        NSLog("%@", "didFinishReceivingResourceWithName \(resourceName)")
-    }
-    
-    func session(_ session: MCSession, didReceiveCertificate certificate: [Any]?, fromPeer peerID: MCPeerID, certificateHandler: @escaping (Bool) -> Void) {
-        NSLog("%@", "didReceiveCertificate from peer \(peerID)")
-        //Check the certificate of a peer.
-        //This needs to be changed to validate the certificate the peer sends.
-        certificateHandler(true)
-    }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         NSLog("%@", "didReceiveData: \(data.count) bytes from peer \(peerID)")
@@ -367,23 +240,46 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         }
     }
     
-    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
-        NSLog("%@", "didReceiveStream withName \(streamName)")
+    //infrastructure mode
+    func sendViaHTTP(){
+        var listOfMessages = []
+        let myUrl = URL(string: "http://www.swiftdeveloperblog.com/http-post-example-script/");
+        var request = URLRequest(url:myUrl!)
+        request.httpMethod = "POST"// Compose a query string
+        let postString = "firstName=James&lastName=Bond";
+        request.httpBody = postString.data(using: String.Encoding.utf8);
+        let task = URLSession.shared.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
+            if error != nil{
+                print("error=\(String(describing: error))")
+                return
+            }
+            
+            // You can print out response object
+            print("response = \(String(describing: response))")
+            
+            //Let's convert response sent from a server side script to a NSDictionary object:
+            do{
+                let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
+                
+                if let parseJSON = json {
+                    
+                    // Now we can access value of First Name by its key
+                    let date = parseJSON["date"] as? NSDate?
+                    let text = parseJSON["text"] as? String?
+                    let user = parseJSON["user"] as? String?
+                    let rating = parseJSON["rating"] as? NSNumber?
+                    let likeStatus = parseJSON["likeStatus"] as? NSNumber?
+                    let isFavorite = parseJSON["isFavorite"] as? NSNumber?
+                    let numReplies = parseJSON["numReplies"] as? NSNumber?
+                    var message = AnonymouseMessageCore(text: text, date: data, user: user)
+                    listOfMessages.append(message)
+                }
+            } catch {
+                print(error)
+            }
+        }
+        task.resume()
     }
     
-    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
-        NSLog("%@", "didStartReceivingResourceWithName \(resourceName)")
-    }
     
-    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-        NSLog("%@", "peer \(peerID) didChangeState: \(state.stringValue())")
-        //The moment we connect to a peer, send them all of our messages.
-        if state == MCSessionState.connected {
-            self.sendAllMessages(toRequesters: [peerID])
-            self.sendAllReplies(toRequesters: [peerID])
-        }
-        else if state == MCSessionState.notConnected {
-            killConnectionParameters()
-        }
-    }
 }

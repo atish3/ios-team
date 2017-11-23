@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         self.backgroundTask = application.beginBackgroundTask(withName: "backgroundTask", expirationHandler: {
-            self.connectivityController.killConnectionParameters()
+            //self.connectivityController.killConnectionParameters()
             application.endBackgroundTask(self.backgroundTask)
             self.backgroundTask = UIBackgroundTaskInvalid
         })
@@ -68,8 +68,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
         
         if UserDefaults.standard.bool(forKey: "isBrowsing") {
-            self.connectivityController.startAdvertisingPeer()
-            self.connectivityController.startBrowsingForPeers()
+            //self.connectivityController.startAdvertisingPeer()
+            //self.connectivityController.startBrowsingForPeers()
         }
     }
     
@@ -84,12 +84,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         NSLog("\(application) called performFetchWithCompletionHandler")
-        self.connectivityController.startAdvertisingPeer()
-        self.connectivityController.startBrowsingForPeers()
+        //self.connectivityController.startAdvertisingPeer()
+        //self.connectivityController.startBrowsingForPeers()
         
         DispatchQueue.global(qos: DispatchQoS.QoSClass.background).asyncAfter(deadline: DispatchTime.now() + 20.0) {
             NSLog("\(application) called the completionHandler")
-            self.connectivityController.killConnectionParameters()
+            //self.connectivityController.killConnectionParameters()
             completionHandler(UIBackgroundFetchResult.noData)
         }
     }
