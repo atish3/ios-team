@@ -186,75 +186,42 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
     }
     
     func getData(sender: AnyObject) {
-        let userNameValue = userNameTextField.text
-        
-        if isStringEmpty(userNameValue!) == true{
-            return
-        }
-        
-        // Send HTTP GET Request
-        
-        // Define server side script URL
-        let scriptUrl = "http://swiftdeveloperblog.com/my-http-get-example-script/"
-        // Add one parameter
-        let urlWithParams = scriptUrl + "?userName=\(userNameValue!)"
-        // Create NSURL Ibject
-        let myUrl = NSURL(string: urlWithParams);
-        
-        // Creaste URL Request
-        let request = NSMutableURLRequest(URL:myUrl!);
-        
-        // Set request HTTP method to GET. It could be POST as well
-        request.HTTPMethod = "GET"
-        
-        // If needed you could add Authorization header value
-        // Add Basic Authorization
-        /*
-         let username = "myUserName"
-         let password = "myPassword"
-         let loginString = NSString(format: "%@:%@", username, password)
-         let loginData: NSData = loginString.dataUsingEncoding(NSUTF8StringEncoding)!
-         let base64LoginString = loginData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions())
-         request.setValue(base64LoginString, forHTTPHeaderField: "Authorization")
-         */
-        
-        // Or it could be a single Authorization Token value
-        //request.addValue("Token token=884288bae150b9f2f68d8dc3a932071d", forHTTPHeaderField: "Authorization")
-        
-        // Excute HTTP Request
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
-            data, response, error in
-            
-            // Check for error
-            if error != nil
-            {
-                print("error=\(error)")
+        var listOfMessages = []
+        let myUrl = URL(string: "http://www.swiftdeveloperblog.com/http-post-example-script/");
+        var request = URLRequest(url:myUrl!)
+        request.httpMethod = "POST"// Compose a query string
+        let postString = "firstName=James&lastName=Bond";
+        request.httpBody = postString.data(using: String.Encoding.utf8);
+        let task = URLSession.shared.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
+            if error != nil{
+                print("error=\(String(describing: error))")
                 return
             }
             
-            // Print out response string
-            let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
-            print("responseString = \(responseString)")
+            // You can print out response object
+            print("response = \(String(describing: response))")
             
-            
-            // Convert server json response to NSDictionary
-            do {
-                if let convertedJsonIntoDict = try NSJSONSerialization.JSONObjectWithData(data!, options: []) as? NSDictionary {
+            //Let's convert response sent from a server side script to a NSDictionary object:
+            do{
+                let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
+                
+                if let parseJSON = json {
                     
-                    // Print out dictionary
-                    print(convertedJsonIntoDict)
-                    
-                    // Get value by key
-                    let firstNameValue = convertedJsonIntoDict["userName"] as? String
-                    print(firstNameValue!)
-                    
+                    // Now we can access value of First Name by its key
+                    let date = parseJSON["date"] as? NSDate?
+                    let text = parseJSON["text"] as? String?
+                    let user = parseJSON["user"] as? String?
+                    let rating = parseJSON["rating"] as? NSNumber?
+                    let likeStatus = parseJSON["likeStatus"] as? NSNumber?
+                    let isFavorite = parseJSON["isFavorite"] as? NSNumber?
+                    let numReplies = parseJSON["numReplies"] as? NSNumber?
+                    var message = AnonymouseMessageCore(text: text, date: data, user: user)
+                    listOfMessages.append(message)
                 }
-            } catch let error as NSError {
-                print(error.localizedDescription)
+            } catch {
+                print(error)
             }
-            
         }
-        
         task.resume()
         
     }
