@@ -259,7 +259,7 @@
 				TargetAttributes = {
 					1ABE12D01C9744D0005923BA = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = 8JE6W53B3L;
+						DevelopmentTeam = SQXYK344KH;
 						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -531,7 +531,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8JE6W53B3L;
+				DEVELOPMENT_TEAM = SQXYK344KH;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Anonymouse/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
@@ -553,7 +553,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8JE6W53B3L;
+				DEVELOPMENT_TEAM = SQXYK344KH;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Anonymouse/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
