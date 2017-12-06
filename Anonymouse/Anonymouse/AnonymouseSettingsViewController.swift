@@ -42,16 +42,18 @@ class AnonymouseSettingsViewController: UITableViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
+        /*
         case 0:
             return "Connectivity"
-        case 1:
+        */
+        case 0:
             return "Change Screen Name"
-        case 2:
+        case 1:
             return "Danger"
         default:
             return "Default"
@@ -66,14 +68,16 @@ class AnonymouseSettingsViewController: UITableViewController {
         centerLabel.frame.origin = CGPoint.zero
         
         switch indexPath.section {
+        /*
         case 0:
             centerLabel.text = "Stop Broadcasting"
             centerLabel.textColor = UIColor.red
             broadcastLabel = centerLabel
-        case 1:
+        */
+        case 0:
             centerLabel.text = "Profile"
             centerLabel.textColor = UIColor(red: 0, green: 0.478431, blue: 1, alpha: 1)
-        case 2:
+        case 1:
             centerLabel.text = "Delete all messages"
             centerLabel.textColor = UIColor.red
         default:
@@ -88,12 +92,14 @@ class AnonymouseSettingsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
+        /*
         case 0:
             toggleConnection()
             self.tableView.deselectRow(at: indexPath, animated: true)
-        case 1:
+        */
+        case 0:
             self.navigationController!.pushViewController(profileViewController, animated: true)
-        case 2:
+        case 1:
             let certainAlert: UIAlertController = UIAlertController(title: "Delete all messages", message: "Are you sure you want to delete all messages?", preferredStyle: .alert)
             certainAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (_) in
                 self.dataController.clearContext()
@@ -104,11 +110,18 @@ class AnonymouseSettingsViewController: UITableViewController {
             present(certainAlert, animated: true) {
                 self.tableView.deselectRow(at: indexPath, animated: true)
             }
-            
         default:
             print("Pressed row at indexPath: \(indexPath)")
         }
     }
+    
+    
+    /*
+    Commented out the stop/begin broadcasting option because it is unnecessary but we can figure it out later if need be
+    Current state: if the user is in stop broadcasting mode, others can still receive messages (bug)
+    */
+    
+    
     
     //MARK: Connection methods
     
@@ -119,8 +132,7 @@ class AnonymouseSettingsViewController: UITableViewController {
         if connectivityController.isBrowsing {
             userPreferences.set(false, forKey: "isBroadcasting")
             
-            connectivityController.stopBrowsingForPeers()
-            connectivityController.stopAdvertisingPeer()
+            connectivityController.killConnectionParameters()
             broadcastLabel.text = "Begin Broadcasting"
             broadcastLabel.textColor = UIColor.green
         }
