@@ -270,19 +270,7 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         NSLog("%@", "didReceiveData: \(data.count) bytes from peer \(peerID)")
-        //There are only two types of data that this app sends: a single message, or a group of messages
-        
-        //Check if the data sent was a single message
-        if let message = NSKeyedUnarchiver.unarchiveObject(with: data) as? AnonymouseMessageSentCore {
-            let messageHash: String = message.text.sha1()
-            let messageHashes: [String] = dataController.fetchMessageHashes()
-            //Add the message if we don't have it already
-            if !messageHashes.contains(messageHash) {
-                self.dataController.addMessage(message.text!, date: message.date!, user: message.user!)
-            }
-        }
-            //Check if the data sent was an array of messages
-        else if let messageArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? [AnonymouseMessageSentCore] {
+        if let messageArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? [AnonymouseMessageSentCore] {
             let messageHashes: [String] = dataController.fetchMessageHashes()
             for message in messageArray {
                 let messageHash: String = message.text.sha1()
@@ -291,21 +279,6 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
                 }
             }
         }
-            //Check if the data sent was a single reply
-        else if let reply = NSKeyedUnarchiver.unarchiveObject(with: data) as? AnonymouseReplySentCore {
-            let replyHashes: [String] = dataController.fetchReplyHashes()
-            let replyHash: String = reply.text.sha1()
-            if !replyHashes.contains(replyHash) {
-                let messageObjects: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
-                for message in messageObjects {
-                    if message.text!.sha1() == reply.parentHash {
-                        dataController.addReply(withText: reply.text!, date: reply.date!, user: reply.user!, toMessage: message)
-                        break
-                    }
-                }
-            }
-        }
-            //Check if the data sent was an array of replies
         else if let replyArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? [AnonymouseReplySentCore] {
             let replyHashes: [String] = dataController.fetchReplyHashes()
             let messageObjects: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
@@ -321,26 +294,6 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
                 }
             }
         }
-            //Check if the data sent was a single reply
-        else if let rating = NSKeyedUnarchiver.unarchiveObject(with: data) as? AnonymouseRatingSentCore {
-            let messageCoreArray: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
-            for message in messageCoreArray {
-                if message.text!.sha1() == rating.messageHash {
-                    let previousRating: Int = Int(message.rating!)
-                    message.rating = NSNumber(integerLiteral: rating.rating! + previousRating)
-                    return
-                }
-            }
-            let replyCoreArray: [AnonymouseReplyCore] = dataController.fetchReplies(withKey: "date", ascending: true)
-            for reply in replyCoreArray {
-                if reply.text!.sha1() == rating.messageHash {
-                    let previousRating: Int = Int(reply.rating!)
-                    reply.rating = NSNumber(integerLiteral: rating.rating! + previousRating)
-                    return
-                }
-            }
-        }
-            //Check if the data sent was an array of replies
         else if let ratingArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? [AnonymouseRatingSentCore] {
             let messageCoreArray: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
             var messageCoreDictionary: [String: AnonymouseMessageCore] = [String: AnonymouseMessageCore]()
