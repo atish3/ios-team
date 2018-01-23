@@ -5,4 +5,8 @@ For first timers, please do the following:
 - install cocoapods on your Mac with "sudo gem install cocoapods"
 - cd into the anonymouse project directory where a file called Podfile exists and then install dependencies with "pod install"
 - open the .xcodeworkspace file (VERY IMPORTANT)
+- find the CryptoSwift.frameworks file under the pod directory on the side bar
+- Open the frameworks file in folder and move it up one folder
+- repeat steps 4-5 with the Alamofire.frameworks file
 - build and run as usual
+
