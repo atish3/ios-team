@@ -15,8 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     var backgroundTask: UIBackgroundTaskIdentifier!
-    @objc var connectivityController: AnonymouseConnectivityController!
-    @objc var dataController: AnonymouseDataController!
+    var connectivityController: AnonymouseConnectivityController!
+    var dataController: AnonymouseDataController!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

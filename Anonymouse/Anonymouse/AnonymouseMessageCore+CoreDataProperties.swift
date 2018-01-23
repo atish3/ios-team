@@ -33,6 +33,10 @@ extension AnonymouseMessageCore {
     @NSManaged public var ownedMessages: NSSet?
     //The number of replies to the message
     @NSManaged public var numReplies: NSNumber?
+    ///The array containing the hashes of all received rating objects
+    @NSManaged public var ratingHashes: [AnonymouseRatingSentCore]
+    ///The public key associated with the message
+    @NSManaged public var pubKey: String?
 
 }
 

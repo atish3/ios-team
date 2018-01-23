@@ -11,11 +11,13 @@ import UIKit
 ///A subclass of `NSObject` that conforms to `NSCoding`. This class is used to send messages to nearby peers.
 class AnonymouseMessageSentCore: NSObject, NSCoding {
     ///The date the message was composed.
-    @objc var date: Date!
+    var date: Date!
     ///The text of the message.
-    @objc var text: String!
+    var text: String!
     ///The user that composed the message.
-    @objc var user: String!
+    var user: String!
+    ///The public key of the message sender
+    var pubKey: String!
     
     
     /**
@@ -24,11 +26,12 @@ class AnonymouseMessageSentCore: NSObject, NSCoding {
         - Parameters:
             - message: The stored message to send.
      */
-    @objc convenience init(message: AnonymouseMessageCore) {
+    convenience init(message: AnonymouseMessageCore) {
         self.init()
         self.date = message.date! as Date!
         self.text = message.text!
         self.user = message.user!
+        self.pubKey = message.pubKey!
     }
     
     /**
@@ -39,12 +42,13 @@ class AnonymouseMessageSentCore: NSObject, NSCoding {
             - date: The date the message was composed.
             - user: The user that composed the message.
      */
-    @objc convenience init(text: String, date: Date, user: String) {
+    convenience init(text: String, date: Date, user: String, pubKey: String) {
         self.init()
         
         self.date = date
         self.text = text
         self.user = user
+        self.pubKey = pubKey
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
@@ -53,15 +57,18 @@ class AnonymouseMessageSentCore: NSObject, NSCoding {
         let unarchivedDate: Date = aDecoder.decodeObject(forKey: "date") as! Date
         let unarchivedText: String = aDecoder.decodeObject(forKey: "text") as! String
         let unarchivedUser: String = aDecoder.decodeObject(forKey: "user") as! String
+        let unarchivedKey: String = aDecoder.decodeObject(forKey: "PublicKey") as! String
         
         self.date = unarchivedDate
         self.text = unarchivedText
         self.user = unarchivedUser
+        self.pubKey = unarchivedKey
     }
     
     func encode(with aCoder: NSCoder) {
         aCoder.encode(self.date!, forKey: "date")
         aCoder.encode(self.text!, forKey: "text")
         aCoder.encode(self.user!, forKey: "user")
+        aCoder.encode(self.user!, forKey: "PublicKey")
     }
 }

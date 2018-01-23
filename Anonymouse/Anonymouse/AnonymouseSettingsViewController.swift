@@ -15,15 +15,15 @@ import UIKit
  */
 class AnonymouseSettingsViewController: UITableViewController {
     ///A weak reference to the connectivityController; this allows the user to toggle broadcast settings.
-    @objc weak var connectivityController: AnonymouseConnectivityController!
+    weak var connectivityController: AnonymouseConnectivityController!
     ///A weak reference to the dataController; this allows the user to delete all messages from the settings view.
-    @objc weak var dataController: AnonymouseDataController!
+    weak var dataController: AnonymouseDataController!
     
     ///An instance of `AnonymouseProfileViewController` that allows users to change their usernames.
-    @objc var profileViewController = AnonymouseProfileViewController()
+    var profileViewController = AnonymouseProfileViewController()
     
     ///The label on the broadcast button; has the text `"Stop Broadcasting"` or `"Begin Broadcasting"`.
-    @objc var broadcastLabel: UILabel!
+    var broadcastLabel: UILabel!
     
     override func viewDidLoad() {
         self.title = "Settings"
@@ -126,7 +126,7 @@ class AnonymouseSettingsViewController: UITableViewController {
     //MARK: Connection methods
     
     ///A function that toggles whether or not the user is broadcasting/receiving messages or not.
-    @objc func toggleConnection() {
+    func toggleConnection() {
         let userPreferences: UserDefaults = UserDefaults.standard
     
         if connectivityController.isBrowsing {

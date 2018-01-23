@@ -13,7 +13,9 @@ class AnonymouseRatingSentCore: NSObject, NSCoding {
     ///The integer rating of the message.
     var rating: Int?
     ///The sha1() hash of the text of the message this rating corresponds to.
-    @objc var messageHash: String!
+    var messageHash: String!
+    ///The sha1() hash of the rating object
+    var ratingHash: String!
     
     /**
      Initialize a sent rating object from a stored message.
@@ -21,10 +23,12 @@ class AnonymouseRatingSentCore: NSObject, NSCoding {
      - Parameters:
         - message: The message from which to create a rating object.
      */
-    @objc convenience init(message: AnonymouseMessageCore) {
+    convenience init(message: AnonymouseMessageCore) {
         self.init()
+        let userPreferences: UserDefaults = UserDefaults.standard
         self.rating = message.rating!.intValue
         self.messageHash = message.text!.sha1()
+        self.ratingHash = UserDefaults.standard.string(forKey: "publicKey")
     }
 
     /**
@@ -33,10 +37,12 @@ class AnonymouseRatingSentCore: NSObject, NSCoding {
     - Parameters: 
         - reply: The reply from which to create a rating object.
      */
-    @objc convenience init(reply: AnonymouseReplyCore) {
+    convenience init(reply: AnonymouseReplyCore) {
         self.init()
+        let userPreferences: UserDefaults = UserDefaults.standard
         self.rating = reply.rating!.intValue
         self.messageHash = reply.text!.sha1()
+        self.ratingHash = UserDefaults.standard.string(forKey: "publicKey")
     }
     
     /**
@@ -46,24 +52,28 @@ class AnonymouseRatingSentCore: NSObject, NSCoding {
         - rating: The integer rating of the message.
         - messageHash: the sha1() hash of the text of the message that this rating corresponds to.
     */
-    @objc convenience init(rating: Int, messageHash: String) {
+    convenience init(rating: Int, messageHash: String, ratingHash: String) {
         self.init()
         self.rating = rating
         self.messageHash = messageHash
+        self.ratingHash = ratingHash
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
         let unarchivedRating: Int = aDecoder.decodeInteger(forKey: "rating")
         let unarchivedHash: String = aDecoder.decodeObject(forKey: "messageHash") as! String
+        let unarchivedRatingHash: String = aDecoder.decodeObject(forKey: "ratingHash") as! String
         
         self.rating = unarchivedRating
         self.messageHash = unarchivedHash
+        self.ratingHash = unarchivedRatingHash
     }
     
     func encode(with aCoder: NSCoder) {
         aCoder.encode(self.rating!, forKey: "rating")
         aCoder.encode(self.messageHash!, forKey: "messageHash")
+        aCoder.encode(self.ratingHash!, forKey: "ratingHash")
     }
     
 }

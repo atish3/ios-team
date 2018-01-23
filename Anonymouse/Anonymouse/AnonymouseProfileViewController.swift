@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CryptoSwift
 
 ///A subclass of `UITextField` that does not allow pasting; used to input the username.
 class NoPasteTextField: UITextField {
@@ -29,15 +30,15 @@ class NoPasteTextField: UITextField {
 class AnonymouseProfileViewController: UIViewController, UITextFieldDelegate {
     
     ///The `textField` in which the user enters their username.
-    @objc var usernameTextField: NoPasteTextField!
+    var usernameTextField: NoPasteTextField!
     ///The label which displays the username when it is not being edited.
-    @objc var usernameLabel: UILabel!
+    var usernameLabel: UILabel!
     ///The button that allows a user to edit their username.
-    @objc var editButton: UIBarButtonItem!
+    var editButton: UIBarButtonItem!
     ///The label above the `usernameTextField` that says `"Screen name:"`.
-    @objc var usernameHeader: UILabel!
+    var usernameHeader: UILabel!
     ///`true` if the user is currently editing their username; false otherwise.
-    @objc var isEditingProfile: Bool = false
+    var isEditingProfile: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,12 +110,20 @@ class AnonymouseProfileViewController: UIViewController, UITextFieldDelegate {
             usernameLabel.isHidden = false
             
             if usernameLabel.text != usernameTextField.text {
+                let oldName = usernameLabel.text
                 usernameLabel.text = usernameTextField.text
                 //Username is set here. This is a bit of a hack
                 let userPreferences: UserDefaults = UserDefaults.standard
                 userPreferences.set(usernameLabel.text!, forKey: "username")
                 userPreferences.set(Date(), forKey: "timeUpdateUsername")
+                if(oldName == "Anonymouse"){
+                    let privateKey: String = usernameLabel.text! + Date().description;
+                    let publicKey = privateKey.sha1();
+                    userPreferences.set(publicKey, forKey: "publicKey")
+                    userPreferences.set(privateKey, forKey: "privateKey")
+                }
             }
+                
             
             editButton.title = "Edit"
             editButton.style = UIBarButtonItemStyle.plain
@@ -126,7 +135,7 @@ class AnonymouseProfileViewController: UIViewController, UITextFieldDelegate {
                 let secondsSinceLastUpdate: TimeInterval = abs(lastTimeUpdateUsername.timeIntervalSinceNow)
                 
                 // Disable update of username if it has been less than seven days since last update
-                if secondsSinceLastUpdate < 604800 {
+               /* if secondsSinceLastUpdate < 604800 {
                     let unableUpdateUsernameAlert: UIAlertController = UIAlertController(title: "Unable to update username", message: "Please do not update username more than once in a week (to prevent spam)", preferredStyle: UIAlertControllerStyle.alert)
                     unableUpdateUsernameAlert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: { (action) in
                         self.usernameTextField.becomeFirstResponder()
@@ -134,7 +143,7 @@ class AnonymouseProfileViewController: UIViewController, UITextFieldDelegate {
                     
                     self.present(unableUpdateUsernameAlert, animated: true, completion: nil)
                     return
-                }
+                } */
             }
             
             usernameTextField.isHidden = false

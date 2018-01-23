@@ -19,7 +19,7 @@ import CoreData
  */
 class AnonymouseTabBarController: UITabBarController, UITabBarControllerDelegate {
     ///An instance of `AnonymouseNavigationStyleController` that contains an `AnonymouseComposeViewController`.
-    @objc var composeNavigationController: AnonymouseNavigationStyleController = AnonymouseNavigationStyleController()
+    var composeNavigationController: AnonymouseNavigationStyleController = AnonymouseNavigationStyleController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,10 +94,9 @@ class AnonymouseTabBarController: UITabBarController, UITabBarControllerDelegate
         let gradientLayer: CAGradientLayer = CAGradientLayer()
         gradientLayer.frame = self.tabBar.bounds
         
-        //let topColor: UIColor = UIColor(colorLiteralRed: 242.0/255.0, green: 106.0/255.0, blue: 80.0/255.0, alpha: 1.0)
-        //let bottomColor: UIColor = UIColor(colorLiteralRed: 255.0/255.0, green: 140.0/255.0, blue: 110.0/255.0, alpha: 1.0)
-        let topColor = #colorLiteral(red: 0.9475640191, green: 0.415500217, blue: 0.3141004774, alpha: 1)
-        let bottomColor = #colorLiteral(red: 1, green: 0.5478515625, blue: 0.4316134983, alpha: 1)
+        
+        let topColor = #colorLiteral(red: 0.9490196078, green: 0.4171278212, blue: 0.3137254902, alpha: 1)
+        let bottomColor = #colorLiteral(red: 1, green: 0.5490196078, blue: 0.431372549, alpha: 1)
         gradientLayer.colors = [topColor, bottomColor].map{$0.cgColor}
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradientLayer.endPoint = CGPoint(x: 0.0, y: 1.0)
@@ -106,8 +105,7 @@ class AnonymouseTabBarController: UITabBarController, UITabBarControllerDelegate
         gradientLayer.render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        //let greyColor: UIColor = UIColor(colorLiteralRed: 234.0/255.0, green: 234.0/255.0, blue: 234.0/255.0, alpha: 1.0)
-        let greyColor = #colorLiteral(red: 0.9185926649, green: 0.9169650608, blue: 0.9161783854, alpha: 1)
+        let greyColor = #colorLiteral(red: 0.9176470588, green: 0.9176470588, blue: 0.9176470588, alpha: 1)
         for item in self.tabBar.items! {
             let unselectedItem = [NSAttributedStringKey.foregroundColor: greyColor]
             

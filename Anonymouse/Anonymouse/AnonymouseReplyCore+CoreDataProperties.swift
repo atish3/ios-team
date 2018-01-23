@@ -29,5 +29,7 @@ extension AnonymouseReplyCore {
     @NSManaged public var user: String?
     ///The parent message that this reply is replying to.
     @NSManaged public var parentMessage: AnonymouseMessageCore?
+    ///The array that contains all the rating object hashes associated with this reply
+    @NSManaged public var ratingHashes: [AnonymouseRatingSentCore]
 
 }
