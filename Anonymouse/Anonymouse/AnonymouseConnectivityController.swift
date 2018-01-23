@@ -41,9 +41,9 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
     var serviceAdvertiser: MCNearbyServiceAdvertiser!
     
     ///`true` if this object is currently browsing.
-    var isBrowsing: Bool = true
+    var isBrowsing: Bool = false
     ///`true` if this object is currently advertising.
-    var isAdvertising: Bool = true
+    var isAdvertising: Bool = false
     
     ///An object that manages communication among peers.
     lazy var sessionObject: MCSession = {
