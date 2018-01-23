@@ -33,6 +33,11 @@
 		1AE809CB1DD6B10A0009D7D1 /* AnonymouseRatingSentCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE809CA1DD6B10A0009D7D1 /* AnonymouseRatingSentCore.swift */; };
 		1AF2D0671C97856300670C89 /* AnonymouseComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF2D0661C97856300670C89 /* AnonymouseComposeViewController.swift */; };
 		1AFEDAE61D986BBC00690EB5 /* AnonymouseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFEDAE51D986BBC00690EB5 /* AnonymouseTabBarController.swift */; };
+		3B4C324B20169C6400C6B437 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1ABE12E21C9744D0005923BA /* Info.plist */; };
+		3B4C324C20169D3800C6B437 /* Pods_Anonymouse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583A4439EE13596C326DE55B /* Pods_Anonymouse.framework */; };
+		3B4C324D20169D3800C6B437 /* Pods_Anonymouse.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 583A4439EE13596C326DE55B /* Pods_Anonymouse.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3B8558A8200B173E006BB080 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BBF3E731F83C50B0081CED5 /* CryptoSwift.framework */; };
+		3B8558A9200B173E006BB080 /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4BBF3E731F83C50B0081CED5 /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		54C0CA17B65E58256F3BC170 /* Pods_Anonymouse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583A4439EE13596C326DE55B /* Pods_Anonymouse.framework */; };
 		7DD0BBB41CBC349000CF2268 /* Anonymouse.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7DD0BBB21CBC349000CF2268 /* Anonymouse.xcdatamodeld */; };
 /* End PBXBuildFile section */
@@ -54,6 +59,21 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		3B8558AA200B173E006BB080 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3B4C324D20169D3800C6B437 /* Pods_Anonymouse.framework in Embed Frameworks */,
+				3B8558A9200B173E006BB080 /* CryptoSwift.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		0286D4C91DEFA10000EEDE07 /* AnonymouseReplyViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseReplyViewCell.swift; sourceTree = "<group>"; };
 		02B6E4411DF3719B00B2AE15 /* AnonymouseReplySentCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseReplySentCore.swift; sourceTree = "<group>"; };
@@ -61,7 +81,7 @@
 		02F9C7871DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnonymouseReplyCore+CoreDataClass.swift"; sourceTree = "<group>"; };
 		02F9C7881DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnonymouseReplyCore+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		081720711F85D8530000070F /* Anonymouse.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = Anonymouse.xcworkspace; sourceTree = "<group>"; };
-		081720731F85D8580000070F /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		081720731F85D8580000070F /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		081720751F85D85D0000070F /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
 		081720761F85D85D0000070F /* Pods */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Pods; sourceTree = "<group>"; };
 		172EA8A11D9788DA00D2E127 /* AnonymouseProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseProfileViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +117,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				54C0CA17B65E58256F3BC170 /* Pods_Anonymouse.framework in Frameworks */,
+				3B8558A8200B173E006BB080 /* CryptoSwift.framework in Frameworks */,
+				3B4C324C20169D3800C6B437 /* Pods_Anonymouse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,6 +259,7 @@
 				1ABE12CF1C9744D0005923BA /* Resources */,
 				260F3B40408CD3EC9FF3B06C /* [CP] Embed Pods Frameworks */,
 				9B9EFF434AEFD7153955CEF0 /* [CP] Copy Pods Resources */,
+				3B8558AA200B173E006BB080 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -259,8 +282,8 @@
 				TargetAttributes = {
 					1ABE12D01C9744D0005923BA = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = SQXYK344KH;
-						LastSwiftMigration = 0810;
+						DevelopmentTeam = 74B56R6EZA;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -316,6 +339,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B4C324B20169C6400C6B437 /* Info.plist in Resources */,
 				081720771F85D85D0000070F /* Podfile.lock in Resources */,
 				081720781F85D85D0000070F /* Pods in Resources */,
 				081720741F85D8580000070F /* Podfile in Resources */,
@@ -531,16 +555,16 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = SQXYK344KH;
+				DEVELOPMENT_TEAM = 74B56R6EZA;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Anonymouse/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.1am.Anonymouse;
+				PRODUCT_BUNDLE_IDENTIFIER = com.1am;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -553,15 +577,15 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = SQXYK344KH;
+				DEVELOPMENT_TEAM = 74B56R6EZA;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Anonymouse/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.1am.Anonymouse;
+				PRODUCT_BUNDLE_IDENTIFIER = com.1am;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};

@@ -6,6 +6,6 @@ target 'Anonymouse' do
   use_frameworks!
 
   # Pods for Anonymouse
-  pod 'CryptoSwift', '0.6.9'
+  pod 'CryptoSwift', '0.7.1'
   pod 'Alamofire', '4.5'
 end

@@ -11,11 +11,11 @@ import UIKit
 ///A subclass of `NSObject` that conforms to `NSCoding`. This class is used to send messages to nearby peers.
 class AnonymouseMessageSentCore: NSObject, NSCoding {
     ///The date the message was composed.
-    var date: Date!
+    @objc var date: Date!
     ///The text of the message.
-    var text: String!
+    @objc var text: String!
     ///The user that composed the message.
-    var user: String!
+    @objc var user: String!
     
     
     /**
@@ -24,7 +24,7 @@ class AnonymouseMessageSentCore: NSObject, NSCoding {
         - Parameters:
             - message: The stored message to send.
      */
-    convenience init(message: AnonymouseMessageCore) {
+    @objc convenience init(message: AnonymouseMessageCore) {
         self.init()
         self.date = message.date! as Date!
         self.text = message.text!
@@ -39,7 +39,7 @@ class AnonymouseMessageSentCore: NSObject, NSCoding {
             - date: The date the message was composed.
             - user: The user that composed the message.
      */
-    convenience init(text: String, date: Date, user: String) {
+    @objc convenience init(text: String, date: Date, user: String) {
         self.init()
         
         self.date = date

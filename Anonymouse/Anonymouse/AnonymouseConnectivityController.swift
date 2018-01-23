@@ -22,68 +22,72 @@ extension MCSessionState {
 
 ///A class that mnanages the connectivity protocols; sending messages and rating objects to nearby peers.
 class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate, MCSessionDelegate {
+    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
+         NSLog("%@", "didFinishReceivingResourceWithName \(resourceName)")
+    }
+    
     
     //MARK: Links
     ///A weak reference to the `dataController`, which allows this class to store received messages.
-    weak var dataController: AnonymouseDataController!
+    @objc weak var dataController: AnonymouseDataController!
     
     //MARK: Connection Parameters
     ///A unique identifier used to identify one's phone on the multipeer network.
-    var myPeerId: MCPeerID = MCPeerID(displayName: UIDevice.current.name)
+    @objc var myPeerId: MCPeerID = MCPeerID(displayName: UIDevice.current.name)
     
     ///A 15-character or less string that describes the function that the app is broadcasting.
-    let myServiceType: String = "Anonymouse"
+    @objc let myServiceType: String = "Anonymouse"
     
     ///An object that handles searching for and finding other phones on the network.
-    var serviceBrowser: MCNearbyServiceBrowser!
+    @objc var serviceBrowser: MCNearbyServiceBrowser!
     
     ///An object that handles broadcasting one's presence on the network.
-    var serviceAdvertiser: MCNearbyServiceAdvertiser!
+    @objc var serviceAdvertiser: MCNearbyServiceAdvertiser!
     
     ///`true` if this object is currently browsing.
-    var isBrowsing: Bool = true
+    @objc var isBrowsing: Bool = true
     ///`true` if this object is currently advertising.
-    var isAdvertising: Bool = true
+    @objc var isAdvertising: Bool = true
     
     ///An object that manages communication among peers.
-    lazy var sessionObject: MCSession = {
+    @objc lazy var sessionObject: MCSession = {
         let session: MCSession = MCSession(peer: self.myPeerId)
-        session.delegate = self
+        session.delegate = self as! MCSessionDelegate
         return session
     }()
     
     //MARK: Convenience methods
     ///Begins advertising the current peer on the network.
-    func startAdvertisingPeer() {
+    @objc func startAdvertisingPeer() {
         serviceAdvertiser.startAdvertisingPeer()
         isAdvertising = true
     }
     
     ///Stops advertising the current peer.
-    func stopAdvertisingPeer() {
+    @objc func stopAdvertisingPeer() {
         serviceAdvertiser.stopAdvertisingPeer()
         isAdvertising = false
     }
     
     ///Begins browsing for other peers on the network.
-    func startBrowsingForPeers() {
+    @objc func startBrowsingForPeers() {
         serviceBrowser.startBrowsingForPeers()
         isBrowsing = true
     }
     
     ///Stops browsing for other peers.
-    func stopBrowsingForPeers() {
+    @objc func stopBrowsingForPeers() {
         serviceBrowser.stopBrowsingForPeers()
         isBrowsing = false
     }
     
     ///Breaks the connection with the currently connected peers.
-    func disconnectFromSession() {
+    @objc func disconnectFromSession() {
         self.sessionObject.disconnect()
     }
     
     ///Kills the connection with currently connected peers and takes this object's presence off the network. =
-    func killConnectionParameters() {
+    @objc func killConnectionParameters() {
         disconnectFromSession()
         stopBrowsingForPeers()
         stopAdvertisingPeer()
@@ -120,7 +124,7 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
      - Parameters:
         - ids: An array of `MCPeerID` objects that represent peers to send mesages to.
      */
-    func sendAllMessages(toRequesters ids: [MCPeerID]) {
+    @objc func sendAllMessages(toRequesters ids: [MCPeerID]) {
         let messageCoreArray: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
         let messageSentArray: [AnonymouseMessageSentCore] = messageCoreArray.map { (messageCore) -> AnonymouseMessageSentCore in
             return AnonymouseMessageSentCore(message: messageCore)
@@ -147,7 +151,7 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
      - Parameters:
         - ids: An array of `MCPeerID` objects that represent peers to send replies to.
      */
-    func sendAllReplies(toRequesters ids: [MCPeerID]) {
+    @objc func sendAllReplies(toRequesters ids: [MCPeerID]) {
         let replyCoreArray: [AnonymouseReplyCore] = dataController.fetchReplies(withKey: "date", ascending: true)
         let replySentArray: [AnonymouseReplySentCore] = replyCoreArray.map { (replyCore) -> AnonymouseReplySentCore in
             return AnonymouseReplySentCore(reply: replyCore)
@@ -176,7 +180,7 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
      - Parameters:
         - message: The message to send to the connected peers.
         */
-    func send(individualMessage message: AnonymouseMessageSentCore) {
+    @objc func send(individualMessage message: AnonymouseMessageSentCore) {
         guard sessionObject.connectedPeers.count > 0 else {
             return
         }
@@ -195,7 +199,7 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
      - Parameters:
         - reply: The reply to send to the connected peers.
      */
-    func send(individualReply reply: AnonymouseReplySentCore) {
+    @objc func send(individualReply reply: AnonymouseReplySentCore) {
         guard sessionObject.connectedPeers.count > 0 else {
             return
         }
@@ -214,7 +218,7 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
      - Parameters:
         - rating: The rating to send to all connected peers.
     */
-    func send(individualRating rating: AnonymouseRatingSentCore) {
+    @objc func send(individualRating rating: AnonymouseRatingSentCore) {
         
         guard sessionObject.connectedPeers.count > 0 else {
             return
@@ -257,9 +261,9 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
     }
     
     //MARK: MCSessionDelegate Methods
-    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL, withError error: Error?) {
-        NSLog("%@", "didFinishReceivingResourceWithName \(resourceName)")
-    }
+    //func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL??, withError error: Error?) {
+    //    NSLog("%@", "didFinishReceivingResourceWithName \(resourceName)")
+   // }
     
     func session(_ session: MCSession, didReceiveCertificate certificate: [Any]?, fromPeer peerID: MCPeerID, certificateHandler: @escaping (Bool) -> Void) {
         NSLog("%@", "didReceiveCertificate from peer \(peerID)")

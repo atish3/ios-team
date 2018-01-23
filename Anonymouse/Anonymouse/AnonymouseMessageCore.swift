@@ -20,7 +20,7 @@ class AnonymouseMessageCore: NSManagedObject {
         - date: The date the message was composed.
         - user: The user that composed the message.
      */
-    convenience init(text: String, date: Date, user: String) {
+    @objc convenience init(text: String, date: Date, user: String) {
         let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext: NSManagedObjectContext = appDelegate.dataController.managedObjectContext
         let entity: NSEntityDescription? = NSEntityDescription.entity(forEntityName: "AnonymouseMessageCore", in: managedContext)
@@ -35,7 +35,7 @@ class AnonymouseMessageCore: NSManagedObject {
     }
     
     ///Likes the message; changes the like status to 1, and sends a like message to nearby peers.
-    func like() {
+    @objc func like() {
         let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         let connectivityController: AnonymouseConnectivityController = appDelegate.connectivityController
         guard let likeStatus = self.likeStatus as? Int else {
@@ -61,7 +61,7 @@ class AnonymouseMessageCore: NSManagedObject {
     }
     
     ///Dislikes the messages; changes the like status to 2, and sends a dislike message to nearby peers.
-    func dislike() {
+    @objc func dislike() {
         let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         let connectivityController: AnonymouseConnectivityController = appDelegate.connectivityController
         guard let likeStatus = self.likeStatus as? Int else {

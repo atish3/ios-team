@@ -13,23 +13,23 @@ import UIKit
  */
 class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
     ///The `textView` in which the user inputs their message.
-    var composeTextView: UITextView!
+    @objc var composeTextView: UITextView!
     ///The maximum number of characters that any message can be, minus one (don't ask, it was easier this way).
-    let maxCharacters: Int = 301
+    @objc let maxCharacters: Int = 301
     ///The number of pixels of padding between the sides of the screen and the `composeTextView`.
-    let textViewMargins: Int = 20
+    @objc let textViewMargins: Int = 20
     ///The text that appears over the `composeTextView`.
-    let placeholderText: String = "Post something to the world!"
+    @objc let placeholderText: String = "Post something to the world!"
     ///The label that contains the `placeholderText`.
-    var placeholderLabel: UILabel!
+    @objc var placeholderLabel: UILabel!
     ///The label that shows how many characters a user has left in their message.
-    var charactersLeftLabel: UILabel!
+    @objc var charactersLeftLabel: UILabel!
     
     
     ///A weak reference to the `dataController` that allows the user to store the message they compose.
-    weak var dataController: AnonymouseDataController!
+    @objc weak var dataController: AnonymouseDataController!
     ///A weak reference to the `connectivityController` that allows the user to send the message they compose.
-    weak var connectivityController: AnonymouseConnectivityController!
+    @objc weak var connectivityController: AnonymouseConnectivityController!
     
     //MARK: Navigation
     override func viewDidLoad() {
@@ -89,14 +89,14 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
     }
     
     ///Called when the cancel button is tapped; dismisses `self` and clears the composed text.
-    func cancelTapped() {
+    @objc func cancelTapped() {
         self.dismiss(animated: true) { () -> Void in
             self.clearText()
         }
     }
     
     ///Called when the post button is tapped; dismisses `self` and calls `self.post()`.
-    func postTapped() {
+    @objc func postTapped() {
         self.dismiss(animated: true) { () -> Void in
             self.post()
         }
@@ -138,7 +138,7 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
     //MARK: Keyboard Methods
     
     ///Called when the keyboard is about to be displayed.
-    func keyboardWillShow(_ notification: Notification) {
+    @objc func keyboardWillShow(_ notification: Notification) {
         var info = (notification as NSNotification).userInfo!
         let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         
@@ -151,7 +151,7 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
     }
     
     ///Called when the keyboard is about to be dismissed.
-    func keyboardWillHide(_ notification: Notification) {
+    @objc func keyboardWillHide(_ notification: Notification) {
         //        var info = (notification as NSNotification).userInfo!
         //        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         //        UIView.animate(withDuration: 0.1, animations: {() -> Void in
@@ -170,7 +170,7 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
     //MARK: Convenience methods
     
     ///Clears the text in the `composeTextView`.
-    func clearText() {
+    @objc func clearText() {
         composeTextView.text = ""
         placeholderLabel.isHidden = false
         
@@ -180,7 +180,7 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
     }
     
     ///Posts the written message to the feed.
-    func post() {
+    @objc func post() {
         let userPreferences: UserDefaults = UserDefaults.standard
         let username: String = userPreferences.string(forKey: "username")!
         

@@ -11,17 +11,17 @@ import UIKit
 ///A subclass of `AnonymouseTableViewCell` that displays replies in the detail view.
 class AnonymouseReplyViewCell: AnonymouseTableViewCell {
     ///The amount of indent applied to replies relative to the main message.
-    static let leftPadding: CGFloat = 20.0
+    @objc static let leftPadding: CGFloat = 20.0
     
     ///The reply to display in the cell.
-    var reply: AnonymouseReplyCore? {
+    @objc var reply: AnonymouseReplyCore? {
         didSet {
             updateCellUI()
         }
     }
     
     ///Moves the cell right by `leftPadding` pixels.
-    func pushRight() {
+    @objc func pushRight() {
         whiteBackdrop!.frame.origin.x += AnonymouseReplyViewCell.leftPadding
         grayFeatureBar!.frame.origin.x += AnonymouseReplyViewCell.leftPadding
     }

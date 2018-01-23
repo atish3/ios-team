@@ -13,7 +13,7 @@ class AnonymouseRatingSentCore: NSObject, NSCoding {
     ///The integer rating of the message.
     var rating: Int?
     ///The sha1() hash of the text of the message this rating corresponds to.
-    var messageHash: String!
+    @objc var messageHash: String!
     
     /**
      Initialize a sent rating object from a stored message.
@@ -21,7 +21,7 @@ class AnonymouseRatingSentCore: NSObject, NSCoding {
      - Parameters:
         - message: The message from which to create a rating object.
      */
-    convenience init(message: AnonymouseMessageCore) {
+    @objc convenience init(message: AnonymouseMessageCore) {
         self.init()
         self.rating = message.rating!.intValue
         self.messageHash = message.text!.sha1()
@@ -33,7 +33,7 @@ class AnonymouseRatingSentCore: NSObject, NSCoding {
     - Parameters: 
         - reply: The reply from which to create a rating object.
      */
-    convenience init(reply: AnonymouseReplyCore) {
+    @objc convenience init(reply: AnonymouseReplyCore) {
         self.init()
         self.rating = reply.rating!.intValue
         self.messageHash = reply.text!.sha1()
@@ -46,7 +46,7 @@ class AnonymouseRatingSentCore: NSObject, NSCoding {
         - rating: The integer rating of the message.
         - messageHash: the sha1() hash of the text of the message that this rating corresponds to.
     */
-    convenience init(rating: Int, messageHash: String) {
+    @objc convenience init(rating: Int, messageHash: String) {
         self.init()
         self.rating = rating
         self.messageHash = messageHash

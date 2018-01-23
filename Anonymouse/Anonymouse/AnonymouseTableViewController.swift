@@ -12,15 +12,15 @@ import CoreData
 ///A subclass of `UITableViewController` that displays user messages.
 class AnonymouseTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
     ///The `NSManagedObjectContext` from which the messages appear.
-    var managedObjectContext: NSManagedObjectContext!
+    @objc var managedObjectContext: NSManagedObjectContext!
     ///The `viewController` that is shown when a message is tapped; also displays the tapped message's replies.
-    var detailViewController: AnonymouseDetailViewController!
+    @objc var detailViewController: AnonymouseDetailViewController!
     ///The object that controls the search functionality at the top of the `tableView`.
-    var searchController: UISearchController!
+    @objc var searchController: UISearchController!
     ///The `NSFetchRequest` object that fetches messages from the `managedObjectContext`.
-    var fetchRequest: NSFetchRequest<AnonymouseMessageCore>
+    @objc var fetchRequest: NSFetchRequest<AnonymouseMessageCore>
     ///The `NSFetchRequest` object that fetches messages based on what the user is searching for
-    var searchRequest: NSFetchRequest<AnonymouseMessageCore> = NSFetchRequest<AnonymouseMessageCore>(entityName: "AnonymouseMessageCore")
+    @objc var searchRequest: NSFetchRequest<AnonymouseMessageCore> = NSFetchRequest<AnonymouseMessageCore>(entityName: "AnonymouseMessageCore")
     
     /**
      Returns an `AnonymouseTableViewController` with a specific `fetchRequest`.
@@ -28,7 +28,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
      - parameters:
         - fetchRequest: The `NSFetchRequest` used to fetch messages that are displayed in the table.
      */
-    init(withFetchRequest fetchRequest: NSFetchRequest<AnonymouseMessageCore>) {
+    @objc init(withFetchRequest fetchRequest: NSFetchRequest<AnonymouseMessageCore>) {
         self.fetchRequest = fetchRequest
         self.searchRequest.sortDescriptors = fetchRequest.sortDescriptors
         super.init(style: UITableViewStyle.plain)
@@ -42,7 +42,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
     }
     
     ///The object that fetches messages from the persistent store.
-    lazy var fetchedResultsController: NSFetchedResultsController<AnonymouseMessageCore> = {
+    @objc lazy var fetchedResultsController: NSFetchedResultsController<AnonymouseMessageCore> = {
         // Initialize Fetched Results Controller
         let fetchedResultsController: NSFetchedResultsController<AnonymouseMessageCore> = NSFetchedResultsController(fetchRequest: self.fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
         
@@ -53,7 +53,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
     }()
     
     ///The object that fetches messages related to the user's search.
-    lazy var searchResultsController: NSFetchedResultsController<AnonymouseMessageCore> = {
+    @objc lazy var searchResultsController: NSFetchedResultsController<AnonymouseMessageCore> = {
         // Initialize Search Results Controller
         let searchResultsController: NSFetchedResultsController<AnonymouseMessageCore> = NSFetchedResultsController(fetchRequest: self.searchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
         
@@ -72,7 +72,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         - notification: a `Notification` that contains a `userInfo[String: AnonymouseTableViewCell]` dictionary
             with `userInfo["cell"]` being the cell to display in detail.
      */
-    func performDetailTransition(notification: Notification) {
+    @objc func performDetailTransition(notification: Notification) {
         guard self.view.window != nil else {
             return
         }
@@ -158,7 +158,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
     
     //MARK: UIRefreshControl
     ///Called when the `tableView` is pulled down to reveal the `refreshControl`.
-    func refreshControlDidChangeValue() {
+    @objc func refreshControlDidChangeValue() {
         self.tableView.reloadData()
         self.refreshControl?.endRefreshing()
     }
@@ -289,7 +289,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         }
     }
     
-    func controller(controller: NSFetchedResultsController<AnonymouseMessageCore>, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+    @objc func controller(controller: NSFetchedResultsController<AnonymouseMessageCore>, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
         switch type {
         case .insert:
             tableView.insertSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
@@ -337,7 +337,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         - searchText: The text to filter the messages by.
         - scope: Honestly not sure what this is for. Ask Sindy.
      */
-    func filterContentForSearchResult(searchText: String, scope: String = "All") {
+    @objc func filterContentForSearchResult(searchText: String, scope: String = "All") {
         let predicate = NSPredicate(format: "text contains[c] %@", searchText)
         searchRequest.predicate = predicate
         do {

@@ -12,11 +12,11 @@ import CoreData
 ///A class that manages the persistent store, and the link between the persistent store and the user interface.
 class AnonymouseDataController: NSObject {
     ///The `NSManagedObjectContext` to which all messages and replies are stored.
-    var managedObjectContext: NSManagedObjectContext
+    @objc var managedObjectContext: NSManagedObjectContext
     ///The maximum number of messages that the persistent store should hold.
-    let maxMessages: Int = 1000
+    @objc let maxMessages: Int = 1000
     ///The size of the blocks to delete when the number of messages exceeds `maxMessages`.
-    let blockSize: Int = 50
+    @objc let blockSize: Int = 50
     
     override init() {
         //Get URL to Anonymouse.xcdatamodeld
@@ -137,7 +137,7 @@ class AnonymouseDataController: NSObject {
     }
     
     ///Saves the `managedObjectContext` if it had any changes.
-    func saveContext() {
+    @objc func saveContext() {
         if managedObjectContext.hasChanges {
             do {
                 try managedObjectContext.save()
@@ -156,7 +156,7 @@ class AnonymouseDataController: NSObject {
         - date: The date the message was composed.
         - user: The user that sent the message.
      */
-    func addMessage(_ text: String, date: Date, user: String) {
+    @objc func addMessage(_ text: String, date: Date, user: String) {
         //Create a message object from the input parameters.
         let currentSize: Int = self.getSize()
         
@@ -181,7 +181,7 @@ class AnonymouseDataController: NSObject {
         - user: The user that sent the reply.
         - message: the parent that this reply is replying to.
      */
-    func addReply(withText text: String, date: Date, user: String, toMessage message: AnonymouseMessageCore) {
+    @objc func addReply(withText text: String, date: Date, user: String, toMessage message: AnonymouseMessageCore) {
         let reply: AnonymouseReplyCore = AnonymouseReplyCore(text: text, date: date, user: user)
         reply.parentMessage = message
         var numRepl = Int((reply.parentMessage?.numReplies)!)
@@ -198,7 +198,7 @@ class AnonymouseDataController: NSObject {
      
      - Returns: An array of `AnonymouseMessageCore` objects from the persistent store, sorted by key value.
      */
-    func fetchObjects(withKey key: String, ascending: Bool) -> [AnonymouseMessageCore] {
+    @objc func fetchObjects(withKey key: String, ascending: Bool) -> [AnonymouseMessageCore] {
         let fetchRequest: NSFetchRequest<AnonymouseMessageCore> = NSFetchRequest<AnonymouseMessageCore>(entityName: "AnonymouseMessageCore")
         
         let sortDescriptor: NSSortDescriptor = NSSortDescriptor(key: key, ascending: ascending)
@@ -214,7 +214,7 @@ class AnonymouseDataController: NSObject {
     }
     
     /// - Returns: An array of hashes corresponding to each message in the persistent store, ordered by date.
-    func fetchMessageHashes() -> [String] {
+    @objc func fetchMessageHashes() -> [String] {
         let messageCoreArray: [AnonymouseMessageCore] = fetchObjects(withKey: "date", ascending: true)
         return messageCoreArray.map({ (messageCore) -> String in
             return messageCore.text!.sha1()
@@ -229,7 +229,7 @@ class AnonymouseDataController: NSObject {
      
      - Returns: An array of `AnonymouseReplyCore` objects from the persistent store, sorted by key value.
      */
-    func fetchReplies(withKey key: String, ascending: Bool) -> [AnonymouseReplyCore] {
+    @objc func fetchReplies(withKey key: String, ascending: Bool) -> [AnonymouseReplyCore] {
         let fetchRequest: NSFetchRequest<AnonymouseReplyCore> = AnonymouseReplyCore.fetchRequest()
         let sortDescriptor: NSSortDescriptor = NSSortDescriptor(key: key, ascending: ascending)
         fetchRequest.sortDescriptors = [sortDescriptor]
@@ -244,7 +244,7 @@ class AnonymouseDataController: NSObject {
     }
     
     /// - Returns: An array of hashes corresponding to each reply in the persistent store, ordered by date.
-    func fetchReplyHashes() -> [String] {
+    @objc func fetchReplyHashes() -> [String] {
         let replyCoreArray: [AnonymouseReplyCore] = fetchReplies(withKey: "date", ascending: true)
         return replyCoreArray.map({ (replyCore) -> String in
             return replyCore.text!.sha1()
@@ -252,7 +252,7 @@ class AnonymouseDataController: NSObject {
     }
     
     ///Deletes everything in the `managedObjectContext`. Mainly used so that my phone didn't get cluttered while testing.
-    func clearContext() {
+    @objc func clearContext() {
         for managedObject in self.fetchObjects(withKey: "date", ascending: true) {
             self.managedObjectContext.delete(managedObject)
         }
@@ -261,13 +261,13 @@ class AnonymouseDataController: NSObject {
     }
     
     /// - Returns: The number of messages in the persistent store.
-    func getSize() -> Int {
+    @objc func getSize() -> Int {
         //Get how many messages are in the core
         return fetchObjects(withKey: "date", ascending: true).count
     }
     
     ///Deletes a number of messages corresponding to `blockSize`.
-    func deleteMessageBlock() {
+    @objc func deleteMessageBlock() {
         let managedObjects: [AnonymouseMessageCore] = self.fetchObjects(withKey: "date", ascending: true)
         for managedObject in managedObjects[0..<blockSize] {
             self.managedObjectContext.delete(managedObject)
@@ -278,7 +278,7 @@ class AnonymouseDataController: NSObject {
 
     // MARK: for message tags
     /// - Returns: A `[String:Int]` dictionary; the keys represent tags, and the values represent the number of times that tag appeared in a message.
-    func fetchMessageTag() -> [String:Int] {
+    @objc func fetchMessageTag() -> [String:Int] {
         var tagCount = [String: Int]()
         let messageCoreArray: [AnonymouseMessageCore] = fetchObjects(withKey: "date", ascending: true)
         
@@ -297,7 +297,7 @@ class AnonymouseDataController: NSObject {
     }
     
     /// - Returns: The words, separated by a space, in a string.
-    func extractMessageTag(_ str: String) -> [String] {
+    @objc func extractMessageTag(_ str: String) -> [String] {
         var tags: [String] = []
         let words: [String] = str.components(separatedBy: " ")
         for word in words {

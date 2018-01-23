@@ -29,15 +29,15 @@ class NoPasteTextField: UITextField {
 class AnonymouseProfileViewController: UIViewController, UITextFieldDelegate {
     
     ///The `textField` in which the user enters their username.
-    var usernameTextField: NoPasteTextField!
+    @objc var usernameTextField: NoPasteTextField!
     ///The label which displays the username when it is not being edited.
-    var usernameLabel: UILabel!
+    @objc var usernameLabel: UILabel!
     ///The button that allows a user to edit their username.
-    var editButton: UIBarButtonItem!
+    @objc var editButton: UIBarButtonItem!
     ///The label above the `usernameTextField` that says `"Screen name:"`.
-    var usernameHeader: UILabel!
+    @objc var usernameHeader: UILabel!
     ///`true` if the user is currently editing their username; false otherwise.
-    var isEditingProfile: Bool = false
+    @objc var isEditingProfile: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,7 +84,7 @@ class AnonymouseProfileViewController: UIViewController, UITextFieldDelegate {
     }
     
     ///Dismisses the keyboard if it is currently active.
-    func returnKeyboard() {
+    @objc func returnKeyboard() {
         usernameTextField.resignFirstResponder()
     }
     
@@ -92,7 +92,7 @@ class AnonymouseProfileViewController: UIViewController, UITextFieldDelegate {
      Saves the inputted username and returns the keyboard if the user is editing.
      Displays the keyboard and the `usernameTextField` if the user is not editing.
      */
-    func toggleEditMode() {
+    @objc func toggleEditMode() {
         if isEditingProfile {
             if let text = usernameTextField.text, text.isEmpty {
                 let emptyUsernameAlert: UIAlertController = UIAlertController(title: "Username field is empty", message: "Please enter a username.", preferredStyle: UIAlertControllerStyle.alert)
