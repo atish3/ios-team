@@ -270,15 +270,17 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         NSLog("%@", "didReceiveData: \(data.count) bytes from peer \(peerID)")
+        //If data is messages
         if let messageArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? [AnonymouseMessageSentCore] {
             let messageHashes: [String] = dataController.fetchMessageHashes()
-            for message in messageArray {
+            for message in messageArray { // Check whether we have this message stored already or not
                 let messageHash: String = message.text.sha1()
-                if !messageHashes.contains(messageHash) {
+                if !messageHashes.contains(messageHash) { //TODO: Exception handling or it will crash in real world scenarios
                     self.dataController.addMessage(message.text!, date: message.date!, user: message.user!)
                 }
             }
         }
+        //If data is replies
         else if let replyArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? [AnonymouseReplySentCore] {
             let replyHashes: [String] = dataController.fetchReplyHashes()
             let messageObjects: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
@@ -286,7 +288,7 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
                 let replyHash: String = reply.text.sha1()
                 if !replyHashes.contains(replyHash) {
                     for message in messageObjects {
-                        if message.text!.sha1() == reply.parentHash {
+                        if message.text!.sha1() == reply.parentHash { //TODO: Exception handling: same as above
                             dataController.addReply(withText: reply.text!, date: reply.date!, user: reply.user!, toMessage: message)
                             break
                         }
@@ -294,6 +296,7 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
                 }
             }
         }
+        //If data is ratings
         else if let ratingArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? [AnonymouseRatingSentCore] {
             let messageCoreArray: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
             var messageCoreDictionary: [String: AnonymouseMessageCore] = [String: AnonymouseMessageCore]()
@@ -308,11 +311,11 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
             }
             
             for rating in ratingArray {
-                if let message = messageCoreDictionary[rating.messageHash] {
+                if let message = messageCoreDictionary[rating.messageHash] { //TODO: Exception handling: same as above
                     let previousRating: Int = Int(message.rating!)
                     message.rating = NSNumber(integerLiteral: rating.rating! + previousRating)
                 }
-                if let reply = replyCoreDictionary[rating.messageHash] {
+                if let reply = replyCoreDictionary[rating.messageHash] { //TODO: Exception handling: same as above
                     let previousRating: Int = Int(reply.rating!)
                     reply.rating = NSNumber(integerLiteral: rating.rating! + previousRating)
                 }
