@@ -181,8 +181,8 @@ class AnonymouseDataController: NSObject {
         - user: The user that sent the reply.
         - message: the parent that this reply is replying to.
      */
-    func addReply(withText text: String, date: Date, user: String, toMessage message: AnonymouseMessageCore) {
-        let reply: AnonymouseReplyCore = AnonymouseReplyCore(text: text, date: date, user: user)
+    func addReply(withText text: String, date: Date, user: String, toMessage message: AnonymouseMessageCore, pubKey: String) {
+        let reply: AnonymouseReplyCore = AnonymouseReplyCore(text: text, date: date, user: user, pubKey: pubKey)
         reply.parentMessage = message
         var numRepl = Int((reply.parentMessage?.numReplies)!)
         numRepl += 1

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16G1114" minimumToolsVersion="Xcode 7.0" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="16G1114" minimumToolsVersion="Xcode 7.0" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="AnonymouseMessageCore" representedClassName=".AnonymouseMessageCore" syncable="YES">
         <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="isFavorite" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
@@ -15,6 +15,7 @@
     <entity name="AnonymouseReplyCore" representedClassName=".AnonymouseReplyCore" syncable="YES">
         <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="likeStatus" attributeType="Integer 16" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="pubKey" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rating" attributeType="Integer 32" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="ratingHashes" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="text" attributeType="String" syncable="YES"/>
@@ -23,6 +24,6 @@
     </entity>
     <elements>
         <element name="AnonymouseMessageCore" positionX="-63" positionY="-18" width="128" height="195"/>
-        <element name="AnonymouseReplyCore" positionX="-63" positionY="27" width="128" height="150"/>
+        <element name="AnonymouseReplyCore" positionX="-63" positionY="27" width="128" height="165"/>
     </elements>
 </model>

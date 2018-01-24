@@ -18,6 +18,8 @@ class AnonymouseReplySentCore: NSObject, NSCoding {
     var user: String!
     ///The sha1() hash of the text of the parent message, used to find the parent.
     var parentHash: String!
+    //The public key associated with the sender of the reply
+    var pubKey: String!
     
     /**
         Initialize a sent reply object from a stored reply object.
@@ -31,6 +33,7 @@ class AnonymouseReplySentCore: NSObject, NSCoding {
         self.text = reply.text!
         self.user = reply.user!
         self.parentHash = reply.parentMessage!.text!.sha1()
+        self.pubKey = reply.pubKey!
     }
     
     /**
@@ -42,13 +45,14 @@ class AnonymouseReplySentCore: NSObject, NSCoding {
             - user: The user that composed the reply.
             - parentText: The sha1() hash of the text of the parent message.
      */
-    convenience init(text: String, date: Date, user: String, parentText: String) {
+    convenience init(text: String, date: Date, user: String, parentText: String, pubKey: String) {
         self.init()
         
         self.date = date
         self.text = text
         self.user = user
         self.parentHash = parentText.sha1()
+        self.pubKey = pubKey
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
@@ -58,11 +62,13 @@ class AnonymouseReplySentCore: NSObject, NSCoding {
         let unarchivedText: String = aDecoder.decodeObject(forKey: "text") as! String
         let unarchivedUser: String = aDecoder.decodeObject(forKey: "user") as! String
         let unarchivedParent: String = aDecoder.decodeObject(forKey: "parentHash") as! String
+        let unarchivedKey: String = aDecoder.decodeObject(forKey: "pubKey") as! String
         
         self.date = unarchivedDate
         self.text = unarchivedText
         self.user = unarchivedUser
         self.parentHash = unarchivedParent
+        self.pubKey = unarchivedKey
     }
     
     func encode(with aCoder: NSCoder) {
@@ -70,5 +76,6 @@ class AnonymouseReplySentCore: NSObject, NSCoding {
         aCoder.encode(self.text!, forKey: "text")
         aCoder.encode(self.user!, forKey: "user")
         aCoder.encode(self.parentHash!, forKey: "parentHash")
+        aCoder.encode(self.pubKey!, forKey: "pubKey")
     }
 }

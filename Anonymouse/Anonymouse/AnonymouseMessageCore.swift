@@ -37,7 +37,7 @@ class AnonymouseMessageCore: NSManagedObject {
     }
     
     ///Likes the message; changes the like status to 1, and sends a like message to nearby peers.
-    func like() {
+      func like() {
         let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         let connectivityController: AnonymouseConnectivityController = appDelegate.connectivityController
         guard let likeStatus = self.likeStatus as? Int else {
@@ -46,13 +46,25 @@ class AnonymouseMessageCore: NSManagedObject {
         if likeStatus != 1 {
             if likeStatus == 2 {
                 self.rating = NSNumber(integerLiteral: self.rating!.intValue + 2)
-                let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: 2, messageHash: self.text!.sha1(), ratingHash: pubKey!)
+                let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: 1, messageHash: self.text!.sha1(), ratingHash: pubKey!)
+                for ratingObject in ratingHashes {
+                    if sentRatingObject.ratingHash! == ratingObject.ratingHash! {
+                        let index = ratingHashes.index(of: ratingObject)
+                        ratingHashes.remove(at: index!)
+                    }
+                }
                 self.ratingHashes.append(sentRatingObject)
                  print(ratingHashes[ratingHashes.count-1].ratingHash + " " + String(ratingHashes.count))
                 connectivityController.send(individualRating: sentRatingObject)
             } else {
                 self.rating = NSNumber(integerLiteral: self.rating!.intValue + 1)
                 let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: 1, messageHash: self.text!.sha1(), ratingHash: pubKey!)
+                for ratingObject in ratingHashes {
+                    if sentRatingObject.ratingHash! == ratingObject.ratingHash! {
+                        let index = ratingHashes.index(of: ratingObject)
+                        ratingHashes.remove(at: index!)
+                    }
+                }
                 self.ratingHashes.append(sentRatingObject)
                 print(ratingHashes[ratingHashes.count-1].ratingHash + " " + String(ratingHashes.count))
                 connectivityController.send(individualRating: sentRatingObject)
@@ -61,12 +73,19 @@ class AnonymouseMessageCore: NSManagedObject {
         } else {
             self.likeStatus = 0
             self.rating = NSNumber(integerLiteral: self.rating!.intValue - 1)
-            let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: -1, messageHash: self.text!.sha1(), ratingHash: pubKey!)
+            let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: 0, messageHash: self.text!.sha1(), ratingHash: pubKey!)
+            for ratingObject in ratingHashes {
+                if sentRatingObject.ratingHash! == ratingObject.ratingHash! {
+                    let index = ratingHashes.index(of: ratingObject)
+                    ratingHashes.remove(at: index!)
+                }
+            }
             self.ratingHashes.append(sentRatingObject)
             print(ratingHashes[ratingHashes.count-1].ratingHash + " " + String(ratingHashes.count))
             connectivityController.send(individualRating: sentRatingObject)
         }
     }
+
     
     ///Dislikes the messages; changes the like status to 2, and sends a dislike message to nearby peers.
     func dislike() {
@@ -78,13 +97,25 @@ class AnonymouseMessageCore: NSManagedObject {
         if likeStatus != 2 {
             if likeStatus == 1 {
                 self.rating = NSNumber(integerLiteral: self.rating!.intValue - 2)
-                let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: -2, messageHash: self.text!.sha1(), ratingHash: pubKey!)
+                let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: -1, messageHash: self.text!.sha1(), ratingHash: pubKey!)
+                for ratingObject in ratingHashes {
+                    if sentRatingObject.ratingHash! == ratingObject.ratingHash! {
+                        let index = ratingHashes.index(of: ratingObject)
+                        ratingHashes.remove(at: index!)
+                    }
+                }
                 self.ratingHashes.append(sentRatingObject)
                 print(ratingHashes[ratingHashes.count-1].ratingHash + " " + String(ratingHashes.count))
                 connectivityController.send(individualRating: sentRatingObject)
             } else {
                 self.rating = NSNumber(integerLiteral: self.rating!.intValue - 1)
                 let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: -1, messageHash: self.text!.sha1(), ratingHash: pubKey!)
+                for ratingObject in ratingHashes {
+                    if sentRatingObject.ratingHash! == ratingObject.ratingHash! {
+                        let index = ratingHashes.index(of: ratingObject)
+                        ratingHashes.remove(at: index!)
+                    }
+                }
                 self.ratingHashes.append(sentRatingObject)
                 print(ratingHashes[ratingHashes.count-1].ratingHash + " " + String(ratingHashes.count))
                 connectivityController.send(individualRating: sentRatingObject)
@@ -93,10 +124,25 @@ class AnonymouseMessageCore: NSManagedObject {
         } else {
             self.likeStatus = 0
             self.rating = NSNumber(integerLiteral: self.rating!.intValue + 1)
-            let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: 1, messageHash: self.text!.sha1(), ratingHash: pubKey!)
+            let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: 0, messageHash: self.text!.sha1(), ratingHash: pubKey!)
+            for ratingObject in ratingHashes {
+                if sentRatingObject.ratingHash! == ratingObject.ratingHash! {
+                    let index = ratingHashes.index(of: ratingObject)
+                    ratingHashes.remove(at: index!)
+                }
+            }
             self.ratingHashes.append(sentRatingObject)
             print(ratingHashes[ratingHashes.count-1].ratingHash + " " + String(ratingHashes.count))
             connectivityController.send(individualRating: sentRatingObject)
         }
     }
+    func ratingSum() -> Int {
+        var sum: Int = 0
+        for ratingObject in self.ratingHashes {
+            sum = sum + ratingObject.rating!
+        }
+        return sum;
+    }
 }
+
+

@@ -22,6 +22,7 @@ extension MCSessionState {
 
 ///A class that mnanages the connectivity protocols; sending messages and rating objects to nearby peers.
 class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate, MCSessionDelegate {
+
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
         NSLog("%@", "didFinishReceivingResourceWithName \(resourceName)")
     }
@@ -305,7 +306,7 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
                 let messageObjects: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
                 for message in messageObjects {
                     if message.text!.sha1() == reply.parentHash {
-                        dataController.addReply(withText: reply.text!, date: reply.date!, user: reply.user!, toMessage: message)
+                        dataController.addReply(withText: reply.text!, date: reply.date!, user: reply.user!, toMessage: message, pubKey: reply.pubKey!)
                         break
                     }
                 }
@@ -320,7 +321,7 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
                 if !replyHashes.contains(replyHash) {
                     for message in messageObjects {
                         if message.text!.sha1() == reply.parentHash {
-                            dataController.addReply(withText: reply.text!, date: reply.date!, user: reply.user!, toMessage: message)
+                            dataController.addReply(withText: reply.text!, date: reply.date!, user: reply.user!, toMessage: message, pubKey: reply.pubKey!)
                             break
                         }
                     }
@@ -332,34 +333,37 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
             let messageCoreArray: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
             for message in messageCoreArray {
                 if message.text!.sha1() == rating.messageHash {
-                    for ratingHash in message.ratingHashes {
+                    for ratingObj in message.ratingHashes {
                         let ratingHashTest = rating.ratingHash
-                        if ratingHashTest! == ratingHash.ratingHash! {
-                            return
-                            }
+                        if ratingHashTest == ratingObj.ratingHash {
+                            let index = message.ratingHashes.index(of: ratingObj)
+                            message.ratingHashes.remove(at: index!)
                         }
-                    let previousRating: Int = Int(message.rating!)
-                    message.rating = NSNumber(integerLiteral: rating.rating! + previousRating)
                     message.ratingHashes.append(rating)
-                    return
-                }
-            }
-            let replyCoreArray: [AnonymouseReplyCore] = dataController.fetchReplies(withKey: "date", ascending: true)
-            for reply in replyCoreArray {
-                if reply.text!.sha1() == rating.messageHash {
-                    for ratingHash in reply.ratingHashes {
-                        let ratingHashTest = rating.ratingHash
-                        if ratingHashTest! == ratingHash.ratingHash! {
-                            return
-                        }
-                    }
-                    let previousRating: Int = Int(reply.rating!)
-                    reply.rating = NSNumber(integerLiteral: rating.rating! + previousRating)
-                    reply.ratingHashes.append(rating)
+                    message.rating = NSNumber(integerLiteral: message.ratingSum())
+                    
                     return
                 }
             }
         }
+
+            let replyCoreArray: [AnonymouseReplyCore] = dataController.fetchReplies(withKey: "date", ascending: true)
+            for reply in replyCoreArray {
+                if reply.text!.sha1() == rating.messageHash {
+                    for ratingObj in reply.ratingHashes {
+                        let ratingHashTest = rating.ratingHash
+                        if ratingHashTest == ratingObj.ratingHash {
+                            let index = reply.ratingHashes.index(of: ratingObj)
+                            reply.ratingHashes.remove(at: index!)
+                        }
+                        reply.ratingHashes.append(rating)
+                        reply.rating = NSNumber(integerLiteral: reply.ratingSum())
+                        
+                        return
+                }
+            }
+        }
+    }
             //Check if the data sent was an array of ratings
         else if let ratingArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? [AnonymouseRatingSentCore] {
             let messageCoreArray: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
@@ -376,30 +380,33 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
             
             for rating in ratingArray {
                 if let message = messageCoreDictionary[rating.messageHash] {
-                    for ratingHash in message.ratingHashes {
+                    for ratingObj in message.ratingHashes {
                         let ratingHashTest = rating.ratingHash
-                        if ratingHashTest! == ratingHash.ratingHash! {
-                            return
+                        if ratingHashTest! == ratingObj.ratingHash! {
+                            if let index = message.ratingHashes.index(of: ratingObj){
+                                message.ratingHashes.remove(at: index)
+                            }
                         }
                     }
-                    let previousRating: Int = Int(message.rating!)
-                    message.rating = NSNumber(integerLiteral: rating.rating! + previousRating)
                     message.ratingHashes.append(rating)
+                    message.rating = NSNumber(integerLiteral: message.ratingSum())
                 }
                 if let reply = replyCoreDictionary[rating.messageHash] {
-                    for ratingHash in reply.ratingHashes {
+                    for ratingObj in reply.ratingHashes {
                         let ratingHashTest = rating.ratingHash
-                        if ratingHashTest! == ratingHash.ratingHash! {
-                            return
+                        if ratingHashTest! == ratingObj.ratingHash! {
+                            if let index = reply.ratingHashes.index(of: ratingObj){
+                                reply.ratingHashes.remove(at: index)
+                            }
                         }
-                    }
-                    let previousRating: Int = Int(reply.rating!)
-                    reply.rating = NSNumber(integerLiteral: rating.rating! + previousRating)
                     reply.ratingHashes.append(rating)
+                    reply.rating = NSNumber(integerLiteral: reply.ratingSum())
                 }
             }
         }
+            return
     }
+}
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
         NSLog("%@", "didReceiveStream withName \(streamName)")
@@ -421,3 +428,4 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         }
     }
 }
+
