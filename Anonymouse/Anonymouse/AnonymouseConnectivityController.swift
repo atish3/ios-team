@@ -46,9 +46,9 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
     var serviceAdvertiser: MCNearbyServiceAdvertiser!
     
     ///`true` if this object is currently browsing.
-    var isBrowsing: Bool = true
+    var isBrowsing: Bool = false
     ///`true` if this object is currently advertising.
-    var isAdvertising: Bool = true
+    var isAdvertising: Bool = false
     
     ///An object that manages communication among peers.
     lazy var sessionObject: MCSession = {
@@ -275,44 +275,17 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         NSLog("%@", "didReceiveData: \(data.count) bytes from peer \(peerID)")
-        //There are only two types of data that this app sends: a single message, or a group of messages
-        
-        //Check if the data sent was a single message
-        if let message = NSKeyedUnarchiver.unarchiveObject(with: data) as? AnonymouseMessageSentCore {
-            let messageHash: String = message.text.sha1()
-            let publicKey = message.pubKey
+        //If data is messages
+        if let messageArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? [AnonymouseMessageSentCore] {
             let messageHashes: [String] = dataController.fetchMessageHashes()
-            //Add the message if we don't have it already
-            if !messageHashes.contains(messageHash) {
-                self.dataController.addMessage(message.text!, date: message.date!, user: message.user!, pubKey: publicKey!)
-            }
-        }
-            //Check if the data sent was an array of messages
-        else if let messageArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? [AnonymouseMessageSentCore] {
-            let messageHashes: [String] = dataController.fetchMessageHashes()
-            for message in messageArray {
+            for message in messageArray { // Check whether we have this message stored already or not
                 let messageHash: String = message.text.sha1()
-                let publicKey: String = message.pubKey
-                if !messageHashes.contains(messageHash) {
-                    self.dataController.addMessage(message.text!, date: message.date!, user: message.user!, pubKey: publicKey)
+                if !messageHashes.contains(messageHash) { //TODO: Exception handling or it will crash in real world scenarios
+                    self.dataController.addMessage(message.text!, date: message.date!, user: message.user!)
                 }
             }
         }
-            //Check if the data sent was a single reply
-        else if let reply = NSKeyedUnarchiver.unarchiveObject(with: data) as? AnonymouseReplySentCore {
-            let replyHashes: [String] = dataController.fetchReplyHashes()
-            let replyHash: String = reply.text.sha1()
-            if !replyHashes.contains(replyHash) {
-                let messageObjects: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
-                for message in messageObjects {
-                    if message.text!.sha1() == reply.parentHash {
-                        dataController.addReply(withText: reply.text!, date: reply.date!, user: reply.user!, toMessage: message, pubKey: reply.pubKey!)
-                        break
-                    }
-                }
-            }
-        }
-            //Check if the data sent was an array of replies
+        //If data is replies
         else if let replyArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? [AnonymouseReplySentCore] {
             let replyHashes: [String] = dataController.fetchReplyHashes()
             let messageObjects: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
@@ -320,51 +293,15 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
                 let replyHash: String = reply.text.sha1()
                 if !replyHashes.contains(replyHash) {
                     for message in messageObjects {
-                        if message.text!.sha1() == reply.parentHash {
-                            dataController.addReply(withText: reply.text!, date: reply.date!, user: reply.user!, toMessage: message, pubKey: reply.pubKey!)
+                        if message.text!.sha1() == reply.parentHash { //TODO: Exception handling: same as above
+                            dataController.addReply(withText: reply.text!, date: reply.date!, user: reply.user!, toMessage: message)
                             break
                         }
                     }
                 }
             }
         }
-            //Check if the data sent was a single rating
-        else if let rating = NSKeyedUnarchiver.unarchiveObject(with: data) as? AnonymouseRatingSentCore {
-            let messageCoreArray: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
-            for message in messageCoreArray {
-                if message.text!.sha1() == rating.messageHash {
-                    for ratingObj in message.ratingHashes {
-                        let ratingHashTest = rating.ratingHash
-                        if ratingHashTest == ratingObj.ratingHash {
-                            let index = message.ratingHashes.index(of: ratingObj)
-                            message.ratingHashes.remove(at: index!)
-                        }
-                    message.ratingHashes.append(rating)
-                    message.rating = NSNumber(integerLiteral: message.ratingSum())
-                    
-                    return
-                }
-            }
-        }
-
-            let replyCoreArray: [AnonymouseReplyCore] = dataController.fetchReplies(withKey: "date", ascending: true)
-            for reply in replyCoreArray {
-                if reply.text!.sha1() == rating.messageHash {
-                    for ratingObj in reply.ratingHashes {
-                        let ratingHashTest = rating.ratingHash
-                        if ratingHashTest == ratingObj.ratingHash {
-                            let index = reply.ratingHashes.index(of: ratingObj)
-                            reply.ratingHashes.remove(at: index!)
-                        }
-                        reply.ratingHashes.append(rating)
-                        reply.rating = NSNumber(integerLiteral: reply.ratingSum())
-                        
-                        return
-                }
-            }
-        }
-    }
-            //Check if the data sent was an array of ratings
+        //If data is ratings
         else if let ratingArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? [AnonymouseRatingSentCore] {
             let messageCoreArray: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
             var messageCoreDictionary: [String: AnonymouseMessageCore] = [String: AnonymouseMessageCore]()
@@ -379,28 +316,13 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
             }
             
             for rating in ratingArray {
-                if let message = messageCoreDictionary[rating.messageHash] {
-                    for ratingObj in message.ratingHashes {
-                        let ratingHashTest = rating.ratingHash
-                        if ratingHashTest! == ratingObj.ratingHash! {
-                            if let index = message.ratingHashes.index(of: ratingObj){
-                                message.ratingHashes.remove(at: index)
-                            }
-                        }
-                    }
-                    message.ratingHashes.append(rating)
-                    message.rating = NSNumber(integerLiteral: message.ratingSum())
+                if let message = messageCoreDictionary[rating.messageHash] { //TODO: Exception handling: same as above
+                    let previousRating: Int = Int(message.rating!)
+                    message.rating = NSNumber(integerLiteral: rating.rating! + previousRating)
                 }
-                if let reply = replyCoreDictionary[rating.messageHash] {
-                    for ratingObj in reply.ratingHashes {
-                        let ratingHashTest = rating.ratingHash
-                        if ratingHashTest! == ratingObj.ratingHash! {
-                            if let index = reply.ratingHashes.index(of: ratingObj){
-                                reply.ratingHashes.remove(at: index)
-                            }
-                        }
-                    reply.ratingHashes.append(rating)
-                    reply.rating = NSNumber(integerLiteral: reply.ratingSum())
+                if let reply = replyCoreDictionary[rating.messageHash] { //TODO: Exception handling: same as above
+                    let previousRating: Int = Int(reply.rating!)
+                    reply.rating = NSNumber(integerLiteral: rating.rating! + previousRating)
                 }
             }
         }
