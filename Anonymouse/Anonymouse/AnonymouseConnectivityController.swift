@@ -7,66 +7,43 @@
 //
 
 import UIKit
-import MultipeerConnectivity
 import CoreData
-
-extension MCSessionState {
-    func stringValue() -> String {
-        switch(self) {
-        case .notConnected: return "NotConnected"
-        case .connecting: return "Connecting"
-        case .connected: return "Connected"
-        }
-    }
-}
+import NetService
+import NetServiceBrowser
 
 ///A class that mnanages the connectivity protocols; sending messages and rating objects to nearby peers.
-class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate, MCSessionDelegate {
-
-    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
-        NSLog("%@", "didFinishReceivingResourceWithName \(resourceName)")
-    }
-    
+class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServiceBrowserDelegate {
     
     //MARK: Links
     ///A weak reference to the `dataController`, which allows this class to store received messages.
     weak var dataController: AnonymouseDataController!
-    
-    //MARK: Connection Parameters
-    ///A unique identifier used to identify one's phone on the multipeer network.
-    var myPeerId: MCPeerID = MCPeerID(displayName: UIDevice.current.name)
-    
+
     ///A 15-character or less string that describes the function that the app is broadcasting.
     let myServiceType: String = "Anonymouse"
     
+    //An object that handles netservice provided by current device
+    var netService: NetService!
+
     ///An object that handles searching for and finding other phones on the network.
-    var serviceBrowser: MCNearbyServiceBrowser!
-    
-    ///An object that handles broadcasting one's presence on the network.
-    var serviceAdvertiser: MCNearbyServiceAdvertiser!
+    var netServiceBrowser: NetServiceBrowser!
     
     ///`true` if this object is currently browsing.
     var isBrowsing: Bool = false
     ///`true` if this object is currently advertising.
     var isAdvertising: Bool = false
     
-    ///An object that manages communication among peers.
-    lazy var sessionObject: MCSession = {
-        let session: MCSession = MCSession(peer: self.myPeerId)
-        session.delegate = self
-        return session
-    }()
-    
     //MARK: Convenience methods
     ///Begins advertising the current peer on the network.
     func startAdvertisingPeer() {
-        serviceAdvertiser.startAdvertisingPeer()
+        netService.startMonitoring()
+        netService.publish()
         isAdvertising = true
     }
     
     ///Stops advertising the current peer.
     func stopAdvertisingPeer() {
-        serviceAdvertiser.stopAdvertisingPeer()
+        netServiceBrowser.stopMonitoring()
+        netServiceBrowser.stop()
         isAdvertising = false
     }
     
@@ -98,11 +75,14 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         unowned let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         dataController = appDelegate.dataController
         
-        serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: nil, serviceType: myServiceType)
-        serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: myServiceType)
+        //FIXME: Construct a netservice instance as domain local, type: unknown (temporary solution:http,tcp) and service name
+        netService = NetService(domain: @"local.", type: "_http._tcp.", name: myServiceType)
+        netServiceBrowser = NetServiceBrowser()
+        netService.includesPeerToPeer = true
+        netServiceBrowser.includesPeerToPeer = true
         super.init()
-        serviceAdvertiser.delegate = self
-        serviceBrowser.delegate = self
+        netService.delegate = self
+        netServiceBrowser.delegate = self
         
         startAdvertisingPeer()
         startBrowsingForPeers()
