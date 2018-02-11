@@ -23,8 +23,11 @@ class AnonymouseRatingSentCore: NSObject, NSCoding {
      */
     convenience init(message: AnonymouseMessageCore) {
         self.init()
+        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         self.rating = message.rating!.intValue
         self.messageHash = message.text!.sha1()
+        let connectivityController: AnonymouseConnectivityController = appDelegate.connectivityController
+        connectivityController.sendRatingViaHTTP(rating: self.rating!, hash: self.messageHash);
     }
 
     /**
@@ -35,8 +38,11 @@ class AnonymouseRatingSentCore: NSObject, NSCoding {
      */
     convenience init(reply: AnonymouseReplyCore) {
         self.init()
+        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         self.rating = reply.rating!.intValue
         self.messageHash = reply.text!.sha1()
+        let connectivityController: AnonymouseConnectivityController = appDelegate.connectivityController
+        connectivityController.sendRatingViaHTTP(rating: self.rating!, hash: self.messageHash);
     }
     
     /**

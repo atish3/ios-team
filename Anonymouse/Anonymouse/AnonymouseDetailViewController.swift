@@ -72,7 +72,7 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
     weak var connectivityController: AnonymouseConnectivityController!
     
     ///Displays the `replyView`, which allows the user to edit and send replies.
-    func displayReply() {
+    @objc func displayReply() {
         guard let mainUser: String = cellData.user else {
             return
         }
@@ -260,7 +260,7 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
     
     //MARK: Button Methods
     ///Called when the reply button is tapped; sends the reply to nearby peers and saves it to the persisten store.
-    func replyTapped() {
+    @objc func replyTapped() {
         var replyText: String = replyTextView.text
         replyText = replyText.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         let userPreferences: UserDefaults = UserDefaults.standard
@@ -275,17 +275,17 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
     }
     
     ///Called when the reply button is selected.
-    func replySelected() {
+    @objc func replySelected() {
         replyButton.alpha = 1.0
     }
     
     ///Called when the reply button is released.
-    func replyReleased() {
+    @objc func replyReleased() {
         replyButton.alpha = 0.5
     }
     
     ///Called when the user taps outside of the editing window/keyboard; dismissed the keyboard and `replyView`.
-    func tappedOutsideOfEdit() {
+    @objc func tappedOutsideOfEdit() {
         guard let mainUser: String = cellData.user else {
             return
         }
@@ -354,7 +354,7 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let nsString: NSString = textView.text! as NSString
-        let numCharacters: Int = nsString.replacingCharacters(in: range, with: text).characters.count
+        let numCharacters: Int = nsString.replacingCharacters(in: range, with: text).count
         let remainingCharacters: Int = maxCharacters - numCharacters
         
         if remainingCharacters < 40 {
@@ -437,7 +437,7 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
     }
     
     //MARK: Keyboard Methods
-    func keyboardWillShow(_ notification: Notification) {
+    @objc func keyboardWillShow(_ notification: Notification) {
         var info = (notification as NSNotification).userInfo!
         let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         if keyboardFrame.height > 100 {
@@ -445,7 +445,7 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
         }
     }
     
-    func keyboardWillHide(_ notification: Notification) {
+    @objc func keyboardWillHide(_ notification: Notification) {
         var info = (notification as NSNotification).userInfo!
         let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         if keyboardFrame.height > 100 {

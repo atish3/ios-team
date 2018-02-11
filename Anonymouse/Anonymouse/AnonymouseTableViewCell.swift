@@ -186,7 +186,7 @@ class AnonymouseTableViewCell : UITableViewCell {
     ///Creates the label that displays the username.
     func createUserLabel() {
         userLabel = UILabel()
-        let darkOrange: UIColor = UIColor(colorLiteralRed: 255.0/255.0, green: 107.0/255.0, blue: 72.0/255.0, alpha: 1.0)
+        let darkOrange = #colorLiteral(red: 1, green: 0.4196078431, blue: 0.2823529412, alpha: 1)
         userLabel!.numberOfLines = 1
         userLabel!.textColor = darkOrange
         userLabel!.font = AnonymouseTableViewCell.userFont
@@ -392,7 +392,7 @@ class AnonymouseTableViewCell : UITableViewCell {
         guard let messageData = data else {
             return
         }
-        let likeStatus: Int = Int(messageData.likeStatus!)
+        let likeStatus: Int = Int(truncating: messageData.likeStatus!)
         messageData.like()
         
         if likeStatus != 1 {
@@ -409,7 +409,7 @@ class AnonymouseTableViewCell : UITableViewCell {
         guard let messageData = data else {
             return
         }
-        let likeStatus: Int = Int(messageData.likeStatus!)
+        let likeStatus: Int = Int(truncating: messageData.likeStatus!)
         messageData.dislike()
         
         //Downvote Tapped
@@ -447,7 +447,7 @@ class AnonymouseTableViewCell : UITableViewCell {
     }
     
     ///Called when any of the feature bar buttons are tapped; calls the correct method depending on which button was tapped.
-    func featureBarButtonTapped(sender: AnyObject) {
+    @objc func featureBarButtonTapped(sender: AnyObject) {
         switch sender.tag {
         case 0:
             upvoteTapped()

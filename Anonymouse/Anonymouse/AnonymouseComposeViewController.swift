@@ -89,14 +89,14 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
     }
     
     ///Called when the cancel button is tapped; dismisses `self` and clears the composed text.
-    func cancelTapped() {
+    @objc func cancelTapped() {
         self.dismiss(animated: true) { () -> Void in
             self.clearText()
         }
     }
     
     ///Called when the post button is tapped; dismisses `self` and calls `self.post()`.
-    func postTapped() {
+    @objc func postTapped() {
         self.dismiss(animated: true) { () -> Void in
             self.post()
         }
@@ -105,7 +105,7 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
     //MARK: TextView Methods
     func textViewDidChange(_ textView: UITextView) {
         placeholderLabel.isHidden = !textView.text.isEmpty
-        if textView.text.characters.count > 0 {
+        if textView.text.count > 0 {
             self.navigationItem.rightBarButtonItem!.isEnabled = true
         }
         else
@@ -116,7 +116,7 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let nsString: NSString = textView.text! as NSString
-        let numCharacters: Int = nsString.replacingCharacters(in: range, with: text).characters.count
+        let numCharacters: Int = nsString.replacingCharacters(in: range, with: text).count
         let remainingCharacters: Int = maxCharacters - numCharacters
         
         if remainingCharacters < 40 {
@@ -138,7 +138,7 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
     //MARK: Keyboard Methods
     
     ///Called when the keyboard is about to be displayed.
-    func keyboardWillShow(_ notification: Notification) {
+    @objc func keyboardWillShow(_ notification: Notification) {
         var info = (notification as NSNotification).userInfo!
         let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         
@@ -151,7 +151,7 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
     }
     
     ///Called when the keyboard is about to be dismissed.
-    func keyboardWillHide(_ notification: Notification) {
+    @objc func keyboardWillHide(_ notification: Notification) {
         //        var info = (notification as NSNotification).userInfo!
         //        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         //        UIView.animate(withDuration: 0.1, animations: {() -> Void in
@@ -187,7 +187,7 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
         var messageText = self.composeTextView.text!
         messageText = messageText.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
-        self.dataController.addMessage(messageText, date: Date(), user: username)
+        self.dataController.addMessage(messageText, date: Date(), user: username, fromServer: false)
 //        if self.connectivityController.sessionObject.connectedPeers.count > 0 {
 //            self.connectivityController.send(individualMessage: AnonymouseMessageSentCore(text: self.composeTextView.text, date: Date(), user: username))
 //        }

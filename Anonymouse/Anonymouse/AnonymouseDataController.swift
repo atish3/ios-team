@@ -156,7 +156,7 @@ class AnonymouseDataController: NSObject {
         - date: The date the message was composed.
         - user: The user that sent the message.
      */
-    func addMessage(_ text: String, date: Date, user: String) {
+    func addMessage(_ text: String, date: Date, user: String, fromServer: Bool) {
         //Create a message object from the input parameters.
         let currentSize: Int = self.getSize()
         
@@ -168,7 +168,7 @@ class AnonymouseDataController: NSObject {
         }
         
         //The creation of this object inserts it into the context
-        let _: AnonymouseMessageCore = AnonymouseMessageCore(text: text, date: date, user: user)
+        let _: AnonymouseMessageCore = AnonymouseMessageCore(text: text, date: date, user: user, fromServer: fromServer)
         
         self.saveContext()
     }
@@ -182,9 +182,9 @@ class AnonymouseDataController: NSObject {
         - message: the parent that this reply is replying to.
      */
     func addReply(withText text: String, date: Date, user: String, toMessage message: AnonymouseMessageCore) {
-        let reply: AnonymouseReplyCore = AnonymouseReplyCore(text: text, date: date, user: user)
+        let reply: AnonymouseReplyCore = AnonymouseReplyCore(text: text, date: date, user: user, message: message)
         reply.parentMessage = message
-        var numRepl = Int((reply.parentMessage?.numReplies)!)
+        var numRepl = Int(truncating: (reply.parentMessage?.numReplies)!)
         numRepl += 1
         reply.parentMessage?.numReplies = NSNumber(value: numRepl)
         self.saveContext()
@@ -302,7 +302,7 @@ class AnonymouseDataController: NSObject {
         let words: [String] = str.components(separatedBy: " ")
         for word in words {
             if word.hasPrefix("#") {
-                tags.append(String(word.characters.dropFirst()))
+                tags.append(String(word.dropFirst()))
             }
         }
         return tags

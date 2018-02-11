@@ -74,7 +74,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         - notification: a `Notification` that contains a `userInfo[String: AnonymouseTableViewCell]` dictionary
             with `userInfo["cell"]` being the cell to display in detail.
      */
-    func performDetailTransition(notification: Notification) {
+    @objc func performDetailTransition(notification: Notification) {
         guard self.view.window != nil else {
             return
         }
@@ -160,7 +160,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
     
     //MARK: UIRefreshControl
     ///Called when the `tableView` is pulled down to reveal the `refreshControl`.
-    func refreshControlDidChangeValue() {
+    @objc func refreshControlDidChangeValue() {
         self.tableView.reloadData()
         self.refreshControl?.endRefreshing()
     }
@@ -185,11 +185,11 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         return 0
     }
     
-    func getData(sender: AnyObject) {
-        var listOfMessages = []
-        let myUrl = URL(string: "http://www.swiftdeveloperblog.com/http-post-example-script/");
+    /*func getData(sender: AnyObject) {
+        var listOfMessages = [AnonymouseMessageCore]()
+        let myUrl = URL(string: "https://requestb.in/q3ep4sq3");
         var request = URLRequest(url:myUrl!)
-        request.httpMethod = "POST"// Compose a query string
+        request.httpMethod = "GET"// Compose a query string
         let postString = "firstName=James&lastName=Bond";
         request.httpBody = postString.data(using: String.Encoding.utf8);
         let task = URLSession.shared.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
@@ -212,11 +212,12 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
                     let text = parseJSON["text"] as? String?
                     let user = parseJSON["user"] as? String?
                     let rating = parseJSON["rating"] as? NSNumber?
-                    let likeStatus = parseJSON["likeStatus"] as? NSNumber?
-                    let isFavorite = parseJSON["isFavorite"] as? NSNumber?
+                    //let likeStatus = parseJSON["likeStatus"] as? NSNumber?
+                    //let isFavorite = parseJSON["isFavorite"] as? NSNumber?
                     let numReplies = parseJSON["numReplies"] as? NSNumber?
-                    var message = AnonymouseMessageCore(text: text, date: data, user: user)
+                    let message = AnonymouseMessageCore(text: text as! String, date: date!! as Date, user: user as! String, rating: rating as! NSNumber, numReplies: numReplies as! NSNumber)
                     listOfMessages.append(message)
+                    print(message.rating!)
                 }
             } catch {
                 print(error)
@@ -224,7 +225,9 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         }
         task.resume()
         
-    }
+    } */
+    
+    
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var frc: NSFetchedResultsController<NSFetchRequestResult>

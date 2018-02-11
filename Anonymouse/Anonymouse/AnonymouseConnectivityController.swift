@@ -9,6 +9,7 @@
 import UIKit
 import MultipeerConnectivity
 import CoreData
+import Alamofire
 
 
 
@@ -68,7 +69,7 @@ class AnonymouseConnectivityController : NSObject {
         }
         
         do {
-            let archivedReplyArray: Data = NSKeyedArchiver.archivedData(withRootObject: replySentArray)
+             let archivedReplyArray: Data = NSKeyedArchiver.archivedData(withRootObject: replySentArray)
             //try self.sessionObject.send(archivedReplyArray, toPeers: ids, with: MCSessionSendDataMode.reliable)
             
             let archivedRatingArray: Data = NSKeyedArchiver.archivedData(withRootObject: ratingSentArray)
@@ -151,7 +152,7 @@ class AnonymouseConnectivityController : NSObject {
             let messageHashes: [String] = dataController.fetchMessageHashes()
             //Add the message if we don't have it already
             if !messageHashes.contains(messageHash) {
-                self.dataController.addMessage(message.text!, date: message.date!, user: message.user!)
+                self.dataController.addMessage(message.text!, date: message.date!, user: message.user!, fromServer: true)
             }
         }
             //Check if the data sent was an array of messages
@@ -160,7 +161,7 @@ class AnonymouseConnectivityController : NSObject {
             for message in messageArray {
                 let messageHash: String = message.text.sha1()
                 if !messageHashes.contains(messageHash) {
-                    self.dataController.addMessage(message.text!, date: message.date!, user: message.user!)
+                    self.dataController.addMessage(message.text!, date: message.date!, user: message.user!, fromServer: true)
                 }
             }
         }
@@ -199,7 +200,7 @@ class AnonymouseConnectivityController : NSObject {
             let messageCoreArray: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
             for message in messageCoreArray {
                 if message.text!.sha1() == rating.messageHash {
-                    let previousRating: Int = Int(message.rating!)
+                    let previousRating: Int = Int(truncating: message.rating!)
                     message.rating = NSNumber(integerLiteral: rating.rating! + previousRating)
                     return
                 }
@@ -207,7 +208,7 @@ class AnonymouseConnectivityController : NSObject {
             let replyCoreArray: [AnonymouseReplyCore] = dataController.fetchReplies(withKey: "date", ascending: true)
             for reply in replyCoreArray {
                 if reply.text!.sha1() == rating.messageHash {
-                    let previousRating: Int = Int(reply.rating!)
+                    let previousRating: Int = Int(truncating: reply.rating!)
                     reply.rating = NSNumber(integerLiteral: rating.rating! + previousRating)
                     return
                 }
@@ -229,11 +230,11 @@ class AnonymouseConnectivityController : NSObject {
             
             for rating in ratingArray {
                 if let message = messageCoreDictionary[rating.messageHash] {
-                    let previousRating: Int = Int(message.rating!)
+                    let previousRating: Int = Int(truncating: message.rating!)
                     message.rating = NSNumber(integerLiteral: rating.rating! + previousRating)
                 }
                 if let reply = replyCoreDictionary[rating.messageHash] {
-                    let previousRating: Int = Int(reply.rating!)
+                    let previousRating: Int = Int(truncating: reply.rating!)
                     reply.rating = NSNumber(integerLiteral: rating.rating! + previousRating)
                 }
             }
@@ -241,32 +242,53 @@ class AnonymouseConnectivityController : NSObject {
     }
     
     //infrastructure mode
-    func sendViaHTTP(){
-        let myUrl = URL(string: "http://www.swiftdeveloperblog.com/http-post-example-script/");
+    func sendMessageViaHTTP(text: String, date: Date, rating: Int, user: String){
+        
+       /* print("We are now calling the send via HTTP function")
+        let myUrl = URL(string: "http://ptsv2.com/t/0ktsb-1517694455/post");
         
         var request = URLRequest(url:myUrl!)
         
         request.httpMethod = "POST"// Compose a query string
         
-        let postString = "firstName=James&lastName=Bond";
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        request.httpBody = postString.data(using: String.Encoding.utf8);
+        var postString = text + "; "
+            postString += date.description + "; "
+            postString += String(rating) + "; " + user;
         
-        let task = URLSession.shared.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
+        request.httpBody = postString.data(using: String.Encoding.utf8); */
+        
+        let parameters: Parameters = [
+            "Message": text,
+            "Date": date.description,
+            "Rating": rating,
+            "User": user,
+        ]
+        print("Parameters created");
+        
+        // Both calls are equivalent
+        Alamofire.request("http://localhost:3000/message", method: .post, parameters: parameters, encoding: JSONEncoding(options: []))
+        //NOTE: the server being used is one hosted on my laptop and is only being used for testing purposes
+        
+        print("Request sent");
+        
+        
+        //let task = URLSession.shared.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
             
-            if error != nil
-            {
-                print("error=\(String(describing: error))")
-                return
-            }
+            //if error != nil
+            //{
+                //print("error=\(String(describing: error))")
+                //return
+            //}
             
             // You can print out response object
-            print("response = \(String(describing: response))")
+        /*    print("response = \(String(describing: response))")
             
             //Let's convert response sent from a server side script to a NSDictionary object:
             do {
-                let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
-                
+                let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary
+                print(json!);
                 if let parseJSON = json {
                     
                     // Now we can access value of First Name by its key
@@ -275,10 +297,47 @@ class AnonymouseConnectivityController : NSObject {
                 }
             } catch {
                 print(error)
-            }
-        }
-        task.resume()
+            } */
+        //task.resume()
+        getMessageViaHTTP();
     }
     
+    func sendReplyViaHTTP(text: String, date: Date, rating: Int, user: String, message: AnonymouseMessageCore){
+        
+        let parameters: Parameters = [
+            "Message": text,
+            "Date": date.description,
+            "Rating": rating,
+            "User": user,
+            "Parent": message.text!.sha1()
+        ]
+        
+        // Both calls are equivalent
+        Alamofire.request("http://localhost:3000/message", method: .post, parameters: parameters, encoding: JSONEncoding(options: []))
+    }
     
+    func sendRatingViaHTTP(rating: Int, hash: String){
+        
+        let parameters: Parameters = [
+            "Rating": rating,
+            "Parent": hash
+        ]
+        
+        // Both calls are equivalent
+        Alamofire.request("http://localhost:3000/message", method: .post, parameters: parameters, encoding: JSONEncoding(options: []))
+
+    }
+    
+    func getMessageViaHTTP(){
+        print("We are in get message now");
+        Alamofire.request("http://localhost:3000/message").responseJSON { response in
+            print(response.description);
+            if let JSON = response.result.value {
+                print("JSON: \(JSON)")
+            }
+        }
+    }
 }
+
+
+

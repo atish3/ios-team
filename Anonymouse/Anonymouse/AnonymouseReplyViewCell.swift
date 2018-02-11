@@ -176,7 +176,7 @@ class AnonymouseReplyViewCell: AnonymouseTableViewCell {
         guard let replyData = reply else {
             return
         }
-        let likeStatus: Int = Int(replyData.likeStatus!)
+        let likeStatus: Int = Int(truncating: replyData.likeStatus!)
         replyData.like()
         
         if likeStatus != 1 {
@@ -193,7 +193,7 @@ class AnonymouseReplyViewCell: AnonymouseTableViewCell {
         guard let replyData = reply else {
             return
         }
-        let likeStatus: Int = Int(replyData.likeStatus!)
+        let likeStatus: Int = Int(truncating: replyData.likeStatus!)
         replyData.dislike()
         
         

@@ -83,7 +83,7 @@ class VPNViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func VPNStatusDidChange(_ notification: Notification?) {
+    @objc func VPNStatusDidChange(_ notification: Notification?) {
         print("VPN Status changed:")
         let status = self.vpnManager.connection.status
         switch status {
@@ -103,7 +103,7 @@ class VPNViewController: UIViewController {
             connectButton.setTitle("Connect", for: .normal)
             break
         case .invalid:
-            print("Invliad")
+            print("Invalid")
             break
         case .reasserting:
             print("Reasserting...")
