@@ -10,7 +10,8 @@ import UIKit
 import CoreData
 import NetService
 import NetServiceBrowser
-
+import Timer
+import Date
 ///A class that mnanages the connectivity protocols; sending messages and rating objects to nearby peers.
 class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServiceBrowserDelegate {
 
@@ -32,11 +33,12 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
     ///`true` if this object is currently advertising.
     var isAdvertising: Bool = false
 
+    var timer: Timer!
     //MARK: Convenience methods
     ///Begins advertising the current peer on the network.
     func startAdvertisingPeer() {
         netService.startMonitoring()
-        netService.publish(options: [NetService.Options.listenForConnections])
+        netService.publish(options: [.listenForConnections])
         isAdvertising = true
     }
 
@@ -50,6 +52,7 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
     ///Begins browsing for other peers on the network.
     func startBrowsingForPeers() {
         serviceBrowser.startBrowsingForPeers()
+        serviceBrowser.searchForServices(ofType: "_Anonymouse._tcp", inDomain: "local.")
         isBrowsing = true
     }
 
@@ -70,14 +73,15 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
         dataController = appDelegate.dataController
 
         //FIXME: Construct a netservice instance as domain local, type: unknown (temporary solution:http,tcp) and service name
-        netService = NetService(domain: @"local.", type: "_http._tcp.", name: myServiceType)
+        netService = NetService(domain: "local.", type: "_Anonymouse._tcp.", name: myServiceType)
         netServiceBrowser = NetServiceBrowser()
         netService.includesPeerToPeer = true
         netServiceBrowser.includesPeerToPeer = true
         super.init()
         netService.delegate = self
         netServiceBrowser.delegate = self
-
+        // let date: Date = Date(timeIntervalSince1970 : Date().timeIntervalSinceReferenceDate+(5-Date().timeIntervalSinceReferenceDate%5) )
+        // timer = Timer(fire:date, interval:5, repeats: true, block)
         startAdvertisingPeer()
         startBrowsingForPeers()
     }
