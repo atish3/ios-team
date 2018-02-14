@@ -33,9 +33,6 @@ class AnonymouseMessageCore: NSManagedObject {
         self.isFavorite = NSNumber(booleanLiteral: false)
         self.numReplies = NSNumber(integerLiteral: 0)
         let connectivityController: AnonymouseConnectivityController = appDelegate.connectivityController
-        if(!fromServer){
-            connectivityController.sendMessageViaHTTP(text: self.text!, date: self.date! as Date, rating: self.rating as! Int, user: self.user!);
-        }
     }
 
    /* convenience init(text: String, date: Date, user: String, rating: NSNumber, numReplies: NSNumber) {
@@ -63,18 +60,18 @@ class AnonymouseMessageCore: NSManagedObject {
             if likeStatus == 2 {
                 self.rating = NSNumber(integerLiteral: self.rating!.intValue + 2)
                 let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: 2, messageHash: self.text!.sha1())
-                connectivityController.sendRatingViaHTTP(rating: sentRatingObject.rating!, hash: sentRatingObject.messageHash!)
+                connectivityController.sendRatingViaHTTP(rating: sentRatingObject.rating!, hash: sentRatingObject.messageHash!, date: Date())
             } else {
                 self.rating = NSNumber(integerLiteral: self.rating!.intValue + 1)
                 let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: 1, messageHash: self.text!.sha1())
-                connectivityController.sendRatingViaHTTP(rating: sentRatingObject.rating!, hash: sentRatingObject.messageHash!)
+                connectivityController.sendRatingViaHTTP(rating: sentRatingObject.rating!, hash: sentRatingObject.messageHash!, date: Date())
             }
             self.likeStatus = 1
         } else {
             self.likeStatus = 0
             self.rating = NSNumber(integerLiteral: self.rating!.intValue - 1)
             let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: -1, messageHash: self.text!.sha1())
-            connectivityController.sendRatingViaHTTP(rating: sentRatingObject.rating!, hash: sentRatingObject.messageHash!)
+            connectivityController.sendRatingViaHTTP(rating: sentRatingObject.rating!, hash: sentRatingObject.messageHash!, date: Date())
         }
     }
     
@@ -89,18 +86,18 @@ class AnonymouseMessageCore: NSManagedObject {
             if likeStatus == 1 {
                 self.rating = NSNumber(integerLiteral: self.rating!.intValue - 2)
                 let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: -2, messageHash: self.text!.sha1())
-                connectivityController.sendRatingViaHTTP(rating: sentRatingObject.rating!, hash: sentRatingObject.messageHash!)
+                connectivityController.sendRatingViaHTTP(rating: sentRatingObject.rating!, hash: sentRatingObject.messageHash!, date: Date())
             } else {
                 self.rating = NSNumber(integerLiteral: self.rating!.intValue - 1)
                 let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: -1, messageHash: self.text!.sha1())
-                connectivityController.sendRatingViaHTTP(rating: sentRatingObject.rating!, hash: sentRatingObject.messageHash!)
+                connectivityController.sendRatingViaHTTP(rating: sentRatingObject.rating!, hash: sentRatingObject.messageHash!, date: Date())
             }
             self.likeStatus = 2
         } else {
             self.likeStatus = 0
             self.rating = NSNumber(integerLiteral: self.rating!.intValue + 1)
             let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: 1, messageHash: self.text!.sha1())
-            connectivityController.sendRatingViaHTTP(rating: sentRatingObject.rating!, hash: sentRatingObject.messageHash!)
+            connectivityController.sendRatingViaHTTP(rating: sentRatingObject.rating!, hash: sentRatingObject.messageHash!, date: Date())
         }
     }
 }

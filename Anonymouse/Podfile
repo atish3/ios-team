@@ -8,6 +8,7 @@ target 'Anonymouse' do
   # Pods for Anonymouse
   pod 'CryptoSwift', '0.7.1'
   pod 'Alamofire', '~> 4.2.0'
+  pod 'SwiftyJSON', '4.0.0'
 
 end
 

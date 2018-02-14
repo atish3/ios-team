@@ -42,6 +42,10 @@
 		3B5CDF2320190DE400AD41F6 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B5CDF1920190DA100AD41F6 /* Alamofire.framework */; };
 		3B5CDF2420190DE400AD41F6 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3B5CDF1920190DA100AD41F6 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3B709CAC202AC807002D86F5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B709CAB202AC807002D86F5 /* Default-568h@2x.png */; };
+		3B8D2A3320335E2300BD7B5C /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B8D2A3420335E2300BD7B5C /* SwiftyJSON.framework */; };
+		3B8D2A3620335E2600BD7B5C /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3B8D2A3420335E2300BD7B5C /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3BD200AC2033FB98002F9FC2 /* AnonymouseRatingCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD200AB2033FB98002F9FC2 /* AnonymouseRatingCore.swift */; };
+		3BD200AE2033FD3B002F9FC2 /* AnonymouseRatingCore+DataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD200AD2033FD3B002F9FC2 /* AnonymouseRatingCore+DataProperties.swift */; };
 		7DD0BBB41CBC349000CF2268 /* Anonymouse.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7DD0BBB21CBC349000CF2268 /* Anonymouse.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +56,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				3B8D2A3620335E2600BD7B5C /* SwiftyJSON.framework in Embed Frameworks */,
 				3B5CDF2220190DE000AD41F6 /* Pods_Anonymouse.framework in Embed Frameworks */,
 				3B5CDF2420190DE400AD41F6 /* Alamofire.framework in Embed Frameworks */,
 				3B5CDF1F20190DDD00AD41F6 /* CryptoSwift.framework in Embed Frameworks */,
@@ -99,6 +104,9 @@
 		3B5CDF1B20190DA400AD41F6 /* CryptoSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CryptoSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B5CDF1D20190DA600AD41F6 /* Pods_Anonymouse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Anonymouse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B709CAB202AC807002D86F5 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		3B8D2A3420335E2300BD7B5C /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3BD200AB2033FB98002F9FC2 /* AnonymouseRatingCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnonymouseRatingCore.swift; sourceTree = "<group>"; };
+		3BD200AD2033FD3B002F9FC2 /* AnonymouseRatingCore+DataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnonymouseRatingCore+DataProperties.swift"; sourceTree = "<group>"; };
 		7DD0BBB31CBC349000CF2268 /* Anonymouse.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Anonymouse.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,6 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B8D2A3320335E2300BD7B5C /* SwiftyJSON.framework in Frameworks */,
 				3B5CDF1C20190DA600AD41F6 /* Pods_Anonymouse.framework in Frameworks */,
 				3B5CDF2320190DE400AD41F6 /* Alamofire.framework in Frameworks */,
 				3B5CDF1A20190DA400AD41F6 /* CryptoSwift.framework in Frameworks */,
@@ -145,7 +154,9 @@
 				7DD0BBB21CBC349000CF2268 /* Anonymouse.xcdatamodeld */,
 				1A692BBA1DAE964D00C03E1A /* AnonymouseDataController.swift */,
 				02F9C7861DEDFCE800CA631D /* AnonymouseMessageCore+CoreDataProperties.swift */,
+				3BD200AD2033FD3B002F9FC2 /* AnonymouseRatingCore+DataProperties.swift */,
 				1A42E02F1CBED2A100E6EE86 /* AnonymouseMessageCore.swift */,
+				3BD200AB2033FB98002F9FC2 /* AnonymouseRatingCore.swift */,
 				02F9C7871DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataClass.swift */,
 				02F9C7881DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataProperties.swift */,
 			);
@@ -225,6 +236,7 @@
 		3B5CDF1720190DA100AD41F6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3B8D2A3420335E2300BD7B5C /* SwiftyJSON.framework */,
 				3B5CDF1D20190DA600AD41F6 /* Pods_Anonymouse.framework */,
 				3B5CDF1B20190DA400AD41F6 /* CryptoSwift.framework */,
 				3B5CDF1920190DA100AD41F6 /* Alamofire.framework */,
@@ -322,6 +334,7 @@
 				02B6E4421DF3719B00B2AE15 /* AnonymouseReplySentCore.swift in Sources */,
 				0286D4CA1DEFA10000EEDE07 /* AnonymouseReplyViewCell.swift in Sources */,
 				1ABE12EE1C97521C005923BA /* AnonymouseTableViewCell.swift in Sources */,
+				3BD200AE2033FD3B002F9FC2 /* AnonymouseRatingCore+DataProperties.swift in Sources */,
 				1AD52A961D9964A9000F13DE /* AnonymouseNavigationStyleController.swift in Sources */,
 				1AFEDAE61D986BBC00690EB5 /* AnonymouseTabBarController.swift in Sources */,
 				02F9C78B1DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataClass.swift in Sources */,
@@ -333,6 +346,7 @@
 				1ABE12F21C9756A2005923BA /* AnonymouseConnectivityController.swift in Sources */,
 				02F9C78C1DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataProperties.swift in Sources */,
 				1ABE12EA1C9750A6005923BA /* AnonymouseTableViewController.swift in Sources */,
+				3BD200AC2033FB98002F9FC2 /* AnonymouseRatingCore.swift in Sources */,
 				172EA8A21D9788DA00D2E127 /* AnonymouseProfileViewController.swift in Sources */,
 				1A932A551DB3CAC7004294A9 /* AnonymouseMessageSentCore.swift in Sources */,
 				7DD0BBB41CBC349000CF2268 /* Anonymouse.xcdatamodeld in Sources */,

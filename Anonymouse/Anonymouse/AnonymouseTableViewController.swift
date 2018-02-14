@@ -22,6 +22,8 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
     var fetchRequest: NSFetchRequest<AnonymouseMessageCore>
     ///The `NSFetchRequest` object that fetches messages based on what the user is searching for
     var searchRequest: NSFetchRequest<AnonymouseMessageCore> = NSFetchRequest<AnonymouseMessageCore>(entityName: "AnonymouseMessageCore")
+    ///Used for refresh
+    var connectivityController = AnonymouseConnectivityController()
     
     
     /**
@@ -162,6 +164,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
     ///Called when the `tableView` is pulled down to reveal the `refreshControl`.
     @objc func refreshControlDidChangeValue() {
         self.tableView.reloadData()
+        connectivityController.getMessageViaHTTP()
         self.refreshControl?.endRefreshing()
     }
     

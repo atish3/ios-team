@@ -18,6 +18,8 @@ class AnonymouseDataController: NSObject {
     ///The size of the blocks to delete when the number of messages exceeds `maxMessages`.
     let blockSize: Int = 50
     
+    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+    
     override init() {
         //Get URL to Anonymouse.xcdatamodeld
         guard let modelURL: URL = Bundle.main.url(forResource: "Anonymouse", withExtension: "momd") else {
@@ -172,6 +174,25 @@ class AnonymouseDataController: NSObject {
         
         self.saveContext()
     }
+    
+    func addRating(rating: Int, parent: String, date: Date){
+        let _: AnonymouseRatingCore = AnonymouseRatingCore(rating: rating, parent: parent, date: date as NSDate)
+        self.saveContext()
+    }
+    
+    func fetchRatings(withKey key: String, ascending: Bool) -> [AnonymouseRatingCore] {
+        let fetchRequest: NSFetchRequest<AnonymouseRatingCore> = AnonymouseRatingCore.fetchRequest()
+        let sortDescriptor: NSSortDescriptor = NSSortDescriptor(key: key, ascending: ascending)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        do {
+            let fetchedRatings: [AnonymouseRatingCore] = try self.managedObjectContext.fetch(fetchRequest)
+            return fetchedRatings
+        } catch {
+            let fetchError: NSError = error as NSError
+            fatalError("Failure to fetch replies: \(fetchError)")
+        }
+    }
     /**
      Adds a reply to the persistent store.
      
@@ -181,8 +202,8 @@ class AnonymouseDataController: NSObject {
         - user: The user that sent the reply.
         - message: the parent that this reply is replying to.
      */
-    func addReply(withText text: String, date: Date, user: String, toMessage message: AnonymouseMessageCore) {
-        let reply: AnonymouseReplyCore = AnonymouseReplyCore(text: text, date: date, user: user, message: message)
+    func addReply(withText text: String, date: Date, user: String, toMessage message: AnonymouseMessageCore, fromServer: Bool) {
+        let reply: AnonymouseReplyCore = AnonymouseReplyCore(text: text, date: date, user: user, message: message, fromServer: true)
         reply.parentMessage = message
         var numRepl = Int(truncating: (reply.parentMessage?.numReplies)!)
         numRepl += 1
