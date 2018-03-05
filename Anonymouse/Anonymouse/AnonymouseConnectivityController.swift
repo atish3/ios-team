@@ -108,18 +108,15 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
             return AnonymouseRatingSentCore(message: messageCore)
         }
 
-        do {
-            //Encode the messages for sending
-            let archivedMessageArray: NSData = NSData(data: NSKeyedArchiver.archivedData(withRootObject: messageSentArray))
-            let archivedMessageArrayPtr = archivedMessageArray.bytes.bindMemory(to: UInt8.self , capacity: archivedMessageArray.length)
-            outStream.write(archivedMessageArrayPtr ,maxLength: archivedMessageArray.length)
 
-            let archivedRatingArray: NSData = NSData(data: NSKeyedArchiver.archivedData(withRootObject: ratingSentArray))
-            let archivedRatingArrayptr = archivedRatingArray.bytes.bindMemory(to: UInt8.self, capacity: archivedRatingArray.length)
-            outStream.write(archivedRatingArrayptr ,maxLength: archivedRatingArray.length)
-        } catch let error as NSError {
-            NSLog("%@", error)
-        }
+        //Encode the messages for sending
+        let archivedMessageArray: NSData = NSData(data: NSKeyedArchiver.archivedData(withRootObject: messageSentArray))
+        let archivedMessageArrayPtr = archivedMessageArray.bytes.bindMemory(to: UInt8.self , capacity: archivedMessageArray.length)
+        outStream.write(archivedMessageArrayPtr ,maxLength: archivedMessageArray.length)
+
+        let archivedRatingArray: NSData = NSData(data: NSKeyedArchiver.archivedData(withRootObject: ratingSentArray))
+        let archivedRatingArrayPtr = archivedRatingArray.bytes.bindMemory(to: UInt8.self, capacity: archivedRatingArray.length)
+        outStream.write(archivedRatingArrayPtr ,maxLength: archivedRatingArray.length)
     }
 
     /**
@@ -137,15 +134,15 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
             return AnonymouseRatingSentCore(reply: replyCore)
         }
 
-        do {
-            let archivedReplyArray: NSData = NSData(data: NSKeyedArchiver.archivedData(withRootObject: replySentArray))
-            outStream.write(archivedReplyArray.bytes ,maxLength: archivedReplyArray.length)
 
-            let archivedRatingArray: NSData = NSData(data: NSKeyedArchiver.archivedData(withRootObject: ratingSentArray))
-            outStream.write(archivedRatingArray.bytes ,maxLength: archivedRatingArray.length)
-        } catch let error as NSError {
-            NSLog("%@", error)
-        }
+        let archivedReplyArray: NSData = NSData(data: NSKeyedArchiver.archivedData(withRootObject: replySentArray))
+         let archivedReplyArrayPtr = archivedReplyArray.bytes.bindMemory(to: UInt8.self , capacity: archivedReplyArray.length)
+        outStream.write(archivedReplyArrayPtr ,maxLength: archivedReplyArray.length)
+
+        let archivedRatingArray: NSData = NSData(data: NSKeyedArchiver.archivedData(withRootObject: ratingSentArray))
+        let archivedRatingArrayPtr = archivedRatingArray.bytes.bindMemory(to: UInt8.self, capacity: archivedRatingArray.length)
+        outStream.write(archivedRatingArrayPtr ,maxLength: archivedRatingArray.length)
+
     }
 
     //NetSericeDelegate Functions
@@ -207,10 +204,10 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
 
   /**Tells the delegate the sender found a service.*/
     func netServiceBrowser(_: NetServiceBrowser, didFind: NetService, moreComing: Bool){
-     var input: InputStream = InputStream()
-     var output: OutputStream = OutputStream()
+     let input: UnsafeMutablePointer<InputStream?>?
+     let output: UnsafeMutablePointer<OutputStream?>?
      didFind.getInputStream(input, outputStream:output)
-     handleDataTransfer(from:input, to:output)
+        handleDataTransfer(from: (input!.pointee)!, to:(output!.pointee)!)
   }
 
 
