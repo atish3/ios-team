@@ -8,10 +8,7 @@
 
 import UIKit
 import CoreData
-import NetService
-import NetServiceBrowser
-import Timer
-import Date
+import Foundation
 ///A class that mnanages the connectivity protocols; sending messages and rating objects to nearby peers.
 class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServiceBrowserDelegate {
 
@@ -37,28 +34,27 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
     //MARK: Convenience methods
     ///Begins advertising the current peer on the network.
     func startAdvertisingPeer() {
-        netService.startMonitoring()
         netService.publish(options: [.listenForConnections])
+        netService.startMonitoring()
         isAdvertising = true
     }
 
     ///Stops advertising the current peer.
     func stopAdvertisingPeer() {
-        netServiceBrowser.stopMonitoring()
-        netServiceBrowser.stop()
+        netService.stop()
+        netService.stopMonitoring()
         isAdvertising = false
     }
 
     ///Begins browsing for other peers on the network.
     func startBrowsingForPeers() {
-        serviceBrowser.startBrowsingForPeers()
-        serviceBrowser.searchForServices(ofType: "_Anonymouse._tcp", inDomain: "local.")
+        netServiceBrowser.searchForServices(ofType: "_Anonymouse._tcp", inDomain: "local.")
         isBrowsing = true
     }
 
     ///Stops browsing for other peers.
     func stopBrowsingForPeers() {
-        serviceBrowser.stopBrowsingForPeers()
+        netServiceBrowser.stop()
         isBrowsing = false
     }
 
@@ -87,8 +83,8 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
     }
 
     deinit {
-        self.serviceAdvertiser.stopAdvertisingPeer()
-        self.serviceBrowser.stopBrowsingForPeers()
+        self.stopAdvertisingPeer()
+        self.stopBrowsingForPeers()
     }
 
 
@@ -115,10 +111,12 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
         do {
             //Encode the messages for sending
             let archivedMessageArray: NSData = NSData(data: NSKeyedArchiver.archivedData(withRootObject: messageSentArray))
-            outStream.write(archivedMessageArray.bytes ,archiviedMessageArray.length)
+            let archivedMessageArrayPtr = archivedMessageArray.bytes.bindMemory(to: UInt8.self , capacity: archivedMessageArray.length)
+            outStream.write(archivedMessageArrayPtr ,maxLength: archivedMessageArray.length)
 
             let archivedRatingArray: NSData = NSData(data: NSKeyedArchiver.archivedData(withRootObject: ratingSentArray))
-            outStream.write(archivedRatingArray.bytes ,archiviedRatingArray.length)
+            let archivedRatingArrayptr = archivedRatingArray.bytes.bindMemory(to: UInt8.self, capacity: archivedRatingArray.length)
+            outStream.write(archivedRatingArrayptr ,maxLength: archivedRatingArray.length)
         } catch let error as NSError {
             NSLog("%@", error)
         }
@@ -141,10 +139,10 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
 
         do {
             let archivedReplyArray: NSData = NSData(data: NSKeyedArchiver.archivedData(withRootObject: replySentArray))
-            outStream.write(archivedReplyArray.bytes ,archiviedReplyArray.length)
+            outStream.write(archivedReplyArray.bytes ,maxLength: archivedReplyArray.length)
 
             let archivedRatingArray: NSData = NSData(data: NSKeyedArchiver.archivedData(withRootObject: ratingSentArray))
-            outStream.write(archivedRatingArray.bytes ,archivedRatingArray.length)
+            outStream.write(archivedRatingArray.bytes ,maxLength: archivedRatingArray.length)
         } catch let error as NSError {
             NSLog("%@", error)
         }
@@ -153,42 +151,42 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
     //NetSericeDelegate Functions
 
     /**Notifies the delegate that the network is ready to publish the service.*/
-    func netServiceWillPublish(NetService) {
+    func netServiceWillPublish(_: NetService) {
       NSLog("netServiceWillPublish")
     }
 
     /**Notifies the delegate that a service could not be published.*/
-    func netService(NetService, didNotPublish: [String : NSNumber]){
+    func netService(_: NetService, didNotPublish: [String : NSNumber]){
       NSLog("the delegate that a service could not be published")
     }
 
     /**Notifies the delegate that a service was successfully published.*/
-    func netServiceDidPublish(NetService){
+    func netServiceDidPublish(_: NetService){
       NSLog("a service was successfully published")
     }
 
     /**Notifies the delegate that the network is ready to resolve the service.*/
-    func netServiceWillResolve(NetService){
+    func netServiceWillResolve(_: NetService){
         NSLog("the network is ready to resolve the service")
     }
 
     /**Informs the delegate that an error occurred during resolution of a given service.*/
-    func netService(NetService, didNotResolve: [String : NSNumber]){
+    func netService(_: NetService, didNotResolve: [String : NSNumber]){
         NSLog("an error occurred during resolution of a given service")
     }
 
     /**Informs the delegate that the address for a given service was resolved.*/
-    func netServiceDidResolveAddress(NetService){
+    func netServiceDidResolveAddress(_: NetService){
         NSLog("the address for a given service was resolved.")
     }
 
     /** Notifies the delegate that the TXT record for a given service has been updated.*/
-    func netService(NetService, didUpdateTXTRecord: Data){
+    func netService(_: NetService, didUpdateTXTRecord: Data){
         NSLog(" the TXT record for a given service has been updated.")
     }
 
   /**Informs the delegate that a publish() or resolve(withTimeout:) request was stopped.*/
-  func netServiceDidStop(NetService){
+    func netServiceDidStop(_: NetService){
       NSLog("a publish() or resolve(withTimeout:) request was stopped")
   }
   func netService(_ sender: NetService, didAcceptConnectionWith inputStream: InputStream,   outputStream: OutputStream){
@@ -196,19 +194,19 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
  }
   // netService Browser delegate
   /**Tells the delegate the sender found a domain.*/
-  func netServiceBrowser(NetServiceBrowser, didFindDomain: String, moreComing: Bool){
+    func netServiceBrowser(_: NetServiceBrowser, didFindDomain: String, moreComing: Bool){
     NSLog(" the sender found a domain")
   }
 
 
   /**Tells the delegate the a domain has disappeared or has become unavailable.*/
-  func netServiceBrowser(NetServiceBrowser, didRemoveDomain: String, moreComing: Bool){
+    func netServiceBrowser(_: NetServiceBrowser, didRemoveDomain: String, moreComing: Bool){
     NSLog("a domain has disappeared or has become unavailable")
   }
 
 
   /**Tells the delegate the sender found a service.*/
-  func netServiceBrowser(NetServiceBrowser, didFind: NetService, moreComing: Bool){
+    func netServiceBrowser(_: NetServiceBrowser, didFind: NetService, moreComing: Bool){
      var input: InputStream = InputStream()
      var output: OutputStream = OutputStream()
      didFind.getInputStream(input, outputStream:output)
@@ -217,23 +215,23 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
 
 
   /**Tells the delegate a service has disappeared or has become unavailable.*/
-  func netServiceBrowser(NetServiceBrowser, didRemove: NetService, moreComing: Bool){
+    func netServiceBrowser(_: NetServiceBrowser, didRemove: NetService, moreComing: Bool){
     NSLog(" a service has disappeared or has become unavailable")
   }
 
   /**Tells the delegate that a search is commencing.*/
-  func netServiceBrowserWillSearch(NetServiceBrowser){
+    func netServiceBrowserWillSearch(_: NetServiceBrowser){
     NSLog("a search is commencing")
   }
 
   /**Tells the delegate that a search was not successful.*/
-  func netServiceBrowser(NetServiceBrowser, didNotSearch: [String : NSNumber]){
+    func netServiceBrowser(_: NetServiceBrowser, didNotSearch: [String : NSNumber]){
     NSLog("a search was not successful")
   }
 
 
   /**Tells the delegate that a search was stopped.*/
-  func netServiceBrowserDidStopSearch(NetServiceBrowser){
+    func netServiceBrowserDidStopSearch(_: NetServiceBrowser){
     NSLog(" a search was stopped")
   }
 
@@ -241,7 +239,7 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
     sendAllMessages(toStream: outputStream)
     sendAllReplies(toStream: outputStream)
     let uint8Pointer = UnsafeMutablePointer<UInt8>.allocate(capacity: 1024*400)
-    inputStream.read(uint8Pointer, 1024*400)
+    inputStream.read(uint8Pointer, maxLength: 1024*400)
 
     let data: Data = Data(uint8Pointer, 1024*400)
 
@@ -250,7 +248,7 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
          for message in messageArray {
              let messageHash: String = message.text.sha1()
              if !messageHashes.contains(messageHash) {
-                 self.dataController.addMessage(message.text!, date: message.date!, user: message.user!)
+                self.dataController.addMessage(message.text!, date: message.date!, user: message.user!, pubKey: message.pubKey!)
              }
          }
      }
@@ -262,7 +260,7 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
              if !replyHashes.contains(replyHash) {
                  for message in messageObjects {
                      if message.text!.sha1() == reply.parentHash {
-                         dataController.addReply(withText: reply.text!, date: reply.date!, user: reply.user!, toMessage: message)
+                        dataController.addReply(withText: reply.text!, date: reply.date!, user: reply.user!, toMessage: message, pubKey: reply.pubKey!)
                          break
                      }
                  }
@@ -284,11 +282,11 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
 
          for rating in ratingArray {
              if let message = messageCoreDictionary[rating.messageHash] {
-                 let previousRating: Int = Int(message.rating!)
+                let previousRating: Int = Int(truncating: message.rating!)
                  message.rating = NSNumber(integerLiteral: rating.rating! + previousRating)
              }
              if let reply = replyCoreDictionary[rating.messageHash] {
-                 let previousRating: Int = Int(reply.rating!)
+                let previousRating: Int = Int(truncating: reply.rating!)
                  reply.rating = NSNumber(integerLiteral: rating.rating! + previousRating)
              }
          }

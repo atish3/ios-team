@@ -184,7 +184,7 @@ class AnonymouseDataController: NSObject {
     func addReply(withText text: String, date: Date, user: String, toMessage message: AnonymouseMessageCore, pubKey: String) {
         let reply: AnonymouseReplyCore = AnonymouseReplyCore(text: text, date: date, user: user, pubKey: pubKey)
         reply.parentMessage = message
-        var numRepl = Int((reply.parentMessage?.numReplies)!)
+        var numRepl = Int(truncating: (reply.parentMessage?.numReplies)!)
         numRepl += 1
         reply.parentMessage?.numReplies = NSNumber(value: numRepl)
         self.saveContext()

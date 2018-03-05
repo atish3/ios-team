@@ -84,7 +84,6 @@
 		1AF2D0661C97856300670C89 /* AnonymouseComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseComposeViewController.swift; sourceTree = "<group>"; };
 		1AFEDAE51D986BBC00690EB5 /* AnonymouseTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseTabBarController.swift; sourceTree = "<group>"; };
 		3C0249D81F7D5FEA00B3FF51 /* CryptoSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CryptoSwift.xcodeproj; path = ../../CryptoSwift/CryptoSwift.xcodeproj; sourceTree = "<group>"; };
-		4BBF3E731F83C50B0081CED5 /* CryptoSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CryptoSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		583A4439EE13596C326DE55B /* Pods_Anonymouse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Anonymouse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DD0BBB31CBC349000CF2268 /* Anonymouse.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Anonymouse.xcdatamodel; sourceTree = "<group>"; };
 		8B21278EEF6271FAF60175F2 /* Pods-Anonymouse.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anonymouse.release.xcconfig"; path = "Pods/Target Support Files/Pods-Anonymouse/Pods-Anonymouse.release.xcconfig"; sourceTree = "<group>"; };
@@ -125,7 +124,6 @@
 			children = (
 				1A5BA78D1D999FD1005000D5 /* AnonymouseSettingsViewController.swift */,
 				172EA8A11D9788DA00D2E127 /* AnonymouseProfileViewController.swift */,
-				1AF2D0661C97856300670C89 /* AnonymouseComposeViewController.swift */,
 				1ABE12E91C9750A6005923BA /* AnonymouseTableViewController.swift */,
 				1A932A581DB3D37A004294A9 /* AnonymouseDetailViewController.swift */,
 			);
@@ -159,6 +157,7 @@
 		1A932A571DB3CB4A004294A9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1AF2D0661C97856300670C89 /* AnonymouseComposeViewController.swift */,
 				1ABE12ED1C97521C005923BA /* AnonymouseTableViewCell.swift */,
 				0286D4C91DEFA10000EEDE07 /* AnonymouseReplyViewCell.swift */,
 			);
@@ -172,7 +171,6 @@
 				081720761F85D85D0000070F /* Pods */,
 				081720731F85D8580000070F /* Podfile */,
 				081720711F85D8530000070F /* Anonymouse.xcworkspace */,
-				4BBF3E731F83C50B0081CED5 /* CryptoSwift.framework */,
 				1ABE12D21C9744D0005923BA /* Products */,
 				1ABE12D31C9744D0005923BA /* Anonymouse */,
 				5FD7CDB6AB7F90222232B9A4 /* Pods */,
