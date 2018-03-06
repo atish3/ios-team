@@ -5,54 +5,49 @@
 //  Created by Pascal Sturmfels on 12/3/16.
 //  Copyright © 2016 1AM. All rights reserved.
 //
-
 import UIKit
 
 ///A sublcass of `NSObject` that conforms to `NSCoding`. This class is used to send replies to nearby peers.
 class AnonymouseReplySentCore: NSObject, NSCoding {
     ///The date the reply was composed.
-    var date: Date!
+    @objc var date: Date!
     ///The text of the reply.
-    var text: String!
+    @objc var text: String!
     ///The user that composed the reply.
-    var user: String!
+    @objc var user: String!
     ///The sha1() hash of the text of the parent message, used to find the parent.
-    var parentHash: String!
-    //The public key associated with the sender of the reply
-    var pubKey: String!
+    @objc var parentHash: String!
     
     /**
-        Initialize a sent reply object from a stored reply object.
+     Initialize a sent reply object from a stored reply object.
      
-        - Parameters:
-            - reply: The stored reply to send.
+     - Parameters:
+     - reply: The stored reply to send.
      */
-    convenience init(reply: AnonymouseReplyCore) {
+    @objc convenience init(reply: AnonymouseReplyCore) {
         self.init()
         self.date = reply.date! as Date!
         self.text = reply.text!
         self.user = reply.user!
         self.parentHash = reply.parentMessage!.text!.sha1()
-        self.pubKey = reply.pubKey!
     }
     
     /**
-        Initialize a send reply object with the text `text`, date `date`, and user `user`.
-    
-        - Parameters:
-            - text: The text of the reply.
-            - date: The date the reply was composed.
-            - user: The user that composed the reply.
-            - parentText: The sha1() hash of the text of the parent message.
+     Initialize a send reply object with the text `text`, date `date`, and user `user`.
+     
+     - Parameters:
+     - text: The text of the reply.
+     - date: The date the reply was composed.
+     - user: The user that composed the reply.
+     - parentText: The sha1() hash of the text of the parent message.
      */
-    convenience init(text: String, date: Date, user: String, parentText: String, pubKey: String) {
+    @objc convenience init(text: String, date: Date, user: String, parentText: String) {
         self.init()
         
         self.date = date
         self.text = text
         self.user = user
         self.parentHash = parentText.sha1()
-        self.pubKey = pubKey
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
@@ -62,13 +57,11 @@ class AnonymouseReplySentCore: NSObject, NSCoding {
         let unarchivedText: String = aDecoder.decodeObject(forKey: "text") as! String
         let unarchivedUser: String = aDecoder.decodeObject(forKey: "user") as! String
         let unarchivedParent: String = aDecoder.decodeObject(forKey: "parentHash") as! String
-        let unarchivedKey: String = aDecoder.decodeObject(forKey: "pubKey") as! String
         
         self.date = unarchivedDate
         self.text = unarchivedText
         self.user = unarchivedUser
         self.parentHash = unarchivedParent
-        self.pubKey = unarchivedKey
     }
     
     func encode(with aCoder: NSCoder) {
@@ -76,6 +69,5 @@ class AnonymouseReplySentCore: NSObject, NSCoding {
         aCoder.encode(self.text!, forKey: "text")
         aCoder.encode(self.user!, forKey: "user")
         aCoder.encode(self.parentHash!, forKey: "parentHash")
-        aCoder.encode(self.pubKey!, forKey: "pubKey")
     }
 }

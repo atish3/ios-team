@@ -22,6 +22,9 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
     //An object that handles netservice provided by current device
     var netService: NetService!
 
+    //A list contains all opening outputsStream
+    var outputs: [OutputStream] = []
+    
     ///An object that handles searching for and finding other phones on the network.
     var netServiceBrowser: NetServiceBrowser!
 
@@ -100,6 +103,7 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
         - ids: An array of `MCPeerID` objects that represent peers to send mesages to.
      */
     func sendAllMessages(toStream outStream: OutputStream) {
+        NSLog("Sending Messages")
         let messageCoreArray: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
         let messageSentArray: [AnonymouseMessageSentCore] = messageCoreArray.map { (messageCore) -> AnonymouseMessageSentCore in
             return AnonymouseMessageSentCore(message: messageCore)
@@ -126,6 +130,7 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
         - ids: An array of `MCPeerID` objects that represent peers to send replies to.
      */
     func sendAllReplies(toStream outStream: OutputStream) {
+        NSLog("Sending Replies")
         let replyCoreArray: [AnonymouseReplyCore] = dataController.fetchReplies(withKey: "date", ascending: true)
         let replySentArray: [AnonymouseReplySentCore] = replyCoreArray.map { (replyCore) -> AnonymouseReplySentCore in
             return AnonymouseReplySentCore(reply: replyCore)
@@ -187,6 +192,7 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
       NSLog("a publish() or resolve(withTimeout:) request was stopped")
   }
   func netService(_ sender: NetService, didAcceptConnectionWith inputStream: InputStream,   outputStream: OutputStream){
+    NSLog("Service accepy connection")
     handleDataTransfer(from: inputStream, to: outputStream)
  }
   // netService Browser delegate
@@ -204,10 +210,11 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
 
   /**Tells the delegate the sender found a service.*/
     func netServiceBrowser(_: NetServiceBrowser, didFind: NetService, moreComing: Bool){
+        NSLog("Found and Connected to service")
      let input = UnsafeMutablePointer<InputStream?>.allocate(capacity: 1)
      let output = UnsafeMutablePointer<OutputStream?>.allocate(capacity: 1)
-     didFind.getInputStream(input, outputStream:output)
-        handleDataTransfer(from: (input.pointee)!, to:(output.pointee)!)
+    didFind.getInputStream(input, outputStream:output)
+     handleDataTransfer(from: (input.pointee)!, to:(output.pointee)!)
   }
 
 
@@ -232,7 +239,8 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
     NSLog(" a search was stopped")
   }
 
-  func handleDataTransfer(from inputStream: InputStream, to outputStream: OutputStream){
+  func handleDataTransfer(from inputStream: InputStream, to outputStream:  OutputStream){
+    NSLog("Transfer Data")
     sendAllMessages(toStream: outputStream)
     sendAllReplies(toStream: outputStream)
     let uint8Pointer = UnsafeMutablePointer<UInt8>.allocate(capacity: 1024*400)
@@ -240,16 +248,24 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
     let uint8RawPointer = UnsafeRawPointer(uint8Pointer)
     let data: Data = Data(bytes: uint8RawPointer, count: 1024*400)
 
+    var string: String = String()
+    for i in 0..<1024 {
+        string.append(Character(UnicodeScalar(uint8Pointer[i])))
+    }
+    NSLog(string)
+    NSLog("Logging Data")
     if let messageArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? [AnonymouseMessageSentCore] {
+        NSLog("Message Received")
          let messageHashes: [String] = dataController.fetchMessageHashes()
          for message in messageArray {
              let messageHash: String = message.text.sha1()
              if !messageHashes.contains(messageHash) {
-                self.dataController.addMessage(message.text!, date: message.date!, user: message.user!, pubKey: message.pubKey!)
+                self.dataController.addMessage(message.text!, date: message.date!, user: message.user!)
              }
          }
      }
      else if let replyArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? [AnonymouseReplySentCore] {
+        NSLog("Reply Received")
          let replyHashes: [String] = dataController.fetchReplyHashes()
          let messageObjects: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
          for reply in replyArray {
@@ -257,7 +273,7 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
              if !replyHashes.contains(replyHash) {
                  for message in messageObjects {
                      if message.text!.sha1() == reply.parentHash {
-                        dataController.addReply(withText: reply.text!, date: reply.date!, user: reply.user!, toMessage: message, pubKey: reply.pubKey!)
+                        dataController.addReply(withText: reply.text!, date: reply.date!, user: reply.user!, toMessage: message)
                          break
                      }
                  }
@@ -265,6 +281,7 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
          }
      }
      else if let ratingArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? [AnonymouseRatingSentCore] {
+        NSLog("Rating Received")
          let messageCoreArray: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
          var messageCoreDictionary: [String: AnonymouseMessageCore] = [String: AnonymouseMessageCore]()
          for message in messageCoreArray {
@@ -289,5 +306,46 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
          }
      }
   }
+    /**
+     Sends an individual message to all connected peers.
+     It is meant to be used when the user is connected to nearby peers
+     and they compose a new message.
+     
+     - Parameters:
+     - message: The message to send to the connected peers.
+     */
+    func send(individualMessage message: AnonymouseMessageSentCore) {
+        NSLog("Sending Messages")
+        for output in self.outputs{
+            self.sendAllMessages(toStream: output)
+        }
+    }
 
+    /**
+     Sends an individual reply to all connected peers.
+     
+     - Parameters:
+     - reply: The reply to send to the connected peers.
+     */
+    func send(individualReply reply: AnonymouseReplySentCore) {
+        NSLog("Sending Replies")
+        for output in self.outputs{
+            self.sendAllReplies(toStream: output)
+        }
+    }
+    
+    /**
+     Sends an individual rating object to all connected peers.
+     
+     - Parameters:
+     - rating: The rating to send to all connected peers.
+     */
+    func send(individualRating rating: AnonymouseRatingSentCore) {
+        NSLog("Sending Ratings")
+        for output in self.outputs{
+            self.sendAllMessages(toStream: output)
+            self.sendAllReplies(toStream: output)
+        }
+    }
+    
 }

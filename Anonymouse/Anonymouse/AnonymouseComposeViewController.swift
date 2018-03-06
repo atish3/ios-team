@@ -5,7 +5,6 @@
 //  Created by Pascal Sturmfels on 3/14/16.
 //  Copyright © 2016 1AM. All rights reserved.
 //
-
 import UIKit
 
 /**
@@ -13,23 +12,23 @@ import UIKit
  */
 class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
     ///The `textView` in which the user inputs their message.
-    var composeTextView: UITextView!
+    @objc var composeTextView: UITextView!
     ///The maximum number of characters that any message can be, minus one (don't ask, it was easier this way).
-    let maxCharacters: Int = 301
+    @objc let maxCharacters: Int = 301
     ///The number of pixels of padding between the sides of the screen and the `composeTextView`.
-    let textViewMargins: Int = 20
+    @objc let textViewMargins: Int = 20
     ///The text that appears over the `composeTextView`.
-    let placeholderText: String = "Post something to the world!"
+    @objc let placeholderText: String = "Post something to the world!"
     ///The label that contains the `placeholderText`.
-    var placeholderLabel: UILabel!
+    @objc var placeholderLabel: UILabel!
     ///The label that shows how many characters a user has left in their message.
-    var charactersLeftLabel: UILabel!
+    @objc var charactersLeftLabel: UILabel!
     
     
     ///A weak reference to the `dataController` that allows the user to store the message they compose.
-    weak var dataController: AnonymouseDataController!
+    @objc weak var dataController: AnonymouseDataController!
     ///A weak reference to the `connectivityController` that allows the user to send the message they compose.
-    weak var connectivityController: AnonymouseConnectivityController!
+    @objc weak var connectivityController: AnonymouseConnectivityController!
     
     //MARK: Navigation
     override func viewDidLoad() {
@@ -170,7 +169,7 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
     //MARK: Convenience methods
     
     ///Clears the text in the `composeTextView`.
-    func clearText() {
+    @objc func clearText() {
         composeTextView.text = ""
         placeholderLabel.isHidden = false
         
@@ -180,21 +179,18 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
     }
     
     ///Posts the written message to the feed.
-    func post() {
+    @objc func post() {
         let userPreferences: UserDefaults = UserDefaults.standard
         let username: String = userPreferences.string(forKey: "username")!
-        let publicKey: String = userPreferences.string(forKey: "publicKey")!
-        let privateKey: String = userPreferences.string(forKey: "privateKey")!
-        if(publicKey == privateKey.sha1()){
-            var messageText = self.composeTextView.text!
-            messageText = messageText.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
-            self.dataController.addMessage(messageText, date: Date(), user: username, pubKey: publicKey)
-        //    if self.connectivityController.sessionObject.connectedPeers.count > 0 {
-          //      self.connectivityController.send(individualMessage: AnonymouseMessageSentCore(text: self.composeTextView.text, date: Date(), user: username, pubKey: publicKey))
-          //  }
-            self.clearText()
+        var messageText = self.composeTextView.text!
+        messageText = messageText.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        
+        self.dataController.addMessage(messageText, date: Date(), user: username)
+        if self.connectivityController.outputs.count > 0 {
+            self.connectivityController.send(individualMessage: AnonymouseMessageSentCore(text: self.composeTextView.text, date: Date(), user: username))
         }
-    }   
+        self.clearText()
+    }
     
 }

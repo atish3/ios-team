@@ -5,14 +5,13 @@
 //  Created by Pascal Sturmfels on 10/16/16.
 //  Copyright © 2016 1AM. All rights reserved.
 //
-
 import UIKit
 import CoreData
 
 ///A subclass of `UIViewController` that displays a single message in detail, along with its replies.
 class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
     ///The data of the main message displayed in detail
-    var cellData: AnonymouseMessageCore! {
+    @objc var cellData: AnonymouseMessageCore! {
         didSet {
             ///A fetch request to fetch the replies of the main message
             self.fetchRequest = NSFetchRequest<AnonymouseReplyCore>(entityName: "AnonymouseReplyCore")
@@ -39,37 +38,37 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
     }
     
     ///A `textView` in which the user inputs a reply to the main message.
-    var replyTextView: UITextView!
+    @objc var replyTextView: UITextView!
     ///The container view for everything related to the `replyTextView`.
-    var replyView: UIView!
+    @objc var replyView: UIView!
     ///The button that sends the reply to the main message when tapped.
-    var replyButton: UIButton!
+    @objc var replyButton: UIButton!
     ///The placeholder label that appears when the `replyTextView` is empty.
     //var replyLabel: UILabel!
     ///The `tableView` used to display the replies to the main message.
-    var tableView: UITableView!
+    @objc var tableView: UITableView!
     /**`true` if this view was pushed by a reply button tapped event, `false`
      if this view was pushed by a cell tapped event.
-    */
-    var shouldDisplayReply: Bool = false
+     */
+    @objc var shouldDisplayReply: Bool = false
     
     ///The `NSManagedObjectContext` that the replies are stored in.
-    var managedObjectContext: NSManagedObjectContext!
+    @objc var managedObjectContext: NSManagedObjectContext!
     ///The `NSFetchedRequest` that finds the replies to the main message.
-    var fetchRequest: NSFetchRequest<AnonymouseReplyCore>!
+    @objc var fetchRequest: NSFetchRequest<AnonymouseReplyCore>!
     
     ///The `NSFetchedResultsController` that fetches the replies using the `fetchRequest`.
-    var fetchedResultsController: NSFetchedResultsController<AnonymouseReplyCore>!
+    @objc var fetchedResultsController: NSFetchedResultsController<AnonymouseReplyCore>!
     
     ///The maximum number of characters that can be in a reply, minus one (don't ask lol)
-    let maxCharacters: Int = 301
+    @objc let maxCharacters: Int = 301
     ///The label that displays how many characters the user has left in their composed reply.
-    var charactersLeftLabel: UILabel!
+    @objc var charactersLeftLabel: UILabel!
     
     ///A weak reference to the `dataController` that allows a user to post a reply to the persistent store.
-    weak var dataController: AnonymouseDataController!
+    @objc weak var dataController: AnonymouseDataController!
     ///A weak reference to the `connectivityController` that allows a user to send a reply to nearby peers.
-    weak var connectivityController: AnonymouseConnectivityController!
+    @objc weak var connectivityController: AnonymouseConnectivityController!
     
     ///Displays the `replyView`, which allows the user to edit and send replies.
     @objc func displayReply() {
@@ -232,7 +231,7 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
     }
     
     ///Clears the `replyView` of the currently-edited message text, and dismisses it.
-    func resetInputAccessoryView() {
+    @objc func resetInputAccessoryView() {
         guard let mainUser: String = cellData.user else {
             return
         }
@@ -265,13 +264,10 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
         replyText = replyText.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         let userPreferences: UserDefaults = UserDefaults.standard
         let username: String = userPreferences.string(forKey: "username")!
-        let privKey: String = userPreferences.string(forKey: "privateKey")!
-        let pubKey: String = userPreferences.string(forKey: "publicKey")!
-        if(privKey.sha1() == pubKey) {
-            self.dataController.addReply(withText: replyText, date: Date(), user: username, toMessage: cellData, pubKey: pubKey)
-        //    if self.connectivityController.sessionObject.connectedPeers.count > 0 {
-         //       self.connectivityController.send(individualReply: AnonymouseReplySentCore(text: replyText, date: Date(), user: username, parentText: cellData.text!, pubKey: pubKey))
-        //    }
+        
+        self.dataController.addReply(withText: replyText, date: Date(), user: username, toMessage: cellData)
+        if self.connectivityController.outputs.count > 0 {
+            self.connectivityController.send(individualReply: AnonymouseReplySentCore(text: replyText, date: Date(), user: username, parentText: cellData.text!))
         }
         
         resetInputAccessoryView()
@@ -318,14 +314,14 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
     
     //MARK: TextView Methods
     ///Dismisses the keyboard
-    func dismissKeyboard() {
+    @objc func dismissKeyboard() {
         replyTextView.resignFirstResponder()
     }
     
     func textViewDidChange(_ textView: UITextView) {
         let testString: String = textView.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         replyButton.isHidden = testString.isEmpty
-      //  replyLabel.isHidden = !textView.text.isEmpty
+        //  replyLabel.isHidden = !textView.text.isEmpty
         let numLines: Int = Int(textView.contentSize.height/textView.font!.lineHeight)
         
         if numLines >= 4 {
@@ -503,7 +499,7 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
         }
     }
     
-    func controller(controller: NSFetchedResultsController<AnonymouseReplyCore>, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+    @objc func controller(controller: NSFetchedResultsController<AnonymouseReplyCore>, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
         fatalError("Section info should never change")
         //        switch type {
         //        case .insert:
@@ -520,12 +516,12 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
     
     //MARK: Helpers
     /**
-    Displays an alert with the given `title`, `message`, and `cancelButtonTitle`.
+     Displays an alert with the given `title`, `message`, and `cancelButtonTitle`.
      
      - Parameters:
-        - title: The title of the alert.
-        - message: The message body of the alert.
-        - cancelButtonTitle: The title of the cancel button.
+     - title: The title of the alert.
+     - message: The message body of the alert.
+     - cancelButtonTitle: The title of the cancel button.
      */
     fileprivate func showAlertWithTitle(_ title: String, message: String, cancelButtonTitle: String) {
         // Initialize Alert Controller
