@@ -237,8 +237,8 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
     sendAllReplies(toStream: outputStream)
     let uint8Pointer = UnsafeMutablePointer<UInt8>.allocate(capacity: 1024*400)
     inputStream.read(uint8Pointer, maxLength: 1024*400)
-
-    let data: Data = Data(uint8Pointer, 1024*400)
+    let uint8RawPointer = UnsafeRawPointer(uint8Pointer)
+    let data: Data = Data(bytes: uint8RawPointer, count: 1024*400)
 
     if let messageArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? [AnonymouseMessageSentCore] {
          let messageHashes: [String] = dataController.fetchMessageHashes()

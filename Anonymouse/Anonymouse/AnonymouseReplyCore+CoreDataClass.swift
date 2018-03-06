@@ -44,7 +44,7 @@ class AnonymouseReplyCore: NSManagedObject {
                 }
                 self.ratingHashes.append(sentRatingObject)
                  print(ratingHashes[ratingHashes.count-1].ratingHash + " " + String(ratingHashes.count))
-                connectivityController.send(individualRating: sentRatingObject)
+                connectivityController.sendAllMessages(toStream: <#T##OutputStream#>)
             } else {
                 self.rating = NSNumber(integerLiteral: self.rating!.intValue + 1)
                 let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: 1, messageHash: self.text!.sha1(), ratingHash: pubKey!)
