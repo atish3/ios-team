@@ -55,7 +55,7 @@ class AnonymouseMessageCore: NSManagedObject {
                 }
                 self.ratingHashes.append(sentRatingObject)
                  print(ratingHashes[ratingHashes.count-1].ratingHash + " " + String(ratingHashes.count))
-                connectivityController.send(individualRating: sentRatingObject)
+           //     connectivityController.send(individualRating: sentRatingObject)
             } else {
                 self.rating = NSNumber(integerLiteral: self.rating!.intValue + 1)
                 let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: 1, messageHash: self.text!.sha1(), ratingHash: pubKey!)
@@ -67,7 +67,7 @@ class AnonymouseMessageCore: NSManagedObject {
                 }
                 self.ratingHashes.append(sentRatingObject)
                 print(ratingHashes[ratingHashes.count-1].ratingHash + " " + String(ratingHashes.count))
-                connectivityController.send(individualRating: sentRatingObject)
+             //   connectivityController.send(individualRating: sentRatingObject)
             }
             self.likeStatus = 1
         } else {
@@ -82,7 +82,7 @@ class AnonymouseMessageCore: NSManagedObject {
             }
             self.ratingHashes.append(sentRatingObject)
             print(ratingHashes[ratingHashes.count-1].ratingHash + " " + String(ratingHashes.count))
-            connectivityController.send(individualRating: sentRatingObject)
+     //       connectivityController.send(individualRating: sentRatingObject)
         }
     }
 
@@ -106,7 +106,7 @@ class AnonymouseMessageCore: NSManagedObject {
                 }
                 self.ratingHashes.append(sentRatingObject)
                 print(ratingHashes[ratingHashes.count-1].ratingHash + " " + String(ratingHashes.count))
-                connectivityController.send(individualRating: sentRatingObject)
+          //      connectivityController.send(individualRating: sentRatingObject)
             } else {
                 self.rating = NSNumber(integerLiteral: self.rating!.intValue - 1)
                 let sentRatingObject: AnonymouseRatingSentCore = AnonymouseRatingSentCore(rating: -1, messageHash: self.text!.sha1(), ratingHash: pubKey!)
@@ -118,7 +118,7 @@ class AnonymouseMessageCore: NSManagedObject {
                 }
                 self.ratingHashes.append(sentRatingObject)
                 print(ratingHashes[ratingHashes.count-1].ratingHash + " " + String(ratingHashes.count))
-                connectivityController.send(individualRating: sentRatingObject)
+          //      connectivityController.send(individualRating: sentRatingObject)
             }
             self.likeStatus = 2
         } else {
@@ -133,7 +133,7 @@ class AnonymouseMessageCore: NSManagedObject {
             }
             self.ratingHashes.append(sentRatingObject)
             print(ratingHashes[ratingHashes.count-1].ratingHash + " " + String(ratingHashes.count))
-            connectivityController.send(individualRating: sentRatingObject)
+   //         connectivityController.send(individualRating: sentRatingObject)
         }
     }
     func ratingSum() -> Int {

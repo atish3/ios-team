@@ -269,9 +269,9 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
         let pubKey: String = userPreferences.string(forKey: "publicKey")!
         if(privKey.sha1() == pubKey) {
             self.dataController.addReply(withText: replyText, date: Date(), user: username, toMessage: cellData, pubKey: pubKey)
-            if self.connectivityController.sessionObject.connectedPeers.count > 0 {
-                self.connectivityController.send(individualReply: AnonymouseReplySentCore(text: replyText, date: Date(), user: username, parentText: cellData.text!, pubKey: pubKey))
-            }
+        //    if self.connectivityController.sessionObject.connectedPeers.count > 0 {
+         //       self.connectivityController.send(individualReply: AnonymouseReplySentCore(text: replyText, date: Date(), user: username, parentText: cellData.text!, pubKey: pubKey))
+        //    }
         }
         
         resetInputAccessoryView()

@@ -204,10 +204,10 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
 
   /**Tells the delegate the sender found a service.*/
     func netServiceBrowser(_: NetServiceBrowser, didFind: NetService, moreComing: Bool){
-     let input: UnsafeMutablePointer<InputStream?>?
-     let output: UnsafeMutablePointer<OutputStream?>?
+     let input = UnsafeMutablePointer<InputStream?>.allocate(capacity: 1)
+     let output = UnsafeMutablePointer<OutputStream?>.allocate(capacity: 1)
      didFind.getInputStream(input, outputStream:output)
-        handleDataTransfer(from: (input!.pointee)!, to:(output!.pointee)!)
+        handleDataTransfer(from: (input.pointee)!, to:(output.pointee)!)
   }
 
 
