@@ -9,7 +9,7 @@
 import CoreData
 import UIKit
 
-class AnonymouseRatingCore:NSManagedObject{
+class AnonymouseRatingCore: NSManagedObject{
     convenience init (rating: Int, parent: String, date: Date){
         let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext: NSManagedObjectContext = appDelegate.dataController.managedObjectContext

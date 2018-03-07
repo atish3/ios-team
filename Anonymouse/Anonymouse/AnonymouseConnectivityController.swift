@@ -257,21 +257,6 @@ for rating in ratingArray {
 //infrastructure mode
 func sendMessageViaHTTP(text: String, date: Date, rating: Int, user: String){
 
-/* print("We are now calling the send via HTTP function")
-let myUrl = URL(string: "http://ptsv2.com/t/0ktsb-1517694455/post");
-
-var request = URLRequest(url:myUrl!)
-
-request.httpMethod = "POST"// Compose a query string
-
-request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-
-var postString = text + "; "
-postString += date.description + "; "
-postString += String(rating) + "; " + user;
-
-request.httpBody = postString.data(using: String.Encoding.utf8); */
-
 let parameters: Parameters = [
 "MessageType": "Message",
 "Message": text,
@@ -279,40 +264,14 @@ let parameters: Parameters = [
 "Rating": rating,
 "User": user,
 ]
+    
 print("Parameters created");
 
 // Both calls are equivalent
-Alamofire.request("http://35.3.23.49:3000/message", method: .post, parameters: parameters, encoding: JSONEncoding(options: []))
+Alamofire.request("http://35.3.23.49:3000", method: .post, parameters: parameters, encoding: JSONEncoding(options: []))
 //NOTE: the server being used is one hosted on my laptop and is only being used for testing purposes
 
 print("Request sent");
-
-
-//let task = URLSession.shared.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
-
-//if error != nil
-//{
-   // print("error=\(String(describing: error))")
-   // return
-//}
-
-// You can print out response object
-/*    print("response = \(String(describing: response))")
-
-//Let's convert response sent from a server side script to a NSDictionary object:
-do {
-    let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary
-    print(json!);
-    if let parseJSON = json {
-
-        // Now we can access value of First Name by its key
-        let firstNameValue = parseJSON["firstName"] as? String
-        print("firstNameValue: \(String(describing: firstNameValue))")
-    }
-} catch {
-    print(error)
-} */
-//task.resume()
 }
 
 func sendReplyViaHTTP(text: String, date: Date, rating: Int, user: String, message: AnonymouseMessageCore){
@@ -326,7 +285,7 @@ let parameters: Parameters = [
 "Parent": message.text!.sha1()
 ]
 
-Alamofire.request("http://35.3.23.49:3000/message", method: .post, parameters: parameters, encoding: JSONEncoding(options: []))
+Alamofire.request("http://35.3.23.49:3000", method: .post, parameters: parameters, encoding: JSONEncoding(options: []))
 }
 
 func sendRatingViaHTTP(rating: Int, hash: String, date: Date){
@@ -337,17 +296,14 @@ let parameters: Parameters = [
 "Parent": hash,
 "Date": dateDesc
 ]
-    let newRate = AnonymouseRatingCore(rating: rating, parent: hash, date: date)
-
 // Both calls are equivalent
-Alamofire.request("http://35.3.23.49:3000/message", method: .post, parameters: parameters, encoding: JSONEncoding(options: []))
+Alamofire.request("http://35.3.23.49:3000", method: .post, parameters: parameters, encoding: JSONEncoding(options: []))
 
 }
 
 func getMessageViaHTTP(){
 let userPreferences: UserDefaults = UserDefaults.standard
-userPreferences.set(Date(), forKey: "timeUpdateMessages")
-let myUrl = URL(string: "http://35.3.23.49:3000/message");
+let myUrl = URL(string: "http://35.3.23.49:3000");
 var request = URLRequest(url:myUrl!)
 request.httpMethod = "GET"// Compose a query string
 let task = URLSession.shared.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
@@ -385,7 +341,10 @@ do{
                 }
                 let messageObjects: [AnonymouseMessageCore] = self.dataController.fetchObjects(withKey: "date", ascending: true)
                 for message in messageObjects{
-                    if((message.text?.sha1())! == text!!.sha1() && message.date! as Date == properDate){
+                    let messageHash = message.text?.sha1()
+                    let newHash = text!!.sha1()
+                    let date = message.date!.description
+                    if(messageHash! == newHash && date == properDate.description){
                         print("Found a match")
                         notFound = false
                         break
@@ -448,6 +407,12 @@ do{
             
                 let ratingCoreArray: [AnonymouseRatingCore] = self.dataController.fetchRatings(withKey: "date", ascending: true)
                 for rating in ratingCoreArray{
+                    let ratParent = rating.parent!
+                    let ratNum = Int(truncating: rating.rating!)
+                    let ratDate = rating.date!.description
+                    let newParent = parent!!
+                    let newNum = ratingNum!!
+                    let newDate = dateDesc!!
                     if(parent!! == rating.parent! && ratingNum!! == Int(truncating: rating.rating!) && (dateDesc)!! == rating.date!.description){
                         notFound = false;
                     }

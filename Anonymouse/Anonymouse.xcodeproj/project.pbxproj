@@ -105,7 +105,7 @@
 		3B5CDF1D20190DA600AD41F6 /* Pods_Anonymouse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Anonymouse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B709CAB202AC807002D86F5 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		3B8D2A3420335E2300BD7B5C /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3BD200AB2033FB98002F9FC2 /* AnonymouseRatingCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnonymouseRatingCore.swift; sourceTree = "<group>"; };
+		3BD200AB2033FB98002F9FC2 /* AnonymouseRatingCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseRatingCore.swift; sourceTree = "<group>"; };
 		3BD200AD2033FD3B002F9FC2 /* AnonymouseRatingCore+DataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnonymouseRatingCore+DataProperties.swift"; sourceTree = "<group>"; };
 		7DD0BBB31CBC349000CF2268 /* Anonymouse.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Anonymouse.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */

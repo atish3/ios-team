@@ -37,7 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         userPreferences.register(defaults: defaultPreferencesDictionary as! [String : Any])
         
-        UIApplication.shared.setMinimumBackgroundFetchInterval(60)
         return true
     }
     
@@ -93,7 +92,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         NSLog("\(application) called performFetchWithCompletionHandler")
         
-        self.connectivityController.getMessageViaHTTP();
         
         
         //self.connectivityController.startAdvertisingPeer()
