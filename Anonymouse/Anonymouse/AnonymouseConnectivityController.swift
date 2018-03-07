@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import Foundation
 ///A class that mnanages the connectivity protocols; sending messages and rating objects to nearby peers.
-class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServiceBrowserDelegate {
+class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServiceBrowserDelegate,StreamDelegate {
 
     //MARK: Links
     ///A weak reference to the `dataController`, which allows this class to store received messages.
@@ -192,7 +192,13 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
       NSLog("a publish() or resolve(withTimeout:) request was stopped")
   }
   func netService(_ sender: NetService, didAcceptConnectionWith inputStream: InputStream,   outputStream: OutputStream){
-    NSLog("Service accepy connection")
+    NSLog("Service accept connection")
+    inputStream.delegate = self
+    outputStream.delegate = self
+    inputStream.schedule(in: RunLoop.main(), forMode: RunLoopMode.defaultRunLoopMode)
+    outputStream.schedule(in: RunLoop.main(), forMode: RunLoopMode.defaultRunLoopMode)
+    inputStream.open()
+    outputStream.open()
     handleDataTransfer(from: inputStream, to: outputStream)
  }
   // netService Browser delegate
@@ -319,6 +325,34 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
         for output in self.outputs{
             self.sendAllMessages(toStream: output)
         }
+    }
+    
+    func stream(_ aStream: Stream,
+                handle eventCode: Stream.Event){
+        
+        case Stream.Event.hasBytesAvailable:
+        
+        NSLog("HasBytesAvailable")
+        
+        var buffer = [UInt8](repeating:0, count:4096)
+        
+        let inputStream = aStream as? InputStream
+        
+        while ((inputStream?.hasBytesAvailable) != false){
+            let len = inputStream?.read(&buffer, maxLength: buffer.count)
+            if(len > 0){
+                let output = NSString(bytes: &buffer, length: buffer.count, encoding: String.Encoding.utf8.rawValue)
+                if (output != ""){
+                    NSLog("Server Received : %@", output!)
+                    self.receiveTextView?.text = output as String?
+                }
+            }else{
+                break
+            }
+        }
+        break
+        default:
+        NSLog("unknown.")
     }
 
     /**
