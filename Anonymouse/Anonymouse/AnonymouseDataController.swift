@@ -176,12 +176,12 @@ class AnonymouseDataController: NSObject {
     }
     
     func addRating(rating: Int, parent: String, date: Date){
-        let _: AnonymouseRatingCore = AnonymouseRatingCore(rating: rating, parent: parent, date: date as NSDate)
+        let _: AnonymouseRatingCore = AnonymouseRatingCore(rating: rating, parent: parent, date: date)
         self.saveContext()
     }
     
     func fetchRatings(withKey key: String, ascending: Bool) -> [AnonymouseRatingCore] {
-        let fetchRequest: NSFetchRequest<AnonymouseRatingCore> = AnonymouseRatingCore.fetchRequest()
+        let fetchRequest: NSFetchRequest<AnonymouseRatingCore> = NSFetchRequest<AnonymouseRatingCore>(entityName: "AnonymouseRatingCore")
         let sortDescriptor: NSSortDescriptor = NSSortDescriptor(key: key, ascending: ascending)
         fetchRequest.sortDescriptors = [sortDescriptor]
         

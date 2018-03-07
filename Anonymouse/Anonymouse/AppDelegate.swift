@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         userPreferences.register(defaults: defaultPreferencesDictionary as! [String : Any])
         
-        connectivityController.startAutoReceive()
+        UIApplication.shared.setMinimumBackgroundFetchInterval(60)
         return true
     }
     
@@ -92,14 +92,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         NSLog("\(application) called performFetchWithCompletionHandler")
+        
+        self.connectivityController.getMessageViaHTTP();
+        
+        
         //self.connectivityController.startAdvertisingPeer()
         //self.connectivityController.startBrowsingForPeers()
         
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.background).asyncAfter(deadline: DispatchTime.now() + 20.0) {
-            NSLog("\(application) called the completionHandler")
+        //DispatchQueue.global(qos: DispatchQoS.QoSClass.background).asyncAfter(deadline: DispatchTime.now() + 20.0) {
+           // NSLog("\(application) called the completionHandler")
             //self.connectivityController.killConnectionParameters()
-            completionHandler(UIBackgroundFetchResult.noData)
-        }
+           // completionHandler(UIBackgroundFetchResult.noData)
+        //}
+        
+        
     }
 }
 

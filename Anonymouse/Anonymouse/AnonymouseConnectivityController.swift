@@ -292,8 +292,8 @@ print("Request sent");
 
 //if error != nil
 //{
-    //print("error=\(String(describing: error))")
-    //return
+   // print("error=\(String(describing: error))")
+   // return
 //}
 
 // You can print out response object
@@ -326,18 +326,18 @@ let parameters: Parameters = [
 "Parent": message.text!.sha1()
 ]
 
-// Both calls are equivalent
 Alamofire.request("http://35.3.23.49:3000/message", method: .post, parameters: parameters, encoding: JSONEncoding(options: []))
 }
 
 func sendRatingViaHTTP(rating: Int, hash: String, date: Date){
-
+let dateDesc = date.description
 let parameters: Parameters = [
 "MessageType": "Rating",
 "Rating": rating,
 "Parent": hash,
-"Date": date
+"Date": dateDesc
 ]
+    let newRate = AnonymouseRatingCore(rating: rating, parent: hash, date: date)
 
 // Both calls are equivalent
 Alamofire.request("http://35.3.23.49:3000/message", method: .post, parameters: parameters, encoding: JSONEncoding(options: []))
@@ -366,7 +366,6 @@ do{
     if let parseJSON = json {
         for object in json!{
         // Now we can access value of First Name by its key
-        var parentMessage = AnonymouseMessageCore()
         let messageType = object["MessageType"] as? String?
         
         if(messageType!! == "Message"){
@@ -407,15 +406,7 @@ do{
                 let user = object["User"] as? String?
                 print("Got user text")
             
-                let parent = (object["Parent"] as? String?)!!
-                let messageObjects: [AnonymouseMessageCore] = self.dataController.fetchObjects(withKey: "date", ascending: true)
-                for message in messageObjects{
-                    if(message.text?.sha1() == parent){
-                        print("Found a match")
-                        parentMessage = message
-                        break
-                    }
-                }
+            
             
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ"
@@ -431,7 +422,15 @@ do{
                     }
                 }
                 if(notFound){
-                    self.dataController.addReply(withText: text as! String!, date: properDate, user: user as! String!, toMessage: parentMessage, fromServer: true)
+                    let parent = (object["Parent"] as? String?)!!
+                    let messageObjects: [AnonymouseMessageCore] = self.dataController.fetchObjects(withKey: "date", ascending: true)
+                    for message in messageObjects{
+                        if(message.text?.sha1() == parent){
+                            print("Found a match")
+                            self.dataController.addReply(withText: text!!, date: properDate, user: user!!, toMessage: message, fromServer: true)
+                            break
+                        }
+                    }
                     print("Added Reply")
                 }
             }
@@ -439,11 +438,17 @@ do{
             var notFound: Bool = true;
                 let ratingNum = object["Rating"] as? Int?
                 let parent = object["Parent"] as? String?
-                let date = object["Date"] as? Date?
+                let dateDesc = object["Date"] as? String?
+            
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ"
+                guard let properDate = dateFormatter.date(from: dateDesc!!) else{
+                    fatalError("ERROR: Date conversion failed due to mismatched format.")
+                }
             
                 let ratingCoreArray: [AnonymouseRatingCore] = self.dataController.fetchRatings(withKey: "date", ascending: true)
                 for rating in ratingCoreArray{
-                    if(parent!! == rating.parent! && ratingNum!! == Int(truncating: rating.rating!) && (date)!! == rating.date! as Date){
+                    if(parent!! == rating.parent! && ratingNum!! == Int(truncating: rating.rating!) && (dateDesc)!! == rating.date!.description){
                         notFound = false;
                     }
                 }
@@ -464,6 +469,8 @@ do{
                         break
                     }
                 }
+                let rate = AnonymouseRatingCore(rating: ratingNum!!, parent: parent!!, date: properDate)
+                self.dataController.addRating(rating: ratingNum!!, parent: parent!!, date: properDate as Date)
             }
             }
         

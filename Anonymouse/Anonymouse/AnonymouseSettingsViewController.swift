@@ -23,7 +23,7 @@ class AnonymouseSettingsViewController: UITableViewController {
     var profileViewController = AnonymouseProfileViewController()
     
     ///The label on the broadcast button; has the text `"Stop Broadcasting"` or `"Begin Broadcasting"`.
-    var broadcastLabel: UILabel!
+    //var broadcastLabel: UILabel!
     
     override func viewDidLoad() {
         self.title = "Settings"
@@ -42,16 +42,16 @@ class AnonymouseSettingsViewController: UITableViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
+        //case 0:
+            //return "Connectivity"
         case 0:
-            return "Connectivity"
-        case 1:
             return "Change Screen Name"
-        case 2:
+        case 1:
             return "Danger"
         default:
             return "Default"
@@ -66,14 +66,14 @@ class AnonymouseSettingsViewController: UITableViewController {
         centerLabel.frame.origin = CGPoint.zero
         
         switch indexPath.section {
+        //case 0:
+           // centerLabel.text = "Stop Broadcasting"
+            //centerLabel.textColor = UIColor.red
+            //broadcastLabel = centerLabel
         case 0:
-            centerLabel.text = "Stop Broadcasting"
-            centerLabel.textColor = UIColor.red
-            broadcastLabel = centerLabel
-        case 1:
             centerLabel.text = "Profile"
             centerLabel.textColor = UIColor(red: 0, green: 0.478431, blue: 1, alpha: 1)
-        case 2:
+        case 1:
             centerLabel.text = "Delete all messages"
             centerLabel.textColor = UIColor.red
         default:
@@ -88,12 +88,12 @@ class AnonymouseSettingsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
-        case 0:
+       // case 0:
             //toggleConnection()
-            self.tableView.deselectRow(at: indexPath, animated: true)
-        case 1:
+           // self.tableView.deselectRow(at: indexPath, animated: true)
+        case 0:
             self.navigationController!.pushViewController(profileViewController, animated: true)
-        case 2:
+        case 1:
             let certainAlert: UIAlertController = UIAlertController(title: "Delete all messages", message: "Are you sure you want to delete all messages?", preferredStyle: .alert)
             certainAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (_) in
                 self.dataController.clearContext()

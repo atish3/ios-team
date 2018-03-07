@@ -32,8 +32,9 @@ class AnonymouseMessageCore: NSManagedObject {
         self.likeStatus = NSNumber(integerLiteral: 0)
         self.isFavorite = NSNumber(booleanLiteral: false)
         self.numReplies = NSNumber(integerLiteral: 0)
-        let connectivityController: AnonymouseConnectivityController = appDelegate.connectivityController
     }
+
+    
 
    /* convenience init(text: String, date: Date, user: String, rating: NSNumber, numReplies: NSNumber) {
         let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate

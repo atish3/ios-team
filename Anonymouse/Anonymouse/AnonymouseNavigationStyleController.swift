@@ -21,7 +21,7 @@ class AnonymouseNavigationStyleController: UINavigationController {
         gradientLayer.frame.size.height += UIApplication.shared.statusBarFrame.height
         
         
-        let topColor = #colorLiteral(red: 0.7098039216, green: 0.1607843137, blue: 0.1450980392, alpha: 1)
+        let topColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
         let bottomColor = #colorLiteral(red: 0.9490196078, green: 0.4156862745, blue: 0.3137254902, alpha: 1)
         gradientLayer.colors = [topColor, bottomColor].map{$0.cgColor}
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)

@@ -83,8 +83,8 @@ class AnonymouseTabBarController: UITabBarController, UITabBarControllerDelegate
         let settingsTabBarItem: UITabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: "settingsIconEmpty")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "settingsIconFilled"))
         settingsTabBarItem.tag = 3
         
-        let VPNTabBarItem: UITabBarItem = UITabBarItem(title: "VPN", image: UIImage(named: "settingsIconEmpty")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "settingsIconFilled"))
-        settingsTabBarItem.tag = 4
+        //let VPNTabBarItem: UITabBarItem = UITabBarItem(title: "VPN", image: UIImage(named: "settingsIconEmpty")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "settingsIconFilled"))
+        //settingsTabBarItem.tag = 4
         
         
         let settingsNavigationController: AnonymouseNavigationStyleController = AnonymouseNavigationStyleController()
@@ -93,19 +93,19 @@ class AnonymouseTabBarController: UITabBarController, UITabBarControllerDelegate
         settingsNavigationController.viewControllers = [settingsViewController]
         settingsNavigationController.tabBarItem = settingsTabBarItem
 
-        let VPNNavigationController: AnonymouseNavigationStyleController = AnonymouseNavigationStyleController()
+        //let VPNNavigationController: AnonymouseNavigationStyleController = AnonymouseNavigationStyleController()
         ///A `viewController` to display the app's VPN settings.
-        let VPNSettingsViewController: VPNViewController = VPNViewController()
-        VPNNavigationController.viewControllers = [VPNSettingsViewController]
-        VPNNavigationController.tabBarItem = VPNTabBarItem
+        //let VPNSettingsViewController: VPNViewController = VPNViewController()
+        //VPNNavigationController.viewControllers = [VPNSettingsViewController]
+        //VPNNavigationController.tabBarItem = VPNTabBarItem
         
-        self.viewControllers = [mostRecentNavigationController, favoriteNavigationController, bestRatedNavigationController, settingsNavigationController, VPNSettingsViewController]
+        self.viewControllers = [mostRecentNavigationController, favoriteNavigationController, bestRatedNavigationController, settingsNavigationController]
         self.selectedIndex = 0
         
         let gradientLayer: CAGradientLayer = CAGradientLayer()
         gradientLayer.frame = self.tabBar.bounds
         
-        let topColor = #colorLiteral(red: 0.950141059, green: 0.4143066406, blue: 0.3137254902, alpha: 1)
+        let topColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
         let bottomColor = #colorLiteral(red: 1, green: 0.5506998698, blue: 0.4316134983, alpha: 1)
         gradientLayer.colors = [topColor, bottomColor].map{$0.cgColor}
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
