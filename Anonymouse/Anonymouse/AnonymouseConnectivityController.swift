@@ -116,11 +116,13 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
         //Encode the messages for sending
         let archivedMessageArray: NSData = NSData(data: NSKeyedArchiver.archivedData(withRootObject: messageSentArray))
         let archivedMessageArrayPtr = archivedMessageArray.bytes.bindMemory(to: UInt8.self , capacity: archivedMessageArray.length)
-        outStream.write(archivedMessageArrayPtr ,maxLength: archivedMessageArray.length)
+        let num1 = outStream.write(archivedMessageArrayPtr ,maxLength: archivedMessageArray.length)
+        NSLog("write1: \(num1)")
 
         let archivedRatingArray: NSData = NSData(data: NSKeyedArchiver.archivedData(withRootObject: ratingSentArray))
         let archivedRatingArrayPtr = archivedRatingArray.bytes.bindMemory(to: UInt8.self, capacity: archivedRatingArray.length)
-        outStream.write(archivedRatingArrayPtr ,maxLength: archivedRatingArray.length)
+        let num2 = outStream.write(archivedRatingArrayPtr ,maxLength: archivedRatingArray.length)
+        NSLog("write2: \(num2)")
     }
 
     /**
@@ -195,8 +197,8 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
     NSLog("Service accept connection")
     inputStream.delegate = self
     outputStream.delegate = self
-    inputStream.schedule(in: RunLoop.main(), forMode: RunLoopMode.defaultRunLoopMode)
-    outputStream.schedule(in: RunLoop.main(), forMode: RunLoopMode.defaultRunLoopMode)
+    inputStream.schedule(in: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
+    outputStream.schedule(in: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
     inputStream.open()
     outputStream.open()
     handleDataTransfer(from: inputStream, to: outputStream)
@@ -217,10 +219,16 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
   /**Tells the delegate the sender found a service.*/
     func netServiceBrowser(_: NetServiceBrowser, didFind: NetService, moreComing: Bool){
         NSLog("Found and Connected to service")
-     let input = UnsafeMutablePointer<InputStream?>.allocate(capacity: 1)
-     let output = UnsafeMutablePointer<OutputStream?>.allocate(capacity: 1)
-    didFind.getInputStream(input, outputStream:output)
-     handleDataTransfer(from: (input.pointee)!, to:(output.pointee)!)
+        var input : InputStream?
+        var output : OutputStream?
+    didFind.getInputStream(&input, outputStream:&output)
+        input!.delegate = self
+        output!.delegate = self
+        input!.schedule(in: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
+        output!.schedule(in: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
+        input!.open()
+        output!.open()
+     handleDataTransfer(from: (input)!, to:(output)!)
   }
 
 
@@ -250,7 +258,8 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
     sendAllMessages(toStream: outputStream)
     sendAllReplies(toStream: outputStream)
     let uint8Pointer = UnsafeMutablePointer<UInt8>.allocate(capacity: 1024*400)
-    inputStream.read(uint8Pointer, maxLength: 1024*400)
+    let num1 = inputStream.read(uint8Pointer, maxLength: 1024*400)
+    NSLog("read: \(num1)")
     let uint8RawPointer = UnsafeRawPointer(uint8Pointer)
     let data: Data = Data(bytes: uint8RawPointer, count: 1024*400)
 
@@ -330,29 +339,30 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
     func stream(_ aStream: Stream,
                 handle eventCode: Stream.Event){
         
-        case Stream.Event.hasBytesAvailable:
+      //  case Stream.Event.hasBytesAvailable:
         
         NSLog("HasBytesAvailable")
         
         var buffer = [UInt8](repeating:0, count:4096)
         
         let inputStream = aStream as? InputStream
-        
+        if inputStream == nil {
+            return
+        }
         while ((inputStream?.hasBytesAvailable) != false){
             let len = inputStream?.read(&buffer, maxLength: buffer.count)
-            if(len > 0){
+            if(len! > 0){
                 let output = NSString(bytes: &buffer, length: buffer.count, encoding: String.Encoding.utf8.rawValue)
                 if (output != ""){
                     NSLog("Server Received : %@", output!)
-                    self.receiveTextView?.text = output as String?
                 }
             }else{
                 break
             }
         }
-        break
-        default:
-        NSLog("unknown.")
+     //   break
+      //  default:
+     //   NSLog("unknown.")
     }
 
     /**
