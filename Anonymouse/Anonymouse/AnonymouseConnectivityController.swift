@@ -10,6 +10,8 @@ import UIKit
 import CoreData
 import Foundation
 ///A class that mnanages the connectivity protocols; sending messages and rating objects to nearby peers.
+
+
 class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServiceBrowserDelegate,StreamDelegate {
 
     //MARK: Links
@@ -41,6 +43,15 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
         netService.startMonitoring()
         isAdvertising = true
     }
+    
+    func intToUInt8(value: Int) -> [UInt8]{
+        let count = MemoryLayout<Int>.size
+        let ints: [Int] = [value]
+        let data = NSData(bytes: ints, length: count)
+        var result = [UInt8](repeating: 0, count: count)
+        data.getBytes(&result, length: count)
+        return result
+    }
 
     ///Stops advertising the current peer.
     func stopAdvertisingPeer() {
@@ -51,7 +62,7 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
 
     ///Begins browsing for other peers on the network.
     func startBrowsingForPeers() {
-        netServiceBrowser.searchForServices(ofType: "_Anonymouse._tcp", inDomain: "local.")
+        netServiceBrowser.searchForServices(ofType: "_Anonymouse._tcp", inDomain: "")
         isBrowsing = true
     }
 
@@ -71,8 +82,7 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
         unowned let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         dataController = appDelegate.dataController
 
-        //FIXME: Construct a netservice instance as domain local, type: unknown (temporary solution:http,tcp) and service name
-        netService = NetService(domain: "local.", type: "_Anonymouse._tcp.", name: myServiceType)
+        netService = NetService(domain: "", type: "_Anonymouse._tcp.", name: myServiceType)
         netServiceBrowser = NetServiceBrowser()
         netService.includesPeerToPeer = true
         netServiceBrowser.includesPeerToPeer = true
@@ -116,13 +126,22 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
         //Encode the messages for sending
         let archivedMessageArray: NSData = NSData(data: NSKeyedArchiver.archivedData(withRootObject: messageSentArray))
         let archivedMessageArrayPtr = archivedMessageArray.bytes.bindMemory(to: UInt8.self , capacity: archivedMessageArray.length)
+        
+        var length = intToUInt8(value: archivedMessageArray.length)
+        var num3_1 = outStream.write(&length, maxLength: MemoryLayout<Int>.size)
+        
         let num1 = outStream.write(archivedMessageArrayPtr ,maxLength: archivedMessageArray.length)
-        NSLog("write1: \(num1)")
+        NSLog("write1: \(num3_1 + num1) message Length:\(archivedMessageArray.length)")
 
         let archivedRatingArray: NSData = NSData(data: NSKeyedArchiver.archivedData(withRootObject: ratingSentArray))
         let archivedRatingArrayPtr = archivedRatingArray.bytes.bindMemory(to: UInt8.self, capacity: archivedRatingArray.length)
+        
+        length = intToUInt8(value: archivedRatingArray.length)
+        num3_1 = outStream.write(&length, maxLength: MemoryLayout<Int>.size)
+        
         let num2 = outStream.write(archivedRatingArrayPtr ,maxLength: archivedRatingArray.length)
-        NSLog("write2: \(num2)")
+        
+        NSLog("write2: \(num3_1+num2) message Length:\(archivedRatingArray.length)")
     }
 
     /**
@@ -143,13 +162,22 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
 
 
         let archivedReplyArray: NSData = NSData(data: NSKeyedArchiver.archivedData(withRootObject: replySentArray))
-         let archivedReplyArrayPtr = archivedReplyArray.bytes.bindMemory(to: UInt8.self , capacity: archivedReplyArray.length)
-        outStream.write(archivedReplyArrayPtr ,maxLength: archivedReplyArray.length)
-
+        let archivedReplyArrayPtr = archivedReplyArray.bytes.bindMemory(to: UInt8.self , capacity: archivedReplyArray.length)
+        
+        var length = intToUInt8(value: archivedReplyArray.length)
+        var num3_1 = outStream.write(&length, maxLength: MemoryLayout<Int>.size)
+        
+        let num3=outStream.write(archivedReplyArrayPtr ,maxLength: archivedReplyArray.length)
+        NSLog("write3: \(num3_1+num3) message Length:\(archivedReplyArray.length)")
+        
         let archivedRatingArray: NSData = NSData(data: NSKeyedArchiver.archivedData(withRootObject: ratingSentArray))
         let archivedRatingArrayPtr = archivedRatingArray.bytes.bindMemory(to: UInt8.self, capacity: archivedRatingArray.length)
-        outStream.write(archivedRatingArrayPtr ,maxLength: archivedRatingArray.length)
-
+        
+        length = intToUInt8(value: archivedRatingArray.length)
+        num3_1 = outStream.write(&length, maxLength: MemoryLayout<Int>.size)
+        
+        let num4=outStream.write(archivedRatingArrayPtr ,maxLength: archivedRatingArray.length)
+        NSLog("write4: \(num3_1+num4) message Length:\(archivedRatingArray.length)")
     }
 
     //NetSericeDelegate Functions
@@ -201,6 +229,7 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
     outputStream.schedule(in: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
     inputStream.open()
     outputStream.open()
+    outputs.append(outputStream)
     handleDataTransfer(from: inputStream, to: outputStream)
  }
   // netService Browser delegate
@@ -218,17 +247,19 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
 
   /**Tells the delegate the sender found a service.*/
     func netServiceBrowser(_: NetServiceBrowser, didFind: NetService, moreComing: Bool){
+
         NSLog("Found and Connected to service")
-        var input : InputStream?
-        var output : OutputStream?
-    didFind.getInputStream(&input, outputStream:&output)
-        input!.delegate = self
-        output!.delegate = self
-        input!.schedule(in: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
-        output!.schedule(in: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
-        input!.open()
-        output!.open()
-     handleDataTransfer(from: (input)!, to:(output)!)
+        var inputStream : InputStream?
+        var outputStream : OutputStream?
+        didFind.getInputStream(&inputStream, outputStream:&outputStream)
+        inputStream!.delegate = self
+        outputStream!.delegate = self
+        inputStream!.schedule(in: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
+        outputStream!.schedule(in: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
+        inputStream!.open()
+        outputStream!.open()
+        outputs.append(outputStream!)
+     handleDataTransfer(from: (inputStream)!, to:(outputStream)!)
   }
 
 
@@ -276,87 +307,98 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
     func stream(_ aStream: Stream,
                 handle eventCode: Stream.Event){
         
-      //  case Stream.Event.hasBytesAvailable:
-        
-        NSLog("HasBytesAvailable")
-        
-        var buffer = [UInt8](repeating:0, count:4096)
         
         let inputStream = aStream as? InputStream
         if inputStream == nil {
-            return
-        }
-        while ((inputStream?.hasBytesAvailable) != false){
-            let len = inputStream?.read(&buffer, maxLength: buffer.count)
-            if(len! > 0){
-                let output = NSString(bytes: &buffer, length: buffer.count, encoding: String.Encoding.utf8.rawValue)
-                if (output != nil){
-                    NSLog("Server Received : %@", output!)
-                }
+            let outputStream = aStream as? OutputStream
+            if outputStream == nil {
+                return
             }else{
-                break
+                NSLog("Server Writing Data")
             }
-        }
+        }else{
+            var buffer = [UInt8](repeating:0, count:1024*200)
+            let len = inputStream?.read(&buffer, maxLength: buffer.count)
 
-        let uint8RawPointer = UnsafeRawPointer(buffer)
-        let data: Data = Data(bytes: uint8RawPointer, count: 1024*400)
-        
+            NSLog("Server Received : \(String(describing: len))")
 
-        NSLog("Logging Data")
-        if let messageArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? [AnonymouseMessageSentCore] {
-            NSLog("Message Received")
-            let messageHashes: [String] = dataController.fetchMessageHashes()
-            for message in messageArray {
-                let messageHash: String = message.text.sha1()
-                if !messageHashes.contains(messageHash) {
-                    self.dataController.addMessage(message.text!, date: message.date!, user: message.user!)
-                }
+            var dataArray: [NSData] = [NSData]()
+            var start = 0
+            while start < len!{
+                NSLog("Start at \(start) \(len)")
+                
+                var length : Int = 0
+                let buf_slice_for_len = buffer[start..<start+8]
+                let buf_for_len: [UInt8] = Array(buf_slice_for_len)
+                let length_uint8 =  NSData(bytes:buf_for_len,length:8)
+                length_uint8.getBytes(&length, length: 8)
+            
+                NSLog("Message chunk \(length)")
+                
+                let buf_slice_for_content = buffer[start+8..<start+8+length]
+                let buf_for_content: [UInt8] = Array(buf_slice_for_content)
+                let data =  NSData(bytes:buf_for_content,length:length)
+                 dataArray.append(data)
+                start = start + length + 8
             }
-        }
-        else if let replyArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? [AnonymouseReplySentCore] {
-            NSLog("Reply Received")
-            let replyHashes: [String] = dataController.fetchReplyHashes()
-            let messageObjects: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
-            for reply in replyArray {
-                let replyHash: String = reply.text.sha1()
-                if !replyHashes.contains(replyHash) {
-                    for message in messageObjects {
-                        if message.text!.sha1() == reply.parentHash {
-                            dataController.addReply(withText: reply.text!, date: reply.date!, user: reply.user!, toMessage: message)
-                            break
+            NSLog("Logging Data")
+            for data in dataArray{
+                NSLog("Logging Data")
+                if let messageArray = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as? [AnonymouseMessageSentCore] {
+                    NSLog("Message Received")
+                    let messageHashes: [String] = dataController.fetchMessageHashes()
+                    for message in messageArray {
+                        let messageHash: String = message.text.sha1()
+                        if !messageHashes.contains(messageHash) {
+                            self.dataController.addMessage(message.text!, date: message.date!, user: message.user!)
                         }
                     }
                 }
+                else if let replyArray = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as? [AnonymouseReplySentCore] {
+                    NSLog("Reply Received")
+                    let replyHashes: [String] = dataController.fetchReplyHashes()
+                    let messageObjects: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
+                    for reply in replyArray {
+                        let replyHash: String = reply.text.sha1()
+                        if !replyHashes.contains(replyHash) {
+                            for message in messageObjects {
+                                if message.text!.sha1() == reply.parentHash {
+                                    dataController.addReply(withText: reply.text!, date: reply.date!, user: reply.user!, toMessage: message)
+                                    break
+                                }
+                            }
+                        }
+                    }
+                }
+                else if let ratingArray = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as? [AnonymouseRatingSentCore] {
+                    NSLog("Rating Received")
+                    let messageCoreArray: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
+                    var messageCoreDictionary: [String: AnonymouseMessageCore] = [String: AnonymouseMessageCore]()
+                    for message in messageCoreArray {
+                        messageCoreDictionary[message.text!.sha1()] = message
+                    }
+                    
+                    let replyCoreArray: [AnonymouseReplyCore] = dataController.fetchReplies(withKey: "date", ascending: true)
+                    var replyCoreDictionary: [String: AnonymouseReplyCore] = [String:AnonymouseReplyCore]()
+                    for reply in replyCoreArray {
+                        replyCoreDictionary[reply.text!.sha1()] = reply
+                    }
+                    
+                    for rating in ratingArray {
+                        if let message = messageCoreDictionary[rating.messageHash] {
+                            let previousRating: Int = Int(truncating: message.rating!)
+                            message.rating = NSNumber(integerLiteral: rating.rating! + previousRating)
+                        }
+                        if let reply = replyCoreDictionary[rating.messageHash] {
+                            let previousRating: Int = Int(truncating: reply.rating!)
+                            reply.rating = NSNumber(integerLiteral: rating.rating! + previousRating)
+                        }
+                    }
+                }
+                
             }
         }
-        else if let ratingArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? [AnonymouseRatingSentCore] {
-            NSLog("Rating Received")
-            let messageCoreArray: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
-            var messageCoreDictionary: [String: AnonymouseMessageCore] = [String: AnonymouseMessageCore]()
-            for message in messageCoreArray {
-                messageCoreDictionary[message.text!.sha1()] = message
-            }
-            
-            let replyCoreArray: [AnonymouseReplyCore] = dataController.fetchReplies(withKey: "date", ascending: true)
-            var replyCoreDictionary: [String: AnonymouseReplyCore] = [String:AnonymouseReplyCore]()
-            for reply in replyCoreArray {
-                replyCoreDictionary[reply.text!.sha1()] = reply
-            }
-            
-            for rating in ratingArray {
-                if let message = messageCoreDictionary[rating.messageHash] {
-                    let previousRating: Int = Int(truncating: message.rating!)
-                    message.rating = NSNumber(integerLiteral: rating.rating! + previousRating)
-                }
-                if let reply = replyCoreDictionary[rating.messageHash] {
-                    let previousRating: Int = Int(truncating: reply.rating!)
-                    reply.rating = NSNumber(integerLiteral: rating.rating! + previousRating)
-                }
-            }
-        }
-     //   break
-      //  default:
-     //   NSLog("unknown.")
+       
     }
 
     /**
