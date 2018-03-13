@@ -337,7 +337,9 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
                 length_uint8.getBytes(&length, length: 8)
             
                 NSLog("Message chunk \(length)")
-                
+                if length > (len - start - 1){
+                    break
+                }
                 let buf_slice_for_content = buffer[start+8..<start+8+length]
                 let buf_for_content: [UInt8] = Array(buf_slice_for_content)
                 let data =  NSData(bytes:buf_for_content,length:length)

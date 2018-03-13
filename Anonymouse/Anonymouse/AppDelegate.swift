@@ -60,11 +60,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         self.connectivityController.startAdvertisingPeer()
         self.connectivityController.startBrowsingForPeers()
-        while !application.backgroundTimeRemaining.isLess(than: 1.0){
-            NSLog("time remaining: \(application.backgroundTimeRemaining)")
-        }
+//        while !application.backgroundTimeRemaining.isLess(than: 1.0){
+//            NSLog("time remaining: \(application.backgroundTimeRemaining)")
+//        }
         self.dataController.saveContext()
-         
+
          application.endBackgroundTask(self.backgroundTask)
          self.backgroundTask = UIBackgroundTaskInvalid
 
