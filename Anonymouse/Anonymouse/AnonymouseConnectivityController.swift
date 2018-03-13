@@ -229,7 +229,7 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
     outputStream.schedule(in: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
     inputStream.open()
     outputStream.open()
-    outputs.append(outputStream)
+//    outputs.append(outputStream)
     handleDataTransfer(from: inputStream, to: outputStream)
  }
   // netService Browser delegate
@@ -258,7 +258,7 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
         outputStream!.schedule(in: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
         inputStream!.open()
         outputStream!.open()
-        outputs.append(outputStream!)
+//        outputs.append(outputStream!)
      handleDataTransfer(from: (inputStream)!, to:(outputStream)!)
   }
 
@@ -318,13 +318,16 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
             }
         }else{
             var buffer = [UInt8](repeating:0, count:1024*200)
-            let len = inputStream?.read(&buffer, maxLength: buffer.count)
+            var len = 0
+            if inputStream!.hasBytesAvailable{
+                len = inputStream!.read(&buffer, maxLength: buffer.count)
+            }
 
             NSLog("Server Received : \(String(describing: len))")
 
             var dataArray: [NSData] = [NSData]()
             var start = 0
-            while start < len!{
+            while start < len{
                 NSLog("Start at \(start) \(len)")
                 
                 var length : Int = 0
@@ -342,6 +345,7 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
                 start = start + length + 8
             }
             NSLog("Logging Data")
+            NSLog("data size: \(dataArray.count)")
             for data in dataArray{
                 NSLog("Logging Data")
                 if let messageArray = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as? [AnonymouseMessageSentCore] {
@@ -423,8 +427,8 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
     func send(individualRating rating: AnonymouseRatingSentCore) {
         NSLog("Sending Ratings")
         for output in self.outputs{
-            self.sendAllMessages(toStream: output)
-            self.sendAllReplies(toStream: output)
+//            self.sendAllMessages(toStream: output)
+//            self.sendAllReplies(toStream: output)
         }
     }
     
