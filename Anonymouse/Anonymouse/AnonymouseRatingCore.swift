@@ -18,5 +18,11 @@ class AnonymouseRatingCore: NSManagedObject{
         self.rating = rating as NSNumber
         self.parent = parent
         self.date = date as NSDate
+        self.randNum = ((Double(arc4random()) * drand48()) as NSNumber)
+    }
+    
+    convenience init(rating: Int, parent: String, date: Date, randNum: Double){
+        self.init(rating: rating, parent: parent, date: date)
+        self.randNum = (randNum as NSNumber)
     }
 }

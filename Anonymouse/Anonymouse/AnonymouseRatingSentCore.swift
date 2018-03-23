@@ -14,6 +14,8 @@ class AnonymouseRatingSentCore: NSObject, NSCoding {
     var rating: Int?
     ///The sha1() hash of the text of the message this rating corresponds to.
     var messageHash: String!
+    ///
+    var randNum: Double = 0.0
     
     /**
      Initialize a sent rating object from a stored message.
@@ -26,8 +28,9 @@ class AnonymouseRatingSentCore: NSObject, NSCoding {
         let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         self.rating = message.rating!.intValue
         self.messageHash = message.text!.sha1()
+        self.randNum = ((Double(arc4random()) * drand48()))
         let connectivityController: AnonymouseConnectivityController = appDelegate.connectivityController
-        connectivityController.sendRatingViaHTTP(rating: self.rating!, hash: self.messageHash, date: Date());
+        connectivityController.sendRatingViaHTTP(rating: self.rating!, hash: self.messageHash, date: Date(), randNum: self.randNum, message: message);
     }
 
     /**
@@ -41,8 +44,9 @@ class AnonymouseRatingSentCore: NSObject, NSCoding {
         let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         self.rating = reply.rating!.intValue
         self.messageHash = reply.text!.sha1()
+        self.randNum = ((Double(arc4random()) * drand48()))
         let connectivityController: AnonymouseConnectivityController = appDelegate.connectivityController
-        connectivityController.sendRatingViaHTTP(rating: self.rating!, hash: self.messageHash, date: Date());
+        connectivityController.sendRatingViaHTTP(rating: self.rating!, hash: self.messageHash, date: Date(), randNum: self.randNum, reply: reply);
     }
     
     /**
@@ -56,20 +60,24 @@ class AnonymouseRatingSentCore: NSObject, NSCoding {
         self.init()
         self.rating = rating
         self.messageHash = messageHash
+        self.randNum = ((Double(arc4random()) * drand48()))
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
         let unarchivedRating: Int = aDecoder.decodeInteger(forKey: "rating")
         let unarchivedHash: String = aDecoder.decodeObject(forKey: "messageHash") as! String
+        let unarchivedRand: Double = aDecoder.decodeDouble(forKey: "randNum")
         
         self.rating = unarchivedRating
         self.messageHash = unarchivedHash
+        self.randNum = unarchivedRand
     }
     
     func encode(with aCoder: NSCoder) {
         aCoder.encode(self.rating!, forKey: "rating")
         aCoder.encode(self.messageHash!, forKey: "messageHash")
+        aCoder.encode(self.randNum, forKey: "randNum")
     }
     
 }

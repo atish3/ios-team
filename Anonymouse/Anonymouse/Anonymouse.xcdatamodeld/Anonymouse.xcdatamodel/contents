@@ -13,6 +13,7 @@
     <entity name="AnonymouseRatingCore" representedClassName=".AnonymouseRatingCore" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="parent" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="randNum" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="rating" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
     </entity>
     <entity name="AnonymouseReplyCore" representedClassName=".AnonymouseReplyCore" syncable="YES">
@@ -25,7 +26,7 @@
     </entity>
     <elements>
         <element name="AnonymouseMessageCore" positionX="-63" positionY="-18" width="128" height="163"/>
-        <element name="AnonymouseRatingCore" positionX="-54" positionY="54" width="128" height="90"/>
+        <element name="AnonymouseRatingCore" positionX="-54" positionY="54" width="128" height="105"/>
         <element name="AnonymouseReplyCore" positionX="-63" positionY="27" width="128" height="135"/>
     </elements>
 </model>

@@ -82,7 +82,7 @@ class AnonymouseDataController: NSObject {
     
     // MARK: - Core Data Saving support
     /// - Returns: the url of the persistent store to which messages are saved.
- fileprivate func applicationStoresDirectory() -> URL {
+    fileprivate func applicationStoresDirectory() -> URL {
         let fm = FileManager.default
         
         // Fetch Application Support Directory
@@ -154,9 +154,9 @@ class AnonymouseDataController: NSObject {
      Adds a message to the persistent store, and makes space for it if necessary.
      
      - Parameters:
-        - text: The text of the message.
-        - date: The date the message was composed.
-        - user: The user that sent the message.
+     - text: The text of the message.
+     - date: The date the message was composed.
+     - user: The user that sent the message.
      */
     func addMessage(_ text: String, date: Date, user: String, fromServer: Bool) {
         //Create a message object from the input parameters.
@@ -175,8 +175,8 @@ class AnonymouseDataController: NSObject {
         self.saveContext()
     }
     
-    func addRating(rating: Int, parent: String, date: Date){
-        let _: AnonymouseRatingCore = AnonymouseRatingCore(rating: rating, parent: parent, date: date)
+    func addRating(rating: Int, parent: String, date: Date, randNum: Double){
+        let _: AnonymouseRatingCore = AnonymouseRatingCore(rating: rating, parent: parent, date: date, randNum: randNum)
         self.saveContext()
     }
     
@@ -197,10 +197,10 @@ class AnonymouseDataController: NSObject {
      Adds a reply to the persistent store.
      
      - Parameters:
-        - text: The text of the reply.
-        - date: The date the reply was composed.
-        - user: The user that sent the reply.
-        - message: the parent that this reply is replying to.
+     - text: The text of the reply.
+     - date: The date the reply was composed.
+     - user: The user that sent the reply.
+     - message: the parent that this reply is replying to.
      */
     func addReply(withText text: String, date: Date, user: String, toMessage message: AnonymouseMessageCore, fromServer: Bool) {
         let reply: AnonymouseReplyCore = AnonymouseReplyCore(text: text, date: date, user: user, message: message, fromServer: true)
@@ -213,9 +213,9 @@ class AnonymouseDataController: NSObject {
     
     /**
      - Parameters:
-        - key: The string value by which to sort messages; must be a string that corresponds
-            to a variable of `AnonymouseMessageCore`.
-        - ascending: `true` if the results fetched should be in asceding order, by key value.
+     - key: The string value by which to sort messages; must be a string that corresponds
+     to a variable of `AnonymouseMessageCore`.
+     - ascending: `true` if the results fetched should be in asceding order, by key value.
      
      - Returns: An array of `AnonymouseMessageCore` objects from the persistent store, sorted by key value.
      */
@@ -244,9 +244,9 @@ class AnonymouseDataController: NSObject {
     
     /**
      - Parameters:
-        - key: The string value by which to sort replies; must be a string that corresponds to 
-            a variable of `AnonymouseReplyCore`.
-        - ascending: `true` if the results fetched should be in ascending order, by key value.
+     - key: The string value by which to sort replies; must be a string that corresponds to
+     a variable of `AnonymouseReplyCore`.
+     - ascending: `true` if the results fetched should be in ascending order, by key value.
      
      - Returns: An array of `AnonymouseReplyCore` objects from the persistent store, sorted by key value.
      */
@@ -274,9 +274,15 @@ class AnonymouseDataController: NSObject {
     
     ///Deletes everything in the `managedObjectContext`. Mainly used so that my phone didn't get cluttered while testing.
     func clearContext() {
+
         for managedObject in self.fetchObjects(withKey: "date", ascending: true) {
             self.managedObjectContext.delete(managedObject)
         }
+        for managedRating in self.fetchRatings(withKey: "date", ascending: true){
+            self.managedObjectContext.delete(managedRating)
+        }
+        let userPreferences: UserDefaults = UserDefaults.standard
+        userPreferences.set(Date(), forKey: "timeReset")
         
         self.saveContext()
     }
@@ -296,7 +302,16 @@ class AnonymouseDataController: NSObject {
         
         self.saveContext()
     }
-
+    
+    ///Deletes the ratings from the managed object context.
+    func deleteRatingBlock() {
+        let managedObjects: [AnonymouseRatingCore] = self.fetchRatings(withKey: "date", ascending: true)
+        for managedObject in managedObjects {
+            self.managedObjectContext.delete(managedObject)
+        }
+        self.saveContext()
+    }
+    
     // MARK: for message tags
     /// - Returns: A `[String:Int]` dictionary; the keys represent tags, and the values represent the number of times that tag appeared in a message.
     func fetchMessageTag() -> [String:Int] {

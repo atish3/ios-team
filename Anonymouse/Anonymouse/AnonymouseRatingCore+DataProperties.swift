@@ -26,5 +26,7 @@ extension AnonymouseRatingCore {
     @NSManaged public var rating: NSNumber?
     ///The parent's message hash for this rating
     @NSManaged public var parent: String?
+    ///The rating's random num
+    @NSManaged public var randNum: NSNumber?
     
 }
