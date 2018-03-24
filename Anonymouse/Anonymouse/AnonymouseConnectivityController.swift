@@ -9,6 +9,8 @@
 import UIKit
 import MultipeerConnectivity
 import CoreData
+import CoreBluetooth
+import CoreLocation
 
 extension MCSessionState {
     func stringValue() -> String {
@@ -19,7 +21,6 @@ extension MCSessionState {
         }
     }
 }
-
 ///A class that mnanages the connectivity protocols; sending messages and rating objects to nearby peers.
 class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate, MCSessionDelegate {
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
@@ -125,6 +126,8 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         - ids: An array of `MCPeerID` objects that represent peers to send mesages to.
      */
     @objc func sendAllMessages(toRequesters ids: [MCPeerID]) {
+        let beaconView = iBeaconViewController.init()
+        beaconView.initLocalBeacon()
         let messageCoreArray: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
         let messageSentArray: [AnonymouseMessageSentCore] = messageCoreArray.map { (messageCore) -> AnonymouseMessageSentCore in
             return AnonymouseMessageSentCore(message: messageCore)
@@ -143,6 +146,7 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         } catch let error as NSError {
             NSLog("%@", error)
         }
+        beaconView.stopLocalBeacon()
     }
     
     /**
@@ -181,16 +185,19 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         - message: The message to send to the connected peers.
         */
     @objc func send(individualMessage message: AnonymouseMessageSentCore) {
-        guard sessionObject.connectedPeers.count > 0 else {
-            return
-        }
+        let beaconView = iBeaconViewController.init()
+        beaconView.initLocalBeacon()
+//        guard sessionObject.connectedPeers.count > 0 else {
+//            return
+//        }
         
         do {
             let archivedMessage: Data = NSKeyedArchiver.archivedData(withRootObject: message)
-            try self.sessionObject.send(archivedMessage, toPeers: sessionObject.connectedPeers, with: MCSessionSendDataMode.reliable)
-        } catch let error as NSError {
-            NSLog("%@", error)
+//           try self.sessionObject.send(archivedMessage, toPeers: sessionObject.connectedPeers, with: MCSessionSendDataMode.reliable)
+//        } catch let error as NSError {
+//            NSLog("%@", error)
         }
+    //    beaconView.stopLocalBeacon()
     }
     
     /**
@@ -200,6 +207,8 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         - reply: The reply to send to the connected peers.
      */
     @objc func send(individualReply reply: AnonymouseReplySentCore) {
+        let beaconView = iBeaconViewController.init()
+        beaconView.initLocalBeacon()
         guard sessionObject.connectedPeers.count > 0 else {
             return
         }
@@ -210,6 +219,7 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         } catch let error as NSError {
             NSLog("%@", error)
         }
+        beaconView.stopLocalBeacon()
     }
     
     /**
@@ -219,7 +229,8 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         - rating: The rating to send to all connected peers.
     */
     @objc func send(individualRating rating: AnonymouseRatingSentCore) {
-        
+        let beaconView = iBeaconViewController.init()
+        beaconView.initLocalBeacon()
         guard sessionObject.connectedPeers.count > 0 else {
             return
         }
@@ -230,6 +241,7 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         } catch let error as NSError {
             NSLog("%@", error)
         }
+        beaconView.stopLocalBeacon()
     }
     
     //MARK: MCNearbyServiceBrowserDelegate Methods

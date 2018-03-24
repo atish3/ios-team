@@ -9,6 +9,8 @@
 import UIKit
 import CoreData
 import Alamofire
+import CoreLocation
+import CoreBluetooth
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -50,6 +52,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        NSLog("I'm in the background")
+        let beacon = iBeaconViewController.init()
+        var manager = CLLocationManager()
+//        var region = CLCircularRegion.init(center: (manager.location?.coordinate)!, radius: 100, identifier: "Anonymouse.beacon")
+        beacon.locationManager(manager, didChangeAuthorization: CLAuthorizationStatus.authorizedAlways)
         self.backgroundTask = application.beginBackgroundTask(withName: "backgroundTask", expirationHandler: {
             self.connectivityController.killConnectionParameters()
             application.endBackgroundTask(self.backgroundTask)

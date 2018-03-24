@@ -12,6 +12,7 @@
 		02F9C78A1DEDFCE800CA631D /* AnonymouseMessageCore+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F9C7861DEDFCE800CA631D /* AnonymouseMessageCore+CoreDataProperties.swift */; };
 		02F9C78B1DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F9C7871DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataClass.swift */; };
 		02F9C78C1DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F9C7881DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataProperties.swift */; };
+		07E4A0AB2065BE4500485F9F /* iBeaconViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E4A0AA2065BE4400485F9F /* iBeaconViewController.swift */; };
 		081720721F85D8530000070F /* Anonymouse.xcworkspace in Resources */ = {isa = PBXBuildFile; fileRef = 081720711F85D8530000070F /* Anonymouse.xcworkspace */; };
 		081720741F85D8580000070F /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 081720731F85D8580000070F /* Podfile */; };
 		081720771F85D85D0000070F /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = 081720751F85D85D0000070F /* Podfile.lock */; };
@@ -80,6 +81,7 @@
 		02F9C7861DEDFCE800CA631D /* AnonymouseMessageCore+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnonymouseMessageCore+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		02F9C7871DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnonymouseReplyCore+CoreDataClass.swift"; sourceTree = "<group>"; };
 		02F9C7881DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnonymouseReplyCore+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		07E4A0AA2065BE4400485F9F /* iBeaconViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iBeaconViewController.swift; sourceTree = "<group>"; };
 		081720711F85D8530000070F /* Anonymouse.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = Anonymouse.xcworkspace; sourceTree = "<group>"; };
 		081720731F85D8580000070F /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		081720751F85D85D0000070F /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				1A5BA78D1D999FD1005000D5 /* AnonymouseSettingsViewController.swift */,
+				07E4A0AA2065BE4400485F9F /* iBeaconViewController.swift */,
 				172EA8A11D9788DA00D2E127 /* AnonymouseProfileViewController.swift */,
 				1AF2D0661C97856300670C89 /* AnonymouseComposeViewController.swift */,
 				1ABE12E91C9750A6005923BA /* AnonymouseTableViewController.swift */,
@@ -282,7 +285,7 @@
 				TargetAttributes = {
 					1ABE12D01C9744D0005923BA = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = 74B56R6EZA;
+						DevelopmentTeam = SQXYK344KH;
 						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -424,6 +427,7 @@
 				1ABE12D51C9744D0005923BA /* AppDelegate.swift in Sources */,
 				02F9C78A1DEDFCE800CA631D /* AnonymouseMessageCore+CoreDataProperties.swift in Sources */,
 				1ABE12F21C9756A2005923BA /* AnonymouseConnectivityController.swift in Sources */,
+				07E4A0AB2065BE4500485F9F /* iBeaconViewController.swift in Sources */,
 				02F9C78C1DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataProperties.swift in Sources */,
 				1ABE12EA1C9750A6005923BA /* AnonymouseTableViewController.swift in Sources */,
 				172EA8A21D9788DA00D2E127 /* AnonymouseProfileViewController.swift in Sources */,
@@ -555,7 +559,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 74B56R6EZA;
+				DEVELOPMENT_TEAM = SQXYK344KH;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Anonymouse/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
@@ -577,7 +581,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 74B56R6EZA;
+				DEVELOPMENT_TEAM = SQXYK344KH;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Anonymouse/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
