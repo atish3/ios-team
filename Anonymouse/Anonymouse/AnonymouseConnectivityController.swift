@@ -126,8 +126,10 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         - ids: An array of `MCPeerID` objects that represent peers to send mesages to.
      */
     @objc func sendAllMessages(toRequesters ids: [MCPeerID]) {
-        let beaconView = iBeaconViewController.init()
-        beaconView.initLocalBeacon()
+        let UUIDspecific = UUID.init(uuidString: "CBA87AB2-AB69-495C-9B82-2FE741D6689D")
+        let item = Item.init(name: "Anonymouse.beacon", uuid: UUIDspecific!, majorValue: 123, minorValue: 456)
+        let beaconView = ItemsViewController()
+        beaconView.startMonitoringItem(item)
         let messageCoreArray: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
         let messageSentArray: [AnonymouseMessageSentCore] = messageCoreArray.map { (messageCore) -> AnonymouseMessageSentCore in
             return AnonymouseMessageSentCore(message: messageCore)
@@ -146,7 +148,7 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         } catch let error as NSError {
             NSLog("%@", error)
         }
-        beaconView.stopLocalBeacon()
+        // stop beacon
     }
     
     /**
@@ -185,7 +187,7 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         - message: The message to send to the connected peers.
         */
     @objc func send(individualMessage message: AnonymouseMessageSentCore) {
-        let beaconView = iBeaconViewController.init()
+        let beaconView = ItemsViewController()
         beaconView.initLocalBeacon()
 //        guard sessionObject.connectedPeers.count > 0 else {
 //            return
@@ -207,7 +209,7 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         - reply: The reply to send to the connected peers.
      */
     @objc func send(individualReply reply: AnonymouseReplySentCore) {
-        let beaconView = iBeaconViewController.init()
+        let beaconView = ItemsViewController()
         beaconView.initLocalBeacon()
         guard sessionObject.connectedPeers.count > 0 else {
             return
@@ -219,7 +221,7 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         } catch let error as NSError {
             NSLog("%@", error)
         }
-        beaconView.stopLocalBeacon()
+     //   beaconView.stopLocalBeacon()
     }
     
     /**
@@ -229,8 +231,7 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         - rating: The rating to send to all connected peers.
     */
     @objc func send(individualRating rating: AnonymouseRatingSentCore) {
-        let beaconView = iBeaconViewController.init()
-        beaconView.initLocalBeacon()
+        createBeacon()
         guard sessionObject.connectedPeers.count > 0 else {
             return
         }
@@ -241,7 +242,7 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         } catch let error as NSError {
             NSLog("%@", error)
         }
-        beaconView.stopLocalBeacon()
+       // beaconView.stopLocalBeacon()
     }
     
     //MARK: MCNearbyServiceBrowserDelegate Methods
@@ -403,3 +404,5 @@ class AnonymouseConnectivityController : NSObject, MCNearbyServiceAdvertiserDele
         }
     }
 }
+
+

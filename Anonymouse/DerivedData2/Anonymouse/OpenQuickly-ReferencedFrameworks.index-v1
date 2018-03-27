@@ -8,17 +8,17 @@
 	<string>CommonCrypto</string>
 	<string>CryptoSwift</string>
 	<string>without</string>
-	<string>CoreData</string>
 	<string>XCTest</string>
+	<string>CoreData</string>
 	<string>Darwin</string>
 	<string>MobileCoreServices</string>
-	<string>MultipeerConnectivity</string>
-	<string>CoreBluetooth</string>
-	<string>CoreLocation</string>
-	<string>UIKit</string>
 	<string>Glibc</string>
-	<string>Foundation</string>
+	<string>CoreLocation</string>
+	<string>CoreBluetooth</string>
 	<string>CryptoSwiftTests</string>
+	<string>UIKit</string>
+	<string>Foundation</string>
+	<string>MultipeerConnectivity</string>
 	<string>SystemConfiguration</string>
 </array>
 </plist>

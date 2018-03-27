@@ -53,10 +53,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         NSLog("I'm in the background")
-        let beacon = iBeaconViewController.init()
-        var manager = CLLocationManager()
+        let UUIDspecific = UUID.init(uuidString: "CBA87AB2-AB69-495C-9B82-2FE741D6689D")
+        let item = Item.init(name: "Anonymouse.beacon", uuid: UUIDspecific!, majorValue: 123, minorValue: 456)
+        let beaconSearch = ItemsViewController()
+        beaconSearch.startMonitoringItem(item)
 //        var region = CLCircularRegion.init(center: (manager.location?.coordinate)!, radius: 100, identifier: "Anonymouse.beacon")
-        beacon.locationManager(manager, didChangeAuthorization: CLAuthorizationStatus.authorizedAlways)
         self.backgroundTask = application.beginBackgroundTask(withName: "backgroundTask", expirationHandler: {
             self.connectivityController.killConnectionParameters()
             application.endBackgroundTask(self.backgroundTask)
