@@ -25,7 +25,7 @@
         <relationship name="parentMessage" maxCount="1" deletionRule="Nullify" destinationEntity="AnonymouseMessageCore" inverseName="ownedMessages" inverseEntity="AnonymouseMessageCore" syncable="YES"/>
     </entity>
     <elements>
-        <element name="AnonymouseMessageCore" positionX="-63" positionY="-18" width="128" height="163"/>
+        <element name="AnonymouseMessageCore" positionX="-63" positionY="-18" width="128" height="165"/>
         <element name="AnonymouseRatingCore" positionX="-54" positionY="54" width="128" height="105"/>
         <element name="AnonymouseReplyCore" positionX="-63" positionY="27" width="128" height="135"/>
     </elements>

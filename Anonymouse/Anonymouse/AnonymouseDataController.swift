@@ -287,6 +287,15 @@ class AnonymouseDataController: NSObject {
         self.saveContext()
     }
     
+    func delete(withHash hash: String){
+        for managedObject in self.fetchObjects(withKey: "date", ascending: true) {
+            if hash == managedObject.text?.sha1(){
+                self.managedObjectContext.delete(managedObject)
+                break
+            }
+        }
+        self.saveContext()
+    }
     /// - Returns: The number of messages in the persistent store.
     func getSize() -> Int {
         //Get how many messages are in the core

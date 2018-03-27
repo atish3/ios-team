@@ -24,7 +24,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
     var searchRequest: NSFetchRequest<AnonymouseMessageCore> = NSFetchRequest<AnonymouseMessageCore>(entityName: "AnonymouseMessageCore")
     ///Used for refresh
     var connectivityController = AnonymouseConnectivityController()
-    
+    var dataController = AnonymouseDataController()
     
     /**
      Returns an `AnonymouseTableViewController` with a specific `fetchRequest`.
@@ -249,6 +249,14 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         return 0
     }
     
+    override func tableView(_ tableView: UITableView,commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath ) {
+        if editingStyle == UITableViewCellEditingStyle.delete{
+            let cell: AnonymouseTableViewCell = tableView.cellForRow(at: indexPath) as! AnonymouseTableViewCell
+            let text_hash: String = (cell.messageLabel?.text?.sha1())!
+            dataController.delete(withHash: text_hash)
+            tableView.reloadData()
+        }
+    }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         var frc: NSFetchedResultsController<NSFetchRequestResult>
