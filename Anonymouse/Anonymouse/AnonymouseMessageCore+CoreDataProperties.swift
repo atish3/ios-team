@@ -52,3 +52,10 @@ extension AnonymouseMessageCore {
     @NSManaged public func removeFromOwnedMessages(_ values: NSSet)
 
 }
+
+extension AnonymouseMessageFilter{
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<AnonymouseMessageFilter> {
+        return NSFetchRequest<AnonymouseMessageFilter>(entityName: "AnonymouseMessageFilter");
+    }
+    @NSManaged public var sha_value: String
+}

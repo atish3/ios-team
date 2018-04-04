@@ -146,7 +146,7 @@ class AnonymouseConnectivityController : NSObject {
         //        }
         
         do {
-            let archivedRating: Data = NSKeyedArchiver.archivedData(withRootObject: rating)
+            let _: Data = NSKeyedArchiver.archivedData(withRootObject: rating)
             //try self.sessionObject.send(archivedRating, toPeers: sessionObject.connectedPeers, with: MCSessionSendDataMode.reliable)
         } catch let error as NSError {
             NSLog("%@", error)
@@ -163,17 +163,19 @@ class AnonymouseConnectivityController : NSObject {
         if let message = NSKeyedUnarchiver.unarchiveObject(with: data) as? AnonymouseMessageSentCore {
             let messageHash: String = message.text.sha1()
             let messageHashes: [String] = dataController.fetchMessageHashes()
+            let filterHashes: [String] = dataController.fetchFilterHashes()
             //Add the message if we don't have it already
-            if !messageHashes.contains(messageHash) {
+            if !messageHashes.contains(messageHash) && !filterHashes.contains(messageHash) {
                 self.dataController.addMessage(message.text!, date: message.date!, user: message.user!, fromServer: true)
             }
         }
             //Check if the data sent was an array of messages
         else if let messageArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? [AnonymouseMessageSentCore] {
             let messageHashes: [String] = dataController.fetchMessageHashes()
+            let filterHashes: [String] = dataController.fetchFilterHashes()
             for message in messageArray {
                 let messageHash: String = message.text.sha1()
-                if !messageHashes.contains(messageHash) {
+                if !messageHashes.contains(messageHash) && !filterHashes.contains(messageHash) {
                     self.dataController.addMessage(message.text!, date: message.date!, user: message.user!, fromServer: true)
                 }
             }

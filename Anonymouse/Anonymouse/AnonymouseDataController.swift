@@ -242,6 +242,21 @@ class AnonymouseDataController: NSObject {
         })
     }
     
+    func fetchFilterHashes() -> [String] {
+        do {
+            let fetchRequest: NSFetchRequest<AnonymouseMessageFilter> = AnonymouseMessageFilter.fetchRequest()
+            let sortDescriptor: NSSortDescriptor = NSSortDescriptor(key: "sha_value", ascending: true)
+            fetchRequest.sortDescriptors = [sortDescriptor]
+            let fetchedMessages: [AnonymouseMessageFilter] = try self.managedObjectContext.fetch(fetchRequest)
+            return  fetchedMessages.map({ (filter) -> String in
+                return filter.sha_value
+            })
+        } catch {
+            let fetchError: NSError = error as NSError
+            fatalError("Failure to fetch results: \(fetchError)")
+        }
+    }
+    
     /**
      - Parameters:
      - key: The string value by which to sort replies; must be a string that corresponds to
@@ -287,10 +302,18 @@ class AnonymouseDataController: NSObject {
         self.saveContext()
     }
     
-    func delete(withHash hash: String){
+    func delete(withHashMsg msghash: String, withHashRating ratinghash: String){
         for managedObject in self.fetchObjects(withKey: "date", ascending: true) {
-            if hash == managedObject.text?.sha1(){
+            if msghash == managedObject.text?.sha1(){
                 self.managedObjectContext.delete(managedObject)
+                let _:AnonymouseMessageFilter = AnonymouseMessageFilter(sha: msghash)
+                break
+            }
+        }
+
+        for managedRating in self.fetchRatings(withKey: "date", ascending: true) {
+            if ratinghash == managedRating.parent{
+                self.managedObjectContext.delete(managedRating)
                 break
             }
         }

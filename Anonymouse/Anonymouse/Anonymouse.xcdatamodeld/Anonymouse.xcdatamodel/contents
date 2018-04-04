@@ -10,6 +10,9 @@
         <attribute name="user" attributeType="String" syncable="YES"/>
         <relationship name="ownedMessages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AnonymouseReplyCore" inverseName="parentMessage" inverseEntity="AnonymouseReplyCore" syncable="YES"/>
     </entity>
+    <entity name="AnonymouseMessageFilter" syncable="YES">
+        <attribute name="sha_value" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="AnonymouseRatingCore" representedClassName=".AnonymouseRatingCore" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="parent" optional="YES" attributeType="String" syncable="YES"/>
@@ -28,5 +31,6 @@
         <element name="AnonymouseMessageCore" positionX="-63" positionY="-18" width="128" height="165"/>
         <element name="AnonymouseRatingCore" positionX="-54" positionY="54" width="128" height="105"/>
         <element name="AnonymouseReplyCore" positionX="-63" positionY="27" width="128" height="135"/>
+        <element name="AnonymouseMessageFilter" positionX="-54" positionY="54" width="128" height="60"/>
     </elements>
 </model>

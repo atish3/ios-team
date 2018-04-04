@@ -12,6 +12,8 @@ import CoreData
 
 ///A subclass of `UITableViewController` that displays user messages.
 class AnonymouseTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
+    //Data core to contain messages
+    var anonymouseMessageCoreData: AnonymouseMessageCore = AnonymouseMessageCore()
     ///The `NSManagedObjectContext` from which the messages appear.
     var managedObjectContext: NSManagedObjectContext!
     ///The `viewController` that is shown when a message is tapped; also displays the tapped message's replies.
@@ -25,6 +27,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
     ///Used for refresh
     var connectivityController = AnonymouseConnectivityController()
     var dataController = AnonymouseDataController()
+
     
     /**
      Returns an `AnonymouseTableViewController` with a specific `fetchRequest`.
@@ -253,8 +256,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         if editingStyle == UITableViewCellEditingStyle.delete{
             let cell: AnonymouseTableViewCell = tableView.cellForRow(at: indexPath) as! AnonymouseTableViewCell
             let text_hash: String = (cell.messageLabel?.text?.sha1())!
-            dataController.delete(withHash: text_hash)
-            tableView.reloadData()
+            dataController.delete(withHashMsg: text_hash,  withHashRating: text_hash)
         }
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -269,7 +271,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         
         //Grab the appropriate data from our cellDataArray.
         
-        let anonymouseMessageCoreData: AnonymouseMessageCore = frc.object(at: indexPath) as! AnonymouseMessageCore
+        anonymouseMessageCoreData = frc.object(at: indexPath) as! AnonymouseMessageCore
         let cell: AnonymouseTableViewCell
         
         //Create a cell of type MCChatTableViewCell
