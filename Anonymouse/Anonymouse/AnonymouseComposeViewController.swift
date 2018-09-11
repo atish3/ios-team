@@ -179,16 +179,42 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
         charactersLeftLabel.alpha = 1.0
     }
     
+    let attributes: [String: Any] =
+        [kSecAttrKeyType as String:            kSecAttrKeyTypeRSA,
+         kSecAttrKeySizeInBits as String:      2048,
+         kSecAttrIsPermanent as String:        true,
+         kSecAttrIsExtractable as String:      true
+    ]    
     ///Posts the written message to the feed.
     func post() {
         let userPreferences: UserDefaults = UserDefaults.standard
         let username: String = userPreferences.string(forKey: "username")!
+        if userPreferences.string(forKey: "PubKey") != nil{
+            print("Key exists")
+            var messageText = self.composeTextView.text!
+            messageText = messageText.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            
+            self.dataController.addMessage(messageText, date: Date(), user: username, fromServer: false)
+            connectivityController.sendMessageViaHTTP(text: messageText, date: Date(), rating: 0, user: username);
+        }
+            //The else block below should be redundant, as the user should already have a key pair,
+            // but in case they don't, generate a new key pair here.
+        else{
+            var error: Unmanaged<CFError>?
+            
+            let privateKey = SecKeyCreateRandomKey(attributes as CFDictionary, &error)
+            print("Key doesn't exist")
+            userPreferences.set((SecKeyCopyExternalRepresentation(privateKey!, &error)! as Data).base64EncodedString(), forKey: "PrivKey")
+            userPreferences.set((SecKeyCopyExternalRepresentation(SecKeyCopyPublicKey(privateKey!)!, &error)! as Data).base64EncodedString(), forKey: "PubKey")
+            
+            var messageText = self.composeTextView.text!
+            messageText = messageText.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            
+            self.dataController.addMessage(messageText, date: Date(), user: username, fromServer: false)
+            connectivityController.sendMessageViaHTTP(text: messageText, date: Date(), rating: 0, user: username);
+        }
         
-        var messageText = self.composeTextView.text!
-        messageText = messageText.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        
-        self.dataController.addMessage(messageText, date: Date(), user: username, fromServer: false)
-        connectivityController.sendMessageViaHTTP(text: messageText, date: Date(), rating: 0, user: username);
+       
 //        if self.connectivityController.sessionObject.connectedPeers.count > 0 {
 //            self.connectivityController.send(individualMessage: AnonymouseMessageSentCore(text: self.composeTextView.text, date: Date(), user: username))
 //        }

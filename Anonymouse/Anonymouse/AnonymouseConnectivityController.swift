@@ -26,6 +26,7 @@ class AnonymouseConnectivityController : NSObject {
     
     var receiveTimer = Timer()
     
+    
     override init() {
         unowned let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         dataController = appDelegate.dataController
@@ -254,24 +255,96 @@ class AnonymouseConnectivityController : NSObject {
         }
     }
     
+    //The dictionaries below are used to convert the
+    //string representation of private/public keys back into
+    //key objects, which are used to sign/verify data.
+    let attributes: [NSObject: NSObject] = [
+        kSecAttrKeyType: kSecAttrKeyTypeRSA,
+        kSecAttrKeyClass: kSecAttrKeyClassPrivate,
+        kSecAttrKeySizeInBits: NSNumber(value: 2048),
+        kSecReturnPersistentRef: false as NSObject
+    ]
+    let keyDict:[NSObject:NSObject] = [
+        kSecAttrKeyType: kSecAttrKeyTypeRSA,
+        kSecAttrKeyClass: kSecAttrKeyClassPublic,
+        kSecAttrKeySizeInBits: NSNumber(value: 2048),
+        kSecReturnPersistentRef: false as NSObject
+    ]
+    
     //infrastructure mode
+    
+    //This function is called when sending a message via infrastructure mode.
     func sendMessageViaHTTP(text: String, date: Date, rating: Int, user: String){
+        var error: Unmanaged<CFError>?
+        let userPreferences: UserDefaults = UserDefaults.standard
         
-        let parameters: Parameters = [
-            "MessageType": "Message",
-            "Message": text,
-            "Date": date.description,
-            "Rating": rating,
-            "User": user,
+        //The two guard statements below convert the private key string into a private key object
+        //This key is then used to sign a hash of the message's text, the sender, and date sent.
+        guard let privKeyData = Data.init(base64Encoded: userPreferences.string(forKey: "PrivKey")!) else {
+            print("Private key couldn't be converted to data")
+            return
+        }
+        guard let privKey = SecKeyCreateWithData(privKeyData as CFData, attributes as CFDictionary, &error) else {
+            print("Reversion priv unsuccessful")
+            return
+        }
+        
+        //The information in the hash is concatenated and converted to data below. The SecKeyCreateSignature function
+        //hashes the data below before signing it.
+        let hash = (text + date.description + user)
+        let hashData = Data(hash.utf8)
+        
+        //signedString will contain a base 64 encoded string representation of the signed hash.
+        //This will be sent to the server, as sending raw data causes problems.
+        var signedString = " "
+        
+        //Signatures with hashes are only allowed after iOS 11. If the phone in question is running an older version,
+        //then we have to do a raw signature instead.
+        if #available(iOS 11.0, *) {
+            //Sign the hash data with the recreated private key (signature data type: CFData)
+            let signedHash = SecKeyCreateSignature(privKey, SecKeyAlgorithm.rsaSignatureMessagePSSSHA1, hashData as CFData, &error)
+            //Convert the CFData signature to datatype Data
+            guard let signedData = signedHash as Data? else {
+                print("CFData to Data")
+                return
+            }
+            //Convert the Data signature to string format. This will be sent to the server
+            //and converted back to CFData by the receiver
+            signedString = signedData.base64EncodedString()
+        
+        //The code in the else statement is the same as the code before it, other than the SecKeyAlgorithm used to sign the data
+        } else {
+            let signedHash = SecKeyCreateSignature(privKey, SecKeyAlgorithm.rsaSignatureRaw, hashData as CFData, &error)
+            guard let signedData = signedHash as Data? else {
+                print("CFData to Data")
+                return
+            }
+            signedString = signedData.base64EncodedString()
+            /*let reDataSigned = Data.init(base64Encoded: signedString)
+            let toBeVerified = reDataSigned! as NSData
+            let verifiedHash = SecKeyVerifySignature(pubKey, SecKeyAlgorithm.rsaSignatureRaw, hashData as CFData, toBeVerified, &error)
+            if !verifiedHash{
+                return
+            } */
+        }
+        
+        //self.sendKeyViaHTTP(pubKey: pubKey!) //Sends public key to server
+        
+     //Define the object sent to the server below
+            let parameters: Parameters = [
+                "MessageType": "Message",
+                "Message": text,
+                "Date": date.description,
+                "Rating": rating,
+                "User": user,
+                "Signature": signedString,
+                "Key": userPreferences.string(forKey: "PubKey")!
             ]
+            print("Parameters created");
         
-        print("Parameters created");
-        
-        // Both calls are equivalent
-        Alamofire.request("http://35.3.23.49:3000/message", method: .post, parameters: parameters, encoding: JSONEncoding(options: []))
-        //NOTE: the server being used is one hosted on my laptop and is only being used for testing purposes
-        
-        print("Request sent");
+            //Send the newly created object to the server.
+            //If you are changing which server the phone sends to/receives from, change the url in the statement
+            Alamofire.request("http://anonymouse-srv.eecs.umich.edu:3000/message", method: .post, parameters: parameters, encoding: JSONEncoding(options: []))
     }
     
     func sendReplyViaHTTP(text: String, date: Date, rating: Int, user: String, message: AnonymouseMessageCore){
@@ -285,7 +358,7 @@ class AnonymouseConnectivityController : NSObject {
             "Parent": message.text!.sha1()
         ]
         
-        Alamofire.request("http://35.3.23.49:3000/message", method: .post, parameters: parameters, encoding: JSONEncoding(options: []))
+        Alamofire.request("http://anonymouse-srv.eecs.umich.edu:3000/message", method: .post, parameters: parameters, encoding: JSONEncoding(options: []))
     }
     
     func sendRatingViaHTTP(rating: Int, hash: String, date: Date, randNum: Double, message: AnonymouseMessageCore){
@@ -301,7 +374,7 @@ class AnonymouseConnectivityController : NSObject {
         let newRate = AnonymouseRatingCore(rating: rating, parent: hash, date: date, randNum: randNum)
         self.dataController.addRating(rating: rating, parent: hash, date: date, randNum: randNum)
         // Both calls are equivalent
-        Alamofire.request("http://35.3.23.49:3000/message", method: .post, parameters: parameters, encoding: JSONEncoding(options: []))
+        Alamofire.request("http://anonymouse-srv.eecs.umich.edu:3000/message", method: .post, parameters: parameters, encoding: JSONEncoding(options: []))
         
     }
     
@@ -318,13 +391,22 @@ class AnonymouseConnectivityController : NSObject {
         let newRate = AnonymouseRatingCore(rating: rating, parent: hash, date: date, randNum: randNum)
         self.dataController.addRating(rating: rating, parent: hash, date: date, randNum: randNum)
         // Both calls are equivalent
-        Alamofire.request("http://35.3.23.49:3000/message", method: .post, parameters: parameters, encoding: JSONEncoding(options: []))
+        Alamofire.request("http://anonymouse-srv.eecs.umich.edu:3000/message", method: .post, parameters: parameters, encoding: JSONEncoding(options: []))
+        
+    }
+    
+    func sendKeyViaHTTP(pubKey: Data){
+        let parameters: Parameters = [
+            "Key": pubKey.hexadecimalString()
+        ]
+        // Both calls are equivalent
+        Alamofire.request("http://anonymouse-srv.eecs.umich.edu:3000/pubKeys", method: .post, parameters: parameters, encoding: JSONEncoding(options: []))
         
     }
     
     func getMessageViaHTTP(){
         let userPreferences: UserDefaults = UserDefaults.standard
-        let myUrl = URL(string: "http://35.3.23.49:3000/message");
+        let myUrl = URL(string: "http://anonymouse-srv.eecs.umich.edu:3000/message");
         var request = URLRequest(url:myUrl!)
         request.httpMethod = "GET"// Compose a query string
         let task = URLSession.shared.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
@@ -339,45 +421,75 @@ class AnonymouseConnectivityController : NSObject {
             //Let's convert response sent from a server side script to a NSDictionary object:
             do{
                 let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? [NSDictionary]
-                
-                if let parseJSON = json {
+                if json != nil {
                     for object in json!{
                         // Now we can access value of First Name by its key
                         let messageType = object["MessageType"] as? String?
                         
                         if(messageType!! == "Message"){
                             var notFound: Bool = true
+                            var error: Unmanaged<CFError>?
+                            var verifiedHash = false
                             
                             let date = object["Date"] as? String?
                             print("Got date text")
                             print(date!!)
-                            let text = object["Message"] as? String?
+                            let pulledText = object["Message"] as? String?
                             print("Got message text")
                             let user = object["User"] as? String?
                             print("Got user text")
+                            let signedString = object["Signature"] as? String?
+                            
+                            let key = object["Key"] as? String?
+                            
+                            guard let keyData = Data.init(base64Encoded: key!!) else {
+                                print("Public key couldn't be converted to data")
+                                return
+                            }
+                            guard let pubKey = SecKeyCreateWithData(keyData as CFData, self.keyDict as CFDictionary, &error) else {
+                                print("Reversion pub unsuccessful")
+                                return
+                            }
+                            
+                            let hash = (pulledText!! + date!! + user!!)
+                            let hashData = Data(hash.utf8)
+                            let reDataSigned = Data.init(base64Encoded: signedString!!)
+                            let toBeVerified = reDataSigned! as NSData
+                            
+                            if #available(iOS 11.0, *) {
+                                 verifiedHash = SecKeyVerifySignature(pubKey, SecKeyAlgorithm.rsaSignatureMessagePSSSHA1, hashData as CFData, toBeVerified, &error)
+                            } else {
+                                 verifiedHash = SecKeyVerifySignature(pubKey, SecKeyAlgorithm.rsaSignatureRaw, hashData as CFData, toBeVerified, &error)
+                            }
+                            if !verifiedHash{
+                                print("Message could not be verified")
+                                return
+                            }
+                            
                             let dateFormatter = DateFormatter()
                             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ"
                             guard let properDate = dateFormatter.date(from: date!!) else{
                                 fatalError("ERROR: Date conversion failed due to mismatched format.")
                             }
-                            if let lastReset = UserDefaults.standard.object(forKey: "timeReset") as! Date! {
+                            if let lastReset = UserDefaults.standard.object(forKey: "timeReset") as! Date? {
                                 if lastReset > properDate {
                                     notFound = false
                                 }
                             }
                             let messageObjects: [AnonymouseMessageCore] = self.dataController.fetchObjects(withKey: "date", ascending: true)
-                            for message in messageObjects{
-                                let messageHash = message.text?.sha1()
-                                let newHash = text!!.sha1()
-                                let date1 = message.date!.description
-                                if(messageHash! == newHash && date!! == date1){
-                                    print("Found a match")
-                                    notFound = false
-                                    break
+                            if(notFound){
+                                for message in messageObjects{
+                                    let messageHash = (message.text!+message.user! + (message.date?.description)!).sha1()
+                                    let newHash = (pulledText!!+user!!+properDate.description).sha1()
+                                    if(messageHash == newHash){
+                                        print("Found a match")
+                                        notFound = false
+                                        break
+                                    }
                                 }
                             }
                             if(notFound){
-                                self.dataController.addMessage(text as! String!, date: properDate, user: user as! String!, fromServer: true)
+                                self.dataController.addMessage(pulledText!!, date: properDate, user: user!! as String, fromServer: true)
                                 print("Added Message")
                             }
                         }
@@ -399,7 +511,7 @@ class AnonymouseConnectivityController : NSObject {
                                 fatalError("ERROR: Date conversion failed due to mismatched format.")
                             }
                             
-                            if let lastReset = UserDefaults.standard.object(forKey: "timeReset") as! Date! {
+                            if let lastReset = UserDefaults.standard.object(forKey: "timeReset") as! Date? {
                                 if lastReset > properDate {
                                     notFound = false
                                 }
@@ -447,9 +559,6 @@ class AnonymouseConnectivityController : NSObject {
                             
                             let ratingCoreArray: [AnonymouseRatingCore] = self.dataController.fetchRatings(withKey: "date", ascending: true)
                             for rating in ratingCoreArray{
-                                let x = Double(truncating: rating.randNum!)
-                                let y = Int(truncating: rating.rating!)
-                                let z = rating.parent!
                                 if(parent!! == rating.parent! && ratingNum!! == Int(truncating: rating.rating!) && randNum!! == Double(truncating: rating.randNum!)){
                                     notFound = false;
                                 }
@@ -489,7 +598,9 @@ class AnonymouseConnectivityController : NSObject {
         }
         task.resume()
     }
+    
 }
+
 
 
 

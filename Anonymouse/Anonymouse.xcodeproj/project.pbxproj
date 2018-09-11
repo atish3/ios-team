@@ -46,6 +46,7 @@
 		3B8D2A3620335E2600BD7B5C /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3B8D2A3420335E2300BD7B5C /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3BD200AC2033FB98002F9FC2 /* AnonymouseRatingCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD200AB2033FB98002F9FC2 /* AnonymouseRatingCore.swift */; };
 		3BD200AE2033FD3B002F9FC2 /* AnonymouseRatingCore+DataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD200AD2033FD3B002F9FC2 /* AnonymouseRatingCore+DataProperties.swift */; };
+		3BFD729020731B80001814D1 /* SwCrypt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFD728F20731B80001814D1 /* SwCrypt.swift */; };
 		7DD0BBB41CBC349000CF2268 /* Anonymouse.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7DD0BBB21CBC349000CF2268 /* Anonymouse.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -107,6 +108,7 @@
 		3B8D2A3420335E2300BD7B5C /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BD200AB2033FB98002F9FC2 /* AnonymouseRatingCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseRatingCore.swift; sourceTree = "<group>"; };
 		3BD200AD2033FD3B002F9FC2 /* AnonymouseRatingCore+DataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnonymouseRatingCore+DataProperties.swift"; sourceTree = "<group>"; };
+		3BFD728F20731B80001814D1 /* SwCrypt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwCrypt.swift; sourceTree = "<group>"; };
 		7DD0BBB31CBC349000CF2268 /* Anonymouse.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Anonymouse.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -210,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				1ABE12D41C9744D0005923BA /* AppDelegate.swift */,
+				3BFD728F20731B80001814D1 /* SwCrypt.swift */,
 				1AD52A951D9964A9000F13DE /* AnonymouseNavigationStyleController.swift */,
 				1AFEDAE51D986BBC00690EB5 /* AnonymouseTabBarController.swift */,
 				1A932A521DB3CA7A004294A9 /* ViewControllers */,
@@ -342,6 +345,7 @@
 				1A932A591DB3D37A004294A9 /* AnonymouseDetailViewController.swift in Sources */,
 				1AF2D0671C97856300670C89 /* AnonymouseComposeViewController.swift in Sources */,
 				1ABE12D51C9744D0005923BA /* AppDelegate.swift in Sources */,
+				3BFD729020731B80001814D1 /* SwCrypt.swift in Sources */,
 				02F9C78A1DEDFCE800CA631D /* AnonymouseMessageCore+CoreDataProperties.swift in Sources */,
 				1ABE12F21C9756A2005923BA /* AnonymouseConnectivityController.swift in Sources */,
 				02F9C78C1DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataProperties.swift in Sources */,
@@ -489,7 +493,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Anonymouse/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "-";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.1am-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -511,7 +515,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Anonymouse/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "-";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.1am-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
