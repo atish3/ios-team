@@ -212,6 +212,7 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
             
             self.dataController.addMessage(messageText, date: Date(), user: username, fromServer: false)
             connectivityController.sendMessageViaHTTP(text: messageText, date: Date(), rating: 0, user: username);
+            connectivityController.sendViaBeacon();
         }
         
        

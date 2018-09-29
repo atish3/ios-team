@@ -734,8 +734,9 @@ open class CC {
 
 		let needed = CCCryptorGetOutputLength!(cryptor!, data.count, true)
 		var result = Data(count: needed)
+        var result1 = result;
 		var updateLen: size_t = 0
-        status = result.withUnsafeMutableBytes({ (resultBytes: UnsafeMutablePointer<UInt8>) -> CCCryptorStatus in
+        status = result1.withUnsafeMutableBytes({ (resultBytes: UnsafeMutablePointer<UInt8>) -> CCCryptorStatus in
             return CCCryptorUpdate!(
                 cryptor!,
                 (data as NSData).bytes, data.count,
@@ -746,7 +747,7 @@ open class CC {
 
 
 		var finalLen: size_t = 0
-        status = result.withUnsafeMutableBytes({ (resultBytes: UnsafeMutablePointer<UInt8>) -> CCCryptorStatus in
+        status = result1.withUnsafeMutableBytes({ (resultBytes: UnsafeMutablePointer<UInt8>) -> CCCryptorStatus in
             return CCCryptorFinal!(
                 cryptor!,
                 resultBytes + updateLen,
@@ -966,9 +967,10 @@ open class CC {
 			guard status == noErr else { throw CCError(status) }
 
 			var result = Data(count: data.count)
+            var result1 = result
 
 			var updateLen: size_t = 0
-            status = result.withUnsafeMutableBytes({ (resultBytes: UnsafeMutablePointer<UInt8>) -> CCCryptorStatus in
+            status = result1.withUnsafeMutableBytes({ (resultBytes: UnsafeMutablePointer<UInt8>) -> CCCryptorStatus in
                 return CCCryptorUpdate!(
                     cryptor!, (data as NSData).bytes, data.count,
                     resultBytes, result.count,
@@ -977,7 +979,7 @@ open class CC {
 			guard status == noErr else { throw CCError(status) }
 
 			var finalLen: size_t = 0
-            status = result.withUnsafeMutableBytes({ (resultBytes: UnsafeMutablePointer<UInt8>) -> CCCryptorStatus in
+            status = result1.withUnsafeMutableBytes({ (resultBytes: UnsafeMutablePointer<UInt8>) -> CCCryptorStatus in
                 return CCCryptorFinal!(cryptor!, resultBytes + updateLen,
                                        result.count - updateLen,
                                        &finalLen)
@@ -1264,7 +1266,8 @@ open class CC {
 			precondition(data1.count == data2.count)
 
             var ret = Data(count: data1.count)
-            ret.withUnsafeMutableBytes { (r: UnsafeMutablePointer<UInt8>) -> Void in
+            var ret1 = ret
+            ret1.withUnsafeMutableBytes { (r: UnsafeMutablePointer<UInt8>) -> Void in
                 let bytes1 = (data1 as NSData).bytes.bindMemory(to: UInt8.self, capacity: data1.count)
                 let bytes2 = (data2 as NSData).bytes.bindMemory(to: UInt8.self, capacity: data2.count)
                 for i in 0 ..< ret.count {
@@ -1864,8 +1867,9 @@ open class CC {
 		                         prf: PRFAlg, rounds: UInt32) throws -> Data {
 
 			var result = Data(count:prf.cc.digestLength)
+            var result1 = result
 			let passwData = password.data(using: String.Encoding.utf8)!
-            let status = result.withUnsafeMutableBytes {
+            let status = result1.withUnsafeMutableBytes {
                 (passwDataBytes: UnsafeMutablePointer<UInt8>) -> CCCryptorStatus in
                 return CCKeyDerivationPBKDF!(PBKDFAlgorithm.pbkdf2.rawValue,
                                              (passwData as NSData).bytes, passwData.count,

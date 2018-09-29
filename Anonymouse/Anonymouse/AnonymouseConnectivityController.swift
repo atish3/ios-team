@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import CryptoSwift
 import MultipeerConnectivity
 import CoreData
+import CoreLocation
+import CoreBluetooth
 import Alamofire
 import SwiftyJSON
 
@@ -599,7 +602,27 @@ class AnonymouseConnectivityController : NSObject {
         task.resume()
     }
     
+    
+    func sendViaBeacon(){
+        let peripheralManager : UnsafeMutablePointer<CBPeripheralManager>? = nil
+        // We must construct a CLBeaconRegion that represents the payload we want the device to beacon.
+        let peripheralData : UnsafeMutablePointer<NSDictionary>? = nil
+        let region : UnsafeMutablePointer<CLBeaconRegion>? = nil
+        let power : UnsafeMutablePointer<NSNumber>? = nil
+        
+        region!.pointee = CLBeaconRegion.init(proximityUUID: UUID.init(uuidString: "14667BE0-1D83-4DF4-8279-ABC62DFC69F9")!, major: 0, minor: 0, identifier: "FellowAppUser")
+        peripheralData!.pointee = (region?.pointee.peripheralData(withMeasuredPower: power?.pointee))!
+        
+        // The region's peripheral data contains the CoreBluetooth-specific data we need to advertise.
+        if((peripheralData?.pointee) != nil)
+        {
+            peripheralManager?.pointee.startAdvertising(peripheralData?.pointee as? [String : Any])
+        }
+    }
+    
 }
+
+
 
 
 
