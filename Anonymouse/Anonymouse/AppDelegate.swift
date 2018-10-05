@@ -63,28 +63,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DispatchQueue.global().async {
             var bgTask = application.beginBackgroundTask()
             
-            //CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:[NSUUID UUID] identifier:BeaconIdentifier];
-            
             var region : CLBeaconRegion? = nil;
             let locationManager : CLLocationManager = CLLocationManager.init();
             locationManager.requestAlwaysAuthorization()
             
-            region = CLBeaconRegion.init(proximityUUID: UUID.init(uuidString: "14667BE0-1D83-4DF4-8279-ABC62DFC69F9")!, identifier: "App")
+            region = CLBeaconRegion.init(proximityUUID: UUID.init(uuidString: "E2C56DB5-DFFB-48D2-B060-D0F5A71096E0")!, identifier: "App")
             
             if(region != nil)
             {
                 locationManager.stopMonitoring(for: region!)
             }
             region = nil;
-            region = CLBeaconRegion.init(proximityUUID: UUID.init(uuidString: "14667BE0-1D83-4DF4-8279-ABC62DFC69F9")!, major: 0, minor: 0, identifier: "App")
+            region = CLBeaconRegion.init(proximityUUID: UUID.init(uuidString: "E2C56DB5-DFFB-48D2-B060-D0F5A71096E0")!, major: 0, minor: 0, identifier: "App")
             if((region) != nil)
             {
                 locationManager.startMonitoring(for: region!)
             }
-            application.endBackgroundTask(bgTask)
-            bgTask = UIBackgroundTaskInvalid;
         }
-            
+        application.endBackgroundTask(bgTask)
+        bgTask = UIBackgroundTaskInvalid;
             // Clean up any unfinished task business by marking where you
             // stopped or ending the task outright.
         

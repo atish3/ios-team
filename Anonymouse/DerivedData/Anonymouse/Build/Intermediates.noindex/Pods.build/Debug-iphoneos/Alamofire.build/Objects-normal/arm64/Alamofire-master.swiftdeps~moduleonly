@@ -1,0 +1,21 @@
+version: "Apple Swift version 4.2 (swiftlang-1000.11.37.1 clang-1000.11.45.1)"
+options: "7ad3a105f14bc0313494f9e00cbec9b1"
+build_time: [1538318436, 226278000]
+inputs:
+  "/Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Pods/Alamofire/Source/AFError.swift": [1518379007, 0]
+  "/Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Pods/Alamofire/Source/Alamofire.swift": [1518379007, 0]
+  "/Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Pods/Alamofire/Source/DispatchQueue+Alamofire.swift": [1518379007, 0]
+  "/Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Pods/Alamofire/Source/MultipartFormData.swift": [1518379007, 0]
+  "/Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Pods/Alamofire/Source/NetworkReachabilityManager.swift": [1518379007, 0]
+  "/Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Pods/Alamofire/Source/Notifications.swift": [1518379007, 0]
+  "/Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Pods/Alamofire/Source/ParameterEncoding.swift": [1518379007, 0]
+  "/Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Pods/Alamofire/Source/Request.swift": [1518379007, 0]
+  "/Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Pods/Alamofire/Source/Response.swift": [1518379007, 0]
+  "/Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Pods/Alamofire/Source/ResponseSerialization.swift": [1518379007, 0]
+  "/Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Pods/Alamofire/Source/Result.swift": [1518379007, 0]
+  "/Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Pods/Alamofire/Source/ServerTrustPolicy.swift": [1518379007, 0]
+  "/Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Pods/Alamofire/Source/SessionDelegate.swift": [1518379007, 0]
+  "/Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Pods/Alamofire/Source/SessionManager.swift": [1518379007, 0]
+  "/Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Pods/Alamofire/Source/TaskDelegate.swift": [1518379007, 0]
+  "/Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Pods/Alamofire/Source/Timeline.swift": [1518379007, 0]
+  "/Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Pods/Alamofire/Source/Validation.swift": [1518379007, 0]

@@ -610,7 +610,7 @@ class AnonymouseConnectivityController : NSObject {
         let region : UnsafeMutablePointer<CLBeaconRegion>? = nil
         let power : UnsafeMutablePointer<NSNumber>? = nil
         
-        region!.pointee = CLBeaconRegion.init(proximityUUID: UUID.init(uuidString: "14667BE0-1D83-4DF4-8279-ABC62DFC69F9")!, major: 0, minor: 0, identifier: "FellowAppUser")
+        region!.pointee = CLBeaconRegion.init(proximityUUID: UUID.init(uuidString: "E2C56DB5-DFFB-48D2-B060-D0F5A71096E0")!, major: 0, minor: 0, identifier: "FellowAppUser")
         peripheralData!.pointee = (region?.pointee.peripheralData(withMeasuredPower: power?.pointee))!
         
         // The region's peripheral data contains the CoreBluetooth-specific data we need to advertise.

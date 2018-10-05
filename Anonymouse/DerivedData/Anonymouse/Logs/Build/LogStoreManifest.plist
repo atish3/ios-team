@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>logFormatVersion</key>
+	<integer>9</integer>
+	<key>logs</key>
+	<dict>
+		<key>0DCEA31B-C185-4928-AD02-AD6654388969</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>0DCEA31B-C185-4928-AD02-AD6654388969.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>E</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Anonymouse project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Anonymouse</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Build Anonymouse</string>
+			<key>timeStartedRecording</key>
+			<real>560011235.38802302</real>
+			<key>timeStoppedRecording</key>
+			<real>560011280.03580904</real>
+			<key>title</key>
+			<string>Build Anonymouse</string>
+			<key>uniqueIdentifier</key>
+			<string>0DCEA31B-C185-4928-AD02-AD6654388969</string>
+		</dict>
+		<key>34109984-500D-42E9-8B05-BFE4CFF8541B</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>34109984-500D-42E9-8B05-BFE4CFF8541B.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>E</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Anonymouse project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Anonymouse</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Build Anonymouse</string>
+			<key>timeStartedRecording</key>
+			<real>560011167.43982399</real>
+			<key>timeStoppedRecording</key>
+			<real>560011194.66755199</real>
+			<key>title</key>
+			<string>Build Anonymouse</string>
+			<key>uniqueIdentifier</key>
+			<string>34109984-500D-42E9-8B05-BFE4CFF8541B</string>
+		</dict>
+		<key>97297FB1-11EE-4CFC-AA9A-310EB195B322</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>97297FB1-11EE-4CFC-AA9A-310EB195B322.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>E</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Anonymouse project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Anonymouse</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Build Anonymouse</string>
+			<key>timeStartedRecording</key>
+			<real>560011122.46201897</real>
+			<key>timeStoppedRecording</key>
+			<real>560011128.15041304</real>
+			<key>title</key>
+			<string>Build Anonymouse</string>
+			<key>uniqueIdentifier</key>
+			<string>97297FB1-11EE-4CFC-AA9A-310EB195B322</string>
+		</dict>
+		<key>9AC78EB4-8424-474D-BEB3-0F2FFFAB8EF1</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>9AC78EB4-8424-474D-BEB3-0F2FFFAB8EF1.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>E</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Anonymouse project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Anonymouse</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Build Anonymouse</string>
+			<key>timeStartedRecording</key>
+			<real>560010092.59870899</real>
+			<key>timeStoppedRecording</key>
+			<real>560010101.95714402</real>
+			<key>title</key>
+			<string>Build Anonymouse</string>
+			<key>uniqueIdentifier</key>
+			<string>9AC78EB4-8424-474D-BEB3-0F2FFFAB8EF1</string>
+		</dict>
+	</dict>
+</dict>
+</plist>
