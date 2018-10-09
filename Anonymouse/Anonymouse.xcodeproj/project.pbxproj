@@ -34,16 +34,17 @@
 		1AE809CB1DD6B10A0009D7D1 /* AnonymouseRatingSentCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE809CA1DD6B10A0009D7D1 /* AnonymouseRatingSentCore.swift */; };
 		1AF2D0671C97856300670C89 /* AnonymouseComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF2D0661C97856300670C89 /* AnonymouseComposeViewController.swift */; };
 		1AFEDAE61D986BBC00690EB5 /* AnonymouseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFEDAE51D986BBC00690EB5 /* AnonymouseTabBarController.swift */; };
-		3B5CDF1A20190DA400AD41F6 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B5CDF1B20190DA400AD41F6 /* CryptoSwift.framework */; };
-		3B5CDF1C20190DA600AD41F6 /* Pods_Anonymouse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B5CDF1D20190DA600AD41F6 /* Pods_Anonymouse.framework */; };
-		3B5CDF1F20190DDD00AD41F6 /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3B5CDF1B20190DA400AD41F6 /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3B5CDF2220190DE000AD41F6 /* Pods_Anonymouse.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3B5CDF1D20190DA600AD41F6 /* Pods_Anonymouse.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3B5CDF2320190DE400AD41F6 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B5CDF1920190DA100AD41F6 /* Alamofire.framework */; };
-		3B5CDF2420190DE400AD41F6 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3B5CDF1920190DA100AD41F6 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3B3DE2C2216A8952004A726C /* AnonymousePeripheralManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3DE2C1216A8952004A726C /* AnonymousePeripheralManagerDelegate.swift */; };
+		3B662F51216814DA00F74D09 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BC296BD2168112900FB4E35 /* CryptoSwift.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		3B662F52216814DA00F74D09 /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3BC296BD2168112900FB4E35 /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3B662F55216814E400F74D09 /* Pods_Anonymouse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B662F53216814E200F74D09 /* Pods_Anonymouse.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		3B662F56216814E400F74D09 /* Pods_Anonymouse.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3B662F53216814E200F74D09 /* Pods_Anonymouse.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3B709CAC202AC807002D86F5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B709CAB202AC807002D86F5 /* Default-568h@2x.png */; };
-		3B8D2A3320335E2300BD7B5C /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B8D2A3420335E2300BD7B5C /* SwiftyJSON.framework */; };
-		3B8D2A3620335E2600BD7B5C /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3B8D2A3420335E2300BD7B5C /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3BB557C721612CB200C05C97 /* Anonymouse.xcworkspace in Resources */ = {isa = PBXBuildFile; fileRef = 081720711F85D8530000070F /* Anonymouse.xcworkspace */; };
+		3BC296C02168112D00FB4E35 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BC296BF2168112D00FB4E35 /* Alamofire.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		3BC296C22168113000FB4E35 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BC296C12168113000FB4E35 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		3BC296C42168114D00FB4E35 /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3BC296C12168113000FB4E35 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3BC296C62168114F00FB4E35 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3BC296BF2168112D00FB4E35 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3BD200AC2033FB98002F9FC2 /* AnonymouseRatingCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD200AB2033FB98002F9FC2 /* AnonymouseRatingCore.swift */; };
 		3BD200AE2033FD3B002F9FC2 /* AnonymouseRatingCore+DataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD200AD2033FD3B002F9FC2 /* AnonymouseRatingCore+DataProperties.swift */; };
 		3BFD729020731B80001814D1 /* SwCrypt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFD728F20731B80001814D1 /* SwCrypt.swift */; };
@@ -53,17 +54,17 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		3B5CDF2020190DDD00AD41F6 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 8;
+			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3B8D2A3620335E2600BD7B5C /* SwiftyJSON.framework in Embed Frameworks */,
-				3B5CDF2220190DE000AD41F6 /* Pods_Anonymouse.framework in Embed Frameworks */,
-				3B5CDF2420190DE400AD41F6 /* Alamofire.framework in Embed Frameworks */,
-				3B5CDF1F20190DDD00AD41F6 /* CryptoSwift.framework in Embed Frameworks */,
+				3B662F56216814E400F74D09 /* Pods_Anonymouse.framework in Embed Frameworks */,
+				3B662F52216814DA00F74D09 /* CryptoSwift.framework in Embed Frameworks */,
+				3BC296C42168114D00FB4E35 /* SwiftyJSON.framework in Embed Frameworks */,
+				3BC296C62168114F00FB4E35 /* Alamofire.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -101,11 +102,12 @@
 		3B24E4EA202223BE00E85644 /* ActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
 		3B24E4ED202223BE00E85644 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		3B24E4EF202223BE00E85644 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3B5CDF1920190DA100AD41F6 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3B5CDF1B20190DA400AD41F6 /* CryptoSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CryptoSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3B5CDF1D20190DA600AD41F6 /* Pods_Anonymouse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Anonymouse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B3DE2C1216A8952004A726C /* AnonymousePeripheralManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnonymousePeripheralManagerDelegate.swift; sourceTree = "<group>"; };
+		3B662F53216814E200F74D09 /* Pods_Anonymouse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Anonymouse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B709CAB202AC807002D86F5 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		3B8D2A3420335E2300BD7B5C /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3BC296BD2168112900FB4E35 /* CryptoSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CryptoSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3BC296BF2168112D00FB4E35 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3BC296C12168113000FB4E35 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BD200AB2033FB98002F9FC2 /* AnonymouseRatingCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseRatingCore.swift; sourceTree = "<group>"; };
 		3BD200AD2033FD3B002F9FC2 /* AnonymouseRatingCore+DataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnonymouseRatingCore+DataProperties.swift"; sourceTree = "<group>"; };
 		3BFD728F20731B80001814D1 /* SwCrypt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwCrypt.swift; sourceTree = "<group>"; };
@@ -117,10 +119,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3B8D2A3320335E2300BD7B5C /* SwiftyJSON.framework in Frameworks */,
-				3B5CDF1C20190DA600AD41F6 /* Pods_Anonymouse.framework in Frameworks */,
-				3B5CDF2320190DE400AD41F6 /* Alamofire.framework in Frameworks */,
-				3B5CDF1A20190DA400AD41F6 /* CryptoSwift.framework in Frameworks */,
+				3BC296C22168113000FB4E35 /* SwiftyJSON.framework in Frameworks */,
+				3BC296C02168112D00FB4E35 /* Alamofire.framework in Frameworks */,
+				3B662F51216814DA00F74D09 /* CryptoSwift.framework in Frameworks */,
+				3B662F55216814E400F74D09 /* Pods_Anonymouse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,6 +174,7 @@
 				1A932A541DB3CAC7004294A9 /* AnonymouseMessageSentCore.swift */,
 				02B6E4411DF3719B00B2AE15 /* AnonymouseReplySentCore.swift */,
 				1AE809CA1DD6B10A0009D7D1 /* AnonymouseRatingSentCore.swift */,
+				3B3DE2C1216A8952004A726C /* AnonymousePeripheralManagerDelegate.swift */,
 			);
 			name = Connection;
 			sourceTree = "<group>";
@@ -239,10 +242,10 @@
 		3B5CDF1720190DA100AD41F6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3B8D2A3420335E2300BD7B5C /* SwiftyJSON.framework */,
-				3B5CDF1D20190DA600AD41F6 /* Pods_Anonymouse.framework */,
-				3B5CDF1B20190DA400AD41F6 /* CryptoSwift.framework */,
-				3B5CDF1920190DA100AD41F6 /* Alamofire.framework */,
+				3B662F53216814E200F74D09 /* Pods_Anonymouse.framework */,
+				3BC296C12168113000FB4E35 /* SwiftyJSON.framework */,
+				3BC296BF2168112D00FB4E35 /* Alamofire.framework */,
+				3BC296BD2168112900FB4E35 /* CryptoSwift.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -255,9 +258,9 @@
 			buildConfigurationList = 1ABE12E51C9744D0005923BA /* Build configuration list for PBXNativeTarget "Anonymouse" */;
 			buildPhases = (
 				1ABE12CD1C9744D0005923BA /* Sources */,
-				1ABE12CF1C9744D0005923BA /* Resources */,
-				1ABE12CE1C9744D0005923BA /* Frameworks */,
 				3B5CDF2020190DDD00AD41F6 /* Embed Frameworks */,
+				1ABE12CE1C9744D0005923BA /* Frameworks */,
+				1ABE12CF1C9744D0005923BA /* Resources */,
 			);
 			buildRules = (
 			);
@@ -280,7 +283,6 @@
 				TargetAttributes = {
 					1ABE12D01C9744D0005923BA = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = SQXYK344KH;
 						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -338,6 +340,7 @@
 				0286D4CA1DEFA10000EEDE07 /* AnonymouseReplyViewCell.swift in Sources */,
 				1ABE12EE1C97521C005923BA /* AnonymouseTableViewCell.swift in Sources */,
 				3BD200AE2033FD3B002F9FC2 /* AnonymouseRatingCore+DataProperties.swift in Sources */,
+				3B3DE2C2216A8952004A726C /* AnonymousePeripheralManagerDelegate.swift in Sources */,
 				1AD52A961D9964A9000F13DE /* AnonymouseNavigationStyleController.swift in Sources */,
 				1AFEDAE61D986BBC00690EB5 /* AnonymouseTabBarController.swift in Sources */,
 				02F9C78B1DEDFCE800CA631D /* AnonymouseReplyCore+CoreDataClass.swift in Sources */,

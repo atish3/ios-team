@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Anonymouse/AnonymouseComposeViewController.swift"
-            timestampString = "559683620.7807519"
+            timestampString = "560808405.591409"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "184"
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Anonymouse/AnonymouseComposeViewController.swift"
-            timestampString = "559683620.781034"
+            timestampString = "560808405.591517"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "206"
-            endingLineNumber = "206"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
             landmarkName = "post()"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,13 +74,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Anonymouse/AnonymouseConnectivityController.swift"
-            timestampString = "560273313.483176"
+            timestampString = "560808405.591573"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "288"
-            endingLineNumber = "288"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "294"
+            endingLineNumber = "294"
+            landmarkName = "sendMessageViaHTTP(text:date:rating:user:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -90,13 +90,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Anonymouse/AnonymouseConnectivityController.swift"
-            timestampString = "560273313.488247"
+            timestampString = "560808405.591627"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "279"
-            endingLineNumber = "279"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "285"
+            endingLineNumber = "285"
+            landmarkName = "AnonymouseConnectivityController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -106,13 +106,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Anonymouse/AnonymouseConnectivityController.swift"
-            timestampString = "560273313.488746"
+            timestampString = "560808405.591676"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "331"
-            endingLineNumber = "331"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "337"
+            endingLineNumber = "337"
+            landmarkName = "sendMessageViaHTTP(text:date:rating:user:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -122,13 +122,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Anonymouse/AnonymouseConnectivityController.swift"
-            timestampString = "560273313.489289"
+            timestampString = "560808405.591723"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "333"
-            endingLineNumber = "333"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "339"
+            endingLineNumber = "339"
+            landmarkName = "sendMessageViaHTTP(text:date:rating:user:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -138,13 +138,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Anonymouse/AnonymouseConnectivityController.swift"
-            timestampString = "560273313.489761"
+            timestampString = "560808405.591771"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "329"
-            endingLineNumber = "329"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "335"
+            endingLineNumber = "335"
+            landmarkName = "sendMessageViaHTTP(text:date:rating:user:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -154,13 +154,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Anonymouse/AnonymouseConnectivityController.swift"
-            timestampString = "560273313.490242"
+            timestampString = "560808405.59182"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "317"
-            endingLineNumber = "317"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "323"
+            endingLineNumber = "323"
+            landmarkName = "sendMessageViaHTTP(text:date:rating:user:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -170,13 +170,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Anonymouse/AnonymouseConnectivityController.swift"
-            timestampString = "560273313.4907041"
+            timestampString = "560808405.591866"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "304"
-            endingLineNumber = "304"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "310"
+            endingLineNumber = "310"
+            landmarkName = "sendMessageViaHTTP(text:date:rating:user:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -186,13 +186,535 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Anonymouse/AnonymouseConnectivityController.swift"
-            timestampString = "560273313.491305"
+            timestampString = "560808405.591912"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "314"
-            endingLineNumber = "314"
+            startingLineNumber = "320"
+            endingLineNumber = "320"
+            landmarkName = "sendMessageViaHTTP(text:date:rating:user:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Anonymouse/AppDelegate.swift"
+            timestampString = "560630563.4625829"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "application(_:didFinishLaunchingWithOptions:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Anonymouse/AppDelegate.swift"
+            timestampString = "560630563.46315"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "application(_:didFinishLaunchingWithOptions:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Anonymouse/AppDelegate.swift"
+            timestampString = "560630563.463527"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "applicationDidEnterBackground(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Anonymouse/AppDelegate.swift"
+            timestampString = "560630563.463883"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "AppDelegate"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Anonymouse.AppDelegate.window.getter : Swift.Optional&lt;__C.UIWindow&gt;"
+                  moduleName = "Anonymouse"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Anonymouse/AppDelegate.swift"
+                  timestampString = "560479556.539466"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "114">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Anonymouse.AppDelegate.window.setter : Swift.Optional&lt;__C.UIWindow&gt;"
+                  moduleName = "Anonymouse"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Anonymouse/AppDelegate.swift"
+                  timestampString = "560479556.542158"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "128">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Anonymouse.AppDelegate.init() -&gt; Anonymouse.AppDelegate"
+                  moduleName = "Anonymouse"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Anonymouse/AppDelegate.swift"
+                  timestampString = "560479556.544732"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "23">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Anonymouse/AppDelegate.swift"
+            timestampString = "560630563.464229"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "AppDelegate"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Anonymouse.AppDelegate.__allocating_init() -&gt; Anonymouse.AppDelegate"
+                  moduleName = "Anonymouse"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Anonymouse/AppDelegate.swift"
+                  timestampString = "560479556.555491"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Anonymouse.AppDelegate.init() -&gt; Anonymouse.AppDelegate"
+                  moduleName = "Anonymouse"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Anonymouse/AppDelegate.swift"
+                  timestampString = "560479556.559667"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "23">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Anonymouse.AppDelegate.__deallocating_deinit"
+                  moduleName = "Anonymouse"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Anonymouse/AppDelegate.swift"
+                  timestampString = "560479556.564055"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "main"
+                  moduleName = "Anonymouse"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Anonymouse/AppDelegate.swift"
+                  timestampString = "560479556.573947"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "12">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Anonymouse/AppDelegate.swift"
+            timestampString = "560630563.4645669"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "AppDelegate"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Anonymouse.AppDelegate.window.getter : Swift.Optional&lt;__C.UIWindow&gt;"
+                  moduleName = "Anonymouse"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Anonymouse/AppDelegate.swift"
+                  timestampString = "560479556.584515"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "114">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Anonymouse.AppDelegate.window.setter : Swift.Optional&lt;__C.UIWindow&gt;"
+                  moduleName = "Anonymouse"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Anonymouse/AppDelegate.swift"
+                  timestampString = "560479556.5872999"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "128">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Anonymouse.AppDelegate.init() -&gt; Anonymouse.AppDelegate"
+                  moduleName = "Anonymouse"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Anonymouse/AppDelegate.swift"
+                  timestampString = "560479556.589877"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "23">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Anonymouse/AppDelegate.swift"
+            timestampString = "560630563.465006"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
             landmarkName = "unknown"
             landmarkType = "0">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Anonymouse.AppDelegate.__allocating_init() -&gt; Anonymouse.AppDelegate"
+                  moduleName = "Anonymouse"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Anonymouse/AppDelegate.swift"
+                  timestampString = "560479556.5988179"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Anonymouse.AppDelegate.init() -&gt; Anonymouse.AppDelegate"
+                  moduleName = "Anonymouse"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Anonymouse/AppDelegate.swift"
+                  timestampString = "560479556.602949"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "23">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Anonymouse.AppDelegate.__deallocating_deinit"
+                  moduleName = "Anonymouse"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Anonymouse/AppDelegate.swift"
+                  timestampString = "560479556.607597"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "main"
+                  moduleName = "Anonymouse"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Anonymouse/AppDelegate.swift"
+                  timestampString = "560479556.611127"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "12">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Anonymouse/AppDelegate.swift"
+            timestampString = "560630563.465481"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "application(_:didFinishLaunchingWithOptions:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Anonymouse/AppDelegate.swift"
+            timestampString = "560630563.465911"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "applicationDidEnterBackground(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Anonymouse/AppDelegate.swift"
+            timestampString = "560630563.466314"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "applicationDidEnterBackground(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Anonymouse/AppDelegate.swift"
+            timestampString = "560630563.466626"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "applicationDidEnterBackground(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Anonymouse/AppDelegate.swift"
+            timestampString = "560630563.466916"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "applicationDidEnterBackground(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Anonymouse/AppDelegate.swift"
+            timestampString = "560630563.467206"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "applicationDidEnterBackground(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Anonymouse.AppDelegate.applicationDidEnterBackground(__C.UIApplication) -&gt; ()"
+                  moduleName = "Anonymouse"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Anonymouse/AppDelegate.swift"
+                  timestampString = "560617603.451874"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "376">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in Anonymouse.AppDelegate.applicationDidEnterBackground(__C.UIApplication) -&gt; ()"
+                  moduleName = "Anonymouse"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Anonymouse/AppDelegate.swift"
+                  timestampString = "560617603.455212"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "52">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Anonymouse/AnonymouseConnectivityController.swift"
+            timestampString = "560808405.592093"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "611"
+            endingLineNumber = "611"
+            landmarkName = "sendViaBeacon()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Anonymouse/AnonymouseComposeViewController.swift"
+            timestampString = "560808405.5921431"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "215"
+            endingLineNumber = "215"
+            landmarkName = "post()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Anonymouse/AnonymouseComposeViewController.swift"
+            timestampString = "560808405.59219"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "198"
+            endingLineNumber = "198"
+            landmarkName = "post()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Anonymouse/AnonymousePeripheralManagerDelegate.swift"
+            timestampString = "560808405.592236"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "peripheralManagerDidUpdateState(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -201,13 +723,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Anonymouse/AppDelegate.swift"
-            timestampString = "560008855.572638"
+            filePath = "Anonymouse/AnonymouseConnectivityController.swift"
+            timestampString = "560808434.387711"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "applicationDidEnterBackground(_:)"
+            startingLineNumber = "612"
+            endingLineNumber = "612"
+            landmarkName = "sendViaBeacon()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -195,6 +195,7 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
             messageText = messageText.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             
             self.dataController.addMessage(messageText, date: Date(), user: username, fromServer: false)
+            connectivityController.sendViaBeacon();
             connectivityController.sendMessageViaHTTP(text: messageText, date: Date(), rating: 0, user: username);
         }
             //The else block below should be redundant, as the user should already have a key pair,
@@ -211,8 +212,8 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
             messageText = messageText.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             
             self.dataController.addMessage(messageText, date: Date(), user: username, fromServer: false)
-            connectivityController.sendMessageViaHTTP(text: messageText, date: Date(), rating: 0, user: username);
             connectivityController.sendViaBeacon();
+            connectivityController.sendMessageViaHTTP(text: messageText, date: Date(), rating: 0, user: username);
         }
         
        

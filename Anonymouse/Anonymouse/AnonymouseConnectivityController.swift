@@ -25,6 +25,10 @@ class AnonymouseConnectivityController : NSObject {
     ///A weak reference to the `dataController`, which allows this class to store received messages.
     weak var dataController: AnonymouseDataController!
     
+    weak var delegate: AnonymousePeripheralManagerDelegate!
+    
+    var peripheralManager : CBPeripheralManager
+    
     var fxn = "getMessageViaHTTP()"
     
     var receiveTimer = Timer()
@@ -33,6 +37,8 @@ class AnonymouseConnectivityController : NSObject {
     override init() {
         unowned let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         dataController = appDelegate.dataController
+        delegate = appDelegate.peripheralDelegate
+        peripheralManager  = CBPeripheralManager.init(delegate: delegate, queue: nil, options: nil)
         //add http request object
     }
     
@@ -602,21 +608,17 @@ class AnonymouseConnectivityController : NSObject {
         task.resume()
     }
     
-    
     func sendViaBeacon(){
-        let peripheralManager : UnsafeMutablePointer<CBPeripheralManager>? = nil
-        // We must construct a CLBeaconRegion that represents the payload we want the device to beacon.
-        let peripheralData : UnsafeMutablePointer<NSDictionary>? = nil
-        let region : UnsafeMutablePointer<CLBeaconRegion>? = nil
-        let power : UnsafeMutablePointer<NSNumber>? = nil
-        
-        region!.pointee = CLBeaconRegion.init(proximityUUID: UUID.init(uuidString: "E2C56DB5-DFFB-48D2-B060-D0F5A71096E0")!, major: 0, minor: 0, identifier: "FellowAppUser")
-        peripheralData!.pointee = (region?.pointee.peripheralData(withMeasuredPower: power?.pointee))!
-        
-        // The region's peripheral data contains the CoreBluetooth-specific data we need to advertise.
-        if((peripheralData?.pointee) != nil)
-        {
-            peripheralManager?.pointee.startAdvertising(peripheralData?.pointee as? [String : Any])
+        if(peripheralManager.state == .poweredOn){
+            let peripheralData : NSDictionary
+            var region : CLBeaconRegion
+            let power : NSNumber = -59
+            
+            region = CLBeaconRegion.init(proximityUUID: UUID.init(uuidString: "E2C56DB5-DFFB-48D2-B060-D0F5A71096E0")!, major: 0, minor: 0, identifier: "FellowAppUser")
+            peripheralData = (region.peripheralData(withMeasuredPower: power))
+            
+            // The region's peripheral data contains the CoreBluetooth-specific data we need to advertise.
+            peripheralManager.startAdvertising(peripheralData as? [String : Any])
         }
     }
     

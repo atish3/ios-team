@@ -18,10 +18,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var backgroundTask: UIBackgroundTaskIdentifier!
     var connectivityController: AnonymouseConnectivityController!
     var dataController: AnonymouseDataController!
+    var peripheralDelegate: AnonymousePeripheralManagerDelegate!
+    var region : CLBeaconRegion? = nil;
+    let locationManager : CLLocationManager = CLLocationManager.init();
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         dataController = AnonymouseDataController()
+        peripheralDelegate = AnonymousePeripheralManagerDelegate()
         connectivityController = AnonymouseConnectivityController()
         
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
@@ -54,38 +58,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidEnterBackground(_ application: UIApplication) {
         var bgTask = application.beginBackgroundTask()
-            
-            // Clean up any unfinished task business by marking where you
-            // stopped or ending the task outright.
-        application.endBackgroundTask(bgTask)
-        bgTask = UIBackgroundTaskInvalid;
         
-        DispatchQueue.global().async {
-            var bgTask = application.beginBackgroundTask()
-            
-            var region : CLBeaconRegion? = nil;
-            let locationManager : CLLocationManager = CLLocationManager.init();
-            locationManager.requestAlwaysAuthorization()
-            
-            region = CLBeaconRegion.init(proximityUUID: UUID.init(uuidString: "E2C56DB5-DFFB-48D2-B060-D0F5A71096E0")!, identifier: "App")
-            
-            if(region != nil)
-            {
-                locationManager.stopMonitoring(for: region!)
+        switch CLLocationManager.authorizationStatus(){
+        case .notDetermined:
+            while(CLLocationManager.authorizationStatus() == .notDetermined){
+                locationManager.requestAlwaysAuthorization()
             }
-            region = nil;
-            region = CLBeaconRegion.init(proximityUUID: UUID.init(uuidString: "E2C56DB5-DFFB-48D2-B060-D0F5A71096E0")!, major: 0, minor: 0, identifier: "App")
-            if((region) != nil)
-            {
-                locationManager.startMonitoring(for: region!)
-            }
+            break
+        default:
+            break
         }
-        application.endBackgroundTask(bgTask)
-        bgTask = UIBackgroundTaskInvalid;
             // Clean up any unfinished task business by marking where you
             // stopped or ending the task outright.
         
-        self.dataController.saveContext()
+        DispatchQueue.main.async {
+            if(CLLocationManager.authorizationStatus() == .authorizedAlways){
+                // Enable any of your app's location features
+                self.region = CLBeaconRegion.init(proximityUUID: UUID.init(uuidString: "E2C56DB5-DFFB-48D2-B060-D0F5A71096E0")!, identifier: "App")
+                
+                if(self.region != nil){
+                    self.locationManager.stopMonitoring(for: self.region!)
+                }
+                self.region = nil;
+                self.region = CLBeaconRegion.init(proximityUUID: UUID.init(uuidString: "E2C56DB5-DFFB-48D2-B060-D0F5A71096E0")!, major: 0, minor: 0, identifier: "App")
+                if((self.region) != nil){
+                        self.locationManager.startMonitoring(for: self.region!)
+                }
+            }
+            let date = Date();
+            if(Date() - 3600 < date){
+                application.endBackgroundTask(bgTask)
+                bgTask = UIBackgroundTaskInvalid;
+            }
+            // Clean up any unfinished task business by marking where you
+            // stopped or ending the task outright.
+            
+            self.dataController.saveContext()
+
+            }
         
     }
         
