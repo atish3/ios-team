@@ -21,7 +21,7 @@ class AnonymousePeripheralManagerDelegate: NSObject, CBPeripheralManagerDelegate
             print("Powered on")
             break;
         case .unknown:
-            print("Actually is unknown")
+            print("Unknown")
         default:
             print(peripheral.state.rawValue);
             break;
