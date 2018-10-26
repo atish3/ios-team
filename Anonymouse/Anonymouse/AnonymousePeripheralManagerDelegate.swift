@@ -11,6 +11,7 @@ import UIKit
 import CoreBluetooth
 import CoreLocation
 
+
 class AnonymousePeripheralManagerDelegate: NSObject, CBPeripheralManagerDelegate {
     
     func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager){
@@ -26,4 +27,14 @@ class AnonymousePeripheralManagerDelegate: NSObject, CBPeripheralManagerDelegate
             break;
         }
     }
+    
+    func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?) {
+        if(error != nil){
+            print(error!)
+        }
+        else{
+            print("Started Advertising Successfully")
+        }
+    }
+    
 }

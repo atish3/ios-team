@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var connectivityController: AnonymouseConnectivityController!
     var dataController: AnonymouseDataController!
     var peripheralDelegate: AnonymousePeripheralManagerDelegate!
+    var centralDelegate: AnonymouseCentralManagerDelegate!
     var region : CLBeaconRegion? = nil;
     let locationManager : CLLocationManager = CLLocationManager.init();
     
@@ -27,6 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         dataController = AnonymouseDataController()
         peripheralDelegate = AnonymousePeripheralManagerDelegate()
         connectivityController = AnonymouseConnectivityController()
+        centralDelegate = AnonymouseCentralManagerDelegate()
+        
         
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
 
@@ -57,6 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
+        print("Did enter background");
         var bgTask = application.beginBackgroundTask()
         
         switch CLLocationManager.authorizationStatus(){
@@ -84,11 +88,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if((self.region) != nil){
                         self.locationManager.startMonitoring(for: self.region!)
                 }
-            }
-            let date = Date();
-            if(Date() - 3600 < date){
-                application.endBackgroundTask(bgTask)
-                bgTask = UIBackgroundTaskInvalid;
             }
             // Clean up any unfinished task business by marking where you
             // stopped or ending the task outright.

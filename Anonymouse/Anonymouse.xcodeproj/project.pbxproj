@@ -34,6 +34,7 @@
 		1AE809CB1DD6B10A0009D7D1 /* AnonymouseRatingSentCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE809CA1DD6B10A0009D7D1 /* AnonymouseRatingSentCore.swift */; };
 		1AF2D0671C97856300670C89 /* AnonymouseComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF2D0661C97856300670C89 /* AnonymouseComposeViewController.swift */; };
 		1AFEDAE61D986BBC00690EB5 /* AnonymouseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFEDAE51D986BBC00690EB5 /* AnonymouseTabBarController.swift */; };
+		3B20C2FB217157CD0030429D /* AnonymouseCentralManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B20C2FA217157CD0030429D /* AnonymouseCentralManagerDelegate.swift */; };
 		3B3DE2C2216A8952004A726C /* AnonymousePeripheralManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3DE2C1216A8952004A726C /* AnonymousePeripheralManagerDelegate.swift */; };
 		3B662F51216814DA00F74D09 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BC296BD2168112900FB4E35 /* CryptoSwift.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		3B662F52216814DA00F74D09 /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3BC296BD2168112900FB4E35 /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -99,6 +100,7 @@
 		1AE809CA1DD6B10A0009D7D1 /* AnonymouseRatingSentCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseRatingSentCore.swift; sourceTree = "<group>"; };
 		1AF2D0661C97856300670C89 /* AnonymouseComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseComposeViewController.swift; sourceTree = "<group>"; };
 		1AFEDAE51D986BBC00690EB5 /* AnonymouseTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymouseTabBarController.swift; sourceTree = "<group>"; };
+		3B20C2FA217157CD0030429D /* AnonymouseCentralManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnonymouseCentralManagerDelegate.swift; sourceTree = "<group>"; };
 		3B24E4EA202223BE00E85644 /* ActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
 		3B24E4ED202223BE00E85644 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		3B24E4EF202223BE00E85644 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				02B6E4411DF3719B00B2AE15 /* AnonymouseReplySentCore.swift */,
 				1AE809CA1DD6B10A0009D7D1 /* AnonymouseRatingSentCore.swift */,
 				3B3DE2C1216A8952004A726C /* AnonymousePeripheralManagerDelegate.swift */,
+				3B20C2FA217157CD0030429D /* AnonymouseCentralManagerDelegate.swift */,
 			);
 			name = Connection;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 			files = (
 				1A692BBB1DAE964D00C03E1A /* AnonymouseDataController.swift in Sources */,
 				02B6E4421DF3719B00B2AE15 /* AnonymouseReplySentCore.swift in Sources */,
+				3B20C2FB217157CD0030429D /* AnonymouseCentralManagerDelegate.swift in Sources */,
 				0286D4CA1DEFA10000EEDE07 /* AnonymouseReplyViewCell.swift in Sources */,
 				1ABE12EE1C97521C005923BA /* AnonymouseTableViewCell.swift in Sources */,
 				3BD200AE2033FD3B002F9FC2 /* AnonymouseRatingCore+DataProperties.swift in Sources */,
