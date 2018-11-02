@@ -1,0 +1,155 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "CipherOperationOnBlock"
+- "BlockMode"
+provides-nominal:
+- "11CryptoSwift9BlockModeO"
+provides-member:
+- ["11CryptoSwift9BlockModeO", ""]
+provides-dynamic-lookup:
+depends-top-level:
+- "=="
+- !private "??"
+- "Array"
+- "BlockMode"
+- "BlockModeOptions"
+- "BlockModeWorker"
+- !private "CBCModeWorker"
+- !private "CFBModeWorker"
+- !private "CTRModeWorker"
+- "CipherOperationOnBlock"
+- !private "ECBModeWorker"
+- !private "FloatLiteralType"
+- !private "IntegerLiteralType"
+- !private "OFBModeWorker"
+- !private "PCBCModeWorker"
+- "UInt8"
+depends-member:
+- ["11CryptoSwift9BlockModeO", "Array"]
+- ["11CryptoSwift9BlockModeO", "BlockModeOptions"]
+- ["11CryptoSwift9BlockModeO", "BlockModeWorker"]
+- ["11CryptoSwift9BlockModeO", "CBC"]
+- !private ["11CryptoSwift9BlockModeO", "CBCModeWorker"]
+- ["11CryptoSwift9BlockModeO", "CFB"]
+- !private ["11CryptoSwift9BlockModeO", "CFBModeWorker"]
+- ["11CryptoSwift9BlockModeO", "CTR"]
+- !private ["11CryptoSwift9BlockModeO", "CTRModeWorker"]
+- ["11CryptoSwift9BlockModeO", "CipherOperationOnBlock"]
+- ["11CryptoSwift9BlockModeO", "ECB"]
+- !private ["11CryptoSwift9BlockModeO", "ECBModeWorker"]
+- ["11CryptoSwift9BlockModeO", "OFB"]
+- !private ["11CryptoSwift9BlockModeO", "OFBModeWorker"]
+- ["11CryptoSwift9BlockModeO", "PCBC"]
+- !private ["11CryptoSwift9BlockModeO", "PCBCModeWorker"]
+- ["11CryptoSwift9BlockModeO", "UInt8"]
+- ["11CryptoSwift9BlockModeO", "__derived_enum_equals"]
+- ["11CryptoSwift9BlockModeO", "deinit"]
+- ["11CryptoSwift9BlockModeO", "hash"]
+- ["11CryptoSwift9BlockModeO", "hashValue"]
+- ["11CryptoSwift9BlockModeO", "options"]
+- ["11CryptoSwift9BlockModeO", "worker"]
+- !private ["11CryptoSwift16BlockModeOptionsV", "InitializationVectorRequired"]
+- !private ["11CryptoSwift16BlockModeOptionsV", "PaddingRequired"]
+- !private ["11CryptoSwift16BlockModeOptionsV", "deinit"]
+- !private ["11CryptoSwift15BlockModeWorkerP", "init"]
+- !private ["11CryptoSwift13CBCModeWorkerV", "deinit"]
+- !private ["11CryptoSwift13CBCModeWorkerV", "init"]
+- !private ["11CryptoSwift13CFBModeWorkerV", "deinit"]
+- !private ["11CryptoSwift13CFBModeWorkerV", "init"]
+- !private ["11CryptoSwift13CTRModeWorkerV", "deinit"]
+- !private ["11CryptoSwift13CTRModeWorkerV", "init"]
+- !private ["11CryptoSwift13ECBModeWorkerV", "deinit"]
+- !private ["11CryptoSwift13ECBModeWorkerV", "init"]
+- ["SQ", "CBC"]
+- !private ["SQ", "CBCModeWorker"]
+- ["SQ", "CFB"]
+- !private ["SQ", "CFBModeWorker"]
+- ["SQ", "CTR"]
+- !private ["SQ", "CTRModeWorker"]
+- ["SQ", "ECB"]
+- !private ["SQ", "ECBModeWorker"]
+- !private ["SQ", "InitializationVectorRequired"]
+- ["SQ", "OFB"]
+- !private ["SQ", "OFBModeWorker"]
+- ["SQ", "PCBC"]
+- !private ["SQ", "PCBCModeWorker"]
+- !private ["SQ", "PaddingRequired"]
+- ["SQ", ""]
+- ["SQ", "hash"]
+- ["SQ", "hashValue"]
+- !private ["s25ExpressibleByArrayLiteralP", "InitializationVectorRequired"]
+- !private ["s25ExpressibleByArrayLiteralP", "PaddingRequired"]
+- ["SH", "CBC"]
+- !private ["SH", "CBCModeWorker"]
+- ["SH", "CFB"]
+- !private ["SH", "CFBModeWorker"]
+- ["SH", "CTR"]
+- !private ["SH", "CTRModeWorker"]
+- ["SH", "ECB"]
+- !private ["SH", "ECBModeWorker"]
+- ["SH", "OFB"]
+- !private ["SH", "OFBModeWorker"]
+- ["SH", "PCBC"]
+- !private ["SH", "PCBCModeWorker"]
+- ["SH", ""]
+- ["SH", "hash"]
+- ["SH", "hashValue"]
+- !private ["s6HasherV", "combine"]
+- !private ["11CryptoSwift13OFBModeWorkerV", "deinit"]
+- !private ["11CryptoSwift13OFBModeWorkerV", "init"]
+- !private ["s9OptionSetP", "InitializationVectorRequired"]
+- !private ["s9OptionSetP", "PaddingRequired"]
+- !private ["11CryptoSwift14PCBCModeWorkerV", "deinit"]
+- !private ["11CryptoSwift14PCBCModeWorkerV", "init"]
+- !private ["11CryptoSwift27RandomAccessBlockModeWorkerP", "init"]
+- !private ["SY", "InitializationVectorRequired"]
+- !private ["SY", "PaddingRequired"]
+- !private ["s10SetAlgebraP", "InitializationVectorRequired"]
+- !private ["s10SetAlgebraP", "PaddingRequired"]
+depends-nominal:
+- "11CryptoSwift9BlockModeO"
+- !private "11CryptoSwift16BlockModeOptionsV"
+- !private "11CryptoSwift15BlockModeWorkerP"
+- !private "11CryptoSwift13CBCModeWorkerV"
+- !private "11CryptoSwift13CFBModeWorkerV"
+- !private "11CryptoSwift13CTRModeWorkerV"
+- !private "11CryptoSwift13ECBModeWorkerV"
+- "SQ"
+- !private "s25ExpressibleByArrayLiteralP"
+- "SH"
+- !private "s6HasherV"
+- !private "11CryptoSwift13OFBModeWorkerV"
+- !private "s9OptionSetP"
+- !private "11CryptoSwift14PCBCModeWorkerV"
+- !private "11CryptoSwift27RandomAccessBlockModeWorkerP"
+- !private "SY"
+- !private "s10SetAlgebraP"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Dispatch.apinotesc"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/ObjectiveC.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/CoreImage.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/QuartzCore.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Dispatch.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Metal.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Darwin.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Foundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/CoreFoundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/CoreGraphics.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Swift.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/UIKit.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/SwiftOnoneSupport.swiftmodule"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/Pods/Target Support Files/CryptoSwift/CryptoSwift-umbrella.h"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/DerivedData2/Anonymouse/Build/Intermediates.noindex/Pods.build/Debug-iphoneos/CryptoSwift.build/unextended-module.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/usr/include/objc/ObjectiveC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/OpenGLES.framework/Headers/OpenGLES.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CoreImage.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Metal.framework/Headers/Metal.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/usr/include/Darwin.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
+interface-hash: "0b9d09bec25f42849b2d7952fac10925"

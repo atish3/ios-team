@@ -1,0 +1,207 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "RandomBytesSequence"
+provides-nominal:
+- "11CryptoSwift19RandomBytesSequenceV"
+provides-member:
+- ["11CryptoSwift19RandomBytesSequenceV", ""]
+provides-dynamic-lookup:
+depends-top-level:
+- !private "+"
+- !private ">="
+- "AnyIterator"
+- !private "AssignmentPrecedence"
+- !private "FloatLiteralType"
+- "Int"
+- !private "IntegerLiteralType"
+- "RandomBytesSequence"
+- "Sequence"
+- !private "UInt32"
+- "UInt8"
+- !private "arc4random_uniform"
+depends-member:
+- !private ["s11AnyIteratorV", "init"]
+- !private ["s11AnyIteratorV", "init"]
+- !private ["Sz", "init"]
+- !private ["Sz", "max"]
+- !private ["Sb", "_getBuiltinLogicValue"]
+- !private ["s7CVarArgP", "_getBuiltinLogicValue"]
+- !private ["s7CVarArgP", "init"]
+- !private ["s7CVarArgP", "max"]
+- !private ["SL", "init"]
+- !private ["SL", "max"]
+- !private ["s29CustomPlaygroundQuickLookableP", "_getBuiltinLogicValue"]
+- !private ["s29CustomPlaygroundQuickLookableP", "init"]
+- !private ["s29CustomPlaygroundQuickLookableP", "max"]
+- !private ["s17CustomReflectableP", "_getBuiltinLogicValue"]
+- !private ["s17CustomReflectableP", "init"]
+- !private ["s17CustomReflectableP", "max"]
+- !private ["s23CustomStringConvertibleP", "_getBuiltinLogicValue"]
+- !private ["s23CustomStringConvertibleP", "init"]
+- !private ["s23CustomStringConvertibleP", "max"]
+- !private ["Se", "_getBuiltinLogicValue"]
+- !private ["Se", "init"]
+- !private ["Se", "max"]
+- !private ["SE", "_getBuiltinLogicValue"]
+- !private ["SE", "init"]
+- !private ["SE", "max"]
+- !private ["SQ", "_getBuiltinLogicValue"]
+- !private ["SQ", "init"]
+- !private ["SQ", "max"]
+- !private ["s27ExpressibleByBooleanLiteralP", "_getBuiltinLogicValue"]
+- !private ["s27ExpressibleByIntegerLiteralP", "init"]
+- !private ["s27ExpressibleByIntegerLiteralP", "max"]
+- !private ["s17FixedWidthIntegerP", "init"]
+- !private ["s17FixedWidthIntegerP", "max"]
+- !private ["SH", "_getBuiltinLogicValue"]
+- !private ["SH", "init"]
+- !private ["SH", "max"]
+- !private ["St", "init"]
+- !private ["St", "init"]
+- !private ["s25LosslessStringConvertibleP", "_getBuiltinLogicValue"]
+- !private ["s25LosslessStringConvertibleP", "init"]
+- !private ["s25LosslessStringConvertibleP", "max"]
+- !private ["Sj", "init"]
+- !private ["Sj", "max"]
+- ["11CryptoSwift19RandomBytesSequenceV", "AnyIterator"]
+- ["11CryptoSwift19RandomBytesSequenceV", "Element"]
+- ["11CryptoSwift19RandomBytesSequenceV", "Int"]
+- ["11CryptoSwift19RandomBytesSequenceV", "Iterator"]
+- ["11CryptoSwift19RandomBytesSequenceV", "SubSequence"]
+- !private ["11CryptoSwift19RandomBytesSequenceV", "UInt32"]
+- ["11CryptoSwift19RandomBytesSequenceV", "UInt8"]
+- ["11CryptoSwift19RandomBytesSequenceV", "_Default_Element"]
+- ["11CryptoSwift19RandomBytesSequenceV", "_Default_Iterator"]
+- ["11CryptoSwift19RandomBytesSequenceV", "_Default_SubSequence"]
+- ["11CryptoSwift19RandomBytesSequenceV", "_copyContents"]
+- ["11CryptoSwift19RandomBytesSequenceV", "_copyToContiguousArray"]
+- ["11CryptoSwift19RandomBytesSequenceV", "_customContainsEquatableElement"]
+- ["11CryptoSwift19RandomBytesSequenceV", "_preprocessingPass"]
+- !private ["11CryptoSwift19RandomBytesSequenceV", "arc4random_uniform"]
+- ["11CryptoSwift19RandomBytesSequenceV", "deinit"]
+- ["11CryptoSwift19RandomBytesSequenceV", "drop"]
+- ["11CryptoSwift19RandomBytesSequenceV", "dropFirst"]
+- ["11CryptoSwift19RandomBytesSequenceV", "dropLast"]
+- ["11CryptoSwift19RandomBytesSequenceV", "filter"]
+- ["11CryptoSwift19RandomBytesSequenceV", "forEach"]
+- ["11CryptoSwift19RandomBytesSequenceV", "init"]
+- ["11CryptoSwift19RandomBytesSequenceV", "makeIterator"]
+- ["11CryptoSwift19RandomBytesSequenceV", "map"]
+- ["11CryptoSwift19RandomBytesSequenceV", "prefix"]
+- ["11CryptoSwift19RandomBytesSequenceV", "size"]
+- ["11CryptoSwift19RandomBytesSequenceV", "split"]
+- ["11CryptoSwift19RandomBytesSequenceV", "suffix"]
+- ["11CryptoSwift19RandomBytesSequenceV", "underestimatedCount"]
+- !private ["ST", "AnyIterator"]
+- ["ST", "Element"]
+- ["ST", "Iterator"]
+- ["ST", "SubSequence"]
+- !private ["ST", "UInt32"]
+- !private ["ST", "UInt8"]
+- ["ST", ""]
+- ["ST", "_Default_Element"]
+- ["ST", "_Default_Iterator"]
+- ["ST", "_Default_SubSequence"]
+- ["ST", "_copyContents"]
+- ["ST", "_copyToContiguousArray"]
+- ["ST", "_customContainsEquatableElement"]
+- ["ST", "_preprocessingPass"]
+- !private ["ST", "arc4random_uniform"]
+- ["ST", "drop"]
+- ["ST", "dropFirst"]
+- ["ST", "dropLast"]
+- ["ST", "filter"]
+- ["ST", "forEach"]
+- !private ["ST", "init"]
+- !private ["ST", "init"]
+- ["ST", "makeIterator"]
+- ["ST", "map"]
+- ["ST", "prefix"]
+- !private ["ST", "size"]
+- ["ST", "split"]
+- ["ST", "suffix"]
+- ["ST", "underestimatedCount"]
+- !private ["Sx", "init"]
+- !private ["Sx", "max"]
+- !private ["s6UInt32V", "init"]
+- !private ["s5UInt8V", "init"]
+- !private ["s5UInt8V", "max"]
+- !private ["SU", "init"]
+- !private ["SU", "max"]
+- !private ["s18_BitwiseOperationsP", "init"]
+- !private ["s18_BitwiseOperationsP", "max"]
+- !private ["s35_ExpressibleByBuiltinBooleanLiteralP", "_getBuiltinLogicValue"]
+- !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "init"]
+- !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "max"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "init"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "max"]
+- !private ["s21_ObjectiveCBridgeableP", "_getBuiltinLogicValue"]
+- !private ["s21_ObjectiveCBridgeableP", "init"]
+- !private ["s21_ObjectiveCBridgeableP", "max"]
+- !private ["s14_StringElementP", "init"]
+- !private ["s14_StringElementP", "max"]
+- !private ["11CryptoSwift11_UInt32TypeP", "init"]
+- !private ["11CryptoSwift10_UInt8TypeP", "init"]
+- !private ["11CryptoSwift10_UInt8TypeP", "max"]
+depends-nominal:
+- !private "s11AnyIteratorV"
+- !private "Sz"
+- !private "Sb"
+- !private "s7CVarArgP"
+- !private "SL"
+- !private "s29CustomPlaygroundQuickLookableP"
+- !private "s17CustomReflectableP"
+- !private "s23CustomStringConvertibleP"
+- !private "Se"
+- !private "SE"
+- !private "SQ"
+- !private "s27ExpressibleByBooleanLiteralP"
+- !private "s27ExpressibleByIntegerLiteralP"
+- !private "s17FixedWidthIntegerP"
+- !private "SH"
+- !private "St"
+- !private "s25LosslessStringConvertibleP"
+- !private "Sj"
+- "11CryptoSwift19RandomBytesSequenceV"
+- "ST"
+- !private "Sx"
+- !private "s6UInt32V"
+- !private "s5UInt8V"
+- !private "SU"
+- !private "s18_BitwiseOperationsP"
+- !private "s35_ExpressibleByBuiltinBooleanLiteralP"
+- !private "s35_ExpressibleByBuiltinIntegerLiteralP"
+- !private "s35_HasCustomAnyHashableRepresentationP"
+- !private "s21_ObjectiveCBridgeableP"
+- !private "s14_StringElementP"
+- !private "11CryptoSwift11_UInt32TypeP"
+- !private "11CryptoSwift10_UInt8TypeP"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Dispatch.apinotesc"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/ObjectiveC.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/CoreImage.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/QuartzCore.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Dispatch.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Metal.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Darwin.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Foundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/CoreFoundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/CoreGraphics.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Swift.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/UIKit.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/SwiftOnoneSupport.swiftmodule"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/Pods/Target Support Files/CryptoSwift/CryptoSwift-umbrella.h"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/DerivedData2/Anonymouse/Build/Intermediates.noindex/Pods.build/Debug-iphoneos/CryptoSwift.build/unextended-module.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/usr/include/objc/ObjectiveC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/OpenGLES.framework/Headers/OpenGLES.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CoreImage.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Metal.framework/Headers/Metal.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/usr/include/Darwin.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
+interface-hash: "ae01d75e9fddf13b521d15aa47ff12d3"

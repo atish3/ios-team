@@ -180,6 +180,35 @@
 			<key>uniqueIdentifier</key>
 			<string>68462F4F-1039-4671-B820-0E2939D3AB47</string>
 		</dict>
+		<key>79274D9E-3AD7-4A7C-9882-BBCC62FCED23</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>79274D9E-3AD7-4A7C-9882-BBCC62FCED23.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>E</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Anonymouse project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Anonymouse</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Build Anonymouse</string>
+			<key>timeStartedRecording</key>
+			<real>562889913.46728301</real>
+			<key>timeStoppedRecording</key>
+			<real>562889935.21478295</real>
+			<key>title</key>
+			<string>Build Anonymouse</string>
+			<key>uniqueIdentifier</key>
+			<string>79274D9E-3AD7-4A7C-9882-BBCC62FCED23</string>
+		</dict>
 		<key>7C34D8A7-93FB-4AF3-B16E-C24002D0D3DD</key>
 		<dict>
 			<key>className</key>
@@ -267,6 +296,64 @@
 			<key>uniqueIdentifier</key>
 			<string>9D014B63-0D34-4553-A729-A2767D905995</string>
 		</dict>
+		<key>A89B0405-FB9E-47F5-A80C-6536D786320C</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>A89B0405-FB9E-47F5-A80C-6536D786320C.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>E</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Anonymouse project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Anonymouse</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Build Anonymouse</string>
+			<key>timeStartedRecording</key>
+			<real>562889474.28521502</real>
+			<key>timeStoppedRecording</key>
+			<real>562889501.50123405</real>
+			<key>title</key>
+			<string>Build Anonymouse</string>
+			<key>uniqueIdentifier</key>
+			<string>A89B0405-FB9E-47F5-A80C-6536D786320C</string>
+		</dict>
+		<key>B1EF4027-2A04-407E-AA81-7C73B3DCA666</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>B1EF4027-2A04-407E-AA81-7C73B3DCA666.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>W</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Anonymouse project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Anonymouse</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Build Anonymouse</string>
+			<key>timeStartedRecording</key>
+			<real>562890022.60919905</real>
+			<key>timeStoppedRecording</key>
+			<real>562890040.42083001</real>
+			<key>title</key>
+			<string>Build Anonymouse</string>
+			<key>uniqueIdentifier</key>
+			<string>B1EF4027-2A04-407E-AA81-7C73B3DCA666</string>
+		</dict>
 		<key>BE69FD8F-50FD-47FA-A477-F4C99B9ACBDD</key>
 		<dict>
 			<key>className</key>
@@ -295,6 +382,35 @@
 			<string>Build Anonymouse</string>
 			<key>uniqueIdentifier</key>
 			<string>BE69FD8F-50FD-47FA-A477-F4C99B9ACBDD</string>
+		</dict>
+		<key>DBB05775-6D6E-41F3-9D7C-F4D5E46061F4</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>DBB05775-6D6E-41F3-9D7C-F4D5E46061F4.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>E</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Anonymouse project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Anonymouse</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Build Anonymouse</string>
+			<key>timeStartedRecording</key>
+			<real>562889989.28642702</real>
+			<key>timeStoppedRecording</key>
+			<real>562889994.29488206</real>
+			<key>title</key>
+			<string>Build Anonymouse</string>
+			<key>uniqueIdentifier</key>
+			<string>DBB05775-6D6E-41F3-9D7C-F4D5E46061F4</string>
 		</dict>
 		<key>DC2FB34A-FB14-44ED-B1AE-E84D760B47BD</key>
 		<dict>

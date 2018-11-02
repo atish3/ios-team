@@ -1,0 +1,383 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+provides-nominal:
+provides-member:
+- ["10Foundation4DataV", ""]
+- ["10Foundation4DataV", "checksum"]
+- ["10Foundation4DataV", "md5"]
+- ["10Foundation4DataV", "sha1"]
+- ["10Foundation4DataV", "sha224"]
+- ["10Foundation4DataV", "sha256"]
+- ["10Foundation4DataV", "sha384"]
+- ["10Foundation4DataV", "sha512"]
+- ["10Foundation4DataV", "sha3"]
+- ["10Foundation4DataV", "crc32"]
+- ["10Foundation4DataV", "crc16"]
+- ["10Foundation4DataV", "encrypt"]
+- ["10Foundation4DataV", "decrypt"]
+- ["10Foundation4DataV", "authenticate"]
+- ["10Foundation4DataV", "bytes"]
+- ["10Foundation4DataV", "toHexString"]
+provides-dynamic-lookup:
+depends-top-level:
+- !private "%"
+- !private "+"
+- !private "..<"
+- "Array"
+- "AssignmentPrecedence"
+- "Authenticator"
+- "Bool"
+- "BooleanLiteralType"
+- !private "Checksum"
+- "Cipher"
+- "Data"
+- !private "Digest"
+- !private "FloatLiteralType"
+- !private "IntegerLiteralType"
+- "SHA3"
+- "String"
+- "UInt16"
+- "UInt32"
+- "UInt8"
+depends-member:
+- !private ["Sa", "count"]
+- !private ["Sa", "deinit"]
+- !private ["Sa", "init"]
+- !private ["Sa", "subscript"]
+- !private ["Sa", "toHexString"]
+- !private ["s13ArrayProtocolP", "count"]
+- !private ["s13ArrayProtocolP", "init"]
+- !private ["s13ArrayProtocolP", "subscript"]
+- !private ["s13ArrayProtocolP", "toHexString"]
+- !private ["11CryptoSwift13AuthenticatorP", "authenticate"]
+- !private ["SK", "Array"]
+- !private ["SK", "Checksum"]
+- !private ["SK", "Data"]
+- !private ["SK", "Digest"]
+- !private ["SK", "UInt16"]
+- !private ["SK", "UInt32"]
+- !private ["SK", "bytes"]
+- !private ["SK", "count"]
+- !private ["SK", "init"]
+- !private ["SK", "subscript"]
+- !private ["SK", "toHexString"]
+- !private ["Sz", "bytes"]
+- !private ["Sz", "init"]
+- !private ["11CryptoSwift11CSArrayTypeP", "count"]
+- !private ["11CryptoSwift11CSArrayTypeP", "init"]
+- !private ["11CryptoSwift11CSArrayTypeP", "subscript"]
+- !private ["11CryptoSwift11CSArrayTypeP", "toHexString"]
+- !private ["s7CVarArgP", "bytes"]
+- !private ["s7CVarArgP", "count"]
+- !private ["s7CVarArgP", "init"]
+- !private ["s7CVarArgP", "subscript"]
+- !private ["s7CVarArgP", "toHexString"]
+- !private ["11CryptoSwift8ChecksumC", "crc16"]
+- !private ["11CryptoSwift8ChecksumC", "crc32"]
+- !private ["11CryptoSwift6CipherP", "decrypt"]
+- !private ["11CryptoSwift6CipherP", "encrypt"]
+- !private ["Sl", "Array"]
+- !private ["Sl", "Checksum"]
+- !private ["Sl", "Data"]
+- !private ["Sl", "Digest"]
+- !private ["Sl", "UInt16"]
+- !private ["Sl", "UInt32"]
+- !private ["Sl", "bytes"]
+- !private ["Sl", "count"]
+- !private ["Sl", "init"]
+- !private ["Sl", "subscript"]
+- !private ["Sl", "toHexString"]
+- !private ["SL", "bytes"]
+- !private ["SL", "init"]
+- !private ["s28CustomDebugStringConvertibleP", "Array"]
+- !private ["s28CustomDebugStringConvertibleP", "Checksum"]
+- !private ["s28CustomDebugStringConvertibleP", "Data"]
+- !private ["s28CustomDebugStringConvertibleP", "Digest"]
+- !private ["s28CustomDebugStringConvertibleP", "UInt16"]
+- !private ["s28CustomDebugStringConvertibleP", "UInt32"]
+- !private ["s28CustomDebugStringConvertibleP", "bytes"]
+- !private ["s28CustomDebugStringConvertibleP", "count"]
+- !private ["s28CustomDebugStringConvertibleP", "init"]
+- !private ["s28CustomDebugStringConvertibleP", "subscript"]
+- !private ["s28CustomDebugStringConvertibleP", "toHexString"]
+- !private ["s29CustomPlaygroundQuickLookableP", "bytes"]
+- !private ["s29CustomPlaygroundQuickLookableP", "init"]
+- !private ["s17CustomReflectableP", "Array"]
+- !private ["s17CustomReflectableP", "Checksum"]
+- !private ["s17CustomReflectableP", "Data"]
+- !private ["s17CustomReflectableP", "Digest"]
+- !private ["s17CustomReflectableP", "UInt16"]
+- !private ["s17CustomReflectableP", "UInt32"]
+- !private ["s17CustomReflectableP", "bytes"]
+- !private ["s17CustomReflectableP", "count"]
+- !private ["s17CustomReflectableP", "init"]
+- !private ["s17CustomReflectableP", "subscript"]
+- !private ["s17CustomReflectableP", "toHexString"]
+- !private ["s23CustomStringConvertibleP", "Array"]
+- !private ["s23CustomStringConvertibleP", "Checksum"]
+- !private ["s23CustomStringConvertibleP", "Data"]
+- !private ["s23CustomStringConvertibleP", "Digest"]
+- !private ["s23CustomStringConvertibleP", "UInt16"]
+- !private ["s23CustomStringConvertibleP", "UInt32"]
+- !private ["s23CustomStringConvertibleP", "bytes"]
+- !private ["s23CustomStringConvertibleP", "count"]
+- !private ["s23CustomStringConvertibleP", "init"]
+- !private ["s23CustomStringConvertibleP", "subscript"]
+- !private ["s23CustomStringConvertibleP", "toHexString"]
+- ["10Foundation4DataV", "Array"]
+- ["10Foundation4DataV", "Authenticator"]
+- ["10Foundation4DataV", "Bool"]
+- !private ["10Foundation4DataV", "Checksum"]
+- ["10Foundation4DataV", "Cipher"]
+- ["10Foundation4DataV", "Data"]
+- !private ["10Foundation4DataV", "Digest"]
+- ["10Foundation4DataV", "SHA3"]
+- ["10Foundation4DataV", "String"]
+- ["10Foundation4DataV", "UInt16"]
+- ["10Foundation4DataV", "UInt32"]
+- ["10Foundation4DataV", "UInt8"]
+- ["10Foundation4DataV", "authenticate"]
+- ["10Foundation4DataV", "bytes"]
+- ["10Foundation4DataV", "checksum"]
+- ["10Foundation4DataV", "crc16"]
+- ["10Foundation4DataV", "crc32"]
+- ["10Foundation4DataV", "decrypt"]
+- ["10Foundation4DataV", "encrypt"]
+- !private ["10Foundation4DataV", "init"]
+- ["10Foundation4DataV", "md5"]
+- ["10Foundation4DataV", "sha1"]
+- ["10Foundation4DataV", "sha224"]
+- ["10Foundation4DataV", "sha256"]
+- ["10Foundation4DataV", "sha3"]
+- ["10Foundation4DataV", "sha384"]
+- ["10Foundation4DataV", "sha512"]
+- ["10Foundation4DataV", "toHexString"]
+- !private ["Se", "Array"]
+- !private ["Se", "Checksum"]
+- !private ["Se", "Data"]
+- !private ["Se", "Digest"]
+- !private ["Se", "UInt16"]
+- !private ["Se", "UInt32"]
+- !private ["Se", "bytes"]
+- !private ["Se", "count"]
+- !private ["Se", "init"]
+- !private ["Se", "subscript"]
+- !private ["Se", "toHexString"]
+- !private ["11CryptoSwift6DigestV", "md5"]
+- !private ["11CryptoSwift6DigestV", "sha1"]
+- !private ["11CryptoSwift6DigestV", "sha224"]
+- !private ["11CryptoSwift6DigestV", "sha256"]
+- !private ["11CryptoSwift6DigestV", "sha3"]
+- !private ["11CryptoSwift6DigestV", "sha384"]
+- !private ["11CryptoSwift6DigestV", "sha512"]
+- ["11CryptoSwift10DigestTypeP", "Variant"]
+- !private ["SE", "Array"]
+- !private ["SE", "Checksum"]
+- !private ["SE", "Data"]
+- !private ["SE", "Digest"]
+- !private ["SE", "UInt16"]
+- !private ["SE", "UInt32"]
+- !private ["SE", "bytes"]
+- !private ["SE", "count"]
+- !private ["SE", "init"]
+- !private ["SE", "subscript"]
+- !private ["SE", "toHexString"]
+- !private ["SQ", "Array"]
+- !private ["SQ", "Checksum"]
+- !private ["SQ", "Data"]
+- !private ["SQ", "Digest"]
+- !private ["SQ", "UInt16"]
+- !private ["SQ", "UInt32"]
+- !private ["SQ", "bytes"]
+- !private ["SQ", "count"]
+- !private ["SQ", "init"]
+- !private ["SQ", "subscript"]
+- !private ["SQ", "toHexString"]
+- !private ["s25ExpressibleByArrayLiteralP", "count"]
+- !private ["s25ExpressibleByArrayLiteralP", "init"]
+- !private ["s25ExpressibleByArrayLiteralP", "subscript"]
+- !private ["s25ExpressibleByArrayLiteralP", "toHexString"]
+- !private ["s27ExpressibleByIntegerLiteralP", "bytes"]
+- !private ["s27ExpressibleByIntegerLiteralP", "init"]
+- !private ["s17FixedWidthIntegerP", "bytes"]
+- !private ["s17FixedWidthIntegerP", "init"]
+- !private ["SH", "Array"]
+- !private ["SH", "Checksum"]
+- !private ["SH", "Data"]
+- !private ["SH", "Digest"]
+- !private ["SH", "UInt16"]
+- !private ["SH", "UInt32"]
+- !private ["SH", "bytes"]
+- !private ["SH", "count"]
+- !private ["SH", "init"]
+- !private ["SH", "subscript"]
+- !private ["SH", "toHexString"]
+- !private ["s25LosslessStringConvertibleP", "bytes"]
+- !private ["s25LosslessStringConvertibleP", "init"]
+- !private ["SM", "Array"]
+- !private ["SM", "Checksum"]
+- !private ["SM", "Data"]
+- !private ["SM", "Digest"]
+- !private ["SM", "UInt16"]
+- !private ["SM", "UInt32"]
+- !private ["SM", "bytes"]
+- !private ["SM", "count"]
+- !private ["SM", "init"]
+- !private ["SM", "subscript"]
+- !private ["SM", "toHexString"]
+- !private ["Sj", "bytes"]
+- !private ["Sj", "init"]
+- !private ["Sk", "Array"]
+- !private ["Sk", "Checksum"]
+- !private ["Sk", "Data"]
+- !private ["Sk", "Digest"]
+- !private ["Sk", "UInt16"]
+- !private ["Sk", "UInt32"]
+- !private ["Sk", "bytes"]
+- !private ["Sk", "count"]
+- !private ["Sk", "init"]
+- !private ["Sk", "subscript"]
+- !private ["Sk", "toHexString"]
+- !private ["Sm", "Array"]
+- !private ["Sm", "Checksum"]
+- !private ["Sm", "Data"]
+- !private ["Sm", "Digest"]
+- !private ["Sm", "UInt16"]
+- !private ["Sm", "UInt32"]
+- !private ["Sm", "bytes"]
+- !private ["Sm", "count"]
+- !private ["Sm", "init"]
+- !private ["Sm", "subscript"]
+- !private ["Sm", "toHexString"]
+- !private ["10Foundation20ReferenceConvertibleP", "Array"]
+- !private ["10Foundation20ReferenceConvertibleP", "Checksum"]
+- !private ["10Foundation20ReferenceConvertibleP", "Data"]
+- !private ["10Foundation20ReferenceConvertibleP", "Digest"]
+- !private ["10Foundation20ReferenceConvertibleP", "UInt16"]
+- !private ["10Foundation20ReferenceConvertibleP", "UInt32"]
+- !private ["10Foundation20ReferenceConvertibleP", "bytes"]
+- !private ["10Foundation20ReferenceConvertibleP", "init"]
+- ["11CryptoSwift4SHA3C", "Variant"]
+- !private ["ST", "Array"]
+- !private ["ST", "Checksum"]
+- !private ["ST", "Data"]
+- !private ["ST", "Digest"]
+- !private ["ST", "UInt16"]
+- !private ["ST", "UInt32"]
+- !private ["ST", "bytes"]
+- !private ["ST", "count"]
+- !private ["ST", "init"]
+- !private ["ST", "subscript"]
+- !private ["ST", "toHexString"]
+- !private ["Sx", "bytes"]
+- !private ["Sx", "init"]
+- !private ["s6UInt16V", "bytes"]
+- !private ["s6UInt16V", "init"]
+- !private ["s6UInt32V", "bytes"]
+- !private ["s6UInt32V", "init"]
+- !private ["SU", "bytes"]
+- !private ["SU", "init"]
+- ["11CryptoSwift9UpdatableP", "Variant"]
+- !private ["s18_BitwiseOperationsP", "bytes"]
+- !private ["s18_BitwiseOperationsP", "init"]
+- !private ["s24_DestructorSafeContainerP", "count"]
+- !private ["s24_DestructorSafeContainerP", "init"]
+- !private ["s24_DestructorSafeContainerP", "subscript"]
+- !private ["s24_DestructorSafeContainerP", "toHexString"]
+- !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "bytes"]
+- !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "init"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "bytes"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "count"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "init"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "subscript"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "toHexString"]
+- !private ["s21_ObjectiveCBridgeableP", "Array"]
+- !private ["s21_ObjectiveCBridgeableP", "Checksum"]
+- !private ["s21_ObjectiveCBridgeableP", "Data"]
+- !private ["s21_ObjectiveCBridgeableP", "Digest"]
+- !private ["s21_ObjectiveCBridgeableP", "UInt16"]
+- !private ["s21_ObjectiveCBridgeableP", "UInt32"]
+- !private ["s21_ObjectiveCBridgeableP", "bytes"]
+- !private ["s21_ObjectiveCBridgeableP", "count"]
+- !private ["s21_ObjectiveCBridgeableP", "init"]
+- !private ["s21_ObjectiveCBridgeableP", "subscript"]
+- !private ["s21_ObjectiveCBridgeableP", "toHexString"]
+- !private ["s14_StringElementP", "bytes"]
+- !private ["s14_StringElementP", "init"]
+- !private ["11CryptoSwift11_UInt32TypeP", "bytes"]
+- !private ["11CryptoSwift11_UInt32TypeP", "init"]
+depends-nominal:
+- !private "Sa"
+- !private "s13ArrayProtocolP"
+- !private "11CryptoSwift13AuthenticatorP"
+- !private "SK"
+- !private "Sz"
+- !private "11CryptoSwift11CSArrayTypeP"
+- !private "s7CVarArgP"
+- !private "11CryptoSwift8ChecksumC"
+- !private "11CryptoSwift6CipherP"
+- !private "Sl"
+- !private "SL"
+- !private "s28CustomDebugStringConvertibleP"
+- !private "s29CustomPlaygroundQuickLookableP"
+- !private "s17CustomReflectableP"
+- !private "s23CustomStringConvertibleP"
+- "10Foundation4DataV"
+- !private "Se"
+- !private "11CryptoSwift6DigestV"
+- "11CryptoSwift10DigestTypeP"
+- !private "SE"
+- !private "SQ"
+- !private "s25ExpressibleByArrayLiteralP"
+- !private "s27ExpressibleByIntegerLiteralP"
+- !private "s17FixedWidthIntegerP"
+- !private "SH"
+- !private "s25LosslessStringConvertibleP"
+- !private "SM"
+- !private "Sj"
+- !private "Sk"
+- !private "Sm"
+- !private "10Foundation20ReferenceConvertibleP"
+- "11CryptoSwift4SHA3C"
+- !private "ST"
+- !private "Sx"
+- !private "s6UInt16V"
+- !private "s6UInt32V"
+- !private "SU"
+- "11CryptoSwift9UpdatableP"
+- !private "s18_BitwiseOperationsP"
+- !private "s24_DestructorSafeContainerP"
+- !private "s35_ExpressibleByBuiltinIntegerLiteralP"
+- !private "s35_HasCustomAnyHashableRepresentationP"
+- !private "s21_ObjectiveCBridgeableP"
+- !private "s14_StringElementP"
+- !private "11CryptoSwift11_UInt32TypeP"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Dispatch.apinotesc"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/ObjectiveC.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/CoreImage.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/QuartzCore.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Dispatch.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Metal.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Darwin.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Foundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/CoreFoundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/CoreGraphics.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Swift.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/UIKit.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/SwiftOnoneSupport.swiftmodule"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/Pods/Target Support Files/CryptoSwift/CryptoSwift-umbrella.h"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/DerivedData2/Anonymouse/Build/Intermediates.noindex/Pods.build/Debug-iphoneos/CryptoSwift.build/unextended-module.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/usr/include/objc/ObjectiveC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/OpenGLES.framework/Headers/OpenGLES.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CoreImage.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Metal.framework/Headers/Metal.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/usr/include/Darwin.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
+interface-hash: "c9906a2297f6b88ef83c30102ef087f1"

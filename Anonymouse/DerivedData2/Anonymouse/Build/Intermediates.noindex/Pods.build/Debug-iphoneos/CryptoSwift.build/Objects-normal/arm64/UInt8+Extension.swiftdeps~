@@ -1,0 +1,442 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "_UInt8Type"
+provides-nominal:
+- "11CryptoSwift10_UInt8TypeP"
+- "s5UInt8V"
+provides-member:
+- ["11CryptoSwift10_UInt8TypeP", ""]
+- ["s5UInt8V", ""]
+- ["s5UInt8V", "with"]
+- ["s5UInt8V", "with"]
+- ["s5UInt8V", "with"]
+- ["s5UInt8V", "init"]
+- ["s5UInt8V", "bits"]
+- ["s5UInt8V", "bits"]
+provides-dynamic-lookup:
+depends-top-level:
+- !private "!="
+- !private "%"
+- !private "&"
+- !private "*"
+- !private "+="
+- !private "-"
+- !private "..<"
+- !private "<<"
+- !private "=="
+- "AssignmentPrecedence"
+- "Bit"
+- "CastingPrecedence"
+- !private "FloatLiteralType"
+- !private "IntegerLiteralType"
+- !private "MemoryLayout"
+- "String"
+- !private "StringLiteralType"
+- "TernaryPrecedence"
+- "UInt16"
+- "UInt32"
+- "UInt64"
+- "UInt8"
+- !private "UnicodeScalarType"
+- "_UInt8Type"
+- !private "integerFrom"
+depends-member:
+- !private ["Sa", "indices"]
+- !private ["Sa", "init"]
+- !private ["Sa", "subscript"]
+- !private ["s13ArrayProtocolP", "indices"]
+- !private ["s13ArrayProtocolP", "init"]
+- !private ["s13ArrayProtocolP", "subscript"]
+- !private ["SK", "indices"]
+- !private ["SK", "init"]
+- !private ["SK", "init"]
+- !private ["SK", "subscript"]
+- !private ["Sz", "Bit"]
+- !private ["Sz", "MemoryLayout"]
+- !private ["Sz", "String"]
+- !private ["Sz", "UInt8"]
+- !private ["Sz", "advanced"]
+- !private ["Sz", "bits"]
+- !private ["Sz", "init"]
+- !private ["Sz", "integerFrom"]
+- !private ["11CryptoSwift3BitO", "deinit"]
+- !private ["11CryptoSwift3BitO", "one"]
+- !private ["11CryptoSwift3BitO", "zero"]
+- !private ["Sb", "_getBuiltinLogicValue"]
+- !private ["11CryptoSwift11CSArrayTypeP", "indices"]
+- !private ["11CryptoSwift11CSArrayTypeP", "init"]
+- !private ["11CryptoSwift11CSArrayTypeP", "subscript"]
+- !private ["s7CVarArgP", "Bit"]
+- !private ["s7CVarArgP", "MemoryLayout"]
+- !private ["s7CVarArgP", "String"]
+- !private ["s7CVarArgP", "UInt8"]
+- !private ["s7CVarArgP", "_getBuiltinLogicValue"]
+- !private ["s7CVarArgP", "advanced"]
+- !private ["s7CVarArgP", "bits"]
+- !private ["s7CVarArgP", "indices"]
+- !private ["s7CVarArgP", "init"]
+- !private ["s7CVarArgP", "init"]
+- !private ["s7CVarArgP", "integerFrom"]
+- !private ["s7CVarArgP", "subscript"]
+- !private ["Sl", "indices"]
+- !private ["Sl", "init"]
+- !private ["Sl", "init"]
+- !private ["Sl", "subscript"]
+- !private ["SL", "Bit"]
+- !private ["SL", "MemoryLayout"]
+- !private ["SL", "String"]
+- !private ["SL", "UInt8"]
+- !private ["SL", "advanced"]
+- !private ["SL", "bits"]
+- !private ["SL", "init"]
+- !private ["SL", "init"]
+- !private ["SL", "integerFrom"]
+- !private ["s28CustomDebugStringConvertibleP", "indices"]
+- !private ["s28CustomDebugStringConvertibleP", "init"]
+- !private ["s28CustomDebugStringConvertibleP", "init"]
+- !private ["s28CustomDebugStringConvertibleP", "subscript"]
+- !private ["s29CustomPlaygroundQuickLookableP", "Bit"]
+- !private ["s29CustomPlaygroundQuickLookableP", "MemoryLayout"]
+- !private ["s29CustomPlaygroundQuickLookableP", "String"]
+- !private ["s29CustomPlaygroundQuickLookableP", "UInt8"]
+- !private ["s29CustomPlaygroundQuickLookableP", "_getBuiltinLogicValue"]
+- !private ["s29CustomPlaygroundQuickLookableP", "advanced"]
+- !private ["s29CustomPlaygroundQuickLookableP", "bits"]
+- !private ["s29CustomPlaygroundQuickLookableP", "init"]
+- !private ["s29CustomPlaygroundQuickLookableP", "init"]
+- !private ["s29CustomPlaygroundQuickLookableP", "integerFrom"]
+- !private ["s17CustomReflectableP", "Bit"]
+- !private ["s17CustomReflectableP", "MemoryLayout"]
+- !private ["s17CustomReflectableP", "String"]
+- !private ["s17CustomReflectableP", "UInt8"]
+- !private ["s17CustomReflectableP", "_getBuiltinLogicValue"]
+- !private ["s17CustomReflectableP", "advanced"]
+- !private ["s17CustomReflectableP", "bits"]
+- !private ["s17CustomReflectableP", "indices"]
+- !private ["s17CustomReflectableP", "init"]
+- !private ["s17CustomReflectableP", "init"]
+- !private ["s17CustomReflectableP", "integerFrom"]
+- !private ["s17CustomReflectableP", "subscript"]
+- !private ["s23CustomStringConvertibleP", "Bit"]
+- !private ["s23CustomStringConvertibleP", "MemoryLayout"]
+- !private ["s23CustomStringConvertibleP", "String"]
+- !private ["s23CustomStringConvertibleP", "UInt8"]
+- !private ["s23CustomStringConvertibleP", "_getBuiltinLogicValue"]
+- !private ["s23CustomStringConvertibleP", "advanced"]
+- !private ["s23CustomStringConvertibleP", "bits"]
+- !private ["s23CustomStringConvertibleP", "indices"]
+- !private ["s23CustomStringConvertibleP", "init"]
+- !private ["s23CustomStringConvertibleP", "init"]
+- !private ["s23CustomStringConvertibleP", "integerFrom"]
+- !private ["s23CustomStringConvertibleP", "subscript"]
+- !private ["Se", "Bit"]
+- !private ["Se", "MemoryLayout"]
+- !private ["Se", "String"]
+- !private ["Se", "UInt8"]
+- !private ["Se", "_getBuiltinLogicValue"]
+- !private ["Se", "advanced"]
+- !private ["Se", "bits"]
+- !private ["Se", "indices"]
+- !private ["Se", "init"]
+- !private ["Se", "init"]
+- !private ["Se", "integerFrom"]
+- !private ["Se", "subscript"]
+- !private ["SE", "Bit"]
+- !private ["SE", "MemoryLayout"]
+- !private ["SE", "String"]
+- !private ["SE", "UInt8"]
+- !private ["SE", "_getBuiltinLogicValue"]
+- !private ["SE", "advanced"]
+- !private ["SE", "bits"]
+- !private ["SE", "indices"]
+- !private ["SE", "init"]
+- !private ["SE", "init"]
+- !private ["SE", "integerFrom"]
+- !private ["SE", "subscript"]
+- !private ["SQ", "Bit"]
+- !private ["SQ", "MemoryLayout"]
+- !private ["SQ", "String"]
+- !private ["SQ", "UInt8"]
+- !private ["SQ", "_getBuiltinLogicValue"]
+- !private ["SQ", "advanced"]
+- !private ["SQ", "bits"]
+- !private ["SQ", "indices"]
+- !private ["SQ", "init"]
+- !private ["SQ", "init"]
+- !private ["SQ", "integerFrom"]
+- !private ["SQ", "one"]
+- !private ["SQ", "subscript"]
+- !private ["SQ", "zero"]
+- !private ["s25ExpressibleByArrayLiteralP", "indices"]
+- !private ["s25ExpressibleByArrayLiteralP", "init"]
+- !private ["s25ExpressibleByArrayLiteralP", "subscript"]
+- !private ["s27ExpressibleByBooleanLiteralP", "_getBuiltinLogicValue"]
+- !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "init"]
+- !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "init"]
+- !private ["s27ExpressibleByIntegerLiteralP", "Bit"]
+- !private ["s27ExpressibleByIntegerLiteralP", "MemoryLayout"]
+- !private ["s27ExpressibleByIntegerLiteralP", "String"]
+- !private ["s27ExpressibleByIntegerLiteralP", "UInt8"]
+- !private ["s27ExpressibleByIntegerLiteralP", "advanced"]
+- !private ["s27ExpressibleByIntegerLiteralP", "bits"]
+- !private ["s27ExpressibleByIntegerLiteralP", "init"]
+- !private ["s27ExpressibleByIntegerLiteralP", "integerFrom"]
+- !private ["s26ExpressibleByStringLiteralP", "init"]
+- !private ["s26ExpressibleByStringLiteralP", "init"]
+- !private ["s33ExpressibleByUnicodeScalarLiteralP", "init"]
+- !private ["s33ExpressibleByUnicodeScalarLiteralP", "init"]
+- !private ["s17FixedWidthIntegerP", "Bit"]
+- !private ["s17FixedWidthIntegerP", "MemoryLayout"]
+- !private ["s17FixedWidthIntegerP", "String"]
+- !private ["s17FixedWidthIntegerP", "UInt8"]
+- !private ["s17FixedWidthIntegerP", "advanced"]
+- !private ["s17FixedWidthIntegerP", "bits"]
+- !private ["s17FixedWidthIntegerP", "init"]
+- !private ["s17FixedWidthIntegerP", "integerFrom"]
+- !private ["SH", "Bit"]
+- !private ["SH", "MemoryLayout"]
+- !private ["SH", "String"]
+- !private ["SH", "UInt8"]
+- !private ["SH", "_getBuiltinLogicValue"]
+- !private ["SH", "advanced"]
+- !private ["SH", "bits"]
+- !private ["SH", "indices"]
+- !private ["SH", "init"]
+- !private ["SH", "init"]
+- !private ["SH", "integerFrom"]
+- !private ["SH", "one"]
+- !private ["SH", "subscript"]
+- !private ["SH", "zero"]
+- !private ["Si", "advanced"]
+- !private ["s25LosslessStringConvertibleP", "Bit"]
+- !private ["s25LosslessStringConvertibleP", "MemoryLayout"]
+- !private ["s25LosslessStringConvertibleP", "String"]
+- !private ["s25LosslessStringConvertibleP", "UInt8"]
+- !private ["s25LosslessStringConvertibleP", "_getBuiltinLogicValue"]
+- !private ["s25LosslessStringConvertibleP", "advanced"]
+- !private ["s25LosslessStringConvertibleP", "bits"]
+- !private ["s25LosslessStringConvertibleP", "init"]
+- !private ["s25LosslessStringConvertibleP", "init"]
+- !private ["s25LosslessStringConvertibleP", "integerFrom"]
+- !private ["s12MemoryLayoutO", "size"]
+- !private ["s10MirrorPathP", "advanced"]
+- !private ["s10MirrorPathP", "init"]
+- !private ["s10MirrorPathP", "init"]
+- !private ["SM", "indices"]
+- !private ["SM", "init"]
+- !private ["SM", "subscript"]
+- !private ["Sj", "Bit"]
+- !private ["Sj", "MemoryLayout"]
+- !private ["Sj", "String"]
+- !private ["Sj", "UInt8"]
+- !private ["Sj", "advanced"]
+- !private ["Sj", "bits"]
+- !private ["Sj", "init"]
+- !private ["Sj", "integerFrom"]
+- !private ["Sk", "indices"]
+- !private ["Sk", "init"]
+- !private ["Sk", "subscript"]
+- !private ["Sm", "indices"]
+- !private ["Sm", "init"]
+- !private ["Sm", "init"]
+- !private ["Sm", "subscript"]
+- !private ["SY", "one"]
+- !private ["SY", "zero"]
+- !private ["ST", "indices"]
+- !private ["ST", "init"]
+- !private ["ST", "init"]
+- !private ["ST", "subscript"]
+- !private ["SZ", "advanced"]
+- !private ["s13SignedNumericP", "advanced"]
+- !private ["Sx", "Bit"]
+- !private ["Sx", "MemoryLayout"]
+- !private ["Sx", "String"]
+- !private ["Sx", "UInt8"]
+- !private ["Sx", "advanced"]
+- !private ["Sx", "bits"]
+- !private ["Sx", "init"]
+- !private ["Sx", "integerFrom"]
+- !private ["SS", "init"]
+- !private ["SS", "init"]
+- !private ["Sy", "init"]
+- !private ["Sy", "init"]
+- !private ["s16TextOutputStreamP", "init"]
+- !private ["s16TextOutputStreamP", "init"]
+- !private ["s20TextOutputStreamableP", "init"]
+- !private ["s20TextOutputStreamableP", "init"]
+- ["s5UInt8V", "Bit"]
+- !private ["s5UInt8V", "MemoryLayout"]
+- ["s5UInt8V", "String"]
+- ["s5UInt8V", "UInt16"]
+- ["s5UInt8V", "UInt32"]
+- ["s5UInt8V", "UInt64"]
+- ["s5UInt8V", "UInt8"]
+- ["s5UInt8V", "bits"]
+- ["s5UInt8V", "deinit"]
+- ["s5UInt8V", "init"]
+- !private ["s5UInt8V", "integerFrom"]
+- ["s5UInt8V", "with"]
+- !private ["SU", "Bit"]
+- !private ["SU", "MemoryLayout"]
+- !private ["SU", "String"]
+- !private ["SU", "UInt8"]
+- !private ["SU", "bits"]
+- !private ["SU", "init"]
+- !private ["SU", "integerFrom"]
+- !private ["s18_BitwiseOperationsP", "Bit"]
+- !private ["s18_BitwiseOperationsP", "MemoryLayout"]
+- !private ["s18_BitwiseOperationsP", "String"]
+- !private ["s18_BitwiseOperationsP", "UInt8"]
+- !private ["s18_BitwiseOperationsP", "advanced"]
+- !private ["s18_BitwiseOperationsP", "bits"]
+- !private ["s18_BitwiseOperationsP", "init"]
+- !private ["s18_BitwiseOperationsP", "integerFrom"]
+- !private ["s24_DestructorSafeContainerP", "indices"]
+- !private ["s24_DestructorSafeContainerP", "init"]
+- !private ["s24_DestructorSafeContainerP", "subscript"]
+- !private ["s35_ExpressibleByBuiltinBooleanLiteralP", "_getBuiltinLogicValue"]
+- !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "init"]
+- !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "init"]
+- !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "Bit"]
+- !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "MemoryLayout"]
+- !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "String"]
+- !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "UInt8"]
+- !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "advanced"]
+- !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "bits"]
+- !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "init"]
+- !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "integerFrom"]
+- !private ["s34_ExpressibleByBuiltinStringLiteralP", "init"]
+- !private ["s34_ExpressibleByBuiltinStringLiteralP", "init"]
+- !private ["s39_ExpressibleByBuiltinUTF16StringLiteralP", "init"]
+- !private ["s39_ExpressibleByBuiltinUTF16StringLiteralP", "init"]
+- !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "init"]
+- !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "init"]
+- !private ["s33_ExpressibleByStringInterpolationP", "init"]
+- !private ["s33_ExpressibleByStringInterpolationP", "init"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "Bit"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "MemoryLayout"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "String"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "UInt8"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "advanced"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "bits"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "indices"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "init"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "integerFrom"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "subscript"]
+- !private ["s21_ObjectiveCBridgeableP", "Bit"]
+- !private ["s21_ObjectiveCBridgeableP", "MemoryLayout"]
+- !private ["s21_ObjectiveCBridgeableP", "String"]
+- !private ["s21_ObjectiveCBridgeableP", "UInt8"]
+- !private ["s21_ObjectiveCBridgeableP", "_getBuiltinLogicValue"]
+- !private ["s21_ObjectiveCBridgeableP", "advanced"]
+- !private ["s21_ObjectiveCBridgeableP", "bits"]
+- !private ["s21_ObjectiveCBridgeableP", "indices"]
+- !private ["s21_ObjectiveCBridgeableP", "init"]
+- !private ["s21_ObjectiveCBridgeableP", "init"]
+- !private ["s21_ObjectiveCBridgeableP", "integerFrom"]
+- !private ["s21_ObjectiveCBridgeableP", "subscript"]
+- !private ["s14_StringElementP", "Bit"]
+- !private ["s14_StringElementP", "MemoryLayout"]
+- !private ["s14_StringElementP", "String"]
+- !private ["s14_StringElementP", "UInt8"]
+- !private ["s14_StringElementP", "bits"]
+- !private ["s14_StringElementP", "init"]
+- !private ["s14_StringElementP", "integerFrom"]
+- !private ["s16_SwiftStringViewP", "init"]
+- !private ["s16_SwiftStringViewP", "init"]
+- !private ["11CryptoSwift10_UInt8TypeP", "Bit"]
+- !private ["11CryptoSwift10_UInt8TypeP", "MemoryLayout"]
+- !private ["11CryptoSwift10_UInt8TypeP", "String"]
+- !private ["11CryptoSwift10_UInt8TypeP", "UInt8"]
+- ["11CryptoSwift10_UInt8TypeP", ""]
+- !private ["11CryptoSwift10_UInt8TypeP", "bits"]
+- !private ["11CryptoSwift10_UInt8TypeP", "init"]
+- !private ["11CryptoSwift10_UInt8TypeP", "integerFrom"]
+depends-nominal:
+- !private "Sa"
+- !private "s13ArrayProtocolP"
+- !private "SK"
+- !private "Sz"
+- !private "11CryptoSwift3BitO"
+- !private "Sb"
+- !private "11CryptoSwift11CSArrayTypeP"
+- !private "s7CVarArgP"
+- !private "Sl"
+- !private "SL"
+- !private "s28CustomDebugStringConvertibleP"
+- !private "s29CustomPlaygroundQuickLookableP"
+- !private "s17CustomReflectableP"
+- !private "s23CustomStringConvertibleP"
+- !private "Se"
+- !private "SE"
+- !private "SQ"
+- !private "s25ExpressibleByArrayLiteralP"
+- !private "s27ExpressibleByBooleanLiteralP"
+- !private "s43ExpressibleByExtendedGraphemeClusterLiteralP"
+- !private "s27ExpressibleByIntegerLiteralP"
+- !private "s26ExpressibleByStringLiteralP"
+- !private "s33ExpressibleByUnicodeScalarLiteralP"
+- !private "s17FixedWidthIntegerP"
+- !private "SH"
+- !private "Si"
+- !private "s25LosslessStringConvertibleP"
+- !private "s12MemoryLayoutO"
+- !private "s10MirrorPathP"
+- !private "SM"
+- !private "Sj"
+- !private "Sk"
+- !private "Sm"
+- !private "SY"
+- !private "ST"
+- !private "SZ"
+- !private "s13SignedNumericP"
+- !private "Sx"
+- !private "SS"
+- !private "Sy"
+- !private "s16TextOutputStreamP"
+- !private "s20TextOutputStreamableP"
+- "s5UInt8V"
+- !private "SU"
+- !private "s18_BitwiseOperationsP"
+- !private "s24_DestructorSafeContainerP"
+- !private "s35_ExpressibleByBuiltinBooleanLiteralP"
+- !private "s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP"
+- !private "s35_ExpressibleByBuiltinIntegerLiteralP"
+- !private "s34_ExpressibleByBuiltinStringLiteralP"
+- !private "s39_ExpressibleByBuiltinUTF16StringLiteralP"
+- !private "s41_ExpressibleByBuiltinUnicodeScalarLiteralP"
+- !private "s33_ExpressibleByStringInterpolationP"
+- !private "s35_HasCustomAnyHashableRepresentationP"
+- !private "s21_ObjectiveCBridgeableP"
+- !private "s14_StringElementP"
+- !private "s16_SwiftStringViewP"
+- "11CryptoSwift10_UInt8TypeP"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Dispatch.apinotesc"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/ObjectiveC.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/CoreImage.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/QuartzCore.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Dispatch.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Metal.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Darwin.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Foundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/CoreFoundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/CoreGraphics.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Swift.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/UIKit.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/SwiftOnoneSupport.swiftmodule"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/Pods/Target Support Files/CryptoSwift/CryptoSwift-umbrella.h"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/DerivedData2/Anonymouse/Build/Intermediates.noindex/Pods.build/Debug-iphoneos/CryptoSwift.build/unextended-module.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/usr/include/objc/ObjectiveC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/OpenGLES.framework/Headers/OpenGLES.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CoreImage.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Metal.framework/Headers/Metal.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/usr/include/Darwin.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
+interface-hash: "114d2340a989cf706db9edb313594430"

@@ -828,6 +828,114 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
         }
         
     }
+    
+    /**Notifies the delegate that the network is ready to publish the service.*/
+    func netServiceWillPublish(_: NetService) {
+        NSLog("netServiceWillPublish")
+    }
+    
+    /**Notifies the delegate that a service could not be published.*/
+    func netService(_: NetService, didNotPublish: [String : NSNumber]){
+        NSLog("the delegate that a service could not be published")
+    }
+    
+    /**Notifies the delegate that a service was successfully published.*/
+    func netServiceDidPublish(_: NetService){
+        NSLog("a service was successfully published")
+    }
+    
+    /**Notifies the delegate that the network is ready to resolve the service.*/
+    func netServiceWillResolve(_: NetService){
+        NSLog("the network is ready to resolve the service")
+    }
+    
+    /**Informs the delegate that an error occurred during resolution of a given service.*/
+    func netService(_: NetService, didNotResolve: [String : NSNumber]){
+        NSLog("an error occurred during resolution of a given service")
+    }
+    
+    /**Informs the delegate that the address for a given service was resolved.*/
+    func netServiceDidResolveAddress(_: NetService){
+        NSLog("the address for a given service was resolved.")
+    }
+    
+    /** Notifies the delegate that the TXT record for a given service has been updated.*/
+    func netService(_: NetService, didUpdateTXTRecord: Data){
+        NSLog(" the TXT record for a given service has been updated.")
+    }
+    
+    /**Informs the delegate that a publish() or resolve(withTimeout:) request was stopped.*/
+    func netServiceDidStop(_: NetService){
+        NSLog("a publish() or resolve(withTimeout:) request was stopped")
+    }
+    func netService(_ sender: NetService, didAcceptConnectionWith inputStream: InputStream,   outputStream: OutputStream){
+        NSLog("Service accept connection")
+        inputStream.delegate = self
+        outputStream.delegate = self
+        inputStream.schedule(in: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
+        outputStream.schedule(in: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
+        inputStream.open()
+        outputStream.open()
+        //    outputs.append(outputStream)
+        handleDataTransfer(from: inputStream, to: outputStream)
+    }
+    // netService Browser delegate
+    /**Tells the delegate the sender found a domain.*/
+    func netServiceBrowser(_: NetServiceBrowser, didFindDomain: String, moreComing: Bool){
+        NSLog(" the sender found a domain")
+    }
+    
+    
+    /**Tells the delegate the a domain has disappeared or has become unavailable.*/
+    func netServiceBrowser(_: NetServiceBrowser, didRemoveDomain: String, moreComing: Bool){
+        NSLog("a domain has disappeared or has become unavailable")
+    }
+    
+    
+    /**Tells the delegate the sender found a service.*/
+    func netServiceBrowser(_: NetServiceBrowser, didFind: NetService, moreComing: Bool){
+        
+        NSLog("Found and Connected to service")
+        var inputStream : InputStream?
+        var outputStream : OutputStream?
+        didFind.getInputStream(&inputStream, outputStream:&outputStream)
+        inputStream!.delegate = self
+        outputStream!.delegate = self
+        inputStream!.schedule(in: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
+        outputStream!.schedule(in: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
+        inputStream!.open()
+        outputStream!.open()
+        //        outputs.append(outputStream!)
+        handleDataTransfer(from: (inputStream)!, to:(outputStream)!)
+    }
+    
+    
+    /**Tells the delegate a service has disappeared or has become unavailable.*/
+    func netServiceBrowser(_: NetServiceBrowser, didRemove: NetService, moreComing: Bool){
+        NSLog(" a service has disappeared or has become unavailable")
+    }
+    
+    /**Tells the delegate that a search is commencing.*/
+    func netServiceBrowserWillSearch(_: NetServiceBrowser){
+        NSLog("a search is commencing")
+    }
+    
+    /**Tells the delegate that a search was not successful.*/
+    func netServiceBrowser(_: NetServiceBrowser, didNotSearch: [String : NSNumber]){
+        NSLog("a search was not successful")
+    }
+    
+    
+    /**Tells the delegate that a search was stopped.*/
+    func netServiceBrowserDidStopSearch(_: NetServiceBrowser){
+        NSLog(" a search was stopped")
+    }
+    
+    func handleDataTransfer(from inputStream: InputStream, to outputStream:  OutputStream){
+        NSLog("Transfer Data")
+        sendAllMessages(toStream: outputStream)
+        //sendAllReplies(toStream: outputStream)
+    }
 }
 
 
