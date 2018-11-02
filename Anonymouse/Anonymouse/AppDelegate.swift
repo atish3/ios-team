@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var centralDelegate: AnonymouseCentralManagerDelegate!
     var region : CLBeaconRegion? = nil;
     let locationManager : CLLocationManager = CLLocationManager.init();
+    var newManager: CBCentralManager = CBCentralManager.init()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -29,6 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         peripheralDelegate = AnonymousePeripheralManagerDelegate()
         connectivityController = AnonymouseConnectivityController()
         centralDelegate = AnonymouseCentralManagerDelegate()
+        newManager = CBCentralManager.init(delegate: self.centralDelegate, queue: nil, options: nil)
         
         
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
@@ -61,42 +63,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidEnterBackground(_ application: UIApplication) {
         print("Did enter background");
-        var bgTask = application.beginBackgroundTask()
-        
-        switch CLLocationManager.authorizationStatus(){
-        case .notDetermined:
-            while(CLLocationManager.authorizationStatus() == .notDetermined){
-                locationManager.requestAlwaysAuthorization()
-            }
-            break
-        default:
-            break
+        var newUUID : CBUUID
+        newUUID = CBUUID.init(string: "E2C56DB5-DFFB-48D2-B060-D0F5A71096E0")
+        print(newManager.state.rawValue)
+        if(newManager.state == .poweredOn){
+            newManager.scanForPeripherals(withServices: [newUUID], options: nil)
         }
-            // Clean up any unfinished task business by marking where you
-            // stopped or ending the task outright.
-        
-        DispatchQueue.main.async {
-            if(CLLocationManager.authorizationStatus() == .authorizedAlways){
-                // Enable any of your app's location features
-                self.region = CLBeaconRegion.init(proximityUUID: UUID.init(uuidString: "E2C56DB5-DFFB-48D2-B060-D0F5A71096E0")!, identifier: "App")
-                
-                if(self.region != nil){
-                    self.locationManager.stopMonitoring(for: self.region!)
-                }
-                self.region = nil;
-                self.region = CLBeaconRegion.init(proximityUUID: UUID.init(uuidString: "E2C56DB5-DFFB-48D2-B060-D0F5A71096E0")!, major: 0, minor: 0, identifier: "App")
-                if((self.region) != nil){
-                        self.locationManager.startMonitoring(for: self.region!)
-                }
-            }
-            // Clean up any unfinished task business by marking where you
-            // stopped or ending the task outright.
-            
-            self.dataController.saveContext()
-
-            }
-        
+        print(newManager.isScanning)
     }
+    
         
     
     

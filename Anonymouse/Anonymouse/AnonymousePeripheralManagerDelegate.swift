@@ -22,6 +22,11 @@ class AnonymousePeripheralManagerDelegate: NSObject, CBPeripheralManagerDelegate
             break;
         case .unknown:
             print("Unknown")
+            break;
+        case .poweredOff:
+            print("Turn on Bluetooth")
+            //Prompt user to turn on Bluetooth
+            break;
         default:
             print(peripheral.state.rawValue);
             break;
@@ -34,6 +39,18 @@ class AnonymousePeripheralManagerDelegate: NSObject, CBPeripheralManagerDelegate
         }
         else{
             print("Started Advertising Successfully")
+            print(peripheral.isAdvertising)
+        }
+    }
+    
+    func peripheralManager(_ peripheral: CBPeripheralManager,
+                                    didAdd service: CBService,
+                                    error: Error?){
+        if(error != nil){
+            print(error!)
+        }
+        else{
+            print("Added successfully")
         }
     }
     

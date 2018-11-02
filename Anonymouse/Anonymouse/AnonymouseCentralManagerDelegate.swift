@@ -17,7 +17,7 @@ class AnonymouseCentralManagerDelegate: NSObject, CBCentralManagerDelegate {
     weak var dataController: AnonymouseDataController! = (UIApplication.shared.delegate as! AppDelegate).dataController
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        print("State updated")
+        print("Central State updated")
         switch(central.state){
         case .poweredOn:
             print("Powered on")
@@ -40,5 +40,6 @@ class AnonymouseCentralManagerDelegate: NSObject, CBCentralManagerDelegate {
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         print(RSSI)
+        print("FOUND ONE")
     }
 }
