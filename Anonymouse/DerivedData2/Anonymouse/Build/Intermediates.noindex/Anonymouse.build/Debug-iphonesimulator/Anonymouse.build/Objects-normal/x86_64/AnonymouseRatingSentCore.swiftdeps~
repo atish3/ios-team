@@ -1,0 +1,525 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "AnonymouseRatingSentCore"
+provides-nominal:
+- "10Anonymouse0A14RatingSentCoreC"
+provides-member:
+- ["10Anonymouse0A14RatingSentCoreC", ""]
+provides-dynamic-lookup:
+- "encode"
+- "messageHash"
+- "randNum"
+depends-top-level:
+- !private "*"
+- !private "AnonymouseConnectivityController"
+- "AnonymouseMessageCore"
+- "AnonymouseRatingSentCore"
+- "AnonymouseReplyCore"
+- !private "AppDelegate"
+- "AssignmentPrecedence"
+- "CastingPrecedence"
+- !private "Date"
+- "Double"
+- "FloatLiteralType"
+- "Int"
+- "NSCoder"
+- "NSCoding"
+- "NSObject"
+- "String"
+- !private "StringLiteralType"
+- !private "UIApplication"
+- !private "arc4random"
+- !private "drand48"
+depends-member:
+- !private ["10Anonymouse0A22ConnectivityControllerC", "sendRatingViaHTTP"]
+- !private ["10Anonymouse0A11MessageCoreC", "rating"]
+- !private ["10Anonymouse0A11MessageCoreC", "text"]
+- !private ["10Anonymouse0A14RatingSentCoreC", "AnonymouseConnectivityController"]
+- ["10Anonymouse0A14RatingSentCoreC", "AnonymouseMessageCore"]
+- ["10Anonymouse0A14RatingSentCoreC", "AnonymouseReplyCore"]
+- !private ["10Anonymouse0A14RatingSentCoreC", "AppDelegate"]
+- !private ["10Anonymouse0A14RatingSentCoreC", "Date"]
+- ["10Anonymouse0A14RatingSentCoreC", "Double"]
+- ["10Anonymouse0A14RatingSentCoreC", "Int"]
+- ["10Anonymouse0A14RatingSentCoreC", "NSCoder"]
+- ["10Anonymouse0A14RatingSentCoreC", "String"]
+- !private ["10Anonymouse0A14RatingSentCoreC", "UIApplication"]
+- !private ["10Anonymouse0A14RatingSentCoreC", "arc4random"]
+- ["10Anonymouse0A14RatingSentCoreC", "deinit"]
+- !private ["10Anonymouse0A14RatingSentCoreC", "drand48"]
+- ["10Anonymouse0A14RatingSentCoreC", "encode"]
+- ["10Anonymouse0A14RatingSentCoreC", "encodeWithCoder"]
+- ["10Anonymouse0A14RatingSentCoreC", "init"]
+- ["10Anonymouse0A14RatingSentCoreC", "messageHash"]
+- ["10Anonymouse0A14RatingSentCoreC", "randNum"]
+- ["10Anonymouse0A14RatingSentCoreC", "rating"]
+- !private ["10Anonymouse0A9ReplyCoreC", "rating"]
+- !private ["10Anonymouse0A9ReplyCoreC", "text"]
+- !private ["10Anonymouse11AppDelegateC", "connectivityController"]
+- !private ["SK", "init"]
+- !private ["SK", "init"]
+- !private ["SK", "sha1"]
+- !private ["SB", "init"]
+- !private ["s7CVarArgP", "Date"]
+- !private ["s7CVarArgP", "Double"]
+- !private ["s7CVarArgP", "UIApplication"]
+- ["s7CVarArgP", ""]
+- !private ["s7CVarArgP", "arc4random"]
+- !private ["s7CVarArgP", "connectivityController"]
+- !private ["s7CVarArgP", "decodeDouble"]
+- !private ["s7CVarArgP", "decodeInteger"]
+- !private ["s7CVarArgP", "decodeObject"]
+- !private ["s7CVarArgP", "delegate"]
+- !private ["s7CVarArgP", "drand48"]
+- ["s7CVarArgP", "encode"]
+- ["s7CVarArgP", "encodeWithCoder"]
+- ["s7CVarArgP", "init"]
+- !private ["s7CVarArgP", "init"]
+- !private ["s7CVarArgP", "intValue"]
+- !private ["s7CVarArgP", "messageHash"]
+- !private ["s7CVarArgP", "randNum"]
+- !private ["s7CVarArgP", "rating"]
+- !private ["s7CVarArgP", "sendRatingViaHTTP"]
+- !private ["s7CVarArgP", "sha1"]
+- !private ["s7CVarArgP", "shared"]
+- !private ["s7CVarArgP", "text"]
+- !private ["Sl", "init"]
+- !private ["Sl", "init"]
+- !private ["Sl", "sha1"]
+- !private ["SL", "init"]
+- !private ["SL", "init"]
+- !private ["SL", "sha1"]
+- !private ["s28CustomDebugStringConvertibleP", "Date"]
+- !private ["s28CustomDebugStringConvertibleP", "Double"]
+- !private ["s28CustomDebugStringConvertibleP", "UIApplication"]
+- ["s28CustomDebugStringConvertibleP", ""]
+- !private ["s28CustomDebugStringConvertibleP", "arc4random"]
+- !private ["s28CustomDebugStringConvertibleP", "connectivityController"]
+- !private ["s28CustomDebugStringConvertibleP", "decodeDouble"]
+- !private ["s28CustomDebugStringConvertibleP", "decodeInteger"]
+- !private ["s28CustomDebugStringConvertibleP", "decodeObject"]
+- !private ["s28CustomDebugStringConvertibleP", "delegate"]
+- !private ["s28CustomDebugStringConvertibleP", "drand48"]
+- ["s28CustomDebugStringConvertibleP", "encode"]
+- ["s28CustomDebugStringConvertibleP", "encodeWithCoder"]
+- ["s28CustomDebugStringConvertibleP", "init"]
+- !private ["s28CustomDebugStringConvertibleP", "init"]
+- !private ["s28CustomDebugStringConvertibleP", "intValue"]
+- !private ["s28CustomDebugStringConvertibleP", "messageHash"]
+- !private ["s28CustomDebugStringConvertibleP", "randNum"]
+- !private ["s28CustomDebugStringConvertibleP", "rating"]
+- !private ["s28CustomDebugStringConvertibleP", "sendRatingViaHTTP"]
+- !private ["s28CustomDebugStringConvertibleP", "sha1"]
+- !private ["s28CustomDebugStringConvertibleP", "shared"]
+- !private ["s28CustomDebugStringConvertibleP", "text"]
+- !private ["s29CustomPlaygroundQuickLookableP", "init"]
+- !private ["s29CustomPlaygroundQuickLookableP", "init"]
+- !private ["s29CustomPlaygroundQuickLookableP", "sha1"]
+- !private ["s17CustomReflectableP", "init"]
+- !private ["s17CustomReflectableP", "init"]
+- !private ["s17CustomReflectableP", "sha1"]
+- !private ["s23CustomStringConvertibleP", "Date"]
+- !private ["s23CustomStringConvertibleP", "Double"]
+- !private ["s23CustomStringConvertibleP", "UIApplication"]
+- ["s23CustomStringConvertibleP", ""]
+- !private ["s23CustomStringConvertibleP", "arc4random"]
+- !private ["s23CustomStringConvertibleP", "connectivityController"]
+- !private ["s23CustomStringConvertibleP", "decodeDouble"]
+- !private ["s23CustomStringConvertibleP", "decodeInteger"]
+- !private ["s23CustomStringConvertibleP", "decodeObject"]
+- !private ["s23CustomStringConvertibleP", "delegate"]
+- !private ["s23CustomStringConvertibleP", "drand48"]
+- ["s23CustomStringConvertibleP", "encode"]
+- ["s23CustomStringConvertibleP", "encodeWithCoder"]
+- ["s23CustomStringConvertibleP", "init"]
+- !private ["s23CustomStringConvertibleP", "init"]
+- !private ["s23CustomStringConvertibleP", "intValue"]
+- !private ["s23CustomStringConvertibleP", "messageHash"]
+- !private ["s23CustomStringConvertibleP", "randNum"]
+- !private ["s23CustomStringConvertibleP", "rating"]
+- !private ["s23CustomStringConvertibleP", "sendRatingViaHTTP"]
+- !private ["s23CustomStringConvertibleP", "sha1"]
+- !private ["s23CustomStringConvertibleP", "shared"]
+- !private ["s23CustomStringConvertibleP", "text"]
+- !private ["10Foundation4DateV", "init"]
+- !private ["Se", "init"]
+- !private ["Se", "init"]
+- !private ["Se", "sha1"]
+- !private ["Sd", "init"]
+- !private ["SE", "init"]
+- !private ["SE", "init"]
+- !private ["SE", "sha1"]
+- !private ["SQ", "Date"]
+- !private ["SQ", "Double"]
+- !private ["SQ", "UIApplication"]
+- ["SQ", ""]
+- !private ["SQ", "arc4random"]
+- !private ["SQ", "connectivityController"]
+- !private ["SQ", "decodeDouble"]
+- !private ["SQ", "decodeInteger"]
+- !private ["SQ", "decodeObject"]
+- !private ["SQ", "delegate"]
+- !private ["SQ", "drand48"]
+- ["SQ", "encode"]
+- ["SQ", "encodeWithCoder"]
+- ["SQ", "init"]
+- !private ["SQ", "init"]
+- !private ["SQ", "intValue"]
+- !private ["SQ", "messageHash"]
+- !private ["SQ", "randNum"]
+- !private ["SQ", "rating"]
+- !private ["SQ", "sendRatingViaHTTP"]
+- !private ["SQ", "sha1"]
+- !private ["SQ", "shared"]
+- !private ["SQ", "text"]
+- !private ["s27ExpressibleByBooleanLiteralP", "intValue"]
+- !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "init"]
+- !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "init"]
+- !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "sha1"]
+- !private ["s25ExpressibleByFloatLiteralP", "init"]
+- !private ["s25ExpressibleByFloatLiteralP", "intValue"]
+- !private ["s27ExpressibleByIntegerLiteralP", "init"]
+- !private ["s27ExpressibleByIntegerLiteralP", "intValue"]
+- !private ["s26ExpressibleByStringLiteralP", "init"]
+- !private ["s26ExpressibleByStringLiteralP", "init"]
+- !private ["s26ExpressibleByStringLiteralP", "sha1"]
+- !private ["s33ExpressibleByUnicodeScalarLiteralP", "init"]
+- !private ["s33ExpressibleByUnicodeScalarLiteralP", "init"]
+- !private ["s33ExpressibleByUnicodeScalarLiteralP", "sha1"]
+- !private ["SF", "init"]
+- !private ["SH", "Date"]
+- !private ["SH", "Double"]
+- !private ["SH", "UIApplication"]
+- ["SH", ""]
+- !private ["SH", "arc4random"]
+- !private ["SH", "connectivityController"]
+- !private ["SH", "decodeDouble"]
+- !private ["SH", "decodeInteger"]
+- !private ["SH", "decodeObject"]
+- !private ["SH", "delegate"]
+- !private ["SH", "drand48"]
+- ["SH", "encode"]
+- ["SH", "encodeWithCoder"]
+- ["SH", "init"]
+- !private ["SH", "init"]
+- !private ["SH", "intValue"]
+- !private ["SH", "messageHash"]
+- !private ["SH", "randNum"]
+- !private ["SH", "rating"]
+- !private ["SH", "sendRatingViaHTTP"]
+- !private ["SH", "sha1"]
+- !private ["SH", "shared"]
+- !private ["SH", "text"]
+- !private ["10SwiftyJSON17JSONSubscriptTypeP", "init"]
+- !private ["10SwiftyJSON17JSONSubscriptTypeP", "init"]
+- !private ["10SwiftyJSON17JSONSubscriptTypeP", "sha1"]
+- !private ["s25LosslessStringConvertibleP", "init"]
+- !private ["s25LosslessStringConvertibleP", "init"]
+- !private ["s25LosslessStringConvertibleP", "sha1"]
+- !private ["s10MirrorPathP", "init"]
+- !private ["s10MirrorPathP", "init"]
+- !private ["s10MirrorPathP", "sha1"]
+- !private ["So7NSCoderC", "decodeDouble"]
+- !private ["So7NSCoderC", "decodeInteger"]
+- !private ["So7NSCoderC", "decodeObject"]
+- !private ["So7NSCoderC", "encode"]
+- !private ["So8NSCodingP", "Date"]
+- !private ["So8NSCodingP", "Double"]
+- !private ["So8NSCodingP", "UIApplication"]
+- ["So8NSCodingP", ""]
+- !private ["So8NSCodingP", "arc4random"]
+- !private ["So8NSCodingP", "drand48"]
+- ["So8NSCodingP", "encode"]
+- ["So8NSCodingP", "encodeWithCoder"]
+- ["So8NSCodingP", "init"]
+- !private ["So8NSCodingP", "intValue"]
+- !private ["So8NSCodingP", "messageHash"]
+- !private ["So8NSCodingP", "randNum"]
+- !private ["So8NSCodingP", "rating"]
+- !private ["So8NSCodingP", "sha1"]
+- !private ["So9NSCopyingP", "intValue"]
+- !private ["So9NSCopyingP", "sha1"]
+- !private ["So20NSFetchRequestResultP", "intValue"]
+- !private ["So20NSFetchRequestResultP", "rating"]
+- !private ["So20NSFetchRequestResultP", "text"]
+- !private ["So21NSItemProviderReadingP", "sha1"]
+- !private ["So21NSItemProviderWritingP", "sha1"]
+- !private ["So15NSManagedObjectC", "rating"]
+- !private ["So15NSManagedObjectC", "text"]
+- !private ["So16NSMutableCopyingP", "sha1"]
+- !private ["So8NSNumberC", "intValue"]
+- !private ["So8NSObjectC", "AnonymouseConnectivityController"]
+- ["So8NSObjectC", "AnonymouseMessageCore"]
+- ["So8NSObjectC", "AnonymouseReplyCore"]
+- !private ["So8NSObjectC", "AppDelegate"]
+- !private ["So8NSObjectC", "Date"]
+- ["So8NSObjectC", "Double"]
+- ["So8NSObjectC", "Int"]
+- ["So8NSObjectC", "NSCoder"]
+- ["So8NSObjectC", "String"]
+- !private ["So8NSObjectC", "UIApplication"]
+- ["So8NSObjectC", ""]
+- !private ["So8NSObjectC", "arc4random"]
+- !private ["So8NSObjectC", "connectivityController"]
+- !private ["So8NSObjectC", "decodeDouble"]
+- !private ["So8NSObjectC", "decodeInteger"]
+- !private ["So8NSObjectC", "decodeObject"]
+- !private ["So8NSObjectC", "delegate"]
+- !private ["So8NSObjectC", "drand48"]
+- ["So8NSObjectC", "encode"]
+- ["So8NSObjectC", "encodeWithCoder"]
+- ["So8NSObjectC", "init"]
+- !private ["So8NSObjectC", "init"]
+- !private ["So8NSObjectC", "intValue"]
+- ["So8NSObjectC", "messageHash"]
+- ["So8NSObjectC", "randNum"]
+- ["So8NSObjectC", "rating"]
+- !private ["So8NSObjectC", "sendRatingViaHTTP"]
+- !private ["So8NSObjectC", "sha1"]
+- !private ["So8NSObjectC", "shared"]
+- !private ["So8NSObjectC", "text"]
+- !private ["So8NSObjectP", "Date"]
+- !private ["So8NSObjectP", "Double"]
+- !private ["So8NSObjectP", "UIApplication"]
+- ["So8NSObjectP", ""]
+- !private ["So8NSObjectP", "arc4random"]
+- !private ["So8NSObjectP", "connectivityController"]
+- !private ["So8NSObjectP", "decodeDouble"]
+- !private ["So8NSObjectP", "decodeInteger"]
+- !private ["So8NSObjectP", "decodeObject"]
+- !private ["So8NSObjectP", "delegate"]
+- !private ["So8NSObjectP", "drand48"]
+- ["So8NSObjectP", "encode"]
+- ["So8NSObjectP", "encodeWithCoder"]
+- ["So8NSObjectP", "init"]
+- !private ["So8NSObjectP", "init"]
+- !private ["So8NSObjectP", "intValue"]
+- !private ["So8NSObjectP", "messageHash"]
+- !private ["So8NSObjectP", "randNum"]
+- !private ["So8NSObjectP", "rating"]
+- !private ["So8NSObjectP", "sendRatingViaHTTP"]
+- !private ["So8NSObjectP", "sha1"]
+- !private ["So8NSObjectP", "shared"]
+- !private ["So8NSObjectP", "text"]
+- !private ["So14NSSecureCodingP", "intValue"]
+- !private ["So14NSSecureCodingP", "sha1"]
+- !private ["So8NSStringC", "sha1"]
+- !private ["So7NSValueC", "intValue"]
+- !private ["So27NSNetServiceBrowserDelegateP", "sendRatingViaHTTP"]
+- !private ["So20NSNetServiceDelegateP", "sendRatingViaHTTP"]
+- !private ["Sj", "init"]
+- !private ["Sm", "init"]
+- !private ["Sm", "init"]
+- !private ["Sm", "sha1"]
+- !private ["10Foundation20ReferenceConvertibleP", "init"]
+- !private ["ST", "init"]
+- !private ["ST", "init"]
+- !private ["ST", "sha1"]
+- !private ["s13SignedNumericP", "init"]
+- !private ["So16NSStreamDelegateP", "sendRatingViaHTTP"]
+- !private ["Sx", "init"]
+- !private ["SS", "init"]
+- !private ["SS", "init"]
+- !private ["SS", "sha1"]
+- !private ["Sy", "init"]
+- !private ["Sy", "init"]
+- !private ["Sy", "sha1"]
+- !private ["s16TextOutputStreamP", "init"]
+- !private ["s16TextOutputStreamP", "init"]
+- !private ["s16TextOutputStreamP", "sha1"]
+- !private ["s20TextOutputStreamableP", "init"]
+- !private ["s20TextOutputStreamableP", "init"]
+- !private ["s20TextOutputStreamableP", "sha1"]
+- !private ["So13UIApplicationC", "delegate"]
+- !private ["So13UIApplicationC", "shared"]
+- !private ["So21UIApplicationDelegateP", "connectivityController"]
+- !private ["So30UIPasteConfigurationSupportingP", "connectivityController"]
+- !private ["So30UIPasteConfigurationSupportingP", "delegate"]
+- !private ["So30UIPasteConfigurationSupportingP", "shared"]
+- !private ["So11UIResponderC", "connectivityController"]
+- !private ["So11UIResponderC", "delegate"]
+- !private ["So11UIResponderC", "shared"]
+- !private ["So30UIResponderStandardEditActionsP", "connectivityController"]
+- !private ["So30UIResponderStandardEditActionsP", "delegate"]
+- !private ["So30UIResponderStandardEditActionsP", "shared"]
+- !private ["So23UIUserActivityRestoringP", "connectivityController"]
+- !private ["So23UIUserActivityRestoringP", "delegate"]
+- !private ["So23UIUserActivityRestoringP", "shared"]
+- !private ["9Alamofire14URLConvertibleP", "init"]
+- !private ["9Alamofire14URLConvertibleP", "init"]
+- !private ["9Alamofire14URLConvertibleP", "sha1"]
+- !private ["s15_CVarArgAlignedP", "init"]
+- !private ["s22_CVarArgPassedAsDoubleP", "init"]
+- !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "init"]
+- !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "init"]
+- !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "sha1"]
+- !private ["s33_ExpressibleByBuiltinFloatLiteralP", "init"]
+- !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "init"]
+- !private ["s34_ExpressibleByBuiltinStringLiteralP", "init"]
+- !private ["s34_ExpressibleByBuiltinStringLiteralP", "init"]
+- !private ["s34_ExpressibleByBuiltinStringLiteralP", "sha1"]
+- !private ["s39_ExpressibleByBuiltinUTF16StringLiteralP", "init"]
+- !private ["s39_ExpressibleByBuiltinUTF16StringLiteralP", "init"]
+- !private ["s39_ExpressibleByBuiltinUTF16StringLiteralP", "sha1"]
+- !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "init"]
+- !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "init"]
+- !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "sha1"]
+- !private ["s33_ExpressibleByStringInterpolationP", "init"]
+- !private ["s33_ExpressibleByStringInterpolationP", "init"]
+- !private ["s33_ExpressibleByStringInterpolationP", "sha1"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "init"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "intValue"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "sha1"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "Date"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "Double"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "UIApplication"]
+- ["10Foundation27_KeyValueCodingAndObservingP", ""]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "arc4random"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "connectivityController"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "decodeDouble"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "decodeInteger"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "decodeObject"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "delegate"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "drand48"]
+- ["10Foundation27_KeyValueCodingAndObservingP", "encode"]
+- ["10Foundation27_KeyValueCodingAndObservingP", "encodeWithCoder"]
+- ["10Foundation27_KeyValueCodingAndObservingP", "init"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "init"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "intValue"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "messageHash"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "randNum"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "rating"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "sendRatingViaHTTP"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "sha1"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "shared"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "text"]
+- !private ["s21_ObjectiveCBridgeableP", "init"]
+- !private ["s21_ObjectiveCBridgeableP", "init"]
+- !private ["s21_ObjectiveCBridgeableP", "sha1"]
+- !private ["s16_SwiftStringViewP", "init"]
+- !private ["s16_SwiftStringViewP", "init"]
+- !private ["s16_SwiftStringViewP", "sha1"]
+depends-nominal:
+- !private "10Anonymouse0A22ConnectivityControllerC"
+- !private "10Anonymouse0A11MessageCoreC"
+- "10Anonymouse0A14RatingSentCoreC"
+- !private "10Anonymouse0A9ReplyCoreC"
+- !private "10Anonymouse11AppDelegateC"
+- !private "SK"
+- !private "SB"
+- "s7CVarArgP"
+- !private "Sl"
+- !private "SL"
+- "s28CustomDebugStringConvertibleP"
+- !private "s29CustomPlaygroundQuickLookableP"
+- !private "s17CustomReflectableP"
+- "s23CustomStringConvertibleP"
+- !private "10Foundation4DateV"
+- !private "Se"
+- !private "Sd"
+- !private "SE"
+- "SQ"
+- !private "s27ExpressibleByBooleanLiteralP"
+- !private "s43ExpressibleByExtendedGraphemeClusterLiteralP"
+- !private "s25ExpressibleByFloatLiteralP"
+- !private "s27ExpressibleByIntegerLiteralP"
+- !private "s26ExpressibleByStringLiteralP"
+- !private "s33ExpressibleByUnicodeScalarLiteralP"
+- !private "SF"
+- "SH"
+- !private "10SwiftyJSON17JSONSubscriptTypeP"
+- !private "s25LosslessStringConvertibleP"
+- !private "s10MirrorPathP"
+- !private "So7NSCoderC"
+- "So8NSCodingP"
+- !private "So9NSCopyingP"
+- !private "So20NSFetchRequestResultP"
+- !private "So21NSItemProviderReadingP"
+- !private "So21NSItemProviderWritingP"
+- !private "So15NSManagedObjectC"
+- !private "So16NSMutableCopyingP"
+- !private "So8NSNumberC"
+- "So8NSObjectC"
+- "So8NSObjectP"
+- !private "So14NSSecureCodingP"
+- !private "So8NSStringC"
+- !private "So7NSValueC"
+- !private "So27NSNetServiceBrowserDelegateP"
+- !private "So20NSNetServiceDelegateP"
+- !private "Sj"
+- !private "Sm"
+- !private "10Foundation20ReferenceConvertibleP"
+- !private "ST"
+- !private "s13SignedNumericP"
+- !private "So16NSStreamDelegateP"
+- !private "Sx"
+- !private "SS"
+- !private "Sy"
+- !private "s16TextOutputStreamP"
+- !private "s20TextOutputStreamableP"
+- !private "So13UIApplicationC"
+- !private "So21UIApplicationDelegateP"
+- !private "So30UIPasteConfigurationSupportingP"
+- !private "So11UIResponderC"
+- !private "So30UIResponderStandardEditActionsP"
+- !private "So23UIUserActivityRestoringP"
+- !private "9Alamofire14URLConvertibleP"
+- !private "s15_CVarArgAlignedP"
+- !private "s22_CVarArgPassedAsDoubleP"
+- !private "s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP"
+- !private "s33_ExpressibleByBuiltinFloatLiteralP"
+- !private "s35_ExpressibleByBuiltinIntegerLiteralP"
+- !private "s34_ExpressibleByBuiltinStringLiteralP"
+- !private "s39_ExpressibleByBuiltinUTF16StringLiteralP"
+- !private "s41_ExpressibleByBuiltinUnicodeScalarLiteralP"
+- !private "s33_ExpressibleByStringInterpolationP"
+- !private "s35_HasCustomAnyHashableRepresentationP"
+- "10Foundation27_KeyValueCodingAndObservingP"
+- !private "s21_ObjectiveCBridgeableP"
+- !private "s16_SwiftStringViewP"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Dispatch.apinotesc"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/DerivedData2/Anonymouse/Build/Products/Debug-iphonesimulator/SwiftyJSON.framework/Modules/SwiftyJSON.swiftmodule/x86_64.swiftmodule"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/DerivedData2/Anonymouse/Build/Products/Debug-iphonesimulator/Alamofire.framework/Modules/Alamofire.swiftmodule/x86_64.swiftmodule"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/DerivedData2/Anonymouse/Build/Products/Debug-iphonesimulator/CryptoSwift.framework/Modules/CryptoSwift.swiftmodule/x86_64.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/ObjectiveC.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreData.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreImage.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/QuartzCore.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Dispatch.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Metal.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Darwin.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreLocation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Foundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreFoundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreGraphics.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Swift.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/UIKit.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/SwiftOnoneSupport.swiftmodule"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/DerivedData2/Anonymouse/Build/Products/Debug-iphonesimulator/SwiftyJSON.framework/Headers/SwiftyJSON-umbrella.h"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/DerivedData2/Anonymouse/Build/Products/Debug-iphonesimulator/Alamofire.framework/Headers/Alamofire-umbrella.h"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/DerivedData2/Anonymouse/Build/Products/Debug-iphonesimulator/CryptoSwift.framework/Headers/CryptoSwift-umbrella.h"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/DerivedData2/Anonymouse/Build/Products/Debug-iphonesimulator/SwiftyJSON.framework/Headers/SwiftyJSON-Swift.h"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/DerivedData2/Anonymouse/Build/Products/Debug-iphonesimulator/Alamofire.framework/Headers/Alamofire-Swift.h"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/DerivedData2/Anonymouse/Build/Products/Debug-iphonesimulator/CryptoSwift.framework/Headers/CryptoSwift-Swift.h"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/DerivedData2/Anonymouse/Build/Products/Debug-iphonesimulator/SwiftyJSON.framework/Modules/module.modulemap"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/DerivedData2/Anonymouse/Build/Products/Debug-iphonesimulator/Alamofire.framework/Modules/module.modulemap"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/DerivedData2/Anonymouse/Build/Products/Debug-iphonesimulator/CryptoSwift.framework/Modules/module.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/usr/include/objc/ObjectiveC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/OpenGLES.framework/Headers/OpenGLES.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/CoreData.framework/Headers/CoreData.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CoreImage.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/CoreBluetooth.framework/Headers/CoreBluetooth.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/Metal.framework/Headers/Metal.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/usr/include/Darwin.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/NetworkExtension.framework/Headers/NetworkExtension.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/CoreLocation.framework/Headers/CoreLocation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/MultipeerConnectivity.framework/Headers/MultipeerConnectivity.apinotes"
+interface-hash: "a7b9edbbf5c9bbec97fbe50c60714281"

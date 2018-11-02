@@ -158,7 +158,7 @@ class AnonymouseDataController: NSObject {
      - date: The date the message was composed.
      - user: The user that sent the message.
      */
-    func addMessage(_ text: String, date: Date, user: String, fromServer: Bool) {
+    func addMessage(_ text: String, date: Date, user: String) {
         //Create a message object from the input parameters.
         let currentSize: Int = self.getSize()
         
@@ -170,7 +170,7 @@ class AnonymouseDataController: NSObject {
         }
         
         //The creation of this object inserts it into the context
-        let _: AnonymouseMessageCore = AnonymouseMessageCore(text: text, date: date, user: user, fromServer: fromServer)
+        let _: AnonymouseMessageCore = AnonymouseMessageCore(text: text, date: date, user: user)
         
         self.saveContext()
     }
@@ -202,7 +202,7 @@ class AnonymouseDataController: NSObject {
      - user: The user that sent the reply.
      - message: the parent that this reply is replying to.
      */
-    func addReply(withText text: String, date: Date, user: String, toMessage message: AnonymouseMessageCore, fromServer: Bool) {
+    func addReply(withText text: String, date: Date, user: String, toMessage message: AnonymouseMessageCore) {
         let reply: AnonymouseReplyCore = AnonymouseReplyCore(text: text, date: date, user: user, message: message, fromServer: true)
         reply.parentMessage = message
         var numRepl = Int(truncating: (reply.parentMessage?.numReplies)!)

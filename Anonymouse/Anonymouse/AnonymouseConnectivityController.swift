@@ -18,7 +18,7 @@ import SwiftyJSON
 
 
 ///A class that manages the connectivity protocols; sending messages and rating objects to nearby peers.
-class AnonymouseConnectivityController : NSObject {
+class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServiceBrowserDelegate,StreamDelegate {
     
     //class AnonymouseConnectivityController : NSObject {
     
@@ -34,14 +34,23 @@ class AnonymouseConnectivityController : NSObject {
     
     var fxn = "getMessageViaHTTP()"
     
-    var receiveTimer = Timer()
+    //An object that handles netservice provided by current device
+    var netService: NetService!
     
+    //A list contains all opening outputsStream
+    var outputs: [OutputStream] = []
     
+    ///An object that handles searching for and finding other phones on the network.
+    var netServiceBrowser: NetServiceBrowser!
     
     ///`true` if this object is currently browsing.
-    var isBrowsing: Bool = true
+    var isBrowsing: Bool = false
     ///`true` if this object is currently advertising.
-    var isAdvertising: Bool = true
+    var isAdvertising: Bool = false
+    
+    var timer: Timer!
+    //MARK: Convenience methods
+    ///Begins advertising the current peer on the network
     
     
     override init() {
@@ -82,6 +91,47 @@ class AnonymouseConnectivityController : NSObject {
         }
     }
     
+    func intToUInt8(value: Int) -> [UInt8]{
+        let count = MemoryLayout<Int>.size
+        let ints: [Int] = [value]
+        let data = NSData(bytes: ints, length: count)
+        var result = [UInt8](repeating: 0, count: count)
+        data.getBytes(&result, length: count)
+        return result
+    }
+    
+    func sendAllMessages(toStream outStream: OutputStream) {
+        NSLog("Sending Messages")
+        let messageCoreArray: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
+        let messageSentArray: [AnonymouseMessageSentCore] = messageCoreArray.map { (messageCore) -> AnonymouseMessageSentCore in
+            return AnonymouseMessageSentCore(message: messageCore)
+        }
+        let ratingSentArray: [AnonymouseRatingSentCore] = messageCoreArray.map { (messageCore) -> AnonymouseRatingSentCore in
+            return AnonymouseRatingSentCore(message: messageCore)
+        }
+        
+        
+        //Encode the messages for sending
+        let archivedMessageArray: NSData = NSData(data: NSKeyedArchiver.archivedData(withRootObject: messageSentArray))
+        let archivedMessageArrayPtr = archivedMessageArray.bytes.bindMemory(to: UInt8.self , capacity: archivedMessageArray.length)
+        
+        var length = intToUInt8(value: archivedMessageArray.length)
+        var num3_1 = outStream.write(&length, maxLength: MemoryLayout<Int>.size)
+        
+        let num1 = outStream.write(archivedMessageArrayPtr ,maxLength: archivedMessageArray.length)
+        NSLog("write1: \(num3_1 + num1) message Length:\(archivedMessageArray.length)")
+        
+        let archivedRatingArray: NSData = NSData(data: NSKeyedArchiver.archivedData(withRootObject: ratingSentArray))
+        let archivedRatingArrayPtr = archivedRatingArray.bytes.bindMemory(to: UInt8.self, capacity: archivedRatingArray.length)
+        
+        length = intToUInt8(value: archivedRatingArray.length)
+        num3_1 = outStream.write(&length, maxLength: MemoryLayout<Int>.size)
+        
+        let num2 = outStream.write(archivedRatingArrayPtr ,maxLength: archivedRatingArray.length)
+        
+        NSLog("write2: \(num3_1+num2) message Length:\(archivedRatingArray.length)")
+    }
+    
     /**
      Sends all replies to the passed-in peers.
      
@@ -118,15 +168,19 @@ class AnonymouseConnectivityController : NSObject {
      - message: The message to send to the connected peers.
      */
     func send(individualMessage message: AnonymouseMessageSentCore) {
-        //guard sessionObject.connectedPeers.count > 0 else {
-        //return
-        //}
-        
-        do {
-            let archivedMessage: Data = NSKeyedArchiver.archivedData(withRootObject: message)
-            //try self.sessionObject.send(archivedMessage, toPeers: sessionObject.connectedPeers, with: MCSessionSendDataMode.reliable)
-        } catch let error as NSError {
-            NSLog("%@", error)
+//        //guard sessionObject.connectedPeers.count > 0 else {
+//        //return
+//        //}
+//
+//        do {
+//            let archivedMessage: Data = NSKeyedArchiver.archivedData(withRootObject: message)
+//            //try self.sessionObject.send(archivedMessage, toPeers: sessionObject.connectedPeers, with: MCSessionSendDataMode.reliable)
+//        } catch let error as NSError {
+//            NSLog("%@", error)
+//        }
+        NSLog("Sending Messages")
+        for output in self.outputs{
+            self.sendAllMessages(toStream: output)
         }
     }
     
@@ -222,7 +276,7 @@ class AnonymouseConnectivityController : NSObject {
                 let messageHashes: [String] = dataController.fetchMessageHashes()
                 //Add the message if we don't have it already
                 if !messageHashes.contains(messageHash) {
-                    self.dataController.addMessage(message.text!, date: message.date!, user: message.user!, fromServer: true)
+                    self.dataController.addMessage(message.text!, date: message.date!, user: message.user!)
                 }
             }
                 //Check if the data sent was an array of messages
@@ -231,7 +285,7 @@ class AnonymouseConnectivityController : NSObject {
                 for message in messageArray {
                     let messageHash: String = message.text.sha1()
                     if !messageHashes.contains(messageHash) {
-                        self.dataController.addMessage(message.text!, date: message.date!, user: message.user!, fromServer: true)
+                        self.dataController.addMessage(message.text!, date: message.date!, user: message.user!)
                     }
                 }
             }
@@ -243,7 +297,7 @@ class AnonymouseConnectivityController : NSObject {
                     let messageObjects: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
                     for message in messageObjects {
                         if message.text!.sha1() == reply.parentHash {
-                            dataController.addReply(withText: reply.text!, date: reply.date!, user: reply.user!, toMessage: message, fromServer: true)
+                            dataController.addReply(withText: reply.text!, date: reply.date!, user: reply.user!, toMessage: message)
                             break
                         }
                     }
@@ -258,7 +312,7 @@ class AnonymouseConnectivityController : NSObject {
                     if !replyHashes.contains(replyHash) {
                         for message in messageObjects {
                             if message.text!.sha1() == reply.parentHash {
-                                dataController.addReply(withText: reply.text!, date: reply.date!, user: reply.user!, toMessage: message, fromServer: true)
+                                dataController.addReply(withText: reply.text!, date: reply.date!, user: reply.user!, toMessage: message)
                                 break
                             }
                         }
@@ -545,7 +599,7 @@ class AnonymouseConnectivityController : NSObject {
                                     }
                                 }
                                 if(notFound){
-                                    self.dataController.addMessage(pulledText!!, date: properDate, user: user!! as String, fromServer: true)
+                                    self.dataController.addMessage(pulledText!!, date: properDate, user: user!! as String)
                                     print("Added Message")
                                 }
                             }
@@ -586,7 +640,7 @@ class AnonymouseConnectivityController : NSObject {
                                     for message in messageObjects{
                                         if(message.text?.sha1() == parent){
                                             print("Found a match")
-                                            self.dataController.addReply(withText: text!!, date: properDate, user: user!!, toMessage: message, fromServer: true)
+                                            self.dataController.addReply(withText: text!!, date: properDate, user: user!!, toMessage: message)
                                             break
                                         }
                                     }
@@ -655,7 +709,7 @@ class AnonymouseConnectivityController : NSObject {
             task.resume()
         }
         
-        func sendViaBeacon(){
+    func sendViaBeacon(message: AnonymouseMessageSentCore){
             if(peripheralManager.state == .poweredOn){
                 peripheralManager.add(service)
                 let peripheralData : NSDictionary
@@ -667,10 +721,116 @@ class AnonymouseConnectivityController : NSObject {
                 // The region's peripheral data contains the CoreBluetooth-specific data we need to advertise.
                 print(peripheralData.allValues);
                 peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey: [service.uuid]])
+                send(individualMessage: message)
+            }
+        }
+ 
+    
+    func stream(_ aStream: Stream,
+                handle eventCode: Stream.Event){
+        
+        
+        let inputStream = aStream as? InputStream
+        if inputStream == nil {
+            let outputStream = aStream as? OutputStream
+            if outputStream == nil {
+                return
+            }else{
+                NSLog("Server Writing Data")
+            }
+        }else{
+            var buffer = [UInt8](repeating:0, count:1024*200)
+            var len = 0
+            if inputStream!.hasBytesAvailable{
+                len = inputStream!.read(&buffer, maxLength: buffer.count)
+            }
+            
+            NSLog("Server Received : \(String(describing: len))")
+            
+            var dataArray: [NSData] = [NSData]()
+            var start = 0
+            while start < len{
+                NSLog("Start at \(start) \(len)")
+                
+                var length : Int = 0
+                let buf_slice_for_len = buffer[start..<start+8]
+                let buf_for_len: [UInt8] = Array(buf_slice_for_len)
+                let length_uint8 =  NSData(bytes:buf_for_len,length:8)
+                length_uint8.getBytes(&length, length: 8)
+                
+                NSLog("Message chunk \(length)")
+                if length > (len - start - 1){
+                    break
+                }
+                let buf_slice_for_content = buffer[start+8..<start+8+length]
+                let buf_for_content: [UInt8] = Array(buf_slice_for_content)
+                let data =  NSData(bytes:buf_for_content,length:length)
+                dataArray.append(data)
+                start = start + length + 8
+            }
+            NSLog("Logging Data")
+            NSLog("data size: \(dataArray.count)")
+            for data in dataArray{
+                NSLog("Logging Data")
+                if let messageArray = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as? [AnonymouseMessageSentCore] {
+                    NSLog("Message Received")
+                    let messageHashes: [String] = dataController.fetchMessageHashes()
+                    for message in messageArray {
+                        let messageHash: String = message.text.sha1()
+                        if !messageHashes.contains(messageHash) {
+                            self.dataController.addMessage(message.text!, date: message.date!, user: message.user!)
+                        }
+                    }
+                }
+                else if let replyArray = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as? [AnonymouseReplySentCore] {
+                    NSLog("Reply Received")
+                    let replyHashes: [String] = dataController.fetchReplyHashes()
+                    let messageObjects: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
+                    for reply in replyArray {
+                        let replyHash: String = reply.text.sha1()
+                        if !replyHashes.contains(replyHash) {
+                            for message in messageObjects {
+                                if message.text!.sha1() == reply.parentHash {
+                                    dataController.addReply(withText: reply.text!, date: reply.date!, user: reply.user!, toMessage: message)
+                                    break
+                                }
+                            }
+                        }
+                    }
+                }
+                else if let ratingArray = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as? [AnonymouseRatingSentCore] {
+                    NSLog("Rating Received")
+                    let messageCoreArray: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
+                    var messageCoreDictionary: [String: AnonymouseMessageCore] = [String: AnonymouseMessageCore]()
+                    for message in messageCoreArray {
+                        messageCoreDictionary[message.text!.sha1()] = message
+                    }
+                    
+                    let replyCoreArray: [AnonymouseReplyCore] = dataController.fetchReplies(withKey: "date", ascending: true)
+                    var replyCoreDictionary: [String: AnonymouseReplyCore] = [String:AnonymouseReplyCore]()
+                    for reply in replyCoreArray {
+                        replyCoreDictionary[reply.text!.sha1()] = reply
+                    }
+                    
+                    for rating in ratingArray {
+                        if let message = messageCoreDictionary[rating.messageHash] {
+                            let previousRating: Int = Int(truncating: message.rating!)
+                            message.rating = NSNumber(integerLiteral: rating.rating! + previousRating)
+                        }
+                        if let reply = replyCoreDictionary[rating.messageHash] {
+                            let previousRating: Int = Int(truncating: reply.rating!)
+                            reply.rating = NSNumber(integerLiteral: rating.rating! + previousRating)
+                        }
+                    }
+                }
+                
             }
         }
         
+    }
 }
+
+
 
 
 

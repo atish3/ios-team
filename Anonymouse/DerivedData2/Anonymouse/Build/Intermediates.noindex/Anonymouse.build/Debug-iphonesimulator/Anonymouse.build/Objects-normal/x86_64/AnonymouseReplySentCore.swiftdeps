@@ -1,0 +1,345 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "AnonymouseReplySentCore"
+provides-nominal:
+- "10Anonymouse0A13ReplySentCoreC"
+provides-member:
+- ["10Anonymouse0A13ReplySentCoreC", ""]
+provides-dynamic-lookup:
+- "date"
+- "encode"
+- "parentHash"
+- "text"
+- "user"
+depends-top-level:
+- "AnonymouseReplyCore"
+- "AnonymouseReplySentCore"
+- "AssignmentPrecedence"
+- "CastingPrecedence"
+- "Date"
+- "NSCoder"
+- "NSCoding"
+- "NSObject"
+- "String"
+- !private "StringLiteralType"
+depends-member:
+- !private ["10Anonymouse0A11MessageCoreC", "text"]
+- !private ["10Anonymouse0A9ReplyCoreC", "date"]
+- !private ["10Anonymouse0A9ReplyCoreC", "parentMessage"]
+- !private ["10Anonymouse0A9ReplyCoreC", "text"]
+- !private ["10Anonymouse0A9ReplyCoreC", "user"]
+- ["10Anonymouse0A13ReplySentCoreC", "AnonymouseReplyCore"]
+- ["10Anonymouse0A13ReplySentCoreC", "Date"]
+- ["10Anonymouse0A13ReplySentCoreC", "NSCoder"]
+- ["10Anonymouse0A13ReplySentCoreC", "String"]
+- ["10Anonymouse0A13ReplySentCoreC", "date"]
+- ["10Anonymouse0A13ReplySentCoreC", "deinit"]
+- ["10Anonymouse0A13ReplySentCoreC", "encode"]
+- ["10Anonymouse0A13ReplySentCoreC", "encodeWithCoder"]
+- ["10Anonymouse0A13ReplySentCoreC", "init"]
+- ["10Anonymouse0A13ReplySentCoreC", "parentHash"]
+- ["10Anonymouse0A13ReplySentCoreC", "text"]
+- ["10Anonymouse0A13ReplySentCoreC", "user"]
+- !private ["SK", "init"]
+- !private ["SK", "init"]
+- !private ["SK", "sha1"]
+- ["s7CVarArgP", ""]
+- !private ["s7CVarArgP", "date"]
+- !private ["s7CVarArgP", "decodeObject"]
+- ["s7CVarArgP", "encode"]
+- ["s7CVarArgP", "encodeWithCoder"]
+- ["s7CVarArgP", "init"]
+- !private ["s7CVarArgP", "init"]
+- !private ["s7CVarArgP", "parentHash"]
+- !private ["s7CVarArgP", "parentMessage"]
+- !private ["s7CVarArgP", "sha1"]
+- !private ["s7CVarArgP", "text"]
+- !private ["s7CVarArgP", "user"]
+- !private ["Sl", "init"]
+- !private ["Sl", "init"]
+- !private ["Sl", "sha1"]
+- !private ["SL", "init"]
+- !private ["SL", "init"]
+- !private ["SL", "sha1"]
+- ["s28CustomDebugStringConvertibleP", ""]
+- !private ["s28CustomDebugStringConvertibleP", "date"]
+- !private ["s28CustomDebugStringConvertibleP", "decodeObject"]
+- ["s28CustomDebugStringConvertibleP", "encode"]
+- ["s28CustomDebugStringConvertibleP", "encodeWithCoder"]
+- ["s28CustomDebugStringConvertibleP", "init"]
+- !private ["s28CustomDebugStringConvertibleP", "init"]
+- !private ["s28CustomDebugStringConvertibleP", "parentHash"]
+- !private ["s28CustomDebugStringConvertibleP", "parentMessage"]
+- !private ["s28CustomDebugStringConvertibleP", "sha1"]
+- !private ["s28CustomDebugStringConvertibleP", "text"]
+- !private ["s28CustomDebugStringConvertibleP", "user"]
+- !private ["s29CustomPlaygroundQuickLookableP", "init"]
+- !private ["s29CustomPlaygroundQuickLookableP", "init"]
+- !private ["s29CustomPlaygroundQuickLookableP", "sha1"]
+- !private ["s17CustomReflectableP", "init"]
+- !private ["s17CustomReflectableP", "init"]
+- !private ["s17CustomReflectableP", "sha1"]
+- ["s23CustomStringConvertibleP", ""]
+- !private ["s23CustomStringConvertibleP", "date"]
+- !private ["s23CustomStringConvertibleP", "decodeObject"]
+- ["s23CustomStringConvertibleP", "encode"]
+- ["s23CustomStringConvertibleP", "encodeWithCoder"]
+- ["s23CustomStringConvertibleP", "init"]
+- !private ["s23CustomStringConvertibleP", "init"]
+- !private ["s23CustomStringConvertibleP", "parentHash"]
+- !private ["s23CustomStringConvertibleP", "parentMessage"]
+- !private ["s23CustomStringConvertibleP", "sha1"]
+- !private ["s23CustomStringConvertibleP", "text"]
+- !private ["s23CustomStringConvertibleP", "user"]
+- !private ["Se", "init"]
+- !private ["Se", "init"]
+- !private ["Se", "sha1"]
+- !private ["SE", "init"]
+- !private ["SE", "init"]
+- !private ["SE", "sha1"]
+- ["SQ", ""]
+- !private ["SQ", "date"]
+- !private ["SQ", "decodeObject"]
+- ["SQ", "encode"]
+- ["SQ", "encodeWithCoder"]
+- ["SQ", "init"]
+- !private ["SQ", "init"]
+- !private ["SQ", "parentHash"]
+- !private ["SQ", "parentMessage"]
+- !private ["SQ", "sha1"]
+- !private ["SQ", "text"]
+- !private ["SQ", "user"]
+- !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "init"]
+- !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "init"]
+- !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "sha1"]
+- !private ["s26ExpressibleByStringLiteralP", "init"]
+- !private ["s26ExpressibleByStringLiteralP", "init"]
+- !private ["s26ExpressibleByStringLiteralP", "sha1"]
+- !private ["s33ExpressibleByUnicodeScalarLiteralP", "init"]
+- !private ["s33ExpressibleByUnicodeScalarLiteralP", "init"]
+- !private ["s33ExpressibleByUnicodeScalarLiteralP", "sha1"]
+- ["SH", ""]
+- !private ["SH", "date"]
+- !private ["SH", "decodeObject"]
+- ["SH", "encode"]
+- ["SH", "encodeWithCoder"]
+- ["SH", "init"]
+- !private ["SH", "init"]
+- !private ["SH", "parentHash"]
+- !private ["SH", "parentMessage"]
+- !private ["SH", "sha1"]
+- !private ["SH", "text"]
+- !private ["SH", "user"]
+- !private ["10SwiftyJSON17JSONSubscriptTypeP", "init"]
+- !private ["10SwiftyJSON17JSONSubscriptTypeP", "init"]
+- !private ["10SwiftyJSON17JSONSubscriptTypeP", "sha1"]
+- !private ["s25LosslessStringConvertibleP", "init"]
+- !private ["s25LosslessStringConvertibleP", "init"]
+- !private ["s25LosslessStringConvertibleP", "sha1"]
+- !private ["s10MirrorPathP", "init"]
+- !private ["s10MirrorPathP", "init"]
+- !private ["s10MirrorPathP", "sha1"]
+- !private ["So7NSCoderC", "decodeObject"]
+- !private ["So7NSCoderC", "encode"]
+- ["So8NSCodingP", ""]
+- !private ["So8NSCodingP", "date"]
+- ["So8NSCodingP", "encode"]
+- ["So8NSCodingP", "encodeWithCoder"]
+- ["So8NSCodingP", "init"]
+- !private ["So8NSCodingP", "parentHash"]
+- !private ["So8NSCodingP", "sha1"]
+- !private ["So8NSCodingP", "text"]
+- !private ["So8NSCodingP", "user"]
+- !private ["So9NSCopyingP", "sha1"]
+- !private ["So20NSFetchRequestResultP", "date"]
+- !private ["So20NSFetchRequestResultP", "parentMessage"]
+- !private ["So20NSFetchRequestResultP", "text"]
+- !private ["So20NSFetchRequestResultP", "user"]
+- !private ["So21NSItemProviderReadingP", "sha1"]
+- !private ["So21NSItemProviderWritingP", "sha1"]
+- !private ["So15NSManagedObjectC", "date"]
+- !private ["So15NSManagedObjectC", "parentMessage"]
+- !private ["So15NSManagedObjectC", "text"]
+- !private ["So15NSManagedObjectC", "user"]
+- !private ["So16NSMutableCopyingP", "sha1"]
+- ["So8NSObjectC", "AnonymouseReplyCore"]
+- ["So8NSObjectC", "Date"]
+- ["So8NSObjectC", "NSCoder"]
+- ["So8NSObjectC", "String"]
+- ["So8NSObjectC", ""]
+- ["So8NSObjectC", "date"]
+- !private ["So8NSObjectC", "decodeObject"]
+- ["So8NSObjectC", "encode"]
+- ["So8NSObjectC", "encodeWithCoder"]
+- ["So8NSObjectC", "init"]
+- !private ["So8NSObjectC", "init"]
+- ["So8NSObjectC", "parentHash"]
+- !private ["So8NSObjectC", "parentMessage"]
+- !private ["So8NSObjectC", "sha1"]
+- ["So8NSObjectC", "text"]
+- ["So8NSObjectC", "user"]
+- ["So8NSObjectP", ""]
+- !private ["So8NSObjectP", "date"]
+- !private ["So8NSObjectP", "decodeObject"]
+- ["So8NSObjectP", "encode"]
+- ["So8NSObjectP", "encodeWithCoder"]
+- ["So8NSObjectP", "init"]
+- !private ["So8NSObjectP", "init"]
+- !private ["So8NSObjectP", "parentHash"]
+- !private ["So8NSObjectP", "parentMessage"]
+- !private ["So8NSObjectP", "sha1"]
+- !private ["So8NSObjectP", "text"]
+- !private ["So8NSObjectP", "user"]
+- !private ["So14NSSecureCodingP", "sha1"]
+- !private ["So8NSStringC", "sha1"]
+- !private ["Sm", "init"]
+- !private ["Sm", "init"]
+- !private ["Sm", "sha1"]
+- !private ["ST", "init"]
+- !private ["ST", "init"]
+- !private ["ST", "sha1"]
+- !private ["SS", "init"]
+- !private ["SS", "init"]
+- !private ["SS", "sha1"]
+- !private ["Sy", "init"]
+- !private ["Sy", "init"]
+- !private ["Sy", "sha1"]
+- !private ["s16TextOutputStreamP", "init"]
+- !private ["s16TextOutputStreamP", "init"]
+- !private ["s16TextOutputStreamP", "sha1"]
+- !private ["s20TextOutputStreamableP", "init"]
+- !private ["s20TextOutputStreamableP", "init"]
+- !private ["s20TextOutputStreamableP", "sha1"]
+- !private ["9Alamofire14URLConvertibleP", "init"]
+- !private ["9Alamofire14URLConvertibleP", "init"]
+- !private ["9Alamofire14URLConvertibleP", "sha1"]
+- !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "init"]
+- !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "init"]
+- !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "sha1"]
+- !private ["s34_ExpressibleByBuiltinStringLiteralP", "init"]
+- !private ["s34_ExpressibleByBuiltinStringLiteralP", "init"]
+- !private ["s34_ExpressibleByBuiltinStringLiteralP", "sha1"]
+- !private ["s39_ExpressibleByBuiltinUTF16StringLiteralP", "init"]
+- !private ["s39_ExpressibleByBuiltinUTF16StringLiteralP", "init"]
+- !private ["s39_ExpressibleByBuiltinUTF16StringLiteralP", "sha1"]
+- !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "init"]
+- !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "init"]
+- !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "sha1"]
+- !private ["s33_ExpressibleByStringInterpolationP", "init"]
+- !private ["s33_ExpressibleByStringInterpolationP", "init"]
+- !private ["s33_ExpressibleByStringInterpolationP", "sha1"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "sha1"]
+- ["10Foundation27_KeyValueCodingAndObservingP", ""]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "date"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "decodeObject"]
+- ["10Foundation27_KeyValueCodingAndObservingP", "encode"]
+- ["10Foundation27_KeyValueCodingAndObservingP", "encodeWithCoder"]
+- ["10Foundation27_KeyValueCodingAndObservingP", "init"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "init"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "parentHash"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "parentMessage"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "sha1"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "text"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "user"]
+- !private ["s21_ObjectiveCBridgeableP", "init"]
+- !private ["s21_ObjectiveCBridgeableP", "init"]
+- !private ["s21_ObjectiveCBridgeableP", "sha1"]
+- !private ["s16_SwiftStringViewP", "init"]
+- !private ["s16_SwiftStringViewP", "init"]
+- !private ["s16_SwiftStringViewP", "sha1"]
+depends-nominal:
+- !private "10Anonymouse0A11MessageCoreC"
+- !private "10Anonymouse0A9ReplyCoreC"
+- "10Anonymouse0A13ReplySentCoreC"
+- !private "SK"
+- "s7CVarArgP"
+- !private "Sl"
+- !private "SL"
+- "s28CustomDebugStringConvertibleP"
+- !private "s29CustomPlaygroundQuickLookableP"
+- !private "s17CustomReflectableP"
+- "s23CustomStringConvertibleP"
+- !private "Se"
+- !private "SE"
+- "SQ"
+- !private "s43ExpressibleByExtendedGraphemeClusterLiteralP"
+- !private "s26ExpressibleByStringLiteralP"
+- !private "s33ExpressibleByUnicodeScalarLiteralP"
+- "SH"
+- !private "10SwiftyJSON17JSONSubscriptTypeP"
+- !private "s25LosslessStringConvertibleP"
+- !private "s10MirrorPathP"
+- !private "So7NSCoderC"
+- "So8NSCodingP"
+- !private "So9NSCopyingP"
+- !private "So20NSFetchRequestResultP"
+- !private "So21NSItemProviderReadingP"
+- !private "So21NSItemProviderWritingP"
+- !private "So15NSManagedObjectC"
+- !private "So16NSMutableCopyingP"
+- "So8NSObjectC"
+- "So8NSObjectP"
+- !private "So14NSSecureCodingP"
+- !private "So8NSStringC"
+- !private "Sm"
+- !private "ST"
+- !private "SS"
+- !private "Sy"
+- !private "s16TextOutputStreamP"
+- !private "s20TextOutputStreamableP"
+- !private "9Alamofire14URLConvertibleP"
+- !private "s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP"
+- !private "s34_ExpressibleByBuiltinStringLiteralP"
+- !private "s39_ExpressibleByBuiltinUTF16StringLiteralP"
+- !private "s41_ExpressibleByBuiltinUnicodeScalarLiteralP"
+- !private "s33_ExpressibleByStringInterpolationP"
+- !private "s35_HasCustomAnyHashableRepresentationP"
+- "10Foundation27_KeyValueCodingAndObservingP"
+- !private "s21_ObjectiveCBridgeableP"
+- !private "s16_SwiftStringViewP"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Dispatch.apinotesc"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/DerivedData2/Anonymouse/Build/Products/Debug-iphonesimulator/SwiftyJSON.framework/Modules/SwiftyJSON.swiftmodule/x86_64.swiftmodule"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/DerivedData2/Anonymouse/Build/Products/Debug-iphonesimulator/Alamofire.framework/Modules/Alamofire.swiftmodule/x86_64.swiftmodule"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/DerivedData2/Anonymouse/Build/Products/Debug-iphonesimulator/CryptoSwift.framework/Modules/CryptoSwift.swiftmodule/x86_64.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/ObjectiveC.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreData.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreImage.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/QuartzCore.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Dispatch.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Metal.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Darwin.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreLocation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Foundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreFoundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreGraphics.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Swift.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/UIKit.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/SwiftOnoneSupport.swiftmodule"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/DerivedData2/Anonymouse/Build/Products/Debug-iphonesimulator/SwiftyJSON.framework/Headers/SwiftyJSON-umbrella.h"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/DerivedData2/Anonymouse/Build/Products/Debug-iphonesimulator/Alamofire.framework/Headers/Alamofire-umbrella.h"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/DerivedData2/Anonymouse/Build/Products/Debug-iphonesimulator/CryptoSwift.framework/Headers/CryptoSwift-umbrella.h"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/DerivedData2/Anonymouse/Build/Products/Debug-iphonesimulator/SwiftyJSON.framework/Headers/SwiftyJSON-Swift.h"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/DerivedData2/Anonymouse/Build/Products/Debug-iphonesimulator/Alamofire.framework/Headers/Alamofire-Swift.h"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/DerivedData2/Anonymouse/Build/Products/Debug-iphonesimulator/CryptoSwift.framework/Headers/CryptoSwift-Swift.h"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/DerivedData2/Anonymouse/Build/Products/Debug-iphonesimulator/SwiftyJSON.framework/Modules/module.modulemap"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/DerivedData2/Anonymouse/Build/Products/Debug-iphonesimulator/Alamofire.framework/Modules/module.modulemap"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/DerivedData2/Anonymouse/Build/Products/Debug-iphonesimulator/CryptoSwift.framework/Modules/module.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/usr/include/objc/ObjectiveC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/OpenGLES.framework/Headers/OpenGLES.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/CoreData.framework/Headers/CoreData.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CoreImage.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/CoreBluetooth.framework/Headers/CoreBluetooth.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/Metal.framework/Headers/Metal.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/usr/include/Darwin.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/NetworkExtension.framework/Headers/NetworkExtension.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/CoreLocation.framework/Headers/CoreLocation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/MultipeerConnectivity.framework/Headers/MultipeerConnectivity.apinotes"
+interface-hash: "9ba40ee979bd9832581a0d44a16aff24"

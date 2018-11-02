@@ -194,8 +194,9 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
             var messageText = self.composeTextView.text!
             messageText = messageText.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             
-            self.dataController.addMessage(messageText, date: Date(), user: username, fromServer: false)
-            connectivityController.sendViaBeacon();
+            self.dataController.addMessage(messageText, date: Date(), user: username)
+            let newMessage: AnonymouseMessageSentCore = AnonymouseMessageSentCore(text: messageText, date: Date(), user: username);
+            connectivityController.sendViaBeacon(message: newMessage);
             connectivityController.sendMessageViaHTTP(text: messageText, date: Date(), rating: 0, user: username);
         }
             //The else block below should be redundant, as the user should already have a key pair,
@@ -210,9 +211,9 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
             
             var messageText = self.composeTextView.text!
             messageText = messageText.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-            
-            self.dataController.addMessage(messageText, date: Date(), user: username, fromServer: false)
-            connectivityController.sendViaBeacon();
+            let newMessage: AnonymouseMessageSentCore = AnonymouseMessageSentCore(text: messageText, date: Date(), user: username);
+            self.dataController.addMessage(messageText, date: Date(), user: username)
+            connectivityController.sendViaBeacon(message: newMessage);
             connectivityController.sendMessageViaHTTP(text: messageText, date: Date(), rating: 0, user: username);
         }
         

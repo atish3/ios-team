@@ -1,0 +1,23 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "A1308613D63C86CD6B3AB0448FF4E4B2577092E6",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "A1308613D63C86CD6B3AB0448FF4E4B2577092E6" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "2020EE89-A524-4054-BBB2-A6299425BE91",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "A1308613D63C86CD6B3AB0448FF4E4B2577092E6" : "ios-team\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Anonymouse",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Anonymouse\/Anonymouse.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/atish3\/ios-team.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A1308613D63C86CD6B3AB0448FF4E4B2577092E6"
+    }
+  ]
+}
