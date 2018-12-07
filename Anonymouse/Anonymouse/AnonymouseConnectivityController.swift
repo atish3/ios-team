@@ -108,12 +108,10 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
         // let date: Date = Date(timeIntervalSince1970 : Date().timeIntervalSinceReferenceDate+(5-Date().timeIntervalSinceReferenceDate%5) )
         // timer = Timer(fire:date, interval:5, repeats: true, block)
         //add http request object
-        startAdvertisingPeer();
-        startBrowsingForPeers();
+        self.startBrowsingForPeers()
     }
     
     deinit {
-        self.stopAdvertisingPeer()
         self.stopBrowsingForPeers()
     }
     
@@ -180,24 +178,27 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
             return AnonymouseRatingSentCore(reply: replyCore)
         }
         
+        if(replyCoreArray.count > 0){
+            let archivedReplyArray: NSData = NSData(data: NSKeyedArchiver.archivedData(withRootObject: replySentArray))
+            let archivedReplyArrayPtr = archivedReplyArray.bytes.bindMemory(to: UInt8.self , capacity: archivedReplyArray.length)
         
-        let archivedReplyArray: NSData = NSData(data: NSKeyedArchiver.archivedData(withRootObject: replySentArray))
-        let archivedReplyArrayPtr = archivedReplyArray.bytes.bindMemory(to: UInt8.self , capacity: archivedReplyArray.length)
+            var length = intToUInt8(value: archivedReplyArray.length)
+            var num3_1 = outStream.write(&length, maxLength: MemoryLayout<Int>.size)
         
-        var length = intToUInt8(value: archivedReplyArray.length)
-        var num3_1 = outStream.write(&length, maxLength: MemoryLayout<Int>.size)
+            let num3=outStream.write(archivedReplyArrayPtr ,maxLength: archivedReplyArray.length)
+            NSLog("write3: \(num3_1+num3) message Length:\(archivedReplyArray.length)")
+        }
         
-        let num3=outStream.write(archivedReplyArrayPtr ,maxLength: archivedReplyArray.length)
-        NSLog("write3: \(num3_1+num3) message Length:\(archivedReplyArray.length)")
+        if(ratingSentArray.count > 0){
+            let archivedRatingArray: NSData = NSData(data: NSKeyedArchiver.archivedData(withRootObject: ratingSentArray))
+            let archivedRatingArrayPtr = archivedRatingArray.bytes.bindMemory(to: UInt8.self, capacity: archivedRatingArray.length)
         
-        let archivedRatingArray: NSData = NSData(data: NSKeyedArchiver.archivedData(withRootObject: ratingSentArray))
-        let archivedRatingArrayPtr = archivedRatingArray.bytes.bindMemory(to: UInt8.self, capacity: archivedRatingArray.length)
+            var length = intToUInt8(value: archivedRatingArray.length)
+            var num3_1 = outStream.write(&length, maxLength: MemoryLayout<Int>.size)
         
-        length = intToUInt8(value: archivedRatingArray.length)
-        num3_1 = outStream.write(&length, maxLength: MemoryLayout<Int>.size)
-        
-        let num4=outStream.write(archivedRatingArrayPtr ,maxLength: archivedRatingArray.length)
-        NSLog("write4: \(num3_1+num4) message Length:\(archivedRatingArray.length)")
+            let num4=outStream.write(archivedRatingArrayPtr ,maxLength: archivedRatingArray.length)
+            NSLog("write4: \(num3_1+num4) message Length:\(archivedRatingArray.length)")
+        }
     }
     
     //NetSericeDelegate Functions
@@ -320,6 +321,7 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
      */
     func send(individualMessage message: AnonymouseMessageSentCore) {
         NSLog("Sending Messages")
+        self.startAdvertisingPeer()
         for output in self.outputs{
             self.sendAllMessages(toStream: output)
         }
@@ -436,6 +438,7 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
      */
     func send(individualReply reply: AnonymouseReplySentCore) {
         NSLog("Sending Replies")
+        self.startAdvertisingPeer()
         for output in self.outputs{
             self.sendAllReplies(toStream: output)
         }
@@ -449,6 +452,7 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
      */
     func send(individualRating rating: AnonymouseRatingSentCore) {
         NSLog("Sending Ratings")
+        self.startAdvertisingPeer()
         for output in self.outputs{
             //            self.sendAllMessages(toStream: output)
             //            self.sendAllReplies(toStream: output)
