@@ -1,0 +1,114 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "OFBModeWorker"
+provides-nominal:
+- "11CryptoSwift13OFBModeWorkerV"
+provides-member:
+- ["11CryptoSwift13OFBModeWorkerV", ""]
+provides-dynamic-lookup:
+depends-top-level:
+- !private "??"
+- "Array"
+- "ArraySlice"
+- "AssignmentPrecedence"
+- "BlockModeWorker"
+- "CipherOperationOnBlock"
+- "OFBModeWorker"
+- "UInt8"
+- !private "xor"
+depends-member:
+- !private ["Sa", "init"]
+- !private ["s13ArrayProtocolP", "init"]
+- !private ["SK", "init"]
+- !private ["11CryptoSwift15BlockModeWorkerP", "Array"]
+- ["11CryptoSwift15BlockModeWorkerP", ""]
+- ["11CryptoSwift15BlockModeWorkerP", "cipherOperation"]
+- ["11CryptoSwift15BlockModeWorkerP", "decrypt"]
+- ["11CryptoSwift15BlockModeWorkerP", "encrypt"]
+- !private ["11CryptoSwift15BlockModeWorkerP", "iv"]
+- !private ["11CryptoSwift15BlockModeWorkerP", "prev"]
+- !private ["11CryptoSwift15BlockModeWorkerP", "xor"]
+- !private ["11CryptoSwift11CSArrayTypeP", "init"]
+- !private ["s7CVarArgP", "init"]
+- !private ["Sl", "init"]
+- !private ["s28CustomDebugStringConvertibleP", "init"]
+- !private ["s17CustomReflectableP", "init"]
+- !private ["s23CustomStringConvertibleP", "init"]
+- !private ["Se", "init"]
+- !private ["SE", "init"]
+- !private ["SQ", "init"]
+- !private ["s25ExpressibleByArrayLiteralP", "init"]
+- !private ["SH", "init"]
+- !private ["SM", "init"]
+- ["11CryptoSwift13OFBModeWorkerV", "Array"]
+- ["11CryptoSwift13OFBModeWorkerV", "ArraySlice"]
+- ["11CryptoSwift13OFBModeWorkerV", "CipherOperationOnBlock"]
+- ["11CryptoSwift13OFBModeWorkerV", "Element"]
+- ["11CryptoSwift13OFBModeWorkerV", "UInt8"]
+- ["11CryptoSwift13OFBModeWorkerV", "cipherOperation"]
+- ["11CryptoSwift13OFBModeWorkerV", "decrypt"]
+- ["11CryptoSwift13OFBModeWorkerV", "deinit"]
+- ["11CryptoSwift13OFBModeWorkerV", "encrypt"]
+- ["11CryptoSwift13OFBModeWorkerV", "init"]
+- !private ["11CryptoSwift13OFBModeWorkerV", "iv"]
+- !private ["11CryptoSwift13OFBModeWorkerV", "prev"]
+- !private ["11CryptoSwift13OFBModeWorkerV", "xor"]
+- !private ["Sk", "init"]
+- !private ["Sm", "init"]
+- !private ["ST", "init"]
+- !private ["s24_DestructorSafeContainerP", "init"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "init"]
+- !private ["s21_ObjectiveCBridgeableP", "init"]
+depends-nominal:
+- !private "Sa"
+- !private "s13ArrayProtocolP"
+- !private "SK"
+- "11CryptoSwift15BlockModeWorkerP"
+- !private "11CryptoSwift11CSArrayTypeP"
+- !private "s7CVarArgP"
+- !private "Sl"
+- !private "s28CustomDebugStringConvertibleP"
+- !private "s17CustomReflectableP"
+- !private "s23CustomStringConvertibleP"
+- !private "Se"
+- !private "SE"
+- !private "SQ"
+- !private "s25ExpressibleByArrayLiteralP"
+- !private "SH"
+- !private "SM"
+- "11CryptoSwift13OFBModeWorkerV"
+- !private "Sk"
+- !private "Sm"
+- !private "ST"
+- !private "s24_DestructorSafeContainerP"
+- !private "s35_HasCustomAnyHashableRepresentationP"
+- !private "s21_ObjectiveCBridgeableP"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Dispatch.apinotesc"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/ObjectiveC.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreImage.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/QuartzCore.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Dispatch.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Metal.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Darwin.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Foundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreFoundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreGraphics.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Swift.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/UIKit.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/SwiftOnoneSupport.swiftmodule"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/Pods/Target Support Files/CryptoSwift/CryptoSwift-umbrella.h"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/DerivedData2/Anonymouse/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CryptoSwift.build/unextended-module.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/usr/include/objc/ObjectiveC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/OpenGLES.framework/Headers/OpenGLES.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CoreImage.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/Metal.framework/Headers/Metal.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/usr/include/Darwin.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
+interface-hash: "e6abf07b9069c75e8961d45fd514583e"

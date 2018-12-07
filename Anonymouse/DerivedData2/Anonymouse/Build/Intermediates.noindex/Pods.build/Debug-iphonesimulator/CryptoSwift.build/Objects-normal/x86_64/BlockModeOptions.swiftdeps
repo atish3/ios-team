@@ -1,0 +1,212 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "BlockModeOptions"
+provides-nominal:
+- "11CryptoSwift16BlockModeOptionsV"
+provides-member:
+- ["11CryptoSwift16BlockModeOptionsV", ""]
+provides-dynamic-lookup:
+depends-top-level:
+- "=="
+- "BlockModeOptions"
+- "FloatLiteralType"
+- "Int"
+- "IntegerLiteralType"
+- "OptionSet"
+depends-member:
+- ["11CryptoSwift16BlockModeOptionsV", "ArrayLiteralElement"]
+- ["11CryptoSwift16BlockModeOptionsV", "BlockModeOptions"]
+- ["11CryptoSwift16BlockModeOptionsV", "Element"]
+- ["11CryptoSwift16BlockModeOptionsV", "InitializationVectorRequired"]
+- ["11CryptoSwift16BlockModeOptionsV", "Int"]
+- ["11CryptoSwift16BlockModeOptionsV", "None"]
+- ["11CryptoSwift16BlockModeOptionsV", "PaddingRequired"]
+- ["11CryptoSwift16BlockModeOptionsV", "RawValue"]
+- ["11CryptoSwift16BlockModeOptionsV", "_Default_ArrayLiteralElement"]
+- ["11CryptoSwift16BlockModeOptionsV", "_Default_Element"]
+- ["11CryptoSwift16BlockModeOptionsV", "_Default_RawValue"]
+- ["11CryptoSwift16BlockModeOptionsV", "contains"]
+- ["11CryptoSwift16BlockModeOptionsV", "deinit"]
+- ["11CryptoSwift16BlockModeOptionsV", "formIntersection"]
+- ["11CryptoSwift16BlockModeOptionsV", "formSymmetricDifference"]
+- ["11CryptoSwift16BlockModeOptionsV", "formUnion"]
+- ["11CryptoSwift16BlockModeOptionsV", "init"]
+- ["11CryptoSwift16BlockModeOptionsV", "insert"]
+- ["11CryptoSwift16BlockModeOptionsV", "intersection"]
+- ["11CryptoSwift16BlockModeOptionsV", "isDisjoint"]
+- ["11CryptoSwift16BlockModeOptionsV", "isEmpty"]
+- ["11CryptoSwift16BlockModeOptionsV", "isSubset"]
+- ["11CryptoSwift16BlockModeOptionsV", "isSuperset"]
+- ["11CryptoSwift16BlockModeOptionsV", "rawValue"]
+- ["11CryptoSwift16BlockModeOptionsV", "remove"]
+- ["11CryptoSwift16BlockModeOptionsV", "subtract"]
+- ["11CryptoSwift16BlockModeOptionsV", "subtracting"]
+- ["11CryptoSwift16BlockModeOptionsV", "symmetricDifference"]
+- ["11CryptoSwift16BlockModeOptionsV", "union"]
+- ["11CryptoSwift16BlockModeOptionsV", "update"]
+- ["SQ", "ArrayLiteralElement"]
+- ["SQ", "BlockModeOptions"]
+- ["SQ", "Element"]
+- ["SQ", "RawValue"]
+- ["SQ", ""]
+- ["SQ", "_Default_ArrayLiteralElement"]
+- ["SQ", "_Default_Element"]
+- ["SQ", "_Default_RawValue"]
+- ["SQ", "contains"]
+- ["SQ", "formIntersection"]
+- ["SQ", "formSymmetricDifference"]
+- ["SQ", "formUnion"]
+- ["SQ", "init"]
+- ["SQ", "insert"]
+- ["SQ", "intersection"]
+- ["SQ", "isDisjoint"]
+- ["SQ", "isEmpty"]
+- ["SQ", "isSubset"]
+- ["SQ", "isSuperset"]
+- ["SQ", "rawValue"]
+- ["SQ", "remove"]
+- ["SQ", "subtract"]
+- ["SQ", "subtracting"]
+- ["SQ", "symmetricDifference"]
+- ["SQ", "union"]
+- ["SQ", "update"]
+- ["s25ExpressibleByArrayLiteralP", "ArrayLiteralElement"]
+- ["s25ExpressibleByArrayLiteralP", "BlockModeOptions"]
+- ["s25ExpressibleByArrayLiteralP", "Element"]
+- ["s25ExpressibleByArrayLiteralP", "RawValue"]
+- ["s25ExpressibleByArrayLiteralP", ""]
+- ["s25ExpressibleByArrayLiteralP", "_Default_ArrayLiteralElement"]
+- ["s25ExpressibleByArrayLiteralP", "_Default_Element"]
+- ["s25ExpressibleByArrayLiteralP", "_Default_RawValue"]
+- ["s25ExpressibleByArrayLiteralP", "contains"]
+- ["s25ExpressibleByArrayLiteralP", "formIntersection"]
+- ["s25ExpressibleByArrayLiteralP", "formSymmetricDifference"]
+- ["s25ExpressibleByArrayLiteralP", "formUnion"]
+- ["s25ExpressibleByArrayLiteralP", "init"]
+- ["s25ExpressibleByArrayLiteralP", "insert"]
+- ["s25ExpressibleByArrayLiteralP", "intersection"]
+- ["s25ExpressibleByArrayLiteralP", "isDisjoint"]
+- ["s25ExpressibleByArrayLiteralP", "isEmpty"]
+- ["s25ExpressibleByArrayLiteralP", "isSubset"]
+- ["s25ExpressibleByArrayLiteralP", "isSuperset"]
+- ["s25ExpressibleByArrayLiteralP", "rawValue"]
+- ["s25ExpressibleByArrayLiteralP", "remove"]
+- ["s25ExpressibleByArrayLiteralP", "subtract"]
+- ["s25ExpressibleByArrayLiteralP", "subtracting"]
+- ["s25ExpressibleByArrayLiteralP", "symmetricDifference"]
+- ["s25ExpressibleByArrayLiteralP", "union"]
+- ["s25ExpressibleByArrayLiteralP", "update"]
+- ["s9OptionSetP", "ArrayLiteralElement"]
+- ["s9OptionSetP", "BlockModeOptions"]
+- ["s9OptionSetP", "Element"]
+- ["s9OptionSetP", "RawValue"]
+- ["s9OptionSetP", ""]
+- ["s9OptionSetP", "_Default_ArrayLiteralElement"]
+- ["s9OptionSetP", "_Default_Element"]
+- ["s9OptionSetP", "_Default_RawValue"]
+- ["s9OptionSetP", "contains"]
+- ["s9OptionSetP", "formIntersection"]
+- ["s9OptionSetP", "formSymmetricDifference"]
+- ["s9OptionSetP", "formUnion"]
+- ["s9OptionSetP", "init"]
+- ["s9OptionSetP", "insert"]
+- ["s9OptionSetP", "intersection"]
+- ["s9OptionSetP", "isDisjoint"]
+- ["s9OptionSetP", "isEmpty"]
+- ["s9OptionSetP", "isSubset"]
+- ["s9OptionSetP", "isSuperset"]
+- ["s9OptionSetP", "rawValue"]
+- ["s9OptionSetP", "remove"]
+- ["s9OptionSetP", "subtract"]
+- ["s9OptionSetP", "subtracting"]
+- ["s9OptionSetP", "symmetricDifference"]
+- ["s9OptionSetP", "union"]
+- ["s9OptionSetP", "update"]
+- ["SY", "ArrayLiteralElement"]
+- ["SY", "BlockModeOptions"]
+- ["SY", "Element"]
+- ["SY", "RawValue"]
+- ["SY", ""]
+- ["SY", "_Default_ArrayLiteralElement"]
+- ["SY", "_Default_Element"]
+- ["SY", "_Default_RawValue"]
+- ["SY", "contains"]
+- ["SY", "formIntersection"]
+- ["SY", "formSymmetricDifference"]
+- ["SY", "formUnion"]
+- ["SY", "init"]
+- ["SY", "insert"]
+- ["SY", "intersection"]
+- ["SY", "isDisjoint"]
+- ["SY", "isEmpty"]
+- ["SY", "isSubset"]
+- ["SY", "isSuperset"]
+- ["SY", "rawValue"]
+- ["SY", "remove"]
+- ["SY", "subtract"]
+- ["SY", "subtracting"]
+- ["SY", "symmetricDifference"]
+- ["SY", "union"]
+- ["SY", "update"]
+- ["s10SetAlgebraP", "ArrayLiteralElement"]
+- ["s10SetAlgebraP", "BlockModeOptions"]
+- ["s10SetAlgebraP", "Element"]
+- ["s10SetAlgebraP", "RawValue"]
+- ["s10SetAlgebraP", ""]
+- ["s10SetAlgebraP", "_Default_ArrayLiteralElement"]
+- ["s10SetAlgebraP", "_Default_Element"]
+- ["s10SetAlgebraP", "_Default_RawValue"]
+- ["s10SetAlgebraP", "contains"]
+- ["s10SetAlgebraP", "formIntersection"]
+- ["s10SetAlgebraP", "formSymmetricDifference"]
+- ["s10SetAlgebraP", "formUnion"]
+- ["s10SetAlgebraP", "init"]
+- ["s10SetAlgebraP", "insert"]
+- ["s10SetAlgebraP", "intersection"]
+- ["s10SetAlgebraP", "isDisjoint"]
+- ["s10SetAlgebraP", "isEmpty"]
+- ["s10SetAlgebraP", "isSubset"]
+- ["s10SetAlgebraP", "isSuperset"]
+- ["s10SetAlgebraP", "rawValue"]
+- ["s10SetAlgebraP", "remove"]
+- ["s10SetAlgebraP", "subtract"]
+- ["s10SetAlgebraP", "subtracting"]
+- ["s10SetAlgebraP", "symmetricDifference"]
+- ["s10SetAlgebraP", "union"]
+- ["s10SetAlgebraP", "update"]
+depends-nominal:
+- "11CryptoSwift16BlockModeOptionsV"
+- "SQ"
+- "s25ExpressibleByArrayLiteralP"
+- "s9OptionSetP"
+- "SY"
+- "s10SetAlgebraP"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Dispatch.apinotesc"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/ObjectiveC.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreImage.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/QuartzCore.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Dispatch.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Metal.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Darwin.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Foundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreFoundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreGraphics.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Swift.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/UIKit.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/SwiftOnoneSupport.swiftmodule"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/Pods/Target Support Files/CryptoSwift/CryptoSwift-umbrella.h"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/DerivedData2/Anonymouse/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CryptoSwift.build/unextended-module.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/usr/include/objc/ObjectiveC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/OpenGLES.framework/Headers/OpenGLES.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CoreImage.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/Metal.framework/Headers/Metal.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/usr/include/Darwin.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
+interface-hash: "17e64d4052e65ff3f0b5f6a6facf27aa"

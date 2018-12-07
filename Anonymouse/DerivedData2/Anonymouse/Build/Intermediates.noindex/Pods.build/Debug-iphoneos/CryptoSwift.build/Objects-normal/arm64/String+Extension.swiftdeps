@@ -1,0 +1,599 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+provides-nominal:
+provides-member:
+- ["SS", ""]
+- ["SS", "md5"]
+- ["SS", "sha1"]
+- ["SS", "sha224"]
+- ["SS", "sha256"]
+- ["SS", "sha384"]
+- ["SS", "sha512"]
+- ["SS", "sha3"]
+- ["SS", "crc32"]
+- ["SS", "crc16"]
+- ["SS", "encrypt"]
+- ["SS", "encryptToBase64"]
+- ["SS", "authenticate"]
+provides-dynamic-lookup:
+depends-top-level:
+- !private "Array"
+- "Authenticator"
+- "Bool"
+- "BooleanLiteralType"
+- !private "CastingPrecedence"
+- "Cipher"
+- "SHA3"
+- "String"
+- "UInt16"
+- "UInt32"
+- !private "UInt8"
+depends-member:
+- !private ["Sa", "authenticate"]
+- !private ["Sa", "crc16"]
+- !private ["Sa", "crc32"]
+- !private ["Sa", "deinit"]
+- !private ["Sa", "encrypt"]
+- !private ["Sa", "init"]
+- !private ["Sa", "md5"]
+- !private ["Sa", "sha1"]
+- !private ["Sa", "sha224"]
+- !private ["Sa", "sha256"]
+- !private ["Sa", "sha3"]
+- !private ["Sa", "sha384"]
+- !private ["Sa", "sha512"]
+- !private ["Sa", "toBase64"]
+- !private ["Sa", "toHexString"]
+- !private ["s13ArrayProtocolP", "authenticate"]
+- !private ["s13ArrayProtocolP", "crc16"]
+- !private ["s13ArrayProtocolP", "crc32"]
+- !private ["s13ArrayProtocolP", "encrypt"]
+- !private ["s13ArrayProtocolP", "init"]
+- !private ["s13ArrayProtocolP", "md5"]
+- !private ["s13ArrayProtocolP", "sha1"]
+- !private ["s13ArrayProtocolP", "sha224"]
+- !private ["s13ArrayProtocolP", "sha256"]
+- !private ["s13ArrayProtocolP", "sha3"]
+- !private ["s13ArrayProtocolP", "sha384"]
+- !private ["s13ArrayProtocolP", "sha512"]
+- !private ["s13ArrayProtocolP", "toBase64"]
+- !private ["s13ArrayProtocolP", "toHexString"]
+- !private ["SK", "Array"]
+- !private ["SK", "authenticate"]
+- !private ["SK", "crc16"]
+- !private ["SK", "crc32"]
+- !private ["SK", "encrypt"]
+- !private ["SK", "init"]
+- !private ["SK", "lazy"]
+- !private ["SK", "map"]
+- !private ["SK", "md5"]
+- !private ["SK", "sha1"]
+- !private ["SK", "sha224"]
+- !private ["SK", "sha256"]
+- !private ["SK", "sha3"]
+- !private ["SK", "sha384"]
+- !private ["SK", "sha512"]
+- !private ["SK", "toBase64"]
+- !private ["SK", "toHexString"]
+- !private ["SK", "utf8"]
+- !private ["Sz", "bytes"]
+- !private ["11CryptoSwift11CSArrayTypeP", "authenticate"]
+- !private ["11CryptoSwift11CSArrayTypeP", "crc16"]
+- !private ["11CryptoSwift11CSArrayTypeP", "crc32"]
+- !private ["11CryptoSwift11CSArrayTypeP", "encrypt"]
+- !private ["11CryptoSwift11CSArrayTypeP", "init"]
+- !private ["11CryptoSwift11CSArrayTypeP", "md5"]
+- !private ["11CryptoSwift11CSArrayTypeP", "sha1"]
+- !private ["11CryptoSwift11CSArrayTypeP", "sha224"]
+- !private ["11CryptoSwift11CSArrayTypeP", "sha256"]
+- !private ["11CryptoSwift11CSArrayTypeP", "sha3"]
+- !private ["11CryptoSwift11CSArrayTypeP", "sha384"]
+- !private ["11CryptoSwift11CSArrayTypeP", "sha512"]
+- !private ["11CryptoSwift11CSArrayTypeP", "toBase64"]
+- !private ["11CryptoSwift11CSArrayTypeP", "toHexString"]
+- !private ["s7CVarArgP", "Array"]
+- !private ["s7CVarArgP", "authenticate"]
+- !private ["s7CVarArgP", "bytes"]
+- !private ["s7CVarArgP", "crc16"]
+- !private ["s7CVarArgP", "crc32"]
+- !private ["s7CVarArgP", "encrypt"]
+- !private ["s7CVarArgP", "init"]
+- !private ["s7CVarArgP", "md5"]
+- !private ["s7CVarArgP", "sha1"]
+- !private ["s7CVarArgP", "sha224"]
+- !private ["s7CVarArgP", "sha256"]
+- !private ["s7CVarArgP", "sha3"]
+- !private ["s7CVarArgP", "sha384"]
+- !private ["s7CVarArgP", "sha512"]
+- !private ["s7CVarArgP", "toBase64"]
+- !private ["s7CVarArgP", "toHexString"]
+- !private ["s7CVarArgP", "utf8"]
+- !private ["Sl", "Array"]
+- !private ["Sl", "authenticate"]
+- !private ["Sl", "crc16"]
+- !private ["Sl", "crc32"]
+- !private ["Sl", "encrypt"]
+- !private ["Sl", "init"]
+- !private ["Sl", "lazy"]
+- !private ["Sl", "map"]
+- !private ["Sl", "md5"]
+- !private ["Sl", "sha1"]
+- !private ["Sl", "sha224"]
+- !private ["Sl", "sha256"]
+- !private ["Sl", "sha3"]
+- !private ["Sl", "sha384"]
+- !private ["Sl", "sha512"]
+- !private ["Sl", "toBase64"]
+- !private ["Sl", "toHexString"]
+- !private ["Sl", "utf8"]
+- !private ["SL", "Array"]
+- !private ["SL", "bytes"]
+- !private ["SL", "utf8"]
+- !private ["s28CustomDebugStringConvertibleP", "Array"]
+- !private ["s28CustomDebugStringConvertibleP", "authenticate"]
+- !private ["s28CustomDebugStringConvertibleP", "crc16"]
+- !private ["s28CustomDebugStringConvertibleP", "crc32"]
+- !private ["s28CustomDebugStringConvertibleP", "encrypt"]
+- !private ["s28CustomDebugStringConvertibleP", "init"]
+- !private ["s28CustomDebugStringConvertibleP", "lazy"]
+- !private ["s28CustomDebugStringConvertibleP", "md5"]
+- !private ["s28CustomDebugStringConvertibleP", "sha1"]
+- !private ["s28CustomDebugStringConvertibleP", "sha224"]
+- !private ["s28CustomDebugStringConvertibleP", "sha256"]
+- !private ["s28CustomDebugStringConvertibleP", "sha3"]
+- !private ["s28CustomDebugStringConvertibleP", "sha384"]
+- !private ["s28CustomDebugStringConvertibleP", "sha512"]
+- !private ["s28CustomDebugStringConvertibleP", "toBase64"]
+- !private ["s28CustomDebugStringConvertibleP", "toHexString"]
+- !private ["s28CustomDebugStringConvertibleP", "utf8"]
+- !private ["s29CustomPlaygroundQuickLookableP", "Array"]
+- !private ["s29CustomPlaygroundQuickLookableP", "bytes"]
+- !private ["s29CustomPlaygroundQuickLookableP", "lazy"]
+- !private ["s29CustomPlaygroundQuickLookableP", "utf8"]
+- !private ["s17CustomReflectableP", "Array"]
+- !private ["s17CustomReflectableP", "authenticate"]
+- !private ["s17CustomReflectableP", "bytes"]
+- !private ["s17CustomReflectableP", "crc16"]
+- !private ["s17CustomReflectableP", "crc32"]
+- !private ["s17CustomReflectableP", "encrypt"]
+- !private ["s17CustomReflectableP", "init"]
+- !private ["s17CustomReflectableP", "lazy"]
+- !private ["s17CustomReflectableP", "md5"]
+- !private ["s17CustomReflectableP", "sha1"]
+- !private ["s17CustomReflectableP", "sha224"]
+- !private ["s17CustomReflectableP", "sha256"]
+- !private ["s17CustomReflectableP", "sha3"]
+- !private ["s17CustomReflectableP", "sha384"]
+- !private ["s17CustomReflectableP", "sha512"]
+- !private ["s17CustomReflectableP", "toBase64"]
+- !private ["s17CustomReflectableP", "toHexString"]
+- !private ["s17CustomReflectableP", "utf8"]
+- !private ["s23CustomStringConvertibleP", "Array"]
+- !private ["s23CustomStringConvertibleP", "authenticate"]
+- !private ["s23CustomStringConvertibleP", "bytes"]
+- !private ["s23CustomStringConvertibleP", "crc16"]
+- !private ["s23CustomStringConvertibleP", "crc32"]
+- !private ["s23CustomStringConvertibleP", "encrypt"]
+- !private ["s23CustomStringConvertibleP", "init"]
+- !private ["s23CustomStringConvertibleP", "lazy"]
+- !private ["s23CustomStringConvertibleP", "md5"]
+- !private ["s23CustomStringConvertibleP", "sha1"]
+- !private ["s23CustomStringConvertibleP", "sha224"]
+- !private ["s23CustomStringConvertibleP", "sha256"]
+- !private ["s23CustomStringConvertibleP", "sha3"]
+- !private ["s23CustomStringConvertibleP", "sha384"]
+- !private ["s23CustomStringConvertibleP", "sha512"]
+- !private ["s23CustomStringConvertibleP", "toBase64"]
+- !private ["s23CustomStringConvertibleP", "toHexString"]
+- !private ["s23CustomStringConvertibleP", "utf8"]
+- !private ["Se", "Array"]
+- !private ["Se", "authenticate"]
+- !private ["Se", "bytes"]
+- !private ["Se", "crc16"]
+- !private ["Se", "crc32"]
+- !private ["Se", "encrypt"]
+- !private ["Se", "init"]
+- !private ["Se", "md5"]
+- !private ["Se", "sha1"]
+- !private ["Se", "sha224"]
+- !private ["Se", "sha256"]
+- !private ["Se", "sha3"]
+- !private ["Se", "sha384"]
+- !private ["Se", "sha512"]
+- !private ["Se", "toBase64"]
+- !private ["Se", "toHexString"]
+- !private ["Se", "utf8"]
+- ["11CryptoSwift10DigestTypeP", "Variant"]
+- !private ["SE", "Array"]
+- !private ["SE", "authenticate"]
+- !private ["SE", "bytes"]
+- !private ["SE", "crc16"]
+- !private ["SE", "crc32"]
+- !private ["SE", "encrypt"]
+- !private ["SE", "init"]
+- !private ["SE", "md5"]
+- !private ["SE", "sha1"]
+- !private ["SE", "sha224"]
+- !private ["SE", "sha256"]
+- !private ["SE", "sha3"]
+- !private ["SE", "sha384"]
+- !private ["SE", "sha512"]
+- !private ["SE", "toBase64"]
+- !private ["SE", "toHexString"]
+- !private ["SE", "utf8"]
+- !private ["SQ", "Array"]
+- !private ["SQ", "authenticate"]
+- !private ["SQ", "bytes"]
+- !private ["SQ", "crc16"]
+- !private ["SQ", "crc32"]
+- !private ["SQ", "encrypt"]
+- !private ["SQ", "init"]
+- !private ["SQ", "md5"]
+- !private ["SQ", "sha1"]
+- !private ["SQ", "sha224"]
+- !private ["SQ", "sha256"]
+- !private ["SQ", "sha3"]
+- !private ["SQ", "sha384"]
+- !private ["SQ", "sha512"]
+- !private ["SQ", "toBase64"]
+- !private ["SQ", "toHexString"]
+- !private ["SQ", "utf8"]
+- !private ["s25ExpressibleByArrayLiteralP", "authenticate"]
+- !private ["s25ExpressibleByArrayLiteralP", "crc16"]
+- !private ["s25ExpressibleByArrayLiteralP", "crc32"]
+- !private ["s25ExpressibleByArrayLiteralP", "encrypt"]
+- !private ["s25ExpressibleByArrayLiteralP", "init"]
+- !private ["s25ExpressibleByArrayLiteralP", "md5"]
+- !private ["s25ExpressibleByArrayLiteralP", "sha1"]
+- !private ["s25ExpressibleByArrayLiteralP", "sha224"]
+- !private ["s25ExpressibleByArrayLiteralP", "sha256"]
+- !private ["s25ExpressibleByArrayLiteralP", "sha3"]
+- !private ["s25ExpressibleByArrayLiteralP", "sha384"]
+- !private ["s25ExpressibleByArrayLiteralP", "sha512"]
+- !private ["s25ExpressibleByArrayLiteralP", "toBase64"]
+- !private ["s25ExpressibleByArrayLiteralP", "toHexString"]
+- !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "Array"]
+- !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "utf8"]
+- !private ["s27ExpressibleByIntegerLiteralP", "bytes"]
+- !private ["s26ExpressibleByStringLiteralP", "Array"]
+- !private ["s26ExpressibleByStringLiteralP", "utf8"]
+- !private ["s33ExpressibleByUnicodeScalarLiteralP", "Array"]
+- !private ["s33ExpressibleByUnicodeScalarLiteralP", "utf8"]
+- !private ["s17FixedWidthIntegerP", "bytes"]
+- !private ["SH", "Array"]
+- !private ["SH", "authenticate"]
+- !private ["SH", "bytes"]
+- !private ["SH", "crc16"]
+- !private ["SH", "crc32"]
+- !private ["SH", "encrypt"]
+- !private ["SH", "init"]
+- !private ["SH", "md5"]
+- !private ["SH", "sha1"]
+- !private ["SH", "sha224"]
+- !private ["SH", "sha256"]
+- !private ["SH", "sha3"]
+- !private ["SH", "sha384"]
+- !private ["SH", "sha512"]
+- !private ["SH", "toBase64"]
+- !private ["SH", "toHexString"]
+- !private ["SH", "utf8"]
+- !private ["s14LazyCollectionV", "map"]
+- !private ["s22LazyCollectionProtocolP", "crc16"]
+- !private ["s22LazyCollectionProtocolP", "crc32"]
+- !private ["s22LazyCollectionProtocolP", "map"]
+- !private ["s22LazyCollectionProtocolP", "md5"]
+- !private ["s22LazyCollectionProtocolP", "sha1"]
+- !private ["s22LazyCollectionProtocolP", "sha224"]
+- !private ["s22LazyCollectionProtocolP", "sha256"]
+- !private ["s22LazyCollectionProtocolP", "sha3"]
+- !private ["s22LazyCollectionProtocolP", "sha384"]
+- !private ["s22LazyCollectionProtocolP", "sha512"]
+- !private ["s17LazyMapCollectionV", "crc16"]
+- !private ["s17LazyMapCollectionV", "crc32"]
+- !private ["s17LazyMapCollectionV", "md5"]
+- !private ["s17LazyMapCollectionV", "sha1"]
+- !private ["s17LazyMapCollectionV", "sha224"]
+- !private ["s17LazyMapCollectionV", "sha256"]
+- !private ["s17LazyMapCollectionV", "sha3"]
+- !private ["s17LazyMapCollectionV", "sha384"]
+- !private ["s17LazyMapCollectionV", "sha512"]
+- !private ["s15LazyMapSequenceV", "crc16"]
+- !private ["s15LazyMapSequenceV", "crc32"]
+- !private ["s15LazyMapSequenceV", "md5"]
+- !private ["s15LazyMapSequenceV", "sha1"]
+- !private ["s15LazyMapSequenceV", "sha224"]
+- !private ["s15LazyMapSequenceV", "sha256"]
+- !private ["s15LazyMapSequenceV", "sha3"]
+- !private ["s15LazyMapSequenceV", "sha384"]
+- !private ["s15LazyMapSequenceV", "sha512"]
+- !private ["s12LazySequenceV", "map"]
+- !private ["s20LazySequenceProtocolP", "crc16"]
+- !private ["s20LazySequenceProtocolP", "crc32"]
+- !private ["s20LazySequenceProtocolP", "map"]
+- !private ["s20LazySequenceProtocolP", "md5"]
+- !private ["s20LazySequenceProtocolP", "sha1"]
+- !private ["s20LazySequenceProtocolP", "sha224"]
+- !private ["s20LazySequenceProtocolP", "sha256"]
+- !private ["s20LazySequenceProtocolP", "sha3"]
+- !private ["s20LazySequenceProtocolP", "sha384"]
+- !private ["s20LazySequenceProtocolP", "sha512"]
+- !private ["s25LosslessStringConvertibleP", "Array"]
+- !private ["s25LosslessStringConvertibleP", "bytes"]
+- !private ["s25LosslessStringConvertibleP", "utf8"]
+- !private ["s10MirrorPathP", "Array"]
+- !private ["s10MirrorPathP", "utf8"]
+- !private ["SM", "authenticate"]
+- !private ["SM", "crc16"]
+- !private ["SM", "crc32"]
+- !private ["SM", "encrypt"]
+- !private ["SM", "init"]
+- !private ["SM", "md5"]
+- !private ["SM", "sha1"]
+- !private ["SM", "sha224"]
+- !private ["SM", "sha256"]
+- !private ["SM", "sha3"]
+- !private ["SM", "sha384"]
+- !private ["SM", "sha512"]
+- !private ["SM", "toBase64"]
+- !private ["SM", "toHexString"]
+- !private ["So8NSCodingP", "utf8"]
+- !private ["So9NSCopyingP", "utf8"]
+- !private ["So21NSItemProviderReadingP", "utf8"]
+- !private ["So21NSItemProviderWritingP", "utf8"]
+- !private ["So16NSMutableCopyingP", "utf8"]
+- !private ["So8NSObjectC", "utf8"]
+- !private ["So8NSObjectP", "utf8"]
+- !private ["So14NSSecureCodingP", "utf8"]
+- !private ["So8NSStringC", "utf8"]
+- !private ["Sj", "bytes"]
+- !private ["Sk", "authenticate"]
+- !private ["Sk", "crc16"]
+- !private ["Sk", "crc32"]
+- !private ["Sk", "encrypt"]
+- !private ["Sk", "init"]
+- !private ["Sk", "map"]
+- !private ["Sk", "md5"]
+- !private ["Sk", "sha1"]
+- !private ["Sk", "sha224"]
+- !private ["Sk", "sha256"]
+- !private ["Sk", "sha3"]
+- !private ["Sk", "sha384"]
+- !private ["Sk", "sha512"]
+- !private ["Sk", "toBase64"]
+- !private ["Sk", "toHexString"]
+- !private ["Sm", "Array"]
+- !private ["Sm", "authenticate"]
+- !private ["Sm", "crc16"]
+- !private ["Sm", "crc32"]
+- !private ["Sm", "encrypt"]
+- !private ["Sm", "init"]
+- !private ["Sm", "md5"]
+- !private ["Sm", "sha1"]
+- !private ["Sm", "sha224"]
+- !private ["Sm", "sha256"]
+- !private ["Sm", "sha3"]
+- !private ["Sm", "sha384"]
+- !private ["Sm", "sha512"]
+- !private ["Sm", "toBase64"]
+- !private ["Sm", "toHexString"]
+- !private ["Sm", "utf8"]
+- ["11CryptoSwift4SHA3C", "Variant"]
+- !private ["ST", "Array"]
+- !private ["ST", "authenticate"]
+- !private ["ST", "crc16"]
+- !private ["ST", "crc32"]
+- !private ["ST", "encrypt"]
+- !private ["ST", "init"]
+- !private ["ST", "lazy"]
+- !private ["ST", "map"]
+- !private ["ST", "md5"]
+- !private ["ST", "sha1"]
+- !private ["ST", "sha224"]
+- !private ["ST", "sha256"]
+- !private ["ST", "sha3"]
+- !private ["ST", "sha384"]
+- !private ["ST", "sha512"]
+- !private ["ST", "toBase64"]
+- !private ["ST", "toHexString"]
+- !private ["ST", "utf8"]
+- !private ["Sx", "bytes"]
+- !private ["SS", "Array"]
+- ["SS", "Authenticator"]
+- ["SS", "Bool"]
+- ["SS", "Cipher"]
+- ["SS", "SHA3"]
+- ["SS", "String"]
+- ["SS", "UInt16"]
+- ["SS", "UInt32"]
+- !private ["SS", "UInt8"]
+- ["SS", "authenticate"]
+- ["SS", "crc16"]
+- ["SS", "crc32"]
+- ["SS", "encrypt"]
+- ["SS", "encryptToBase64"]
+- ["SS", "md5"]
+- ["SS", "sha1"]
+- ["SS", "sha224"]
+- ["SS", "sha256"]
+- ["SS", "sha3"]
+- ["SS", "sha384"]
+- ["SS", "sha512"]
+- !private ["SS", "utf8"]
+- !private ["Sy", "Array"]
+- !private ["Sy", "utf8"]
+- !private ["s16TextOutputStreamP", "Array"]
+- !private ["s16TextOutputStreamP", "utf8"]
+- !private ["s20TextOutputStreamableP", "Array"]
+- !private ["s20TextOutputStreamableP", "utf8"]
+- !private ["s6UInt16V", "bytes"]
+- !private ["s6UInt32V", "bytes"]
+- !private ["SS8UTF8ViewV", "lazy"]
+- !private ["SU", "bytes"]
+- ["11CryptoSwift9UpdatableP", "Variant"]
+- !private ["s18_BitwiseOperationsP", "bytes"]
+- !private ["s24_DestructorSafeContainerP", "authenticate"]
+- !private ["s24_DestructorSafeContainerP", "crc16"]
+- !private ["s24_DestructorSafeContainerP", "crc32"]
+- !private ["s24_DestructorSafeContainerP", "encrypt"]
+- !private ["s24_DestructorSafeContainerP", "init"]
+- !private ["s24_DestructorSafeContainerP", "md5"]
+- !private ["s24_DestructorSafeContainerP", "sha1"]
+- !private ["s24_DestructorSafeContainerP", "sha224"]
+- !private ["s24_DestructorSafeContainerP", "sha256"]
+- !private ["s24_DestructorSafeContainerP", "sha3"]
+- !private ["s24_DestructorSafeContainerP", "sha384"]
+- !private ["s24_DestructorSafeContainerP", "sha512"]
+- !private ["s24_DestructorSafeContainerP", "toBase64"]
+- !private ["s24_DestructorSafeContainerP", "toHexString"]
+- !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "Array"]
+- !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "utf8"]
+- !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "bytes"]
+- !private ["s34_ExpressibleByBuiltinStringLiteralP", "Array"]
+- !private ["s34_ExpressibleByBuiltinStringLiteralP", "utf8"]
+- !private ["s39_ExpressibleByBuiltinUTF16StringLiteralP", "Array"]
+- !private ["s39_ExpressibleByBuiltinUTF16StringLiteralP", "utf8"]
+- !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "Array"]
+- !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "utf8"]
+- !private ["s33_ExpressibleByStringInterpolationP", "Array"]
+- !private ["s33_ExpressibleByStringInterpolationP", "utf8"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "authenticate"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "bytes"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "crc16"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "crc32"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "encrypt"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "init"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "md5"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "sha1"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "sha224"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "sha256"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "sha3"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "sha384"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "sha512"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "toBase64"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "toHexString"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "utf8"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "utf8"]
+- !private ["s21_ObjectiveCBridgeableP", "Array"]
+- !private ["s21_ObjectiveCBridgeableP", "authenticate"]
+- !private ["s21_ObjectiveCBridgeableP", "bytes"]
+- !private ["s21_ObjectiveCBridgeableP", "crc16"]
+- !private ["s21_ObjectiveCBridgeableP", "crc32"]
+- !private ["s21_ObjectiveCBridgeableP", "encrypt"]
+- !private ["s21_ObjectiveCBridgeableP", "init"]
+- !private ["s21_ObjectiveCBridgeableP", "md5"]
+- !private ["s21_ObjectiveCBridgeableP", "sha1"]
+- !private ["s21_ObjectiveCBridgeableP", "sha224"]
+- !private ["s21_ObjectiveCBridgeableP", "sha256"]
+- !private ["s21_ObjectiveCBridgeableP", "sha3"]
+- !private ["s21_ObjectiveCBridgeableP", "sha384"]
+- !private ["s21_ObjectiveCBridgeableP", "sha512"]
+- !private ["s21_ObjectiveCBridgeableP", "toBase64"]
+- !private ["s21_ObjectiveCBridgeableP", "toHexString"]
+- !private ["s21_ObjectiveCBridgeableP", "utf8"]
+- !private ["s16_SequenceWrapperP", "map"]
+- !private ["s14_StringElementP", "bytes"]
+- !private ["s16_SwiftStringViewP", "Array"]
+- !private ["s16_SwiftStringViewP", "lazy"]
+- !private ["s16_SwiftStringViewP", "utf8"]
+- !private ["11CryptoSwift11_UInt32TypeP", "bytes"]
+depends-nominal:
+- !private "Sa"
+- !private "s13ArrayProtocolP"
+- !private "SK"
+- !private "Sz"
+- !private "11CryptoSwift11CSArrayTypeP"
+- !private "s7CVarArgP"
+- !private "Sl"
+- !private "SL"
+- !private "s28CustomDebugStringConvertibleP"
+- !private "s29CustomPlaygroundQuickLookableP"
+- !private "s17CustomReflectableP"
+- !private "s23CustomStringConvertibleP"
+- !private "Se"
+- "11CryptoSwift10DigestTypeP"
+- !private "SE"
+- !private "SQ"
+- !private "s25ExpressibleByArrayLiteralP"
+- !private "s43ExpressibleByExtendedGraphemeClusterLiteralP"
+- !private "s27ExpressibleByIntegerLiteralP"
+- !private "s26ExpressibleByStringLiteralP"
+- !private "s33ExpressibleByUnicodeScalarLiteralP"
+- !private "s17FixedWidthIntegerP"
+- !private "SH"
+- !private "s14LazyCollectionV"
+- !private "s22LazyCollectionProtocolP"
+- !private "s17LazyMapCollectionV"
+- !private "s15LazyMapSequenceV"
+- !private "s12LazySequenceV"
+- !private "s20LazySequenceProtocolP"
+- !private "s25LosslessStringConvertibleP"
+- !private "s10MirrorPathP"
+- !private "SM"
+- !private "So8NSCodingP"
+- !private "So9NSCopyingP"
+- !private "So21NSItemProviderReadingP"
+- !private "So21NSItemProviderWritingP"
+- !private "So16NSMutableCopyingP"
+- !private "So8NSObjectC"
+- !private "So8NSObjectP"
+- !private "So14NSSecureCodingP"
+- !private "So8NSStringC"
+- !private "Sj"
+- !private "Sk"
+- !private "Sm"
+- "11CryptoSwift4SHA3C"
+- !private "ST"
+- !private "Sx"
+- "SS"
+- !private "Sy"
+- !private "s16TextOutputStreamP"
+- !private "s20TextOutputStreamableP"
+- !private "s6UInt16V"
+- !private "s6UInt32V"
+- !private "SS8UTF8ViewV"
+- !private "SU"
+- "11CryptoSwift9UpdatableP"
+- !private "s18_BitwiseOperationsP"
+- !private "s24_DestructorSafeContainerP"
+- !private "s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP"
+- !private "s35_ExpressibleByBuiltinIntegerLiteralP"
+- !private "s34_ExpressibleByBuiltinStringLiteralP"
+- !private "s39_ExpressibleByBuiltinUTF16StringLiteralP"
+- !private "s41_ExpressibleByBuiltinUnicodeScalarLiteralP"
+- !private "s33_ExpressibleByStringInterpolationP"
+- !private "s35_HasCustomAnyHashableRepresentationP"
+- !private "10Foundation27_KeyValueCodingAndObservingP"
+- !private "s21_ObjectiveCBridgeableP"
+- !private "s16_SequenceWrapperP"
+- !private "s14_StringElementP"
+- !private "s16_SwiftStringViewP"
+- !private "11CryptoSwift11_UInt32TypeP"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Dispatch.apinotesc"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/ObjectiveC.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/CoreImage.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/QuartzCore.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Dispatch.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Metal.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Darwin.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Foundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/CoreFoundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/CoreGraphics.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Swift.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/UIKit.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/SwiftOnoneSupport.swiftmodule"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/Pods/Target Support Files/CryptoSwift/CryptoSwift-umbrella.h"
+- "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/DerivedData2/Anonymouse/Build/Intermediates.noindex/Pods.build/Debug-iphoneos/CryptoSwift.build/unextended-module.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/usr/include/objc/ObjectiveC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/OpenGLES.framework/Headers/OpenGLES.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CoreImage.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Metal.framework/Headers/Metal.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/usr/include/Darwin.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
+interface-hash: "21ce568ed1cb63ab5be07383874c6c8a"

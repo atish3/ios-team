@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>logFormatVersion</key>
+	<integer>9</integer>
+	<key>logs</key>
+	<dict>
+		<key>D8A0FC85-4A08-4571-99E3-756BF8E55C1E</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>D8A0FC85-4A08-4571-99E3-756BF8E55C1E.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Anonymouse project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Anonymouse</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Debug Anonymouse</string>
+			<key>timeStartedRecording</key>
+			<real>562889214.07316506</real>
+			<key>timeStoppedRecording</key>
+			<real>562889232.15971506</real>
+			<key>title</key>
+			<string>Debug Anonymouse</string>
+			<key>uniqueIdentifier</key>
+			<string>D8A0FC85-4A08-4571-99E3-756BF8E55C1E</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

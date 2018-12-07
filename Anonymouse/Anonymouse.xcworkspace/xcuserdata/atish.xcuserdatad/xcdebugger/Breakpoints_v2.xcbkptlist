@@ -79,8 +79,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "750"
             endingLineNumber = "750"
-            landmarkName = "sendMessageViaHTTP(text:date:rating:user:)"
-            landmarkType = "7">
+            landmarkName = "session(_:didReceive:fromPeer:)"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -95,8 +95,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "741"
             endingLineNumber = "741"
-            landmarkName = "sendMessageViaHTTP(text:date:rating:user:)"
-            landmarkType = "7">
+            landmarkName = "session(_:didReceive:fromPeer:)"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -111,8 +111,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "793"
             endingLineNumber = "793"
-            landmarkName = "sendMessageViaHTTP(text:date:rating:user:)"
-            landmarkType = "7">
+            landmarkName = "session(_:didReceive:fromPeer:)"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -127,8 +127,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "795"
             endingLineNumber = "795"
-            landmarkName = "sendMessageViaHTTP(text:date:rating:user:)"
-            landmarkType = "7">
+            landmarkName = "session(_:didReceive:fromPeer:)"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -143,8 +143,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "791"
             endingLineNumber = "791"
-            landmarkName = "sendMessageViaHTTP(text:date:rating:user:)"
-            landmarkType = "7">
+            landmarkName = "session(_:didReceive:fromPeer:)"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -159,8 +159,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "779"
             endingLineNumber = "779"
-            landmarkName = "sendMessageViaHTTP(text:date:rating:user:)"
-            landmarkType = "7">
+            landmarkName = "session(_:didReceive:fromPeer:)"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -175,8 +175,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "766"
             endingLineNumber = "766"
-            landmarkName = "sendMessageViaHTTP(text:date:rating:user:)"
-            landmarkType = "7">
+            landmarkName = "session(_:didReceive:fromPeer:)"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -191,8 +191,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "776"
             endingLineNumber = "776"
-            landmarkName = "sendMessageViaHTTP(text:date:rating:user:)"
-            landmarkType = "7">
+            landmarkName = "session(_:didReceive:fromPeer:)"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -569,8 +569,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1067"
             endingLineNumber = "1067"
-            landmarkName = "sendViaBeacon(text:date:user:)"
-            landmarkType = "7">
+            landmarkName = "getMessageViaHTTP()"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -633,8 +633,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1067"
             endingLineNumber = "1067"
-            landmarkName = "sendViaBeacon(text:date:user:)"
-            landmarkType = "7">
+            landmarkName = "getMessageViaHTTP()"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -713,8 +713,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "158"
             endingLineNumber = "158"
-            landmarkName = "sendAllMessages(toStream:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -729,8 +729,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "149"
             endingLineNumber = "149"
-            landmarkName = "sendAllMessages(toStream:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -745,8 +745,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "152"
             endingLineNumber = "152"
-            landmarkName = "sendAllMessages(toStream:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -761,8 +761,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "147"
             endingLineNumber = "147"
-            landmarkName = "sendAllMessages(toStream:)"
-            landmarkType = "7">
+            landmarkName = "deinit"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -777,8 +777,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "148"
             endingLineNumber = "148"
-            landmarkName = "sendAllMessages(toStream:)"
-            landmarkType = "7">
+            landmarkName = "deinit"
+            landmarkType = "9">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -825,8 +825,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "150"
             endingLineNumber = "150"
-            landmarkName = "sendAllMessages(toStream:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -873,8 +873,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "146"
             endingLineNumber = "146"
-            landmarkName = "sendAllMessages(toStream:)"
-            landmarkType = "7">
+            landmarkName = "deinit"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -889,8 +889,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "145"
             endingLineNumber = "145"
-            landmarkName = "sendAllMessages(toStream:)"
-            landmarkType = "7">
+            landmarkName = "deinit"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -905,8 +905,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "336"
             endingLineNumber = "336"
-            landmarkName = "send(individualMessage:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -921,8 +921,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1069"
             endingLineNumber = "1069"
-            landmarkName = "sendViaBeacon(text:date:user:)"
-            landmarkType = "7">
+            landmarkName = "getMessageViaHTTP()"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -937,8 +937,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "472"
             endingLineNumber = "472"
-            landmarkName = "sendAllMessages(toRequesters:)"
-            landmarkType = "7">
+            landmarkName = "send(individualReply:)"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

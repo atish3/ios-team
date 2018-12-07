@@ -1,0 +1,5 @@
+version: "Apple Swift version 4.2 (swiftlang-1000.11.37.1 clang-1000.11.45.1)"
+options: "d877bb96273ed0b64f22106bf5f0d08a"
+build_time: [1541193940, 246619000]
+inputs:
+  "/Users/EliMasjedi/Desktop/School/Junior_Year/MDP/ios-team/Anonymouse/Pods/SwiftyJSON/Source/SwiftyJSON.swift": [1540592030, 0]
