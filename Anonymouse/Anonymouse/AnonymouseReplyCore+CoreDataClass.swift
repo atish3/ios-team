@@ -23,7 +23,7 @@ class AnonymouseReplyCore: NSManagedObject {
         self.likeStatus = NSNumber(integerLiteral: 0)
     } */
     
-    convenience init(text: String, date: Date, user: String, message: AnonymouseMessageCore, fromServer: Bool) {
+    convenience init(text: String, date: Date, user: String, message: AnonymouseMessageCore) {
         let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext: NSManagedObjectContext = appDelegate.dataController.managedObjectContext
         let entity: NSEntityDescription? = NSEntityDescription.entity(forEntityName: "AnonymouseReplyCore", in: managedContext)

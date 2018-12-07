@@ -16,6 +16,8 @@ class AnonymouseCentralManagerDelegate: NSObject, CBCentralManagerDelegate {
     
     weak var dataController: AnonymouseDataController! = (UIApplication.shared.delegate as! AppDelegate).dataController
     
+    weak var connectivityController: AnonymouseConnectivityController! = (UIApplication.shared.delegate as! AppDelegate).connectivityController
+    
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         print("Central State updated")
         switch(central.state){
@@ -41,5 +43,7 @@ class AnonymouseCentralManagerDelegate: NSObject, CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         print(RSSI)
         print("FOUND ONE")
+        connectivityController.startBrowsingForPeers()
+        
     }
 }

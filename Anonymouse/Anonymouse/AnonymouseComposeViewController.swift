@@ -194,9 +194,12 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
             var messageText = self.composeTextView.text!
             messageText = messageText.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             
-            self.dataController.addMessage(messageText, date: Date(), user: username, fromServer: false)
-            connectivityController.sendViaBeacon();
+            self.dataController.addMessage(messageText, date: Date(), user: username)
+            let messageArr: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
+            let sent : AnonymouseMessageSentCore = AnonymouseMessageSentCore(message: messageArr[messageArr.count - 1])
+            connectivityController.sendViaBeacon(text: messageText, date: Date(), user: username);
             connectivityController.sendMessageViaHTTP(text: messageText, date: Date(), rating: 0, user: username);
+            connectivityController.send(individualMessage: sent)
         }
             //The else block below should be redundant, as the user should already have a key pair,
             // but in case they don't, generate a new key pair here.
@@ -211,9 +214,12 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
             var messageText = self.composeTextView.text!
             messageText = messageText.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             
-            self.dataController.addMessage(messageText, date: Date(), user: username, fromServer: false)
-            connectivityController.sendViaBeacon();
+            self.dataController.addMessage(messageText, date: Date(), user: username)
+            let messageArr: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
+            let sent : AnonymouseMessageSentCore = AnonymouseMessageSentCore(message: messageArr[messageArr.count - 1])
+            connectivityController.sendViaBeacon(text: messageText, date: Date(), user: username);
             connectivityController.sendMessageViaHTTP(text: messageText, date: Date(), rating: 0, user: username);
+            connectivityController.send(individualMessage: sent)
         }
         
        

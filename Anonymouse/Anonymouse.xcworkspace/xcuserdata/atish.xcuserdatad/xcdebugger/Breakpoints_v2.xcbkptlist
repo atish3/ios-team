@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Anonymouse/AnonymouseComposeViewController.swift"
-            timestampString = "562437914.22226"
+            timestampString = "565916215.960915"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "184"
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Anonymouse/AnonymouseComposeViewController.swift"
-            timestampString = "562437914.222402"
+            timestampString = "565916215.961027"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "207"
-            endingLineNumber = "207"
+            startingLineNumber = "210"
+            endingLineNumber = "210"
             landmarkName = "post()"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Anonymouse/AnonymouseConnectivityController.swift"
-            timestampString = "562438126.173915"
+            timestampString = "565916215.9610831"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "341"
-            endingLineNumber = "341"
+            startingLineNumber = "750"
+            endingLineNumber = "750"
             landmarkName = "sendMessageViaHTTP(text:date:rating:user:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,27 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Anonymouse/AnonymouseConnectivityController.swift"
-            timestampString = "562438126.1739939"
+            timestampString = "565916215.961574"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "332"
-            endingLineNumber = "332"
-            landmarkName = "AnonymouseConnectivityController"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Anonymouse/AnonymouseConnectivityController.swift"
-            timestampString = "562438126.1740561"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "384"
-            endingLineNumber = "384"
+            startingLineNumber = "741"
+            endingLineNumber = "741"
             landmarkName = "sendMessageViaHTTP(text:date:rating:user:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -122,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Anonymouse/AnonymouseConnectivityController.swift"
-            timestampString = "562438126.174112"
+            timestampString = "565916215.961919"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "386"
-            endingLineNumber = "386"
+            startingLineNumber = "793"
+            endingLineNumber = "793"
             landmarkName = "sendMessageViaHTTP(text:date:rating:user:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Anonymouse/AnonymouseConnectivityController.swift"
-            timestampString = "562438126.174167"
+            timestampString = "565916215.962237"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "382"
-            endingLineNumber = "382"
+            startingLineNumber = "795"
+            endingLineNumber = "795"
             landmarkName = "sendMessageViaHTTP(text:date:rating:user:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -154,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Anonymouse/AnonymouseConnectivityController.swift"
-            timestampString = "562438126.17422"
+            timestampString = "565916215.962553"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "370"
-            endingLineNumber = "370"
+            startingLineNumber = "791"
+            endingLineNumber = "791"
             landmarkName = "sendMessageViaHTTP(text:date:rating:user:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -170,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Anonymouse/AnonymouseConnectivityController.swift"
-            timestampString = "562438126.174273"
+            timestampString = "565916215.962862"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "357"
-            endingLineNumber = "357"
+            startingLineNumber = "779"
+            endingLineNumber = "779"
             landmarkName = "sendMessageViaHTTP(text:date:rating:user:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -186,11 +170,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Anonymouse/AnonymouseConnectivityController.swift"
-            timestampString = "562438126.1743259"
+            timestampString = "565916215.963171"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "367"
-            endingLineNumber = "367"
+            startingLineNumber = "766"
+            endingLineNumber = "766"
+            landmarkName = "sendMessageViaHTTP(text:date:rating:user:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Anonymouse/AnonymouseConnectivityController.swift"
+            timestampString = "565916215.963487"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "776"
+            endingLineNumber = "776"
             landmarkName = "sendMessageViaHTTP(text:date:rating:user:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -202,7 +202,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Anonymouse/AppDelegate.swift"
-            timestampString = "562438126.174382"
+            timestampString = "565915650.579206"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "26"
@@ -218,7 +218,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Anonymouse/AppDelegate.swift"
-            timestampString = "562438126.174439"
+            timestampString = "565915650.579408"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "27"
@@ -234,7 +234,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Anonymouse/AppDelegate.swift"
-            timestampString = "562438126.174493"
+            timestampString = "565915650.579599"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "17"
@@ -297,7 +297,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Anonymouse/AppDelegate.swift"
-            timestampString = "562438126.174545"
+            timestampString = "565915650.579681"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "15"
@@ -375,7 +375,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Anonymouse/AppDelegate.swift"
-            timestampString = "562438126.174596"
+            timestampString = "565915650.579761"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "16"
@@ -438,7 +438,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Anonymouse/AppDelegate.swift"
-            timestampString = "562438126.174648"
+            timestampString = "565915650.579887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "14"
@@ -516,7 +516,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Anonymouse/AppDelegate.swift"
-            timestampString = "562438126.1746989"
+            timestampString = "565915650.5799741"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "28"
@@ -532,7 +532,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Anonymouse/AppDelegate.swift"
-            timestampString = "562438126.17475"
+            timestampString = "565915650.580057"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "65"
@@ -548,7 +548,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Anonymouse/AppDelegate.swift"
-            timestampString = "562438126.174827"
+            timestampString = "565915650.58017"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "61"
@@ -564,12 +564,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Anonymouse/AnonymouseConnectivityController.swift"
-            timestampString = "562438126.174901"
+            timestampString = "565916215.963928"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "658"
-            endingLineNumber = "658"
-            landmarkName = "sendViaBeacon()"
+            startingLineNumber = "1067"
+            endingLineNumber = "1067"
+            landmarkName = "sendViaBeacon(text:date:user:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -580,11 +580,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Anonymouse/AnonymouseComposeViewController.swift"
-            timestampString = "562437914.2277991"
+            timestampString = "565916215.964373"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "215"
-            endingLineNumber = "215"
+            startingLineNumber = "220"
+            endingLineNumber = "220"
             landmarkName = "post()"
             landmarkType = "7">
          </BreakpointContent>
@@ -596,11 +596,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Anonymouse/AnonymouseComposeViewController.swift"
-            timestampString = "562437914.227851"
+            timestampString = "565916215.96443"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "198"
-            endingLineNumber = "198"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
             landmarkName = "post()"
             landmarkType = "7">
          </BreakpointContent>
@@ -628,28 +628,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Anonymouse/AnonymouseConnectivityController.swift"
-            timestampString = "562438126.175086"
+            timestampString = "565916215.964499"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "658"
-            endingLineNumber = "658"
-            landmarkName = "sendViaBeacon()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Anonymouse/AnonymouseConnectivityController.swift"
-            timestampString = "562438126.17514"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "664"
-            endingLineNumber = "664"
-            landmarkName = "sendViaBeacon()"
+            startingLineNumber = "1067"
+            endingLineNumber = "1067"
+            landmarkName = "sendViaBeacon(text:date:user:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -676,11 +660,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Anonymouse/AnonymouseCentralManagerDelegate.swift"
-            timestampString = "562438126.175246"
+            timestampString = "565916215.964861"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
             landmarkName = "centralManager(_:didConnect:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -692,28 +676,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Anonymouse/AppDelegate.swift"
-            timestampString = "562438126.1756409"
+            timestampString = "565915650.581654"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "70"
             endingLineNumber = "70"
             landmarkName = "applicationDidEnterBackground(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Anonymouse/AnonymouseConnectivityController.swift"
-            timestampString = "562438126.175698"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "660"
-            endingLineNumber = "660"
-            landmarkName = "sendViaBeacon()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -730,6 +698,246 @@
             startingLineNumber = "49"
             endingLineNumber = "49"
             landmarkName = "peripheralManager(_:didAdd:error:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Anonymouse/AnonymouseConnectivityController.swift"
+            timestampString = "565916215.964945"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
+            landmarkName = "sendAllMessages(toStream:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Anonymouse/AnonymouseConnectivityController.swift"
+            timestampString = "565916215.965257"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
+            landmarkName = "sendAllMessages(toStream:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Anonymouse/AnonymouseConnectivityController.swift"
+            timestampString = "565916215.965556"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
+            landmarkName = "sendAllMessages(toStream:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Anonymouse/AnonymouseConnectivityController.swift"
+            timestampString = "565916215.965854"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
+            landmarkName = "sendAllMessages(toStream:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Anonymouse/AnonymouseConnectivityController.swift"
+            timestampString = "565916215.966153"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
+            landmarkName = "sendAllMessages(toStream:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Anonymouse.AnonymouseConnectivityController.sendAllMessages(toStream: __C.NSOutputStream) -&gt; ()"
+                  moduleName = "Anonymouse"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Anonymouse/AnonymouseConnectivityController.swift"
+                  timestampString = "565380232.522765"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "150"
+                  endingLineNumber = "150"
+                  offsetFromSymbolStart = "504">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Anonymouse.AnonymouseMessageCore) -&gt; Anonymouse.AnonymouseMessageSentCore in Anonymouse.AnonymouseConnectivityController.sendAllMessages(toStream: __C.NSOutputStream) -&gt; ()"
+                  moduleName = "Anonymouse"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Anonymouse/AnonymouseConnectivityController.swift"
+                  timestampString = "565380232.524851"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "151"
+                  endingLineNumber = "151"
+                  offsetFromSymbolStart = "28">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Anonymouse/AnonymouseConnectivityController.swift"
+            timestampString = "565916215.966452"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
+            landmarkName = "sendAllMessages(toStream:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Anonymouse.AnonymouseConnectivityController.sendAllMessages(toStream: __C.NSOutputStream) -&gt; ()"
+                  moduleName = "Anonymouse"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Anonymouse/AnonymouseConnectivityController.swift"
+                  timestampString = "565380232.530149"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "153"
+                  endingLineNumber = "153"
+                  offsetFromSymbolStart = "748">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Anonymouse.AnonymouseMessageCore) -&gt; Anonymouse.AnonymouseRatingSentCore in Anonymouse.AnonymouseConnectivityController.sendAllMessages(toStream: __C.NSOutputStream) -&gt; ()"
+                  moduleName = "Anonymouse"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/atish/Desktop/ios-stuf/ios-team/Anonymouse/Anonymouse/AnonymouseConnectivityController.swift"
+                  timestampString = "565380232.532173"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "154"
+                  endingLineNumber = "154"
+                  offsetFromSymbolStart = "28">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Anonymouse/AnonymouseConnectivityController.swift"
+            timestampString = "565916215.9667521"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
+            landmarkName = "sendAllMessages(toStream:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Anonymouse/AnonymouseConnectivityController.swift"
+            timestampString = "565916215.967052"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
+            landmarkName = "sendAllMessages(toStream:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Anonymouse/AnonymouseConnectivityController.swift"
+            timestampString = "565916215.967352"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "336"
+            endingLineNumber = "336"
+            landmarkName = "send(individualMessage:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Anonymouse/AnonymouseConnectivityController.swift"
+            timestampString = "565916215.967653"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1069"
+            endingLineNumber = "1069"
+            landmarkName = "sendViaBeacon(text:date:user:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Anonymouse/AnonymouseConnectivityController.swift"
+            timestampString = "565916215.967958"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "472"
+            endingLineNumber = "472"
+            landmarkName = "sendAllMessages(toRequesters:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

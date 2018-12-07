@@ -266,7 +266,7 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
         let userPreferences: UserDefaults = UserDefaults.standard
         let username: String = userPreferences.string(forKey: "username")!
         
-        self.dataController.addReply(withText: replyText, date: Date(), user: username, toMessage: cellData, fromServer: false)
+        self.dataController.addReply(withText: replyText, date: Date(), user: username, toMessage: cellData)
         connectivityController.sendReplyViaHTTP(text: replyText, date: Date(), rating: 0, user: username, message: cellData);
 //        if self.connectivityController.sessionObject.connectedPeers.count > 0 {
 //            self.connectivityController.send(individualReply: AnonymouseReplySentCore(text: replyText, date: Date(), user: username, parentText: cellData.text!))

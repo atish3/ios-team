@@ -20,7 +20,7 @@ class AnonymouseMessageCore: NSManagedObject {
         - date: The date the message was composed.
         - user: The user that composed the message.
      */
-    convenience init(text: String, date: Date, user: String, fromServer: Bool) {
+    convenience init(text: String, date: Date, user: String) {
         let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext: NSManagedObjectContext = appDelegate.dataController.managedObjectContext
         let entity: NSEntityDescription? = NSEntityDescription.entity(forEntityName: "AnonymouseMessageCore", in: managedContext)
