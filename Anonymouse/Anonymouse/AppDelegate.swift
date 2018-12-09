@@ -66,10 +66,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var newUUID : CBUUID
         newUUID = CBUUID.init(string: "E2C56DB5-DFFB-48D2-B060-D0F5A71096E0")
         print(newManager.state.rawValue)
-        if(newManager.state == .poweredOn){
-            newManager.scanForPeripherals(withServices: [newUUID], options: nil)
+        var timer : Timer = Timer.init()
+        timer.tolerance = 0.5
+        timer = Timer.scheduledTimer(withTimeInterval: 30.0, repeats: true) { timer in
+            self.newManager.stopScan()
+            self.connectivityController.stopAdvertisingPeer()
+            self.connectivityController.stopBrowsingForPeers()
+            if(self.newManager.state == .poweredOn){
+                self.newManager.scanForPeripherals(withServices: [newUUID], options: nil)
+            }
         }
-        print(newManager.isScanning)
+    
     }
     
         
@@ -86,8 +93,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-
-        
+        newManager.stopScan()
+        self.connectivityController.stopAdvertisingPeer()
+        self.connectivityController.stopBrowsingForPeers()
     }
     
     func applicationWillTerminate(_ application: UIApplication) {

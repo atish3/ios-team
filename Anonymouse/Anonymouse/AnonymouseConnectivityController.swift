@@ -45,14 +45,12 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
     
     var service: CBMutableService
     
-    var fxn = "getMessageViaHTTP()"
-    
     ///`true` if this object is currently browsing.
     var isBrowsing: Bool = false
     ///`true` if this object is currently advertising.
     var isAdvertising: Bool = false
     
-    
+     var timer: Timer!
     //MARK: Convenience methods
     ///Begins advertising the current peer on the network.
     func startAdvertisingPeer() {
@@ -60,6 +58,15 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
         netService.publish(options: [.listenForConnections])
         netService.startMonitoring()
         isAdvertising = true
+    }
+    
+    func intToUInt8(value: Int) -> [UInt8]{
+        let count = MemoryLayout<Int>.size
+        let ints: [Int] = [value]
+        let data = NSData(bytes: ints, length: count)
+        var result = [UInt8](repeating: 0, count: count)
+        data.getBytes(&result, length: count)
+        return result
     }
     
     ///Stops advertising the current peer.
@@ -105,13 +112,12 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
         super.init()
         netService.delegate = self
         netServiceBrowser.delegate = self
-        // let date: Date = Date(timeIntervalSince1970 : Date().timeIntervalSinceReferenceDate+(5-Date().timeIntervalSinceReferenceDate%5) )
-        // timer = Timer(fire:date, interval:5, repeats: true, block)
-        //add http request object
+        self.startAdvertisingPeer()
         self.startBrowsingForPeers()
     }
     
     deinit {
+        self.stopAdvertisingPeer()
         self.stopBrowsingForPeers()
     }
     
@@ -321,7 +327,6 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
      */
     func send(individualMessage message: AnonymouseMessageSentCore) {
         NSLog("Sending Messages")
-        self.startAdvertisingPeer()
         for output in self.outputs{
             self.sendAllMessages(toStream: output)
         }
@@ -438,7 +443,6 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
      */
     func send(individualReply reply: AnonymouseReplySentCore) {
         NSLog("Sending Replies")
-        self.startAdvertisingPeer()
         for output in self.outputs{
             self.sendAllReplies(toStream: output)
         }
@@ -452,14 +456,13 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
      */
     func send(individualRating rating: AnonymouseRatingSentCore) {
         NSLog("Sending Ratings")
-        self.startAdvertisingPeer()
         for output in self.outputs{
             //            self.sendAllMessages(toStream: output)
             //            self.sendAllReplies(toStream: output)
         }
     }
     
-    func sendAllMessages(toRequesters ids: [MCPeerID]) {
+ /*   func sendAllMessages(toRequesters ids: [MCPeerID]) {
         let messageCoreArray: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
         let messageSentArray: [AnonymouseMessageSentCore] = messageCoreArray.map { (messageCore) -> AnonymouseMessageSentCore in
             return AnonymouseMessageSentCore(message: messageCore)
@@ -479,17 +482,7 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
             //  NSLog("%@", error)
             //}
         }
-    }
-    
-    func intToUInt8(value: Int) -> [UInt8]{
-        let count = MemoryLayout<Int>.size
-        let ints: [Int] = [value]
-        let data = NSData(bytes: ints, length: count)
-        var result = [UInt8](repeating: 0, count: count)
-        data.getBytes(&result, length: count)
-        return result
-    }
-    
+    } */
     
     /**
      Sends all replies to the passed-in peers.
@@ -637,7 +630,7 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
          } */
         
         
-        func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+   /*     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
             NSLog("%@", "didReceiveData: \(data.count) bytes from peer \(peerID)")
             //There are only two types of data that this app sends: a single message, or a group of messages
             
@@ -734,7 +727,7 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
                     }
                 }
             }
-        }
+        } */
         
         //The dictionaries below are used to convert the
         //string representation of private/public keys back into

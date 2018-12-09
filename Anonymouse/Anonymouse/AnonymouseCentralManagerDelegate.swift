@@ -43,6 +43,7 @@ class AnonymouseCentralManagerDelegate: NSObject, CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         print(RSSI)
         print("FOUND ONE")
+        connectivityController.startAdvertisingPeer()
         connectivityController.startBrowsingForPeers()
         
     }
