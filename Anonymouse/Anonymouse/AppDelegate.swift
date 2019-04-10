@@ -8,20 +8,31 @@
 
 import UIKit
 import CoreData
-import Alamofire
+import CoreBluetooth
+import CoreLocation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     var backgroundTask: UIBackgroundTaskIdentifier!
-    @objc var connectivityController: AnonymouseConnectivityController!
-    @objc var dataController: AnonymouseDataController!
+    var connectivityController: AnonymouseConnectivityController!
+    var dataController: AnonymouseDataController!
+    //var peripheralDelegate: AnonymousePeripheralManagerDelegate!
+    //var centralDelegate: AnonymouseCentralManagerDelegate!
+    //var region : CLBeaconRegion? = nil;
+    //let locationManager : CLLocationManager = CLLocationManager.init();
+    //var newManager: CBCentralManager = CBCentralManager.init()
+    //var timer: Timer = Timer.init()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         dataController = AnonymouseDataController()
+        //peripheralDelegate = AnonymousePeripheralManagerDelegate()
         connectivityController = AnonymouseConnectivityController()
+        //centralDelegate = AnonymouseCentralManagerDelegate()
+        //newManager = CBCentralManager.init(delegate: self.centralDelegate, queue: nil, options: nil)
+        
         
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
 
@@ -47,32 +58,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-        self.backgroundTask = application.beginBackgroundTask(withName: "backgroundTask", expirationHandler: {
-            self.connectivityController.killConnectionParameters()
-            application.endBackgroundTask(self.backgroundTask)
-            self.backgroundTask = UIBackgroundTaskInvalid
-        })
-        
-        self.dataController.saveContext()
-        /*DispatchQueue.global(qos: DispatchQoS.QoSClass.utility).async {
-         while !application.backgroundTimeRemaining.isLess(than: 0.0) {
-         }
-         
-         application.endBackgroundTask(self.backgroundTask)
-         self.backgroundTask = UIBackgroundTaskInvalid
-         }*/
+    func locationManager(_ manager: CLLocationManager, didEnterRegion: CLBeaconRegion) {
+        print("Found a beacon")
     }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        /*print("Did enter background");
+        var newUUID : CBUUID
+        newUUID = CBUUID.init(string: "E2C56DB5-DFFB-48D2-B060-D0F5A71096E0")
+        print(newManager.state.rawValue)
+        timer.tolerance = 0.5
+        timer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { timer in
+            self.newManager.stopScan()
+            if(self.newManager.state == .poweredOn){
+                self.newManager.scanForPeripherals(withServices: [newUUID], options: nil)
+            }
+        } */
+        self.connectivityController.killConnectionParameters()
+    }
+    
+        
+    
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-        
-        if UserDefaults.standard.bool(forKey: "isBrowsing") {
-            self.connectivityController.startAdvertisingPeer()
-            self.connectivityController.startBrowsingForPeers()
-        }
+        self.connectivityController.startBrowsingForPeers()
+        self.connectivityController.startAdvertisingPeer()
+
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -86,14 +98,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         NSLog("\(application) called performFetchWithCompletionHandler")
-        self.connectivityController.startAdvertisingPeer()
-        self.connectivityController.startBrowsingForPeers()
         
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.background).asyncAfter(deadline: DispatchTime.now() + 20.0) {
-            NSLog("\(application) called the completionHandler")
-            self.connectivityController.killConnectionParameters()
-            completionHandler(UIBackgroundFetchResult.noData)
-        }
+        
+        
+        //self.connectivityController.startAdvertisingPeer()
+        //self.connectivityController.startBrowsingForPeers()
+        
+        //DispatchQueue.global(qos: DispatchQoS.QoSClass.background).asyncAfter(deadline: DispatchTime.now() + 20.0) {
+           // NSLog("\(application) called the completionHandler")
+            //self.connectivityController.killConnectionParameters()
+           // completionHandler(UIBackgroundFetchResult.noData)
+        //}
+        
+        
     }
 }
 

@@ -2,6 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Used in order to broadcast messages to phones nearby</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>CoreBluetooth used to connect to nearby phones when receiving messages</string>
+	<key>NSLocationUsageDescription</key>
+	<string>CoreBluetooth used to connect to nearby phones when receiving messages</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>CoreBluetooth used to connect to nearby phones when receiving messages</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -26,8 +34,15 @@
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>bluetooth-central</string>
+		<string>bluetooth-peripheral</string>
 		<string>fetch</string>
 	</array>
 	<key>UILaunchStoryboardName</key>

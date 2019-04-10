@@ -13,22 +13,22 @@ class AnonymouseTableViewCell : UITableViewCell {
     
     //MARK: Constant Class Properties
     ///The distance from the left side of the white cell to the message.
-    @objc static let messageXOffset: CGFloat = 8
+    static let messageXOffset: CGFloat = 8
     ///The distance from the top of the white cell to the username.
-    @objc static let messageYOffset: CGFloat = 5
+    static let messageYOffset: CGFloat = 5
     ///The vertical distance from the username to the message body.
-    @objc static let userMessageDistance: CGFloat = 25
+    static let userMessageDistance: CGFloat = 25
     ///The height of the gray feature bar below the white cell.
-    @objc static let featuresBarHeight: CGFloat = 30.0
+    static let featuresBarHeight: CGFloat = 30.0
     
     ///The font of the date label.
-    @objc static let dateFont: UIFont = UIFont(name: "Helvetica", size: 16.0)!
+    static let dateFont: UIFont = UIFont(name: "Helvetica", size: 16.0)!
     ///The font of the message label.
-    @objc static let messageFont: UIFont = UIFont(name: "Helvetica", size: 16.0)!
+    static let messageFont: UIFont = UIFont(name: "Helvetica", size: 16.0)!
     ///The font of the username label.
-    @objc static let userFont: UIFont = UIFont(name: "Helvetica-Bold", size: 19.0)!
+    static let userFont: UIFont = UIFont(name: "Helvetica-Bold", size: 19.0)!
     ///The amount of extra space needed to define the height of the cell.
-    @objc static let spacing: CGFloat = 47.0
+    static let spacing: CGFloat = 47.0
     
     
     /**
@@ -37,7 +37,7 @@ class AnonymouseTableViewCell : UITableViewCell {
         - Parameters:
             - text: The text to put in the message body to determine the height of the cell.
     */
-    @objc static func getCellHeight(withMessageText text: String) -> CGFloat {
+    static func getCellHeight(withMessageText text: String) -> CGFloat {
         let messageLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 340.0, height: CGFloat.greatestFiniteMagnitude))
         messageLabel.numberOfLines = 0
         messageLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
@@ -53,7 +53,7 @@ class AnonymouseTableViewCell : UITableViewCell {
         - Parameters:
             - text: The text to put in the message body to determine the height of the cell.
      */
-    @objc static func getClippedCellHeight(withMessageText text: String) -> CGFloat {
+    static func getClippedCellHeight(withMessageText text: String) -> CGFloat {
         let messageLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 340.0, height: CGFloat.greatestFiniteMagnitude))
         messageLabel.numberOfLines = 3
         messageLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
@@ -65,37 +65,37 @@ class AnonymouseTableViewCell : UITableViewCell {
     
     //MARK: UIView Properties
     ///Displays the date the message was composed.
-    @objc var dateLabel: UILabel?
+    var dateLabel: UILabel?
     ///Displays the main body of the message.
-    @objc var messageLabel: UILabel?
+    var messageLabel: UILabel?
     ///Displays the user that composed the message.
-    @objc var userLabel: UILabel?
+    var userLabel: UILabel?
     ///The white rectangle that defines each cell.
-    @objc var whiteBackdrop: UIView?
+    var whiteBackdrop: UIView?
     ///The gray rectangle that defines the feature bar.
-    @objc var grayFeatureBar: UIView?
+    var grayFeatureBar: UIView?
     ///The like button.
-    @objc var upvoteButton: UIButton?
+    var upvoteButton: UIButton?
     ///The dislike button.
-    @objc var downvoteButton: UIButton?
+    var downvoteButton: UIButton?
     ///The favorite button.
-    @objc var favoriteButton: UIButton?
+    var favoriteButton: UIButton?
     ///Displays the rating of the given message.
-    @objc var numLikes: UILabel?
+    var numLikes: UILabel?
     ///The line between the dislike button and the favorite button.
-    @objc var divider1: UIView?
+    var divider1: UIView?
     ///The line between the favorite button and the reply button.
-    @objc var divider2: UIView?
+    var divider2: UIView?
     ///The reply button.
-    @objc var replyButton: UIButton?
+    var replyButton: UIButton?
     //TODO: Make this display the number of replies the message has.
-    @objc var replyLabel: UILabel?
+    var replyLabel: UILabel?
     
     ///`true` if this message is in a table of other messages, `false` if this message is alone in the detail view.
-    @objc var isInTable: Bool = true
+    var isInTable: Bool = true
     
     ///The variable that holds the data of the message.
-    @objc var data: AnonymouseMessageCore? {
+    var data: AnonymouseMessageCore? {
         didSet
         {
             updateCellUI()
@@ -103,7 +103,7 @@ class AnonymouseTableViewCell : UITableViewCell {
     }
     
     ///Called when the cell is tapped; selects the cell.
-    @objc func highlightBackground() {
+    func highlightBackground() {
         guard let wb = whiteBackdrop else { return }
         wb.backgroundColor = UIColor(white: 0.8, alpha: 1.0)
         wb.layer.borderColor = UIColor(white: 0.6, alpha: 1.0).cgColor
@@ -120,7 +120,7 @@ class AnonymouseTableViewCell : UITableViewCell {
     }
     
     ///Called when the cell is released; deselects the cell.
-    @objc func releaseBackground() {
+    func releaseBackground() {
         guard let wb = whiteBackdrop else { return }
         wb.backgroundColor = UIColor.white
         wb.layer.borderColor = UIColor(white: 0.85, alpha: 1.0).cgColor
@@ -164,7 +164,7 @@ class AnonymouseTableViewCell : UITableViewCell {
     }
     
     ///Called when the cell is first created. Sets default UI properties common to all cells.
-    @objc func setup() {
+    func setup() {
         self.contentView.backgroundColor = UIColor.clear
         self.backgroundColor = UIColor.clear
         self.selectionStyle = UITableViewCellSelectionStyle.none
@@ -176,7 +176,7 @@ class AnonymouseTableViewCell : UITableViewCell {
     
     //MARK: Creation/Update Methods
     ///Creates the label that displays the date.
-    @objc func createDateLabel() {
+    func createDateLabel() {
         dateLabel = UILabel()
         dateLabel!.textAlignment = NSTextAlignment.center
         dateLabel!.textColor = UIColor.gray
@@ -184,10 +184,9 @@ class AnonymouseTableViewCell : UITableViewCell {
     }
     
     ///Creates the label that displays the username.
-    @objc func createUserLabel() {
+    func createUserLabel() {
         userLabel = UILabel()
-        //let darkOrange: UIColor = UIColor(colorLiteralRed: 255.0/255.0, green: 107.0/255.0, blue: 72.0/255.0, alpha: 1.0)
-        let darkOrange = #colorLiteral(red: 1, green: 0.4176703559, blue: 0.2823529412, alpha: 1)
+        let darkOrange = #colorLiteral(red: 1, green: 0.4196078431, blue: 0.2823529412, alpha: 1)
         userLabel!.numberOfLines = 1
         userLabel!.textColor = darkOrange
         userLabel!.font = AnonymouseTableViewCell.userFont
@@ -200,7 +199,7 @@ class AnonymouseTableViewCell : UITableViewCell {
         - numberOfLines: The maximum number of lines the message body should have; clips if the message
             body exceeds the number of lines.
      */
-    @objc func createMessageLabel(withNumberOfLines numberOfLines: Int) {
+    func createMessageLabel(withNumberOfLines numberOfLines: Int) {
         let messageWidth: CGFloat = self.frame.width - 5 * AnonymouseTableViewCell.messageXOffset
         messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: messageWidth, height: CGFloat.greatestFiniteMagnitude))
         messageLabel!.numberOfLines = numberOfLines
@@ -211,7 +210,7 @@ class AnonymouseTableViewCell : UITableViewCell {
     }
     
     ///Creates the white rectangle that defines the cell.
-    @objc func createBackdrop() {
+    func createBackdrop() {
         whiteBackdrop = UIView(frame: self.bounds)
         whiteBackdrop!.frame.size.width -= 20
         whiteBackdrop!.frame.size.height -= 10
@@ -233,7 +232,7 @@ class AnonymouseTableViewCell : UITableViewCell {
     }
     
     ///Updates the feature bar to correctly reflect the rating of the message, and whether or not it is favorited.
-    @objc func updateFeatureBar() {
+    func updateFeatureBar() {
         
         guard let messageData = data else {
             return
@@ -279,7 +278,7 @@ class AnonymouseTableViewCell : UITableViewCell {
     }
     
     ///Create the gray feature bar at the bottom of the cell.
-    @objc func createGrayFeatureBar() {
+    func createGrayFeatureBar() {
         grayFeatureBar = UIView()
         grayFeatureBar!.backgroundColor = UIColor(white: 0.93, alpha: 1.0)
         grayFeatureBar!.frame.size.height = AnonymouseTableViewCell.featuresBarHeight
@@ -360,7 +359,7 @@ class AnonymouseTableViewCell : UITableViewCell {
         - point: The `CGPoint` at which to place the animation.
         - superView: The view to add the animation to.
      */
-    @objc func expandAnimate(imageNamed name: String, fromPoint point: CGPoint, withSuperView superView: UIView) {
+    func expandAnimate(imageNamed name: String, fromPoint point: CGPoint, withSuperView superView: UIView) {
         let expandImage: UIImageView = UIImageView(image: UIImage(named: name))
         expandImage.alpha = 0.5
         superView.addSubview(expandImage)
@@ -380,7 +379,7 @@ class AnonymouseTableViewCell : UITableViewCell {
         Transitions to the detail view if the message is in the table, 
         displays the `replyTextView` of the detail view if the cell is in the detail view already.
      */
-    @objc func replyTapped() {
+    func replyTapped() {
         if isInTable {
             NotificationCenter.default.post(name: NSNotification.Name("performDetailTransitionFromMessage"), object: nil, userInfo: ["cell": self])
         } else {
@@ -389,11 +388,11 @@ class AnonymouseTableViewCell : UITableViewCell {
     }
     
     ///Called when the like button is tapped. Likes the message, and displays a like animation.
-    @objc func upvoteTapped() {
+    func upvoteTapped() {
         guard let messageData = data else {
             return
         }
-        let likeStatus: Int = Int(messageData.likeStatus!)
+        let likeStatus: Int = Int(truncating: messageData.likeStatus!)
         messageData.like()
         
         if likeStatus != 1 {
@@ -406,11 +405,11 @@ class AnonymouseTableViewCell : UITableViewCell {
     }
     
     ///Called when the dislike button is tapped. Dislikes the message, and displays a dislike animation.
-    @objc func downvoteTapped() {
+    func downvoteTapped() {
         guard let messageData = data else {
             return
         }
-        let likeStatus: Int = Int(messageData.likeStatus!)
+        let likeStatus: Int = Int(truncating: messageData.likeStatus!)
         messageData.dislike()
         
         //Downvote Tapped
@@ -424,7 +423,7 @@ class AnonymouseTableViewCell : UITableViewCell {
     }
     
     ///Called when the favorite button is tapped. Favorites the message, and displays a favorite animation.
-    @objc func favoriteTapped() {
+    func favoriteTapped() {
         guard let messageData = data else {
             return
         }
@@ -468,7 +467,7 @@ class AnonymouseTableViewCell : UITableViewCell {
     }
     
     ///Called when the property `data` is set. Updates the UI to reflect the current `data`.
-    @objc func updateCellUI() {
+    func updateCellUI() {
         guard let cellData = data else {
             return
         }

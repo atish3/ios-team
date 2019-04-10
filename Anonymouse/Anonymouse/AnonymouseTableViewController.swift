@@ -5,6 +5,7 @@
 //  Created by Pascal Sturmfels on 3/14/16.
 //  Copyright © 2016 1AM. All rights reserved.
 //
+
 import CryptoSwift
 import UIKit
 import CoreData
@@ -12,15 +13,18 @@ import CoreData
 ///A subclass of `UITableViewController` that displays user messages.
 class AnonymouseTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
     ///The `NSManagedObjectContext` from which the messages appear.
-    @objc var managedObjectContext: NSManagedObjectContext!
+    var managedObjectContext: NSManagedObjectContext!
     ///The `viewController` that is shown when a message is tapped; also displays the tapped message's replies.
-    @objc var detailViewController: AnonymouseDetailViewController!
+    var detailViewController: AnonymouseDetailViewController!
     ///The object that controls the search functionality at the top of the `tableView`.
-    @objc var searchController: UISearchController!
+    var searchController: UISearchController!
     ///The `NSFetchRequest` object that fetches messages from the `managedObjectContext`.
-    @objc var fetchRequest: NSFetchRequest<AnonymouseMessageCore>
+    var fetchRequest: NSFetchRequest<AnonymouseMessageCore>
     ///The `NSFetchRequest` object that fetches messages based on what the user is searching for
-    @objc var searchRequest: NSFetchRequest<AnonymouseMessageCore> = NSFetchRequest<AnonymouseMessageCore>(entityName: "AnonymouseMessageCore")
+    var searchRequest: NSFetchRequest<AnonymouseMessageCore> = NSFetchRequest<AnonymouseMessageCore>(entityName: "AnonymouseMessageCore")
+    ///Used for refresh
+    var connectivityController = AnonymouseConnectivityController()
+    
     
     /**
      Returns an `AnonymouseTableViewController` with a specific `fetchRequest`.
@@ -28,7 +32,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
      - parameters:
         - fetchRequest: The `NSFetchRequest` used to fetch messages that are displayed in the table.
      */
-    @objc init(withFetchRequest fetchRequest: NSFetchRequest<AnonymouseMessageCore>) {
+    init(withFetchRequest fetchRequest: NSFetchRequest<AnonymouseMessageCore>) {
         self.fetchRequest = fetchRequest
         self.searchRequest.sortDescriptors = fetchRequest.sortDescriptors
         super.init(style: UITableViewStyle.plain)
@@ -42,7 +46,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
     }
     
     ///The object that fetches messages from the persistent store.
-    @objc lazy var fetchedResultsController: NSFetchedResultsController<AnonymouseMessageCore> = {
+    lazy var fetchedResultsController: NSFetchedResultsController<AnonymouseMessageCore> = {
         // Initialize Fetched Results Controller
         let fetchedResultsController: NSFetchedResultsController<AnonymouseMessageCore> = NSFetchedResultsController(fetchRequest: self.fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
         
@@ -53,7 +57,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
     }()
     
     ///The object that fetches messages related to the user's search.
-    @objc lazy var searchResultsController: NSFetchedResultsController<AnonymouseMessageCore> = {
+    lazy var searchResultsController: NSFetchedResultsController<AnonymouseMessageCore> = {
         // Initialize Search Results Controller
         let searchResultsController: NSFetchedResultsController<AnonymouseMessageCore> = NSFetchedResultsController(fetchRequest: self.searchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
         
@@ -159,7 +163,10 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
     //MARK: UIRefreshControl
     ///Called when the `tableView` is pulled down to reveal the `refreshControl`.
     @objc func refreshControlDidChangeValue() {
+        connectivityController.stopBrowsingForPeers()
+        connectivityController.startBrowsingForPeers()
         self.tableView.reloadData()
+        //connectivityController.getMessageViaHTTP()
         self.refreshControl?.endRefreshing()
     }
     
@@ -182,6 +189,50 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         }
         return 0
     }
+    
+    /*func getData(sender: AnyObject) {
+        var listOfMessages = [AnonymouseMessageCore]()
+        let myUrl = URL(string: "https://requestb.in/q3ep4sq3");
+        var request = URLRequest(url:myUrl!)
+        request.httpMethod = "GET"// Compose a query string
+        let postString = "firstName=James&lastName=Bond";
+        request.httpBody = postString.data(using: String.Encoding.utf8);
+        let task = URLSession.shared.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
+            if error != nil{
+                print("error=\(String(describing: error))")
+                return
+            }
+            
+            // You can print out response object
+            print("response = \(String(describing: response))")
+            
+            //Let's convert response sent from a server side script to a NSDictionary object:
+            do{
+                let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
+                
+                if let parseJSON = json {
+                    
+                    // Now we can access value of First Name by its key
+                    let date = parseJSON["date"] as? NSDate?
+                    let text = parseJSON["text"] as? String?
+                    let user = parseJSON["user"] as? String?
+                    let rating = parseJSON["rating"] as? NSNumber?
+                    //let likeStatus = parseJSON["likeStatus"] as? NSNumber?
+                    //let isFavorite = parseJSON["isFavorite"] as? NSNumber?
+                    let numReplies = parseJSON["numReplies"] as? NSNumber?
+                    let message = AnonymouseMessageCore(text: text as! String, date: date!! as Date, user: user as! String, rating: rating as! NSNumber, numReplies: numReplies as! NSNumber)
+                    listOfMessages.append(message)
+                    print(message.rating!)
+                }
+            } catch {
+                print(error)
+            }
+        }
+        task.resume()
+        
+    } */
+    
+    
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var frc: NSFetchedResultsController<NSFetchRequestResult>
@@ -289,7 +340,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         }
     }
     
-    @objc func controller(controller: NSFetchedResultsController<AnonymouseMessageCore>, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+    func controller(controller: NSFetchedResultsController<AnonymouseMessageCore>, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
         switch type {
         case .insert:
             tableView.insertSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
@@ -337,7 +388,7 @@ class AnonymouseTableViewController: UITableViewController, NSFetchedResultsCont
         - searchText: The text to filter the messages by.
         - scope: Honestly not sure what this is for. Ask Sindy.
      */
-    @objc func filterContentForSearchResult(searchText: String, scope: String = "All") {
+    func filterContentForSearchResult(searchText: String, scope: String = "All") {
         let predicate = NSPredicate(format: "text contains[c] %@", searchText)
         searchRequest.predicate = predicate
         do {

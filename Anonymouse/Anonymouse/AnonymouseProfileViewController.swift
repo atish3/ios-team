@@ -29,15 +29,15 @@ class NoPasteTextField: UITextField {
 class AnonymouseProfileViewController: UIViewController, UITextFieldDelegate {
     
     ///The `textField` in which the user enters their username.
-    @objc var usernameTextField: NoPasteTextField!
+    var usernameTextField: NoPasteTextField!
     ///The label which displays the username when it is not being edited.
-    @objc var usernameLabel: UILabel!
+    var usernameLabel: UILabel!
     ///The button that allows a user to edit their username.
-    @objc var editButton: UIBarButtonItem!
+    var editButton: UIBarButtonItem!
     ///The label above the `usernameTextField` that says `"Screen name:"`.
-    @objc var usernameHeader: UILabel!
+    var usernameHeader: UILabel!
     ///`true` if the user is currently editing their username; false otherwise.
-    @objc var isEditingProfile: Bool = false
+    var isEditingProfile: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -160,7 +160,7 @@ class AnonymouseProfileViewController: UIViewController, UITextFieldDelegate {
             textField.text = nsString.replacingCharacters(in: range, with: "_")
             return false
         }
-        if nsString.replacingCharacters(in: range, with: string).characters.count > 15 {
+        if nsString.replacingCharacters(in: range, with: string).count > 15 {
             let tooManyCharactersAlert: UIAlertController = UIAlertController(title: "Too many characters", message: "The username field is limited to 15 characters.", preferredStyle: UIAlertControllerStyle.alert)
             tooManyCharactersAlert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: { (action) in
                 self.usernameTextField.becomeFirstResponder()

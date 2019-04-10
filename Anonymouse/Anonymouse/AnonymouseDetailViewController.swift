@@ -12,7 +12,7 @@ import CoreData
 ///A subclass of `UIViewController` that displays a single message in detail, along with its replies.
 class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
     ///The data of the main message displayed in detail
-    @objc var cellData: AnonymouseMessageCore! {
+    var cellData: AnonymouseMessageCore! {
         didSet {
             ///A fetch request to fetch the replies of the main message
             self.fetchRequest = NSFetchRequest<AnonymouseReplyCore>(entityName: "AnonymouseReplyCore")
@@ -39,37 +39,37 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
     }
     
     ///A `textView` in which the user inputs a reply to the main message.
-    @objc var replyTextView: UITextView!
+    var replyTextView: UITextView!
     ///The container view for everything related to the `replyTextView`.
-    @objc var replyView: UIView!
+    var replyView: UIView!
     ///The button that sends the reply to the main message when tapped.
-    @objc var replyButton: UIButton!
+    var replyButton: UIButton!
     ///The placeholder label that appears when the `replyTextView` is empty.
     //var replyLabel: UILabel!
     ///The `tableView` used to display the replies to the main message.
-    @objc var tableView: UITableView!
+    var tableView: UITableView!
     /**`true` if this view was pushed by a reply button tapped event, `false`
      if this view was pushed by a cell tapped event.
     */
-    @objc var shouldDisplayReply: Bool = false
+    var shouldDisplayReply: Bool = false
     
     ///The `NSManagedObjectContext` that the replies are stored in.
-    @objc var managedObjectContext: NSManagedObjectContext!
+    var managedObjectContext: NSManagedObjectContext!
     ///The `NSFetchedRequest` that finds the replies to the main message.
-    @objc var fetchRequest: NSFetchRequest<AnonymouseReplyCore>!
+    var fetchRequest: NSFetchRequest<AnonymouseReplyCore>!
     
     ///The `NSFetchedResultsController` that fetches the replies using the `fetchRequest`.
-    @objc var fetchedResultsController: NSFetchedResultsController<AnonymouseReplyCore>!
+    var fetchedResultsController: NSFetchedResultsController<AnonymouseReplyCore>!
     
     ///The maximum number of characters that can be in a reply, minus one (don't ask lol)
-    @objc let maxCharacters: Int = 301
+    let maxCharacters: Int = 301
     ///The label that displays how many characters the user has left in their composed reply.
-    @objc var charactersLeftLabel: UILabel!
+    var charactersLeftLabel: UILabel!
     
     ///A weak reference to the `dataController` that allows a user to post a reply to the persistent store.
-    @objc weak var dataController: AnonymouseDataController!
+    weak var dataController: AnonymouseDataController!
     ///A weak reference to the `connectivityController` that allows a user to send a reply to nearby peers.
-    @objc weak var connectivityController: AnonymouseConnectivityController!
+    weak var connectivityController: AnonymouseConnectivityController!
     
     ///Displays the `replyView`, which allows the user to edit and send replies.
     @objc func displayReply() {
@@ -232,7 +232,7 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
     }
     
     ///Clears the `replyView` of the currently-edited message text, and dismisses it.
-    @objc func resetInputAccessoryView() {
+    func resetInputAccessoryView() {
         guard let mainUser: String = cellData.user else {
             return
         }
@@ -267,9 +267,10 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
         let username: String = userPreferences.string(forKey: "username")!
         
         self.dataController.addReply(withText: replyText, date: Date(), user: username, toMessage: cellData)
-        if self.connectivityController.sessionObject.connectedPeers.count > 0 {
-            self.connectivityController.send(individualReply: AnonymouseReplySentCore(text: replyText, date: Date(), user: username, parentText: cellData.text!))
-        }
+        connectivityController.sendReplyViaHTTP(text: replyText, date: Date(), rating: 0, user: username, message: cellData);
+//        if self.connectivityController.sessionObject.connectedPeers.count > 0 {
+//            self.connectivityController.send(individualReply: AnonymouseReplySentCore(text: replyText, date: Date(), user: username, parentText: cellData.text!))
+//        }
         
         resetInputAccessoryView()
     }
@@ -315,7 +316,7 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
     
     //MARK: TextView Methods
     ///Dismisses the keyboard
-    @objc func dismissKeyboard() {
+    func dismissKeyboard() {
         replyTextView.resignFirstResponder()
     }
     
@@ -354,7 +355,7 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let nsString: NSString = textView.text! as NSString
-        let numCharacters: Int = nsString.replacingCharacters(in: range, with: text).characters.count
+        let numCharacters: Int = nsString.replacingCharacters(in: range, with: text).count
         let remainingCharacters: Int = maxCharacters - numCharacters
         
         if remainingCharacters < 40 {
@@ -500,7 +501,7 @@ class AnonymouseDetailViewController: UIViewController, UITextViewDelegate, UITa
         }
     }
     
-    @objc func controller(controller: NSFetchedResultsController<AnonymouseReplyCore>, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+    func controller(controller: NSFetchedResultsController<AnonymouseReplyCore>, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
         fatalError("Section info should never change")
         //        switch type {
         //        case .insert:

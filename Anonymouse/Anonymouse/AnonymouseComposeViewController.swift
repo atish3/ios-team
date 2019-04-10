@@ -13,23 +13,23 @@ import UIKit
  */
 class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
     ///The `textView` in which the user inputs their message.
-    @objc var composeTextView: UITextView!
+    var composeTextView: UITextView!
     ///The maximum number of characters that any message can be, minus one (don't ask, it was easier this way).
-    @objc let maxCharacters: Int = 301
+    let maxCharacters: Int = 301
     ///The number of pixels of padding between the sides of the screen and the `composeTextView`.
-    @objc let textViewMargins: Int = 20
+    let textViewMargins: Int = 20
     ///The text that appears over the `composeTextView`.
-    @objc let placeholderText: String = "Post something to the world!"
+    let placeholderText: String = "Post something to the world!"
     ///The label that contains the `placeholderText`.
-    @objc var placeholderLabel: UILabel!
+    var placeholderLabel: UILabel!
     ///The label that shows how many characters a user has left in their message.
-    @objc var charactersLeftLabel: UILabel!
+    var charactersLeftLabel: UILabel!
     
     
     ///A weak reference to the `dataController` that allows the user to store the message they compose.
-    @objc weak var dataController: AnonymouseDataController!
+    weak var dataController: AnonymouseDataController!
     ///A weak reference to the `connectivityController` that allows the user to send the message they compose.
-    @objc weak var connectivityController: AnonymouseConnectivityController!
+    weak var connectivityController: AnonymouseConnectivityController!
     
     //MARK: Navigation
     override func viewDidLoad() {
@@ -105,7 +105,7 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
     //MARK: TextView Methods
     func textViewDidChange(_ textView: UITextView) {
         placeholderLabel.isHidden = !textView.text.isEmpty
-        if textView.text.characters.count > 0 {
+        if textView.text.count > 0 {
             self.navigationItem.rightBarButtonItem!.isEnabled = true
         }
         else
@@ -116,7 +116,7 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let nsString: NSString = textView.text! as NSString
-        let numCharacters: Int = nsString.replacingCharacters(in: range, with: text).characters.count
+        let numCharacters: Int = nsString.replacingCharacters(in: range, with: text).count
         let remainingCharacters: Int = maxCharacters - numCharacters
         
         if remainingCharacters < 40 {
@@ -170,7 +170,7 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
     //MARK: Convenience methods
     
     ///Clears the text in the `composeTextView`.
-    @objc func clearText() {
+    func clearText() {
         composeTextView.text = ""
         placeholderLabel.isHidden = false
         
@@ -179,18 +179,63 @@ class AnonymouseComposeViewController: UIViewController, UITextViewDelegate {
         charactersLeftLabel.alpha = 1.0
     }
     
+    let attributes: [String: Any] =
+        [kSecAttrKeyType as String:            kSecAttrKeyTypeRSA,
+         kSecAttrKeySizeInBits as String:      2048,
+         kSecAttrIsPermanent as String:        true,
+         kSecAttrIsExtractable as String:      true
+    ]    
     ///Posts the written message to the feed.
-    @objc func post() {
+    func post() {
         let userPreferences: UserDefaults = UserDefaults.standard
         let username: String = userPreferences.string(forKey: "username")!
-        
-        var messageText = self.composeTextView.text!
-        messageText = messageText.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        
-        self.dataController.addMessage(messageText, date: Date(), user: username)
-        if self.connectivityController.sessionObject.connectedPeers.count > 0 {
-            self.connectivityController.send(individualMessage: AnonymouseMessageSentCore(text: self.composeTextView.text, date: Date(), user: username))
+        if userPreferences.string(forKey: "PubKey") != nil{
+            print("Key exists")
+            var messageText = self.composeTextView.text!
+            messageText = messageText.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            
+            self.dataController.addMessage(messageText, date: Date(), user: username)
+            let messageArr: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
+            let sent : AnonymouseMessageSentCore = AnonymouseMessageSentCore(message: messageArr[messageArr.count - 1])
+            //connectivityController.sendViaBeacon(text: messageText, date: Date(), user: username);
+            //connectivityController.inBack = false
+            //connectivityController.sendMessageViaHTTP(text: messageText, date: Date(), rating: 0, user: username);
+            connectivityController.stopBrowsingForPeers()
+            connectivityController.startBrowsingForPeers()
+            print(connectivityController.isAdvertising);
+            print(connectivityController.isBrowsing)
+            connectivityController.send(individualMessage: sent)
         }
+            //The else block below should be redundant, as the user should already have a key pair,
+            // but in case they don't, generate a new key pair here.
+        else{
+            var error: Unmanaged<CFError>?
+            
+            let privateKey = SecKeyCreateRandomKey(attributes as CFDictionary, &error)
+            print("Key doesn't exist")
+            userPreferences.set((SecKeyCopyExternalRepresentation(privateKey!, &error)! as Data).base64EncodedString(), forKey: "PrivKey")
+            userPreferences.set((SecKeyCopyExternalRepresentation(SecKeyCopyPublicKey(privateKey!)!, &error)! as Data).base64EncodedString(), forKey: "PubKey")
+            
+            var messageText = self.composeTextView.text!
+            messageText = messageText.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            
+            self.dataController.addMessage(messageText, date: Date(), user: username)
+            let messageArr: [AnonymouseMessageCore] = dataController.fetchObjects(withKey: "date", ascending: true)
+            let sent : AnonymouseMessageSentCore = AnonymouseMessageSentCore(message: messageArr[messageArr.count - 1])
+            //connectivityController.sendViaBeacon(text: messageText, date: Date(), user: username);
+            //connectivityController.inBack = false
+            //connectivityController.sendMessageViaHTTP(text: messageText, date: Date(), rating: 0, user: username);
+            connectivityController.stopBrowsingForPeers()
+            connectivityController.startBrowsingForPeers()
+            print(connectivityController.isAdvertising);
+            print(connectivityController.isBrowsing)
+            connectivityController.send(individualMessage: sent)
+        }
+        
+       
+//        if self.connectivityController.sessionObject.connectedPeers.count > 0 {
+//            self.connectivityController.send(individualMessage: AnonymouseMessageSentCore(text: self.composeTextView.text, date: Date(), user: username))
+//        }
         self.clearText()
     }
     

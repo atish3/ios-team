@@ -15,15 +15,15 @@ import UIKit
  */
 class AnonymouseSettingsViewController: UITableViewController {
     ///A weak reference to the connectivityController; this allows the user to toggle broadcast settings.
-    @objc weak var connectivityController: AnonymouseConnectivityController!
+    weak var connectivityController: AnonymouseConnectivityController!
     ///A weak reference to the dataController; this allows the user to delete all messages from the settings view.
-    @objc weak var dataController: AnonymouseDataController!
+    weak var dataController: AnonymouseDataController!
     
     ///An instance of `AnonymouseProfileViewController` that allows users to change their usernames.
-    @objc var profileViewController = AnonymouseProfileViewController()
+    var profileViewController = AnonymouseProfileViewController()
     
     ///The label on the broadcast button; has the text `"Stop Broadcasting"` or `"Begin Broadcasting"`.
-    @objc var broadcastLabel: UILabel!
+    //var broadcastLabel: UILabel!
     
     override func viewDidLoad() {
         self.title = "Settings"
@@ -47,10 +47,8 @@ class AnonymouseSettingsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
-        /*
-        case 0:
-            return "Connectivity"
-        */
+        //case 0:
+            //return "Connectivity"
         case 0:
             return "Change Screen Name"
         case 1:
@@ -68,12 +66,10 @@ class AnonymouseSettingsViewController: UITableViewController {
         centerLabel.frame.origin = CGPoint.zero
         
         switch indexPath.section {
-        /*
-        case 0:
-            centerLabel.text = "Stop Broadcasting"
-            centerLabel.textColor = UIColor.red
-            broadcastLabel = centerLabel
-        */
+        //case 0:
+           // centerLabel.text = "Stop Broadcasting"
+            //centerLabel.textColor = UIColor.red
+            //broadcastLabel = centerLabel
         case 0:
             centerLabel.text = "Profile"
             centerLabel.textColor = UIColor(red: 0, green: 0.478431, blue: 1, alpha: 1)
@@ -92,11 +88,9 @@ class AnonymouseSettingsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
-        /*
-        case 0:
-            toggleConnection()
-            self.tableView.deselectRow(at: indexPath, animated: true)
-        */
+       // case 0:
+            //toggleConnection()
+           // self.tableView.deselectRow(at: indexPath, animated: true)
         case 0:
             self.navigationController!.pushViewController(profileViewController, animated: true)
         case 1:
@@ -110,39 +104,33 @@ class AnonymouseSettingsViewController: UITableViewController {
             present(certainAlert, animated: true) {
                 self.tableView.deselectRow(at: indexPath, animated: true)
             }
+            
         default:
             print("Pressed row at indexPath: \(indexPath)")
         }
     }
     
-    
-    /*
-    Commented out the stop/begin broadcasting option because it is unnecessary but we can figure it out later if need be
-    Current state: if the user is in stop broadcasting mode, others can still receive messages (bug)
-    */
-    
-    
-    
     //MARK: Connection methods
     
     ///A function that toggles whether or not the user is broadcasting/receiving messages or not.
-    @objc func toggleConnection() {
-        let userPreferences: UserDefaults = UserDefaults.standard
-    
-        if connectivityController.isBrowsing {
-            userPreferences.set(false, forKey: "isBroadcasting")
-            
-            connectivityController.killConnectionParameters()
-            broadcastLabel.text = "Begin Broadcasting"
-            broadcastLabel.textColor = UIColor.green
-        }
-        else {
-            userPreferences.set(true, forKey: "isBroadcasting")
-        
-            connectivityController.startBrowsingForPeers()
-            connectivityController.startAdvertisingPeer()
-            broadcastLabel.text = "Stop Broadcasting"
-            broadcastLabel.textColor = UIColor.red
-        }
-    }
+//    func toggleConnection() {
+//        let userPreferences: UserDefaults = UserDefaults.standard
+//    
+//        if connectivityController.isBrowsing {
+//            userPreferences.set(false, forKey: "isBroadcasting")
+//            
+//            connectivityController.stopBrowsingForPeers()
+//            connectivityController.stopAdvertisingPeer()
+//            broadcastLabel.text = "Begin Broadcasting"
+//            broadcastLabel.textColor = UIColor.green
+//        }
+//        else {
+//            userPreferences.set(true, forKey: "isBroadcasting")
+//        
+//            connectivityController.startBrowsingForPeers()
+//            connectivityController.startAdvertisingPeer()
+//            broadcastLabel.text = "Stop Broadcasting"
+//            broadcastLabel.textColor = UIColor.red
+//        }
+//    }
 }

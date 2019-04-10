@@ -11,17 +11,17 @@ import UIKit
 ///A subclass of `AnonymouseTableViewCell` that displays replies in the detail view.
 class AnonymouseReplyViewCell: AnonymouseTableViewCell {
     ///The amount of indent applied to replies relative to the main message.
-    @objc static let leftPadding: CGFloat = 20.0
+    static let leftPadding: CGFloat = 20.0
     
     ///The reply to display in the cell.
-    @objc var reply: AnonymouseReplyCore? {
+    var reply: AnonymouseReplyCore? {
         didSet {
             updateCellUI()
         }
     }
     
     ///Moves the cell right by `leftPadding` pixels.
-    @objc func pushRight() {
+    func pushRight() {
         whiteBackdrop!.frame.origin.x += AnonymouseReplyViewCell.leftPadding
         grayFeatureBar!.frame.origin.x += AnonymouseReplyViewCell.leftPadding
     }
@@ -176,7 +176,7 @@ class AnonymouseReplyViewCell: AnonymouseTableViewCell {
         guard let replyData = reply else {
             return
         }
-        let likeStatus: Int = Int(replyData.likeStatus!)
+        let likeStatus: Int = Int(truncating: replyData.likeStatus!)
         replyData.like()
         
         if likeStatus != 1 {
@@ -193,7 +193,7 @@ class AnonymouseReplyViewCell: AnonymouseTableViewCell {
         guard let replyData = reply else {
             return
         }
-        let likeStatus: Int = Int(replyData.likeStatus!)
+        let likeStatus: Int = Int(truncating: replyData.likeStatus!)
         replyData.dislike()
         
         
