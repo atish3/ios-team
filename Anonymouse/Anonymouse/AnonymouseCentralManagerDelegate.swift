@@ -44,7 +44,7 @@ class AnonymouseCentralManagerDelegate: NSObject, CBCentralManagerDelegate {
         print(RSSI)
         print("FOUND ONE")
         connectivityController = appDelegate.connectivityController
-        connectivityController.inBack = true
+        //connectivityController.inBack = true
         connectivityController.stopBrowsingForPeers()
         connectivityController.startBrowsingForPeers()
 

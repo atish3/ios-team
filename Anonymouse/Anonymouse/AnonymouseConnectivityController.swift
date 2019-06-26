@@ -105,7 +105,7 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
         //peripheralManager  = CBPeripheralManager.init(delegate: delegate, queue: nil, options: nil)
         var newUUID : CBUUID
         newUUID = CBUUID.init(string: "E2C56DB5-DFFB-48D2-B060-D0F5A71096E0")
-        service = CBMutableService.init(type: newUUID, primary: true)
+        //service = CBMutableService.init(type: newUUID, primary: true)
         netService = NetService(domain: "", type: "_Anonymouse._tcp.", name: myServiceType)
         netServiceBrowser = NetServiceBrowser()
         netService.includesPeerToPeer = true
@@ -115,7 +115,7 @@ class AnonymouseConnectivityController : NSObject, NetServiceDelegate, NetServic
         netServiceBrowser.delegate = self
         startAdvertisingPeer()
         startBrowsingForPeers()
-        inBack = false
+        //inBack = false
     }
     
     deinit {
